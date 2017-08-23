@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="io.swagger:swagger-parser:1.0.32" type="repository">
+    <properties maven-id="io.swagger:swagger-parser:1.0.32" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/swagger/swagger-parser/1.0.32/swagger-parser-1.0.32.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/20.0/guava-20.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/swagger/swagger-core/1.5.16/swagger-core-1.5.16.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.2.1/commons-lang3-3.2.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.8.9/jackson-dataformat-yaml-2.8.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/swagger/swagger-models/1.5.16/swagger-models-1.5.16.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/swagger/swagger-annotations/1.5.16/swagger-annotations-1.5.16.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-ext/1.6.3/slf4j-ext-1.6.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/ch/qos/cal10n/cal10n-api/0.7.4/cal10n-api-0.7.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
