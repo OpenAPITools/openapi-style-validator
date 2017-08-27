@@ -1,8 +1,5 @@
 package com.jaffsoft.swaggerstylevalidator;
 
-import io.swagger.models.HttpMethod;
-import io.swagger.models.properties.Property;
-
 public class ModelStyleError extends StyleError {
 
     private final String modelName;

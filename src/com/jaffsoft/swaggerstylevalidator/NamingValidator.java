@@ -1,23 +1,45 @@
 package com.jaffsoft.swaggerstylevalidator;
 
-
 public class NamingValidator {
 
+    private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
+    private static final String REGEX_LOWER_CASE_ONLY = "[a-z]+";
+    private static final String REGEX_CAMEL_CASE = "([a-z]+[A-Z]+\\w+)+";
+
     public boolean isUnderscoreCase(String variableName) {
-        boolean isValid = false;
-        //TODO: Find a function online
-        return isValid;
+        return isSeparatorCaseValid(variableName, "_");
     }
 
     public boolean isCamelCase(String variableName) {
-        boolean isValid = false;
-        //TODO: Find a function online
-        return isValid;
+        return variableName.matches(REGEX_LOWER_CASE_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
+
     }
 
     public boolean isHyphenCase(String variableName) {
-        boolean isValid = false;
-        //TODO: Find a function online
-        return isValid;
+        return isSeparatorCaseValid(variableName, "-");
+    }
+
+    private boolean isSeparatorCaseValid(String variableName, String separator) {
+        if (variableName.startsWith(separator) || variableName.endsWith(separator)) {
+            return false;
+        }
+
+        String[] tokens = variableName.split(separator);
+        int totalLength = 0;
+        for (String token : tokens) {
+            if (token.isEmpty()) {
+                return false;
+            }
+            totalLength += token.length();
+            if (!token.toLowerCase().equals(token)) {
+                return false;
+            }
+
+            if (!token.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY)) {
+                return false;
+            }
+        }
+
+        return variableName.length() == (totalLength + tokens.length - 1);
     }
 }

@@ -1,7 +1,6 @@
 package com.jaffsoft.swaggerstylevalidator;
 
 import io.swagger.models.HttpMethod;
-import io.swagger.models.Path;
 
 public class OperationStyleError extends StyleError {
 

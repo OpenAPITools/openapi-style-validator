@@ -7,7 +7,6 @@ import io.swagger.models.properties.Property;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 //TODO: Add JUnit + mockito
 //TODO: Create a test and make sure the folder is ok
