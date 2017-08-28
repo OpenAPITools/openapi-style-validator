@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/swagger-style-validator.iml" filepath="$PROJECT_DIR$/swagger-style-validator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-style-validator.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-style-validator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-style-validator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-style-validator_main.iml" group="swagger-style-validator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-style-validator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-style-validator_test.iml" group="swagger-style-validator" />
     </modules>
   </component>
 </project>
