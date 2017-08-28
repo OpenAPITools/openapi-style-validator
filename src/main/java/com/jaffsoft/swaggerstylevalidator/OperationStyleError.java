@@ -7,13 +7,11 @@ public class OperationStyleError extends StyleError {
     private final String path;
     private final HttpMethod method;
 
-    public OperationStyleError(StyleCheckSection styleCheckSection,
-                               String parentObjectName,
-                               String fieldNames,
+    public OperationStyleError(String fieldNames,
                                String description,
                                String path,
                                HttpMethod method) {
-        super(styleCheckSection, parentObjectName, fieldNames, description);
+        super(StyleCheckSection.Operations, fieldNames, description);
         this.path = path;
         this.method = method;
 
@@ -21,11 +19,10 @@ public class OperationStyleError extends StyleError {
 
     @Override
     public String toString() {
-        return String.format("*ERROR* in Operation %s %s '%s' %s -> %s",
+        return String.format("*ERROR* in Operation %s %s '%s' -> %s",
                 method.name(),
                 path,
                 fieldNames,
-                parentObjectName.isEmpty() ? "" : String.format("in %s", parentObjectName),
                 description);
     }
 }

@@ -1,6 +1,6 @@
 package com.jaffsoft.swaggerstylevalidator;
 
-public class NamingValidator {
+class NamingValidator {
 
     private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
     private static final String REGEX_LOWER_CASE_ONLY = "[a-z]+";

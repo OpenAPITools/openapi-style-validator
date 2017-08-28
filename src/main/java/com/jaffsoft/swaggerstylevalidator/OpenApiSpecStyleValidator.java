@@ -1,15 +1,13 @@
 package com.jaffsoft.swaggerstylevalidator;
 
-
 import io.swagger.models.*;
 import io.swagger.models.properties.Property;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//TODO: Add JUnit + mockito
-//TODO: Create a test and make sure the folder is ok
 class OpenApiSpecStyleValidator {
 
     private final Swagger swagger;
@@ -41,14 +39,14 @@ class OpenApiSpecStyleValidator {
                 infoPresence.add(license.getUrl() != null && !license.getUrl().isEmpty());
                 errorAggregator.validateMinimumInfo(infoPresence, StyleError.StyleCheckSection.APIInfo, "license", "name|url");
             } else {
-                errorAggregator.logMissingOrEmptyOperationAttribute("", "license");
+                errorAggregator.logMissingOrEmptyOperationAttribute("license");
             }
         }
 
         if (parameters.isValidateInfoDescription()) {
             String description = info.getDescription();
             if (description == null || description.isEmpty()) {
-                errorAggregator.logMissingOrEmptyOperationAttribute("", "description");
+                errorAggregator.logMissingOrEmptyOperationAttribute("description");
             }
         }
 
@@ -61,7 +59,7 @@ class OpenApiSpecStyleValidator {
                 infoPresence.add(contact.getEmail() != null && !contact.getEmail().isEmpty());
                 errorAggregator.validateMinimumInfo(infoPresence, StyleError.StyleCheckSection.APIInfo, "contact", "name|url|email");
             } else {
-                errorAggregator.logMissingOrEmptyOperationAttribute("", "contact");
+                errorAggregator.logMissingOrEmptyOperationAttribute("contact");
             }
         }
     }
@@ -73,25 +71,25 @@ class OpenApiSpecStyleValidator {
                 Operation op = path.getOperationMap().get(method);
                 if (parameters.isValidateOperationOperationId()) {
                     if (op.getOperationId() == null || op.getOperationId().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(StyleError.StyleCheckSection.Operations, key, method, "operationId");
+                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "operationId");
                     }
                 }
 
                 if (parameters.isValidateOperationDescription()) {
                     if (op.getDescription() == null || op.getDescription().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(StyleError.StyleCheckSection.Operations, key, method, "description");
+                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "description");
                     }
                 }
 
                 if (parameters.isValidateOperationSummary()) {
                     if (op.getSummary() == null || op.getSummary().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(StyleError.StyleCheckSection.Operations, key, method, "summary");
+                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "summary");
                     }
                 }
 
                 if (parameters.isValidateOperationTag()) {
                     if (op.getTags() == null || op.getTags().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationCollection(StyleError.StyleCheckSection.Operations, key, method, "tags");
+                        errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
                     }
                 }
             }
@@ -107,18 +105,19 @@ class OpenApiSpecStyleValidator {
 
                 if (parameters.isValidateModelPropertiesExample()) {
                     if (property.getExample() == null) {
-                        errorAggregator.logMissingOrEmptyModelAttribute(StyleError.StyleCheckSection.Models, definition, entry.getKey(), "example");
+                        errorAggregator.logMissingOrEmptyModelAttribute(definition, entry.getKey(), "example");
                     }
                 }
 
+                /*
                 if (parameters.isValidateModelNoLocalDef()) {
-
-                }
+                    //TODO:
+                }*/
             }
         }
     }
 
     private void validateNaming() {
-
+        throw new NotImplementedException("This function is not yet implemented");
     }
 }

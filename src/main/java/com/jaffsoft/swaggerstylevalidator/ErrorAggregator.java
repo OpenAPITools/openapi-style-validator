@@ -5,13 +5,12 @@ import io.swagger.models.HttpMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorAggregator {
+class ErrorAggregator {
 
-    List<StyleError> errorList = new ArrayList<>();
+    private final List<StyleError> errorList = new ArrayList<>();
 
-    public void logMissingOrEmptyOperationAttribute(String parentObjectName, String fieldNames) {
+    public void logMissingOrEmptyOperationAttribute(String fieldNames) {
         errorList.add(new StyleError(StyleError.StyleCheckSection.APIInfo,
-                parentObjectName,
                 fieldNames,
                 "Should be present and not empty"));
     }
@@ -29,7 +28,7 @@ public class ErrorAggregator {
         }
 
         if (!hasMinimumInfo) {
-            errorList.add(new StyleError(styleCheckSection,
+            errorList.add(new GenericStyleError(styleCheckSection,
                     parentObjectName,
                     fieldNames,
                     "At least one field should be present and not empty"));
@@ -40,25 +39,20 @@ public class ErrorAggregator {
         return errorList;
     }
 
-    public void logMissingOrEmptyOperationAttribute(StyleError.StyleCheckSection styleCheckSection, String path, HttpMethod method, String field) {
-        errorList.add(new OperationStyleError(styleCheckSection,
-                "",
-                field,
+    public void logMissingOrEmptyOperationAttribute(String path, HttpMethod method, String field) {
+        errorList.add(new OperationStyleError(field,
                 "This field should be present and not empty",
                 path, method));
     }
 
-    public void logMissingOrEmptyOperationCollection(StyleError.StyleCheckSection styleCheckSection, String path, HttpMethod method, String field) {
-        errorList.add(new OperationStyleError(styleCheckSection,
-                "",
-                field,
+    public void logMissingOrEmptyOperationCollection(String path, HttpMethod method, String field) {
+        errorList.add(new OperationStyleError(field,
                 "The collection should be present and there should be at least one item in it",
                 path, method));
     }
 
-    public void logMissingOrEmptyModelAttribute(StyleError.StyleCheckSection styleCheckSection, String modelName, String propertyName, String field) {
-        errorList.add(new ModelStyleError(styleCheckSection,
-                "",
+    public void logMissingOrEmptyModelAttribute(String modelName, String propertyName, String field) {
+        errorList.add(new ModelStyleError(
                 field,
                 "This field should be present and not empty",
                 modelName, propertyName));

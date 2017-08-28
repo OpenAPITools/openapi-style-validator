@@ -2,7 +2,15 @@ package com.jaffsoft.swaggerstylevalidator;
 
 public class ValidatorParameters {
 
-    private enum NamingStrategy {
+    public boolean isValidateNaming() {
+        return validateNaming;
+    }
+
+    public void setValidateNaming(boolean validateNaming) {
+        this.validateNaming = validateNaming;
+    }
+
+    enum NamingStrategy {
         UnderscoreCase,
         CamelCase,
         HyphenCase
@@ -20,9 +28,10 @@ public class ValidatorParameters {
     private boolean validateModelPropertiesExample = true;
     private boolean validateModelNoLocalDef = true;
 
+    private boolean validateNaming = true;
     private NamingStrategy pathNamingStrategy = NamingStrategy.HyphenCase;
     private NamingStrategy parameterNamingStrategy = NamingStrategy.HyphenCase;
-    private NamingStrategy propertyNamingStrategy = NamingStrategy.CamelCase;
+    private NamingStrategy propertyNamingStrategy = NamingStrategy.HyphenCase;
 
     public ValidatorParameters() {
         //For Gson
