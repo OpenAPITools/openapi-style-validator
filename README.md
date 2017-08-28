@@ -3,6 +3,8 @@ A customizable style validator to make sure your Swagger/OpenApi spec follows yo
 
 [![Build Status](https://travis-ci.org/JaffSoft/swagger-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/swagger-style-validator)
 
+[![Coverage Status](https://coveralls.io/repos/github/JaffSoft/swagger-style-validator/badge.svg?branch=master)](https://coveralls.io/github/JaffSoft/swagger-style-validator?branch=master)
+
 ## Important
 Please consider this project as "in development".
 It should be ready in a couple of weeks.
