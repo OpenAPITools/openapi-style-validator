@@ -42,4 +42,16 @@ class NamingValidator {
 
         return variableName.length() == (totalLength + tokens.length - 1);
     }
+
+    public boolean isNamingValid(String name, ValidatorParameters.NamingStrategy namingStrategy) {
+        switch (namingStrategy) {
+            case UnderscoreCase:
+                return isUnderscoreCase(name);
+            case CamelCase:
+                return isCamelCase(name);
+            case HyphenCase:
+                return isHyphenCase(name);
+        }
+        return false;
+    }
 }

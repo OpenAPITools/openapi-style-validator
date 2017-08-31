@@ -1,5 +1,6 @@
 package com.jaffsoft.swaggerstylevalidator;
 
+import com.jaffsoft.swaggerstylevalidator.styleerror.StyleError;
 import io.swagger.models.Swagger;
 import io.swagger.parser.SwaggerParser;
 

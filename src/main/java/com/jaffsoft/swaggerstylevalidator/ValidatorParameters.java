@@ -1,19 +1,21 @@
 package com.jaffsoft.swaggerstylevalidator;
 
-public class ValidatorParameters {
-
-    public boolean isValidateNaming() {
-        return validateNaming;
-    }
-
-    public void setValidateNaming(boolean validateNaming) {
-        this.validateNaming = validateNaming;
-    }
+class ValidatorParameters {
 
     enum NamingStrategy {
-        UnderscoreCase,
-        CamelCase,
-        HyphenCase
+        UnderscoreCase("underscore_case"),
+        CamelCase("camelCase"),
+        HyphenCase("hyphen-case");
+
+        private final String appelation;
+
+        NamingStrategy(String appelation) {
+            this.appelation = appelation;
+        }
+
+        public String getAppelation() {
+            return appelation;
+        }
     }
 
     private boolean validateInfoLicense = true;
@@ -31,105 +33,104 @@ public class ValidatorParameters {
     private boolean validateNaming = true;
     private NamingStrategy pathNamingStrategy = NamingStrategy.HyphenCase;
     private NamingStrategy parameterNamingStrategy = NamingStrategy.HyphenCase;
-    private NamingStrategy propertyNamingStrategy = NamingStrategy.HyphenCase;
 
-    public ValidatorParameters() {
+    ValidatorParameters() {
         //For Gson
     }
 
-    public boolean isValidateInfoLicense() {
+    boolean isValidateInfoLicense() {
         return validateInfoLicense;
     }
 
-    public boolean isValidateInfoDescription() {
+    boolean isValidateInfoDescription() {
         return validateInfoDescription;
     }
 
-    public boolean isValidateInfoContact() {
+    boolean isValidateInfoContact() {
         return validateInfoContact;
     }
 
-    public boolean isValidateOperationOperationId() {
+    boolean isValidateOperationOperationId() {
         return validateOperationOperationId;
     }
 
-    public boolean isValidateOperationDescription() {
+    boolean isValidateOperationDescription() {
         return validateOperationDescription;
     }
 
-    public boolean isValidateOperationTag() {
+    boolean isValidateOperationTag() {
         return validateOperationTag;
     }
 
-    public boolean isValidateOperationSummary() {
+    boolean isValidateOperationSummary() {
         return validateOperationSummary;
     }
 
-    public boolean isValidateModelPropertiesExample() {
+    boolean isValidateModelPropertiesExample() {
         return validateModelPropertiesExample;
     }
 
-    public boolean isValidateModelNoLocalDef() {
+    boolean isValidateModelNoLocalDef() {
         return validateModelNoLocalDef;
     }
 
-    public NamingStrategy getPathNamingStrategy() {
+    NamingStrategy getPathNamingStrategy() {
         return pathNamingStrategy;
     }
 
-    public NamingStrategy getParameterNamingStrategy() {
+    NamingStrategy getParameterNamingStrategy() {
         return parameterNamingStrategy;
     }
 
-    public NamingStrategy getPropertyNamingStrategy() {
-        return propertyNamingStrategy;
-    }
-
-    public void setValidateInfoLicense(boolean validateInfoLicense) {
+    void setValidateInfoLicense(boolean validateInfoLicense) {
         this.validateInfoLicense = validateInfoLicense;
     }
 
-    public void setValidateInfoDescription(boolean validateInfoDescription) {
+    void setValidateInfoDescription(boolean validateInfoDescription) {
         this.validateInfoDescription = validateInfoDescription;
     }
 
-    public void setValidateInfoContact(boolean validateInfoContact) {
+    void setValidateInfoContact(boolean validateInfoContact) {
         this.validateInfoContact = validateInfoContact;
     }
 
-    public void setValidateOperationOperationId(boolean validateOperationOperationId) {
+    void setValidateOperationOperationId(boolean validateOperationOperationId) {
         this.validateOperationOperationId = validateOperationOperationId;
     }
 
-    public void setValidateOperationDescription(boolean validateOperationDescription) {
+    void setValidateOperationDescription(boolean validateOperationDescription) {
         this.validateOperationDescription = validateOperationDescription;
     }
 
-    public void setValidateOperationTag(boolean validateOperationTag) {
+    void setValidateOperationTag(boolean validateOperationTag) {
         this.validateOperationTag = validateOperationTag;
     }
 
-    public void setValidateOperationSummary(boolean validateOperationSummary) {
+    void setValidateOperationSummary(boolean validateOperationSummary) {
         this.validateOperationSummary = validateOperationSummary;
     }
 
-    public void setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
+    void setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
         this.validateModelPropertiesExample = validateModelPropertiesExample;
     }
 
-    public void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
+    void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
     }
 
-    public void setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
+    void setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
         this.pathNamingStrategy = pathNamingStrategy;
     }
 
-    public void setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
+    void setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
         this.parameterNamingStrategy = parameterNamingStrategy;
     }
 
-    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
-        this.propertyNamingStrategy = propertyNamingStrategy;
+    boolean isValidateNaming() {
+        return validateNaming;
+    }
+
+    void setValidateNaming(boolean validateNaming) {
+        this.validateNaming = validateNaming;
     }
 }

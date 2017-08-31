@@ -1,8 +1,9 @@
 package com.jaffsoft.swaggerstylevalidator;
 
+import com.jaffsoft.swaggerstylevalidator.styleerror.StyleError;
 import io.swagger.models.*;
 import io.swagger.models.properties.Property;
-import org.apache.commons.lang3.NotImplementedException;
+import io.swagger.models.parameters.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,12 @@ class OpenApiSpecStyleValidator {
     private final Swagger swagger;
     private final ErrorAggregator errorAggregator;
     private ValidatorParameters parameters;
+    private final NamingValidator namingValidator;
 
     OpenApiSpecStyleValidator(Swagger swagger) {
         this.swagger = swagger;
         errorAggregator = new ErrorAggregator();
+        namingValidator = new NamingValidator();
     }
 
     List<StyleError> validate(ValidatorParameters parameters) {
@@ -118,6 +121,37 @@ class OpenApiSpecStyleValidator {
     }
 
     private void validateNaming() {
-        throw new NotImplementedException("This function is not yet implemented");
+        if (parameters.isValidateNaming()) {
+            for (String key :swagger.getPaths().keySet()) {
+                Path path = swagger.getPath(key);
+                for (HttpMethod method : path.getOperationMap().keySet()) {
+                    Operation op = path.getOperationMap().get(method);
+                    for (Parameter opParam : op.getParameters()) {
+                        boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
+                        if (!isValid) {
+                            errorAggregator.logBadNaming(opParam.getName(),
+                                    "parameter",
+                                    parameters.getParameterNamingStrategy().getAppelation(),
+                                    key,
+                                    method);
+                        }
+                    }
+                }
+
+                String[] pathParts = key.split("/");
+                for (String part : pathParts) {
+                    if (!(part.startsWith("{") && part.endsWith("}"))) {
+                        boolean isValid = namingValidator.isNamingValid("part", parameters.getPathNamingStrategy());
+                        if (!isValid) {
+                            errorAggregator.logBadNaming(part,
+                                    "path",
+                                    parameters.getPathNamingStrategy().getAppelation(),
+                                    key,
+                                    null);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

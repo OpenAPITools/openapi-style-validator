@@ -1,8 +1,8 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.swaggerstylevalidator.styleerror;
 
-class StyleError {
+public class StyleError {
 
-    enum StyleCheckSection {
+    public enum StyleCheckSection {
         APIInfo,
         Operations,
         Models,
