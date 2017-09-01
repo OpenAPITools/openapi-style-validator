@@ -10,8 +10,8 @@ class ErrorAggregator {
 
     private final List<StyleError> errorList = new ArrayList<>();
 
-    void logMissingOrEmptyOperationAttribute(String fieldNames) {
-        errorList.add(new StyleError(StyleError.StyleCheckSection.APIInfo,
+    void logMissingOrEmptyAttribute(StyleError.StyleCheckSection styleCheckSection, String fieldNames) {
+        errorList.add(new StyleError(styleCheckSection,
                 fieldNames,
                 "Should be present and not empty"));
     }

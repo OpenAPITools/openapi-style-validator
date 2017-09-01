@@ -6,16 +6,16 @@ class NamingValidator {
     private static final String REGEX_LOWER_CASE_ONLY = "[a-z]+";
     private static final String REGEX_CAMEL_CASE = "([a-z]+[A-Z]+\\w+)+";
 
-    public boolean isUnderscoreCase(String variableName) {
+    private boolean isUnderscoreCase(String variableName) {
         return isSeparatorCaseValid(variableName, "_");
     }
 
-    public boolean isCamelCase(String variableName) {
+    private boolean isCamelCase(String variableName) {
         return variableName.matches(REGEX_LOWER_CASE_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
 
     }
 
-    public boolean isHyphenCase(String variableName) {
+    private boolean isHyphenCase(String variableName) {
         return isSeparatorCaseValid(variableName, "-");
     }
 
@@ -43,7 +43,7 @@ class NamingValidator {
         return variableName.length() == (totalLength + tokens.length - 1);
     }
 
-    public boolean isNamingValid(String name, ValidatorParameters.NamingStrategy namingStrategy) {
+    boolean isNamingValid(String name, ValidatorParameters.NamingStrategy namingStrategy) {
         switch (namingStrategy) {
             case UnderscoreCase:
                 return isUnderscoreCase(name);

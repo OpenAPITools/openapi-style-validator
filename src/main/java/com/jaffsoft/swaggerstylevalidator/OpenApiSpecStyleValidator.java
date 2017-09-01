@@ -42,14 +42,14 @@ class OpenApiSpecStyleValidator {
                 infoPresence.add(license.getUrl() != null && !license.getUrl().isEmpty());
                 errorAggregator.validateMinimumInfo(infoPresence, StyleError.StyleCheckSection.APIInfo, "license", "name|url");
             } else {
-                errorAggregator.logMissingOrEmptyOperationAttribute("license");
+                errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo,"license");
             }
         }
 
         if (parameters.isValidateInfoDescription()) {
             String description = info.getDescription();
             if (description == null || description.isEmpty()) {
-                errorAggregator.logMissingOrEmptyOperationAttribute("description");
+                errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo,"description");
             }
         }
 
@@ -62,7 +62,7 @@ class OpenApiSpecStyleValidator {
                 infoPresence.add(contact.getEmail() != null && !contact.getEmail().isEmpty());
                 errorAggregator.validateMinimumInfo(infoPresence, StyleError.StyleCheckSection.APIInfo, "contact", "name|url|email");
             } else {
-                errorAggregator.logMissingOrEmptyOperationAttribute("contact");
+                errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo,"contact");
             }
         }
     }

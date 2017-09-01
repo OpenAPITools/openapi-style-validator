@@ -14,6 +14,10 @@ class Main {
             return;
         }
 
+        if (args.length == 2) {
+            //TODO:Use gson to retrieve the ValidatorParameters
+        }
+
         Swagger swagger = new SwaggerParser().read(args[0]);
         OpenApiSpecStyleValidator openApiSpecStyleValidator = new OpenApiSpecStyleValidator(swagger);
 
