@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":modules/lib" external.linked.project.path="$MODULE_DIR$/../../../../modules/lib" external.root.project.path="$MODULE_DIR$/../../../.." external.system.id="GRADLE" external.system.module.group="swagger-style-validator" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../modules/lib">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../modules/lib/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../modules/lib/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../modules/lib/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

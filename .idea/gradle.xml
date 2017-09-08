@@ -6,10 +6,12 @@
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="C:/Gradle/gradle-4.1" />
-        <option name="gradleJvm" value="1.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/modules/cli" />
+            <option value="$PROJECT_DIR$/modules/lib" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />

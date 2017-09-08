@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli.iml" group="modules/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_main.iml" group="modules/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_test.iml" group="modules/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib.iml" group="modules/lib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_main.iml" group="modules/lib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_test.iml" group="modules/lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-style-validator.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-style-validator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-style-validator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-style-validator_main.iml" group="swagger-style-validator" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-style-validator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-style-validator_test.iml" group="swagger-style-validator" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,3 @@
+dependencies {
+  compile group: 'io.swagger', name: 'swagger-parser', version: '1.0.32'
+}

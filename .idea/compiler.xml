@@ -2,8 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="swagger-style-validator_main" target="1.8" />
-      <module name="swagger-style-validator_test" target="1.8" />
+      <module name="modules_cli_main" target="1.8" />
+      <module name="modules_cli_test" target="1.8" />
+      <module name="modules_lib_main" target="1.8" />
+      <module name="modules_lib_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
