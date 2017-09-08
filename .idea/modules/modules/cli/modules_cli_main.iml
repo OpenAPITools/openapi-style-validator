@@ -13,18 +13,18 @@
     <orderEntry type="library" name="Gradle: io.swagger:swagger-parser:1.0.32" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger:swagger-core:1.5.16" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-ext:1.6.3" level="project" />
-    <orderEntry type="library" name="Gradle: io.swagger:swagger-models:1.5.16" level="project" />
-    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.22" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.2.1" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.8.9" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.8.9" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.9" level="project" />
+    <orderEntry type="library" name="Gradle: io.swagger:swagger-models:1.5.16" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:20.0" level="project" />
     <orderEntry type="library" name="Gradle: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.cal10n:cal10n-api:0.7.4" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.8.9" level="project" />
     <orderEntry type="library" name="Gradle: org.yaml:snakeyaml:1.17" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger:swagger-annotations:1.5.16" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.22" level="project" />
   </component>
 </module>
