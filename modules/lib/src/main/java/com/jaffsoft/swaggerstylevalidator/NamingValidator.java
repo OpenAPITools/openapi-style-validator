@@ -12,7 +12,6 @@ class NamingValidator {
 
     private boolean isCamelCase(String variableName) {
         return variableName.matches(REGEX_LOWER_CASE_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
-
     }
 
     private boolean isHyphenCase(String variableName) {

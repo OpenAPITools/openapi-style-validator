@@ -11,6 +11,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="modules_lib_main" />
     <orderEntry type="library" name="Gradle: io.swagger:swagger-parser:1.0.32" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.1" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger:swagger-core:1.5.16" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-ext:1.6.3" level="project" />
