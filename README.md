@@ -42,7 +42,7 @@ description, etc...
 
 This project was started because when I tried SwaggerHub (which is the paid version of the swagger toolkit), they had 
 something similar, but it was proprietary. I didn't want to pay for the service so I created this project in my free 
-times. I did not validate recently if they still have this feature.
+times. I did not validate lately if they still have this feature.
 
 ## How to use JaffSoft swagger-style-validator
 
