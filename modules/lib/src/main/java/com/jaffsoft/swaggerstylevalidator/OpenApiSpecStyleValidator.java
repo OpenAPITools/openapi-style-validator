@@ -122,14 +122,29 @@ class OpenApiSpecStyleValidator {
 
     private void validateNaming() {
         if (parameters.isValidateNaming()) {
-            for (String key :swagger.getPaths().keySet()) {
+            for (String definition : swagger.getDefinitions().keySet()) {
+                Model model = swagger.getDefinitions().get(definition);
+
+                for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
+                    Property property = entry.getValue();
+                    boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingStrategy());
+                    if (!isValid) {
+                        errorAggregator.logModelBadNaming(property.getName(),
+                                "property",
+                                parameters.getPropertyNamingStrategy().getAppelation(),
+                                entry.getKey());
+                    }
+                }
+            }
+
+            for (String key : swagger.getPaths().keySet()) {
                 Path path = swagger.getPath(key);
                 for (HttpMethod method : path.getOperationMap().keySet()) {
                     Operation op = path.getOperationMap().get(method);
                     for (Parameter opParam : op.getParameters()) {
                         boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
                         if (!isValid) {
-                            errorAggregator.logBadNaming(opParam.getName(),
+                            errorAggregator.logOperationBadNaming(opParam.getName(),
                                     "parameter",
                                     parameters.getParameterNamingStrategy().getAppelation(),
                                     key,
@@ -143,7 +158,7 @@ class OpenApiSpecStyleValidator {
                     if (!(part.startsWith("{") && part.endsWith("}"))) {
                         boolean isValid = namingValidator.isNamingValid("part", parameters.getPathNamingStrategy());
                         if (!isValid) {
-                            errorAggregator.logBadNaming(part,
+                            errorAggregator.logOperationBadNaming(part,
                                     "path",
                                     parameters.getPathNamingStrategy().getAppelation(),
                                     key,

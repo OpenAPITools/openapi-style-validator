@@ -227,7 +227,7 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "api_key"
+      - name: "apiKey"
         in: "header"
         required: false
         type: "string"
@@ -573,7 +573,7 @@ securityDefinitions:
       read:pets: "read your pets"
   api_key:
     type: "apiKey"
-    name: "api_key"
+    name: "apiKey"
     in: "header"
 definitions:
   Order:

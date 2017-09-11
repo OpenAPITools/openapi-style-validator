@@ -28,7 +28,8 @@ public class ValidatorParametersTest {
 
         assertTrue(parameters.isValidateNaming());
         assertEquals(ValidatorParameters.NamingStrategy.HyphenCase, parameters.getPathNamingStrategy());
-        assertEquals(ValidatorParameters.NamingStrategy.HyphenCase, parameters.getParameterNamingStrategy());
+        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy());
+        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy());
     }
 
     @Test
@@ -46,6 +47,7 @@ public class ValidatorParametersTest {
 
         parameters.setPathNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
         parameters.setParameterNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
+        parameters.setPropertyNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
 
         assertFalse(parameters.isValidateInfoLicense());
         assertFalse(parameters.isValidateInfoDescription());
@@ -60,6 +62,7 @@ public class ValidatorParametersTest {
 
         assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPathNamingStrategy());
         assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy());
+        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy());
     }
 
 }

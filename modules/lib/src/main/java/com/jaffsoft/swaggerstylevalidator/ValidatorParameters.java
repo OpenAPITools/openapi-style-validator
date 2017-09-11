@@ -32,7 +32,8 @@ class ValidatorParameters {
 
     private boolean validateNaming = true;
     private NamingStrategy pathNamingStrategy = NamingStrategy.HyphenCase;
-    private NamingStrategy parameterNamingStrategy = NamingStrategy.HyphenCase;
+    private NamingStrategy parameterNamingStrategy = NamingStrategy.CamelCase;
+    private NamingStrategy propertyNamingStrategy = NamingStrategy.CamelCase;
 
     ValidatorParameters() {
         //For Gson
@@ -80,6 +81,14 @@ class ValidatorParameters {
 
     NamingStrategy getParameterNamingStrategy() {
         return parameterNamingStrategy;
+    }
+
+    NamingStrategy getPropertyNamingStrategy() {
+        return propertyNamingStrategy;
+    }
+
+    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
+        this.propertyNamingStrategy = propertyNamingStrategy;
     }
 
     void setValidateInfoLicense(boolean validateInfoLicense) {

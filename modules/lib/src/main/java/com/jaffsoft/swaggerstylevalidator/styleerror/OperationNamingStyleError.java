@@ -2,12 +2,12 @@ package com.jaffsoft.swaggerstylevalidator.styleerror;
 
 import io.swagger.models.HttpMethod;
 
-public class NamingStyleError extends StyleError {
+public class OperationNamingStyleError extends StyleError {
 
     private final String path;
     private final HttpMethod method;
 
-    public NamingStyleError(StyleCheckSection styleCheckSection, String fieldNames, String description, String path, HttpMethod method) {
+    public OperationNamingStyleError(StyleCheckSection styleCheckSection, String fieldNames, String description, String path, HttpMethod method) {
         super(styleCheckSection, fieldNames, description);
         this.path = path;
         this.method = method;

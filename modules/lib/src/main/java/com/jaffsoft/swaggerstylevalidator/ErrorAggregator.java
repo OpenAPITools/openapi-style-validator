@@ -59,8 +59,13 @@ class ErrorAggregator {
                 modelName, propertyName));
     }
 
-    void logBadNaming(String variableName, String variableType, String neededNamingStrategy, String path, HttpMethod httpMethod) {
-        errorList.add(new NamingStyleError(StyleError.StyleCheckSection.Naming, variableName,
+    void logOperationBadNaming(String variableName, String variableType, String neededNamingStrategy, String path, HttpMethod httpMethod) {
+        errorList.add(new OperationNamingStyleError(StyleError.StyleCheckSection.Naming, variableName,
                 String.format("%s should be in %s", variableType, neededNamingStrategy), path, httpMethod));
+    }
+
+    void logModelBadNaming(String variableName, String variableType, String neededNamingStrategy, String model) {
+        errorList.add(new ModelNamingStyleError(StyleError.StyleCheckSection.Naming, variableName,
+                String.format("%s should be in %s", variableType, neededNamingStrategy), model));
     }
 }

@@ -8,10 +8,11 @@
   "validateOperationTag": true,
   "validateOperationSummary": true,
 
-  "validateModelPropertiesExample": true,
+  "validateModelPropertiesExample": false,
   "validateModelNoLocalDef": true,
 
   "validateNaming": true,
   "pathNamingStrategy": "HyphenCase",
-  "parameterNamingStrategy": "HyphenCase"
+  "parameterNamingStrategy": "CamelCase",
+  "propertiesNamingStrategy": "CamelCase"
 }
