@@ -8,12 +8,12 @@ A customizable style validator to make sure your Swagger/OpenApi spec follows yo
 ## Summary
 
 Unless you are working alone on a very small API, you are probably working with other people on your spec (YAML) file. 
-Even if you have writen your directions and standards on a PDF or on a wiki somewhere and sent it to all the team 
-members, there is no garanty they will follow it.
+Even if you have written directions and standards in a shared PDF or on a wiki somewhere and sent it to all the team 
+members, there is no way to be sure they will follow it.
 
 You could argue that you will do code review to prevent these errors. Yes you could but wouldn't it be better if you
 could automatize all of this? You can still do code reviews to find business/requirements/REST path errors
-but let swagger-style-validator validate the style and standards like mandatory examples, naming conventions, 
+but let Jaffsoft swagger-style-validator validate the style and standards like mandatory examples, naming conventions, 
 description, etc...
 
 ## What it can validate
@@ -33,21 +33,21 @@ description, etc...
 - All model properties must have examples
 
 ### Naming strategy
-- Enforce naming strategy for paths and parameters
+- Enforce naming strategy for paths, parameters and properties
     - underscore_case
     - camelCase
     - hyphen-case
 
 ## Paid Alternatives
 
-This project was started because when I tried SwaggerHub (which is the paid version of the swagger toolkit), they 
+This project was started because when I tried SwaggerHub (which is the paid version of the swagger toolkit), they had 
 something similar, but it was proprietary. I didn't want to pay for the service so I created this project in my free 
-times.
+times. I did not validate recently if they still have this feature.
 
-## How to use swagger-style-validator
+## How to use JaffSoft swagger-style-validator
 
-For now, the project is a simple command line interface (CLI). It is in the roadmap to split the project in both a CLI
-and a library so that people can integrate it in other software and tools but it's not ready as we speek.
+For now, the project is a simple command line interface (CLI) and a library. The easiest way to use it right now
+is to use the CLI and check the output. It will list all errors found based on the options you provided.
 
 ### To build
 
@@ -58,12 +58,17 @@ The project is configured to use gradle. To build the jar, just do:
 ### To change the code
 
 If you want to open the project, I highly suggest that you use IntelliJ IDEA Community (Free) or Ultimate (paid).
-It is also cross platform so it should work on any OS. This project was created using this tool and you can just open 
-it and shoud work. Maybe you can use other tools to open the project but I will not provide any support.
+This IDE is cross platform so it should work on any OS. This project was created using this tool and you can just open 
+it directly. Maybe you can use other tools to open the project but I will not provide any support.
 
 ### To launch
 
-`java -jar swagger-style-validator.jar ./path/to/spec.yaml`
+`java -jar swagger-style-validator.jar -s ./path/to/spec.yaml -o ./path/to/options.json`
+
+-s|-source : The path to your yaml spec file
+-o|-options : (Optional) The path to your json options file 
+
+Please check the `options.json` file for example on how to provide options to the tool.
 
 ## To the official swagger team (swagger.io)
 
@@ -72,9 +77,8 @@ Please contact me in private if it's something that might interest you.
 
 ## Roadmap
 
-This is in no specific order
+In no specific order
 
-- Split the code into a CLI using a library
 - Try to reach 100% unit test code coverage
 - Make an official release
 - Make it available on Maven
@@ -82,4 +86,4 @@ This is in no specific order
 
 ## Maven / Releases
 
-The tool has not been released officialy yet. Your only option for now is to download the source code and build it.
+The tool has not been released yet. Your only option for now is to download the source code and build it.
