@@ -3,15 +3,14 @@ package com.jaffsoft.swaggerstylevalidator;
 class NamingValidator {
 
     private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
-    private static final String REGEX_LOWER_CASE_ONLY = "[a-z]+";
-    private static final String REGEX_CAMEL_CASE = "([a-z]+[A-Z]+\\w+)+";
+    private static final String REGEX_CAMEL_CASE = "([a-z0-9]+[A-Z]+\\w+)+";
 
     private boolean isUnderscoreCase(String variableName) {
         return isSeparatorCaseValid(variableName, "_");
     }
 
     private boolean isCamelCase(String variableName) {
-        return variableName.matches(REGEX_LOWER_CASE_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
+        return variableName.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
     }
 
     private boolean isHyphenCase(String variableName) {

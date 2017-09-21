@@ -103,19 +103,21 @@ class OpenApiSpecStyleValidator {
         for (String definition : swagger.getDefinitions().keySet()) {
             Model model = swagger.getDefinitions().get(definition);
 
-            for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
-                Property property = entry.getValue();
+            if (model.getProperties() != null) {
+                for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
+                    Property property = entry.getValue();
 
-                if (parameters.isValidateModelPropertiesExample()) {
-                    if (property.getExample() == null) {
-                        errorAggregator.logMissingOrEmptyModelAttribute(definition, entry.getKey(), "example");
+                    if (parameters.isValidateModelPropertiesExample()) {
+                        if (property.getExample() == null) {
+                            errorAggregator.logMissingOrEmptyModelAttribute(definition, entry.getKey(), "example");
+                        }
                     }
-                }
 
-                /*
-                if (parameters.isValidateModelNoLocalDef()) {
-                    //TODO:
-                }*/
+                    /*
+                    if (parameters.isValidateModelNoLocalDef()) {
+                        //TODO:
+                    }*/
+                }
             }
         }
     }
@@ -125,14 +127,16 @@ class OpenApiSpecStyleValidator {
             for (String definition : swagger.getDefinitions().keySet()) {
                 Model model = swagger.getDefinitions().get(definition);
 
-                for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
-                    Property property = entry.getValue();
-                    boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingStrategy());
-                    if (!isValid) {
-                        errorAggregator.logModelBadNaming(property.getName(),
-                                "property",
-                                parameters.getPropertyNamingStrategy().getAppelation(),
-                                entry.getKey());
+                if (model.getProperties() != null) {
+                    for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
+                        Property property = entry.getValue();
+                        boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingStrategy());
+                        if (!isValid) {
+                            errorAggregator.logModelBadNaming(entry.getKey(),
+                                    "property",
+                                    parameters.getPropertyNamingStrategy().getAppelation(),
+                                    definition);
+                        }
                     }
                 }
             }

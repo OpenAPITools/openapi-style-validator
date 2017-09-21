@@ -7,3 +7,4 @@
 # Sensitive or high-churn files:
 # IntelliJ
 /out/
+build

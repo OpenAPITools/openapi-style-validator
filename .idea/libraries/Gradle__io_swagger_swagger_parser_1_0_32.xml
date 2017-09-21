@@ -4,6 +4,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-parser/1.0.32/a98d5c3253ecf9c9341372a0064af85ea6825dc7/swagger-parser-1.0.32.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-parser/1.0.32/910cb1d1a19e8bf220e3369b55c1bd6471029de0/swagger-parser-1.0.32-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

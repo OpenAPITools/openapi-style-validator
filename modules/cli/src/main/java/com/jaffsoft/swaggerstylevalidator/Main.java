@@ -7,11 +7,7 @@ import com.jaffsoft.swaggerstylevalidator.styleerror.StyleError;
 import io.swagger.models.Swagger;
 import io.swagger.parser.SwaggerParser;
 import org.apache.commons.cli.*;
-
-import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 class Main {

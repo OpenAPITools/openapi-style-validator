@@ -66,18 +66,24 @@ public class NamingValidatorTest {
         String goodCamelCase2 = "variable";
         String goodCamelCase3 = "mySuperVariable";
         String goodCamelCase4 = "mySuperVariableIsAFunnyOne";
+        String goodCamelCase5 = "zone2Delete";
+        String goodCamelCase6 = "address1";
 
         //Act
         boolean actual1 = validator.isNamingValid(goodCamelCase1, ValidatorParameters.NamingStrategy.CamelCase);
         boolean actual2 = validator.isNamingValid(goodCamelCase2, ValidatorParameters.NamingStrategy.CamelCase);
         boolean actual3 = validator.isNamingValid(goodCamelCase3, ValidatorParameters.NamingStrategy.CamelCase);
         boolean actual4 = validator.isNamingValid(goodCamelCase4, ValidatorParameters.NamingStrategy.CamelCase);
+        boolean actual5 = validator.isNamingValid(goodCamelCase5, ValidatorParameters.NamingStrategy.CamelCase);
+        boolean actual6 = validator.isNamingValid(goodCamelCase6, ValidatorParameters.NamingStrategy.CamelCase);
 
         //Assert
         assertTrue(actual1);
         assertTrue(actual2);
         assertTrue(actual3);
         assertTrue(actual4);
+        assertTrue(actual5);
+        assertTrue(actual6);
     }
 
     @Test
