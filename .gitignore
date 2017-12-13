@@ -3,6 +3,7 @@
 # Gradle:
 .idea/gradle.xml
 .idea/libraries
+.gradle
 
 # Sensitive or high-churn files:
 # IntelliJ
