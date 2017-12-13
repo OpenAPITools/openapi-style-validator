@@ -37,6 +37,7 @@ class Main {
             printResults(openApiSpecStyleValidator.validate(parameters));
         } catch (ParseException e) {
             System.out.println("There was something wrong in your request. Please check documentation for more info");
+            System.exit(1);
         }
     }
 
@@ -47,6 +48,7 @@ class Main {
             for (StyleError error : errorList) {
                 System.out.println(error.toString());
             }
+            System.exit(1);
         }
     }
 

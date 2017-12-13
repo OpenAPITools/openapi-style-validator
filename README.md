@@ -76,12 +76,31 @@ or example
 
 `java -jar modules/cli/build/libs/swagger-style-validator-cli-1.0.jar -s specs/petstore.yaml -o specs/options.json`
 
+#### Command Line
+
 |Parameter|Required?|Description|
 |---|---|---|
-|-s, -source|yes|The path to your yaml spec file|
+|-s, -source|yes|The path to your json/yaml spec file|
 |-o, -options|no|The path to your json options file|
 
-Please check the `options.json` file for example on how to provide options to the tool.
+#### Options File
+The options file is described in json (example in `specs/options.json`), and has the following possible values:
+
+|Option|Type|Possible Values|
+|---|---|---|
+|validateInfoLicense|boolean|`true`, `false`|
+|validateInfoDescription|boolean|`true`, `false`|
+|validateInfoContact|boolean|`true`, `false`|
+|validateOperationOperationId|boolean|`true`, `false`|
+|validateOperationDescription|boolean|`true`, `false`|
+|validateOperationTag|boolean|`true`, `false`|
+|validateOperationSummary|boolean|`true`, `false`|
+|validateModelPropertiesExample|boolean|`true`, `false`|
+|validateModelNoLocalDef|boolean|`true`, `false`|
+|validateNaming|boolean|`true`, `false`|
+|pathNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|
+|parameterNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|
+|propertiesNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|
 
 ## To the official swagger team (swagger.io)
 
