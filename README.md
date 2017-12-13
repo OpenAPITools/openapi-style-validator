@@ -72,7 +72,7 @@ it directly. Maybe you can use other tools to open the project but I will not pr
 
 `java -jar swagger-style-validator.jar -s ./path/to/spec.yaml -o ./path/to/options.json`
 
-or example
+Example using the default output path for the jar:
 
 `java -jar modules/cli/build/libs/swagger-style-validator-cli-1.0.jar -s specs/petstore.yaml -o specs/options.json`
 
