@@ -76,8 +76,10 @@ or example
 
 `java -jar modules/cli/build/libs/swagger-style-validator-cli-1.0.jar -s specs/petstore.yaml -o specs/options.json`
 
--s|-source : The path to your yaml spec file
--o|-options : (Optional) The path to your json options file
+|Parameter|Required?|Description|
+|---|---|---|
+|-s, -source|yes|The path to your yaml spec file|
+|-o, -options|no|The path to your json options file|
 
 Please check the `options.json` file for example on how to provide options to the tool.
 
