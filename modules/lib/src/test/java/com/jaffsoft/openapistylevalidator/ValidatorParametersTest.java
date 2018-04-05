@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.openapistylevalidator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ public class ValidatorParametersTest {
     private ValidatorParameters parameters;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         parameters = new ValidatorParameters();
     }
 

@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.openapistylevalidator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,12 +10,12 @@ public class NamingValidatorTest {
     private NamingValidator validator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         validator = new NamingValidator();
     }
 
     @Test
-    public void goodUnderscoreCaseShouldReturnTrue() throws Exception {
+    public void goodUnderscoreCaseShouldReturnTrue() {
         //Arrange
         String goodUnderscoreCase1 = "my_variable";
         String goodUnderscoreCase2 = "variable";
@@ -33,7 +33,7 @@ public class NamingValidatorTest {
     }
 
     @Test
-    public void badUnderscoreCaseShouldReturnFalse() throws Exception {
+    public void badUnderscoreCaseShouldReturnFalse() {
         //Arrange
         String badUnderscoreCase1 = "myVariable";
         String badUnderscoreCase2 = "my-variable";
@@ -60,7 +60,7 @@ public class NamingValidatorTest {
     }
 
     @Test
-    public void goodCamelCaseShouldReturnTrue() throws Exception {
+    public void goodCamelCaseShouldReturnTrue() {
         //Arrange
         String goodCamelCase1 = "myVariable";
         String goodCamelCase2 = "variable";
@@ -87,7 +87,7 @@ public class NamingValidatorTest {
     }
 
     @Test
-    public void badCamelCaseShouldReturnFalse() throws Exception {
+    public void badCamelCaseShouldReturnFalse() {
         //Arrange
         String badCamelCase1 = "my_variable";
         String badCamelCase2 = "my-variable";
@@ -111,7 +111,7 @@ public class NamingValidatorTest {
     }
 
     @Test
-    public void goodHyphenCaseShouldReturnTrue() throws Exception {
+    public void goodHyphenCaseShouldReturnTrue() {
         //Arrange
         String goodHyphenCase1 = "my-variable";
         String goodHyphenCase2 = "variable";
@@ -129,7 +129,7 @@ public class NamingValidatorTest {
     }
 
     @Test
-    public void badHyphenCaseShouldReturnFalse() throws Exception {
+    public void badHyphenCaseShouldReturnFalse() {
         //Arrange
         String badHyphenCase1 = "my_variable";
         String badHyphenCase2 = "myVariable";

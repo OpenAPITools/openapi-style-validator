@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator.commons;
+package com.jaffsoft.openapistylevalidator.commons;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

@@ -1,9 +1,9 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.openapistylevalidator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jaffsoft.swaggerstylevalidator.commons.Utils;
-import com.jaffsoft.swaggerstylevalidator.styleerror.StyleError;
+import com.jaffsoft.openapistylevalidator.commons.Utils;
+import com.jaffsoft.openapistylevalidator.styleerror.StyleError;
 import io.swagger.models.Swagger;
 import io.swagger.parser.SwaggerParser;
 import org.apache.commons.cli.*;

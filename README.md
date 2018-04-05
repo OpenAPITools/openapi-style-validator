@@ -1,9 +1,9 @@
-# swagger-style-validator
-A customizable style validator to make sure your Swagger/OpenApi spec follows your organization's standards.
+# openapi-style-validator
+A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
-[![Build Status](https://travis-ci.org/JaffSoft/swagger-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/swagger-style-validator)
+[![Build Status](https://travis-ci.org/JaffSoft/openapi-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/openapi-style-validator)
 
-[![Coverage Status](https://coveralls.io/repos/github/JaffSoft/swagger-style-validator/badge.svg?branch=master)](https://coveralls.io/github/JaffSoft/swagger-style-validator?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/JaffSoft/openapi-style-validator/badge.svg?branch=master)](https://coveralls.io/github/JaffSoft/openapi-style-validator?branch=master)
 
 ## Summary
 
@@ -13,7 +13,7 @@ members, there is no way to be sure they will follow it.
 
 You could argue that you will do code review to prevent these errors. Yes you could but wouldn't it be better if you
 could automatize all of this? You can still do code reviews to find business/requirements/REST path errors
-but let Jaffsoft swagger-style-validator validate the style and standards like mandatory examples, naming conventions,
+but let Jaffsoft openapi-style-validator validate the style and standards like mandatory examples, naming conventions,
 description, etc...
 
 ## What it can validate
@@ -44,7 +44,7 @@ This project was started because when I tried SwaggerHub (which is the paid vers
 something similar, but it was proprietary. I didn't want to pay for the service so I created this project in my free
 times. I did not validate lately if they still have this feature.
 
-## How to use JaffSoft swagger-style-validator
+## How to use JaffSoft openapi-style-validator
 
 For now, the project is a simple command line interface (CLI) and a library. The easiest way to use it right now
 is to use the CLI and check the output. It will list all errors found based on the options you provided.
@@ -70,11 +70,11 @@ it directly. Maybe you can use other tools to open the project but I will not pr
 
 ### To launch
 
-`java -jar swagger-style-validator.jar -s ./path/to/spec.yaml -o ./path/to/options.json`
+`java -jar openapi-style-validator.jar -s ./path/to/spec.yaml -o ./path/to/options.json`
 
 Example using the default output path for the jar:
 
-`java -jar modules/cli/build/libs/swagger-style-validator-cli-1.0.jar -s specs/petstore.yaml -o specs/options.json`
+`java -jar modules/cli/build/libs/openapi-style-validator-cli-1.0.jar -s specs/petstore.yaml -o specs/options.json`
 
 #### Command Line
 
@@ -101,11 +101,6 @@ The options file is described in json (example in `specs/options.json`), and has
 |pathNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|
 |parameterNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|
 |propertiesNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|
-
-## To the official swagger team (swagger.io)
-
-I am very open to transfer this project to your official organization as long as I remain in charge of the project.
-Please contact me in private if it's something that might interest you.
 
 ## Roadmap
 

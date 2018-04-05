@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator.styleerror;
+package com.jaffsoft.openapistylevalidator.styleerror;
 
 import io.swagger.models.HttpMethod;
 
