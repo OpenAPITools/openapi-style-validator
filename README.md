@@ -1,9 +1,9 @@
 # openapi-style-validator
 A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
-[![Build Status](https://travis-ci.org/JaffSoft/swagger-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/swagger-style-validator)
+[![Build Status](https://travis-ci.org/JaffSoft/openapi-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/openapi-style-validator)
 
-[![Coverage Status](https://coveralls.io/repos/github/JaffSoft/swagger-style-validator/badge.svg?branch=master)](https://coveralls.io/github/JaffSoft/swagger-style-validator?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/JaffSoft/openapi-style-validator/badge.svg?branch=master)](https://coveralls.io/github/JaffSoft/openapi-style-validator?branch=master)
 
 ## Summary
 
