@@ -3,8 +3,6 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 [![Build Status](https://travis-ci.org/JaffSoft/openapi-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/openapi-style-validator)
 
-[![Coverage Status](https://coveralls.io/repos/github/JaffSoft/openapi-style-validator/badge.svg?branch=master)](https://coveralls.io/github/JaffSoft/openapi-style-validator?branch=master)
-
 ## Summary
 
 Unless you are working alone on a very small API, you are probably working with other people on your spec (YAML) file.
