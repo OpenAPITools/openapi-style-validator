@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.openapistylevalidator;
 
 class NamingValidator {
 

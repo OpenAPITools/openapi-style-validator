@@ -1,6 +1,6 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.openapistylevalidator;
 
-import com.jaffsoft.swaggerstylevalidator.styleerror.StyleError;
+import com.jaffsoft.openapistylevalidator.styleerror.StyleError;
 import io.swagger.models.*;
 import io.swagger.models.properties.Property;
 import io.swagger.models.parameters.*;

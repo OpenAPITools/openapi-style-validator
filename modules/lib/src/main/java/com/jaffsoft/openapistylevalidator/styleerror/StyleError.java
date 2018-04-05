@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator.styleerror;
+package com.jaffsoft.openapistylevalidator.styleerror;
 
 public class StyleError {
 

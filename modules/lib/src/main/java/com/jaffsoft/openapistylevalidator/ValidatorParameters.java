@@ -1,4 +1,4 @@
-package com.jaffsoft.swaggerstylevalidator;
+package com.jaffsoft.openapistylevalidator;
 
 class ValidatorParameters {
 
@@ -87,7 +87,7 @@ class ValidatorParameters {
         return propertyNamingStrategy;
     }
 
-    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
+    void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
         this.propertyNamingStrategy = propertyNamingStrategy;
     }
 
