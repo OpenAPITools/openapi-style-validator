@@ -43,7 +43,7 @@ class Main {
 
     private static void printResults(List<StyleError> errorList) {
         if (errorList.isEmpty()) {
-            System.out.println("There is no style error in this spec. Good job!");
+            System.out.println("There are no style errors in this spec. Good job!");
         } else {
             for (StyleError error : errorList) {
                 System.out.println(error.toString());
