@@ -12,6 +12,7 @@
   "validateModelNoLocalDef": true,
 
   "validateNaming": true,
+  "ignoreHeaderXNaming": true,
   "pathNamingStrategy": "HyphenCase",
   "parameterNamingStrategy": "CamelCase",
   "propertiesNamingStrategy": "CamelCase"

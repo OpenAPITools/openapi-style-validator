@@ -27,6 +27,7 @@ public class ValidatorParametersTest {
         assertTrue(parameters.isValidateModelNoLocalDef());
 
         assertTrue(parameters.isValidateNaming());
+        assertTrue(parameters.isIgnoreHeaderXNaming());
         assertEquals(ValidatorParameters.NamingStrategy.HyphenCase, parameters.getPathNamingStrategy());
         assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy());
         assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy());
@@ -44,6 +45,7 @@ public class ValidatorParametersTest {
         parameters.setValidateModelPropertiesExample(false);
         parameters.setValidateModelNoLocalDef(false);
         parameters.setValidateNaming(false);
+        parameters.setIgnoreHeaderXNaming(false);
 
         parameters.setPathNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
         parameters.setParameterNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
@@ -59,6 +61,7 @@ public class ValidatorParametersTest {
         assertFalse(parameters.isValidateModelPropertiesExample());
         assertFalse(parameters.isValidateModelNoLocalDef());
         assertFalse(parameters.isValidateNaming());
+        assertFalse(parameters.isIgnoreHeaderXNaming());
 
         assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPathNamingStrategy());
         assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy());

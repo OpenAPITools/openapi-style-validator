@@ -146,13 +146,22 @@ class OpenApiSpecStyleValidator {
                 for (HttpMethod method : path.getOperationMap().keySet()) {
                     Operation op = path.getOperationMap().get(method);
                     for (Parameter opParam : op.getParameters()) {
-                        boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
-                        if (!isValid) {
-                            errorAggregator.logOperationBadNaming(opParam.getName(),
-                                    "parameter",
-                                    parameters.getParameterNamingStrategy().getAppelation(),
-                                    key,
-                                    method);
+                        boolean shouldValidate;
+                        if (opParam.getIn().equals("header") && opParam.getName().startsWith("X-")) {
+                            shouldValidate = !parameters.isIgnoreHeaderXNaming();
+                        } else {
+                            shouldValidate = true;
+                        }
+
+                        if (shouldValidate) {
+                            boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
+                            if (!isValid) {
+                                errorAggregator.logOperationBadNaming(opParam.getName(),
+                                        "parameter",
+                                        parameters.getParameterNamingStrategy().getAppelation(),
+                                        key,
+                                        method);
+                            }
                         }
                     }
                 }

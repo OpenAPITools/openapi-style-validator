@@ -31,6 +31,7 @@ class ValidatorParameters {
     private boolean validateModelNoLocalDef = true;
 
     private boolean validateNaming = true;
+    private boolean ignoreHeaderXNaming = true;
     private NamingStrategy pathNamingStrategy = NamingStrategy.HyphenCase;
     private NamingStrategy parameterNamingStrategy = NamingStrategy.CamelCase;
     private NamingStrategy propertyNamingStrategy = NamingStrategy.CamelCase;
@@ -141,5 +142,13 @@ class ValidatorParameters {
 
     void setValidateNaming(boolean validateNaming) {
         this.validateNaming = validateNaming;
+    }
+
+    boolean isIgnoreHeaderXNaming() {
+        return ignoreHeaderXNaming;
+    }
+
+    void setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
+        this.ignoreHeaderXNaming = ignoreHeaderXNaming;
     }
 }
