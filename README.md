@@ -1,7 +1,7 @@
 # openapi-style-validator
 A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
-[![Build Status](https://travis-ci.org/JaffSoft/openapi-style-validator.svg?branch=master)](https://travis-ci.org/JaffSoft/openapi-style-validator)
+[![Build Status](https://travis-ci.org/OpenAPITools/openapi-style-validator.svg?branch=master)](https://travis-ci.org/OpenAPITools/openapi-style-validator)
 
 ## Summary
 
