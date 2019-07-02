@@ -15,9 +15,9 @@ apply plugin: "java"
 
   task fatJar(type: Jar) {
     manifest {
-      attributes 'Implementation-Title': 'JaffSoft OpenApi Style Validator',
+      attributes 'Implementation-Title': 'OpenApiTools OpenApi Style Validator',
               'Implementation-Version': version,
-              'Main-Class': 'com.jaffsoft.openapistylevalidator.Main'
+              'Main-Class': 'org.openapitools.openapistylevalidator.Main'
     }
     baseName = rootProject.name + '-' + project.name.replace("modules/", "")
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }

@@ -1,4 +1,4 @@
-package com.jaffsoft.openapistylevalidator;
+package org.openapitools.openapistylevalidator;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.jaffsoft.openapistylevalidator.commons;
+package org.openapitools.openapistylevalidator.commons;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
