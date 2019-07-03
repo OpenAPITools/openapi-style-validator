@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli.iml" group="modules/cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_main.iml" group="modules/cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_test.iml" group="modules/cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib.iml" group="modules/lib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_main.iml" group="modules/lib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_test.iml" group="modules/lib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" filepath="$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli.iml" group="openapi-style-validator/modules/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_main.iml" group="openapi-style-validator/modules/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/cli/modules_cli_test.iml" group="openapi-style-validator/modules/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib.iml" group="openapi-style-validator/modules/lib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_main.iml" group="openapi-style-validator/modules/lib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/lib/modules_lib_test.iml" group="openapi-style-validator/modules/lib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" filepath="$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" group="openapi-style-validator" />
     </modules>
   </component>
 </project>
