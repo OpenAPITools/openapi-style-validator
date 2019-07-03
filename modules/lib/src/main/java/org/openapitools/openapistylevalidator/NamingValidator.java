@@ -1,4 +1,4 @@
-package com.jaffsoft.openapistylevalidator;
+package org.openapitools.openapistylevalidator;
 
 class NamingValidator {
 

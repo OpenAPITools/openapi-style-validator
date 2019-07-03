@@ -2,10 +2,11 @@
   <configuration default="false" name="Run" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="com.jaffsoft.openapistylevalidator.Main" />
+    <option name="MAIN_CLASS_NAME" value="org.openapitools.openapistylevalidator.Main" />
     <module name="modules_cli_main" />
     <option name="PROGRAM_PARAMETERS" value="-s ./specs/petstore.yaml -o ./specs/options.json" />
-    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-    <method />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
   </configuration>
 </component>

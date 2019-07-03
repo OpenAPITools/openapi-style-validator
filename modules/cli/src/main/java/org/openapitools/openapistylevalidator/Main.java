@@ -1,12 +1,13 @@
-package com.jaffsoft.openapistylevalidator;
+package org.openapitools.openapistylevalidator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jaffsoft.openapistylevalidator.commons.Utils;
-import com.jaffsoft.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.commons.Utils;
+import org.openapitools.openapistylevalidator.styleerror.StyleError;
 import io.swagger.models.Swagger;
 import io.swagger.parser.SwaggerParser;
 import org.apache.commons.cli.*;
+
 import java.nio.charset.Charset;
 import java.util.List;
 

@@ -1,7 +1,15 @@
-# openapi-style-validator
+# OpenApi Tools: openapi-style-validator
 A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
-[![Build Status](https://travis-ci.org/OpenAPITools/openapi-style-validator.svg?branch=master)](https://travis-ci.org/OpenAPITools/openapi-style-validator)
+[![Build Status](https://travis-ci.org/OpenAPITools/openapi-style-validator.svg?branch=master)](https://travis-ci.org/OpenAPITools/openapi-style-validator
+
+<aside class="notice">
+This project has been moved from `JaffSoft` organization to the `openapitools`. I'm happy to work with the OpenApi Generator core team again and will still provide full support for the code plus I will have this awesome team behind me to help me with code review and management of the project. 
+
+Be aware that over the next few weeks / months, the project will be adapted / refactored to the `openapitools` organizations.
+
+We have a lot of ideas for this project, so follow the project for the latest news!
+</aside>
 
 ## Summary
 
@@ -11,7 +19,7 @@ members, there is no way to be sure they will follow it.
 
 You could argue that you will do code review to prevent these errors. Yes you could but wouldn't it be better if you
 could automatize all of this? You can still do code reviews to find business/requirements/REST path errors
-but let Jaffsoft openapi-style-validator validate the style and standards like mandatory examples, naming conventions,
+but let openapi-style-validator validate the style and standards like mandatory examples, naming conventions,
 description, etc...
 
 ## What it can validate
@@ -42,7 +50,7 @@ This project was started because when I tried SwaggerHub (which is the paid vers
 something similar, but it was proprietary. I didn't want to pay for the service so I created this project in my free
 times. I did not validate lately if they still have this feature.
 
-## How to use JaffSoft openapi-style-validator
+## How to use the style validator
 
 For now, the project is a simple command line interface (CLI) and a library. The easiest way to use it right now
 is to use the CLI and check the output. It will list all errors found based on the options you provided.
@@ -63,8 +71,7 @@ gradle fatJar
 ### To change the code
 
 If you want to open the project, I highly suggest that you use IntelliJ IDEA Community (Free) or Ultimate (paid).
-This IDE is cross platform so it should work on any OS. This project was created using this tool and you can just open
-it directly. Maybe you can use other tools to open the project but I will not provide any support.
+This IDE is cross platform so it should work on any OS. This project was created using this tool and you can just open it directly. Maybe you can use other tools to open the project but I will not provide any support.
 
 ### To launch
 

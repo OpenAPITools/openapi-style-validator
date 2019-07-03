@@ -1,6 +1,6 @@
-package com.jaffsoft.openapistylevalidator;
+package org.openapitools.openapistylevalidator;
 
-import com.jaffsoft.openapistylevalidator.styleerror.*;
+import org.openapitools.openapistylevalidator.styleerror.*;
 import io.swagger.models.HttpMethod;
 
 import java.util.ArrayList;
