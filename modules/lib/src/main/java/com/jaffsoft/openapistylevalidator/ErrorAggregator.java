@@ -1,7 +1,7 @@
 package com.jaffsoft.openapistylevalidator;
 
 import com.jaffsoft.openapistylevalidator.styleerror.*;
-import io.swagger.models.HttpMethod;
+import org.eclipse.microprofile.openapi.models.PathItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +40,13 @@ class ErrorAggregator {
         return errorList;
     }
 
-    void logMissingOrEmptyOperationAttribute(String path, HttpMethod method, String field) {
+    void logMissingOrEmptyOperationAttribute(String path, PathItem.HttpMethod method, String field) {
         errorList.add(new OperationStyleError(field,
                 "This field should be present and not empty",
                 path, method));
     }
 
-    void logMissingOrEmptyOperationCollection(String path, HttpMethod method, String field) {
+    void logMissingOrEmptyOperationCollection(String path, PathItem.HttpMethod method, String field) {
         errorList.add(new OperationStyleError(field,
                 "The collection should be present and there should be at least one item in it",
                 path, method));
@@ -59,7 +59,7 @@ class ErrorAggregator {
                 modelName, propertyName));
     }
 
-    void logOperationBadNaming(String variableName, String variableType, String neededNamingStrategy, String path, HttpMethod httpMethod) {
+    void logOperationBadNaming(String variableName, String variableType, String neededNamingStrategy, String path, PathItem.HttpMethod httpMethod) {
         errorList.add(new OperationNamingStyleError(StyleError.StyleCheckSection.Naming, variableName,
                 String.format("%s should be in %s", variableType, neededNamingStrategy), path, httpMethod));
     }

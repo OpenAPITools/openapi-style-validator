@@ -1,9 +1,15 @@
 package com.jaffsoft.openapistylevalidator;
 
 import com.jaffsoft.openapistylevalidator.styleerror.StyleError;
-import io.swagger.models.*;
-import io.swagger.models.properties.Property;
-import io.swagger.models.parameters.*;
+import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.eclipse.microprofile.openapi.models.Operation;
+import org.eclipse.microprofile.openapi.models.PathItem;
+import org.eclipse.microprofile.openapi.models.info.Contact;
+import org.eclipse.microprofile.openapi.models.info.Info;
+import org.eclipse.microprofile.openapi.models.info.License;
+import org.eclipse.microprofile.openapi.models.media.Schema;
+import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +17,13 @@ import java.util.Map;
 
 class OpenApiSpecStyleValidator {
 
-    private final Swagger swagger;
+    private final OpenAPI openAPI;
     private final ErrorAggregator errorAggregator;
     private ValidatorParameters parameters;
     private final NamingValidator namingValidator;
 
-    OpenApiSpecStyleValidator(Swagger swagger) {
-        this.swagger = swagger;
+    OpenApiSpecStyleValidator(OpenAPI openApi) {
+        this.openAPI = openApi;
         errorAggregator = new ErrorAggregator();
         namingValidator = new NamingValidator();
     }
@@ -33,7 +39,7 @@ class OpenApiSpecStyleValidator {
     }
 
     private void validateInfo() {
-        Info info = swagger.getInfo();
+        Info info = openAPI.getInfo();
         License license = info.getLicense();
         if (parameters.isValidateInfoLicense()) {
             if (license != null) {
@@ -68,10 +74,10 @@ class OpenApiSpecStyleValidator {
     }
 
     private void validateOperations() {
-        for (String key :swagger.getPaths().keySet()) {
-            Path path = swagger.getPath(key);
-            for (HttpMethod method : path.getOperationMap().keySet()) {
-                Operation op = path.getOperationMap().get(method);
+        for (String key : openAPI.getPaths().getPathItems().keySet()) {
+            PathItem path = openAPI.getPaths().getPathItems().get(key);
+            for (PathItem.HttpMethod method : path.getOperations().keySet()) {
+                Operation op = path.getOperations().get(method);
                 if (parameters.isValidateOperationOperationId()) {
                     if (op.getOperationId() == null || op.getOperationId().isEmpty()) {
                         errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "operationId");
@@ -100,12 +106,12 @@ class OpenApiSpecStyleValidator {
     }
 
     private void validateModels() {
-        for (String definition : swagger.getDefinitions().keySet()) {
-            Model model = swagger.getDefinitions().get(definition);
+        for (String definition : openAPI.getComponents().getSchemas().keySet()) {
+            Schema model = openAPI.getComponents().getSchemas().get(definition);
 
             if (model.getProperties() != null) {
-                for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
-                    Property property = entry.getValue();
+                for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
+                    Schema property = entry.getValue();
 
                     if (parameters.isValidateModelPropertiesExample()) {
                         if (property.getExample() == null) {
@@ -124,12 +130,11 @@ class OpenApiSpecStyleValidator {
 
     private void validateNaming() {
         if (parameters.isValidateNaming()) {
-            for (String definition : swagger.getDefinitions().keySet()) {
-                Model model = swagger.getDefinitions().get(definition);
+            for (String definition : openAPI.getComponents().getSchemas().keySet()) {
+                Schema model = openAPI.getComponents().getSchemas().get(definition);
 
                 if (model.getProperties() != null) {
-                    for (Map.Entry<String, Property> entry : model.getProperties().entrySet()) {
-                        Property property = entry.getValue();
+                    for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
                         boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingStrategy());
                         if (!isValid) {
                             errorAggregator.logModelBadNaming(entry.getKey(),
@@ -141,26 +146,28 @@ class OpenApiSpecStyleValidator {
                 }
             }
 
-            for (String key : swagger.getPaths().keySet()) {
-                Path path = swagger.getPath(key);
-                for (HttpMethod method : path.getOperationMap().keySet()) {
-                    Operation op = path.getOperationMap().get(method);
-                    for (Parameter opParam : op.getParameters()) {
-                        boolean shouldValidate;
-                        if (opParam.getIn().equals("header") && opParam.getName().startsWith("X-")) {
-                            shouldValidate = !parameters.isIgnoreHeaderXNaming();
-                        } else {
-                            shouldValidate = true;
-                        }
+            for (String key : openAPI.getPaths().getPathItems().keySet()) {
+                PathItem path = openAPI.getPaths().getPathItems().get(key);
+                for (PathItem.HttpMethod method : path.getOperations().keySet()) {
+                    Operation op = path.getOperations().get(method);
+                    if (op != null && op.getParameters() != null) {
+                        for (Parameter opParam : op.getParameters()) {
+                            boolean shouldValidate;
+                            if (opParam.getIn() == Parameter.In.HEADER && opParam.getName().startsWith("X-")) {
+                                shouldValidate = !parameters.isIgnoreHeaderXNaming();
+                            } else {
+                                shouldValidate = true;
+                            }
 
-                        if (shouldValidate) {
-                            boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
-                            if (!isValid) {
-                                errorAggregator.logOperationBadNaming(opParam.getName(),
-                                        "parameter",
-                                        parameters.getParameterNamingStrategy().getAppelation(),
-                                        key,
-                                        method);
+                            if (shouldValidate) {
+                                boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
+                                if (!isValid) {
+                                    errorAggregator.logOperationBadNaming(opParam.getName(),
+                                            "parameter",
+                                            parameters.getParameterNamingStrategy().getAppelation(),
+                                            key,
+                                            method);
+                                }
                             }
                         }
                     }
