@@ -1,4 +1,4 @@
-package com.jaffsoft.openapistylevalidator.styleerror;
+package org.openapitools.openapistylevalidator.styleerror;
 
 import org.eclipse.microprofile.openapi.models.PathItem;
 

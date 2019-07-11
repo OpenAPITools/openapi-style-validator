@@ -13,7 +13,7 @@
     <orderEntry type="module" module-name="modules_lib_main" />
     <orderEntry type="library" name="Gradle: commons-cli:commons-cli:1.4" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser:2.0.13" level="project" />
-    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.1" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser-v2-converter:2.0.13" level="project" />

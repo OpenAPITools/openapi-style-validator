@@ -1,6 +1,6 @@
-package com.jaffsoft.openapistylevalidator;
+package org.openapitools.openapistylevalidator;
 
-import com.jaffsoft.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.styleerror.StyleError;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;

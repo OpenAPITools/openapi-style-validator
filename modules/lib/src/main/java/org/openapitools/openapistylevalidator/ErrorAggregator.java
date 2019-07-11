@@ -1,7 +1,7 @@
-package com.jaffsoft.openapistylevalidator;
+package org.openapitools.openapistylevalidator;
 
-import com.jaffsoft.openapistylevalidator.styleerror.*;
 import org.eclipse.microprofile.openapi.models.PathItem;
+import org.openapitools.openapistylevalidator.styleerror.*;
 
 import java.util.ArrayList;
 import java.util.List;
