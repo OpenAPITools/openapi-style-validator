@@ -159,7 +159,7 @@ class OpenApiSpecStyleValidator {
                                 shouldValidate = true;
                             }
 
-                            if (shouldValidate) {
+                            if (shouldValidate && opParam.getRef() == null) {
                                 boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
                                 if (!isValid) {
                                     errorAggregator.logOperationBadNaming(opParam.getName(),
