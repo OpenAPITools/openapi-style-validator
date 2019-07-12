@@ -19,7 +19,7 @@ apply plugin: "java"
               'Implementation-Version': version,
               'Main-Class': 'org.openapitools.openapistylevalidator.Main'
     }
-    baseName = rootProject.name + '-' + project.name.replace("modules/", "")
+    archiveBaseName = rootProject.name + '-' + project.name.replace("modules/", "")
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
   }
