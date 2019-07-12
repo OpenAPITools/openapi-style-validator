@@ -1,0 +1,10 @@
+definitions:
+  Foo:
+    type: object
+    description: "Something awesome"
+    properties:
+      name:
+        type: string
+        description: "something"
+      bar:
+        type: string

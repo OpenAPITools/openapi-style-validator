@@ -35,6 +35,7 @@ class Main {
             CommandLine commandLine = parser.parse(options, args);
             OpenAPIParser openApiParser = new OpenAPIParser();
             ParseOptions parseOptions = new ParseOptions();
+            parseOptions.setResolve(true);
 
             SwaggerParseResult parserResult = openApiParser.readLocation(commandLine.getOptionValue(SOURCE_OPT_SHORT), null, parseOptions);
             io.swagger.v3.oas.models.OpenAPI swaggerOpenAPI = parserResult.getOpenAPI();
