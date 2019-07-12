@@ -2,13 +2,16 @@ package org.openapitools.openapistylevalidator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.swagger.parser.OpenAPIParser;
+import io.swagger.v3.parser.core.models.ParseOptions;
+import io.swagger.v3.parser.core.models.SwaggerParseResult;
+import org.apache.commons.cli.*;
+import java.nio.charset.Charset;
+
+import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.commons.Utils;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
-import io.swagger.models.Swagger;
-import io.swagger.parser.SwaggerParser;
-import org.apache.commons.cli.*;
 
-import java.nio.charset.Charset;
 import java.util.List;
 
 class Main {
@@ -30,8 +33,15 @@ class Main {
 
         try {
             CommandLine commandLine = parser.parse(options, args);
-            Swagger swagger = new SwaggerParser().read(commandLine.getOptionValue(SOURCE_OPT_SHORT));
-            OpenApiSpecStyleValidator openApiSpecStyleValidator = new OpenApiSpecStyleValidator(swagger);
+            OpenAPIParser openApiParser = new OpenAPIParser();
+            ParseOptions parseOptions = new ParseOptions();
+            parseOptions.setResolve(true);
+
+            SwaggerParseResult parserResult = openApiParser.readLocation(commandLine.getOptionValue(SOURCE_OPT_SHORT), null, parseOptions);
+            io.swagger.v3.oas.models.OpenAPI swaggerOpenAPI = parserResult.getOpenAPI();
+
+            org.eclipse.microprofile.openapi.models.OpenAPI openAPI = SwAdapter.toOpenAPI(swaggerOpenAPI);
+            OpenApiSpecStyleValidator openApiSpecStyleValidator = new OpenApiSpecStyleValidator(openAPI);
 
             ValidatorParameters parameters = getOptionalValidatorParametersOrDefault(commandLine);
 
@@ -44,7 +54,7 @@ class Main {
 
     private static void printResults(List<StyleError> errorList) {
         if (errorList.isEmpty()) {
-            System.out.println("There are no style errors in this spec. Good job!");
+            System.out.println("There are no style errors in this spec.");
         } else {
             for (StyleError error : errorList) {
                 System.out.println(error.toString());

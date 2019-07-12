@@ -1,0 +1,31 @@
+swagger: '2.0'
+info:
+  version: "1.0.1"
+  title: Test123
+  description: Test123
+  contact:
+    name: API Support
+    url: http://www.example.com/support
+    email: support@example.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /api
+host: "localhost:9000"
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /foo:
+    get:
+      tags:
+        - Foo
+      summary: Return a foo
+      operationId: getFoo
+      description: This is the best function ever
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "./definitions.yaml#/definitions/Foo"

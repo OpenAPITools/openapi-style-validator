@@ -1,16 +1,16 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
-import io.swagger.models.HttpMethod;
+import org.eclipse.microprofile.openapi.models.PathItem;
 
 public class OperationStyleError extends StyleError {
 
     private final String path;
-    private final HttpMethod method;
+    private final PathItem.HttpMethod method;
 
     public OperationStyleError(String fieldNames,
                                String description,
                                String path,
-                               HttpMethod method) {
+                               PathItem.HttpMethod method) {
         super(StyleCheckSection.Operations, fieldNames, description);
         this.path = path;
         this.method = method;
