@@ -1,0 +1,27 @@
+swagger: '2.0'
+info:
+  version: "1.0.1"
+  title: Test123
+  description: Test123
+basePath: /api
+host: "localhost:9000"
+consumes:
+  - application/json
+produces:
+  - application/json
+################################################################################
+#                                 EndPoints                                    #
+################################################################################
+paths:
+  /foo:
+    get:
+      tags:
+        - Foo
+      summary: Return a foo
+      operationId: getFoo
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "./definitions.yaml#/definitions/Foo"
+

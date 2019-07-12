@@ -9,3 +9,5 @@
 # IntelliJ
 /out/
 build
+
+/website/node_modules
