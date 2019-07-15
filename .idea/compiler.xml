@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="cli_main" target="1.8" />
+      <module name="cli_test" target="1.8" />
+      <module name="lib_main" target="1.8" />
+      <module name="lib_test" target="1.8" />
       <module name="modules_cli_main" target="1.8" />
       <module name="modules_cli_test" target="1.8" />
       <module name="modules_lib_main" target="1.8" />

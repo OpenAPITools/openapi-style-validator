@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':modules/lib')
+	compile project(':lib')
 	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
 
 	compile 'io.swagger.parser.v3:swagger-parser:2.0.13'
