@@ -1,3 +1,5 @@
+apply plugin: 'application'
+
 dependencies {
 	compile project(':lib')
 	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
@@ -5,3 +7,16 @@ dependencies {
 	compile 'io.swagger.parser.v3:swagger-parser:2.0.13'
 	compile 'org.openapitools.empoa:empoa-swagger-core:1.0.0'
 }
+
+mainClassName = 'org.openapitools.openapistylevalidator.Main'
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+	//noinspection GroovyAccessibility
+    archiveBaseName = "openapi-style-validator-cli"
+	//noinspection GroovyAccessibility
+	archiveClassifier = null
+}
+
+project.tasks.assemble.dependsOn project.tasks.shadowJar
