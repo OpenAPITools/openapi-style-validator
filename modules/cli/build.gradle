@@ -1,4 +1,0 @@
-dependencies {
-	compile project(':modules/lib')
-	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
-}

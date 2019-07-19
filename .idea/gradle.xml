@@ -11,8 +11,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/modules/cli" />
-            <option value="$PROJECT_DIR$/modules/lib" />
+            <option value="$PROJECT_DIR$/cli" />
+            <option value="$PROJECT_DIR$/lib" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />

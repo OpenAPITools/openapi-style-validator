@@ -61,12 +61,9 @@ The project is configured to use gradle. To build the jar, just do:
 
 `gradlew assemble`
 
-or
+or if you want to invoke the jar creation directly
 
-```
-gradle build
-gradle fatJar
-```
+`gradlew shadowJar`
 
 ### To change the code
 
