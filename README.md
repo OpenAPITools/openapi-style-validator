@@ -3,6 +3,8 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 [![Build Status](https://travis-ci.org/OpenAPITools/openapi-style-validator.svg?branch=master)](https://travis-ci.org/OpenAPITools/openapi-style-validator)
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/OpenAPITools/openapi-style-validator)
+
 ## Quick note
 
 This project has been moved from `JaffSoft` organization to the `openapitools`. I'm happy to work with the OpenApi Generator core team again and will still provide full support for the code plus I will have this awesome team behind me to help me with code review and management of the project. 
