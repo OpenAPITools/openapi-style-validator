@@ -5,13 +5,7 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/OpenAPITools/openapi-style-validator)
 
-## Quick note
-
-This project has been moved from `JaffSoft` organization to the `openapitools`. I'm happy to work with the OpenApi Generator core team again and will still provide full support for the code plus I will have this awesome team behind me to help me with code review and management of the project. 
-
-Be aware that over the next few weeks / months, the project will be adapted / refactored to the `openapitools` organizations.
-
-We have a lot of ideas for this project, so follow the project for the latest news!
+[Official Website](https://openapitools.github.io/openapi-style-validator/)
 
 ## Summary
 
