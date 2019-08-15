@@ -8,6 +8,7 @@
 # Sensitive or high-churn files:
 # IntelliJ
 /out/
+bin
 build
 
 /website/node_modules

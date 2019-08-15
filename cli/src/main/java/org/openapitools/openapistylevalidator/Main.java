@@ -14,7 +14,7 @@ import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 import java.util.List;
 
-class Main {
+public class Main {
 
     private static final String SOURCE_OPT_SHORT = "s";
     private static final String SOURCE_OPT_LONG = "source";
