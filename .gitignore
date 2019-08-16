@@ -11,3 +11,8 @@
 build
 
 /website/node_modules
+/cli/build
+/cli/out
+
+/lib/build
+/lib/out
