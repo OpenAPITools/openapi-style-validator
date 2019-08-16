@@ -20,3 +20,53 @@ shadowJar {
 }
 
 project.tasks.assemble.dependsOn project.tasks.shadowJar
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+artifacts {
+	archives shadowJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'openapi-style-validator-cli'
+            pom {
+                name = 'OpenAPI Style Validator - cli'
+                description = 'Command line interface to validate the style and standards of an OpenAPI specification'
+                packaging = 'jar'
+                url = 'https://openapitools.github.io/openapi-style-validator/'
+                licenses {
+                    license {
+                        name = 'Apache 2.0 License'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'JFCote'
+                        name = 'Jean-Francois Cote'
+                        email = 'jcote@stingray.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/openapitools/openapi-style-validator.git'
+                    developerConnection = 'scm:git:https://github.com/openapitools/openapi-style-validator.git'
+                    url = 'https://github.com/openapitools/openapi-style-validator/'
+                }
+            }
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            artifact shadowJar
+        }
+    }
+}
