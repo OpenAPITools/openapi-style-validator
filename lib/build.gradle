@@ -13,6 +13,22 @@ task javadocJar(type: Jar) {
     classifier = 'javadoc'
 }
 
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+signing {
+    useGpgCmd()
+    sign configurations.archives
+}
+
+tasks.withType(Sign) {
+    onlyIf {
+        project.hasProperty('signing.gnupg.keyName')
+    }
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -44,6 +60,31 @@ publishing {
             from components.java
             artifact sourcesJar
             artifact javadocJar
+
+            if(project.hasProperty('signing.gnupg.keyName')) {
+                pom.withXml {
+                    def pomFile = file("${project.buildDir}/generated-pom.xml")
+                    writeTo(pomFile)
+                    def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                    artifact(pomAscFile) {
+                        classifier = null
+                        extension = 'pom.asc'
+                    }
+                    pomFile.delete()
+                }
+    
+                project.tasks.signArchives.signatureFiles.each {
+                    artifact(it) {
+                        def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                        if (matcher.find()) {
+                            classifier = matcher.group(1)
+                        } else {
+                            classifier = null
+                        }
+                        extension = 'jar.asc'
+                    }
+                }
+            }
         }
     }
 }
