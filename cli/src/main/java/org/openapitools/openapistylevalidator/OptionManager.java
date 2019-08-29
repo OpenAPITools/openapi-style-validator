@@ -79,4 +79,16 @@ class OptionManager {
     String getSource(CommandLine commandLine) {
         return commandLine.getOptionValue(SOURCE_OPT_SHORT);
     }
+
+    boolean isHelpRequested(CommandLine commandLine) {
+        return commandLine.hasOption(HELP_OPT_SHORT) || commandLine.hasOption(HELP_OPT_LONG);
+    }
+
+    boolean isVersionRequested(CommandLine commandLine) {
+        return commandLine.hasOption(VERSION_OPT_SHORT) || commandLine.hasOption(VERSION_OPT_LONG);
+    }
+
+    boolean isSourceProvided(CommandLine commandLine) {
+        return commandLine.hasOption(SOURCE_OPT_SHORT) || commandLine.hasOption(SOURCE_OPT_LONG);
+    }
 }

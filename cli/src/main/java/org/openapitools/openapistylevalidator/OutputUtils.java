@@ -10,7 +10,7 @@ import java.util.List;
 class OutputUtils {
 
     @SuppressWarnings("SameParameterValue")
-    static void printHelp(final Options options,
+    void printHelp(final Options options,
                           final String cmdLineSyntax) {
         PrintWriter writer = new PrintWriter(System.out);
         final HelpFormatter helpFormatter = new HelpFormatter();
@@ -18,7 +18,7 @@ class OutputUtils {
         writer.flush();
     }
 
-    static void printResults(List<StyleError> errorList) {
+    void printResults(List<StyleError> errorList) {
         if (errorList.isEmpty()) {
             System.out.println("There are no style errors in this spec.");
         } else {
@@ -27,5 +27,19 @@ class OutputUtils {
             }
             System.exit(1);
         }
+    }
+
+    void printVersion() {
+        System.out.println(String.format("Current version: %s", getVersion()));
+    }
+
+    void printRequestError() {
+        System.out.println("There was something wrong in your request. Please check documentation for more info");
+        System.exit(1);
+    }
+
+    private String getVersion() {
+        String tentativeVersion = getClass().getPackage().getImplementationVersion();
+        return tentativeVersion == null ? "DEVELOPMENT" : tentativeVersion;
     }
 }
