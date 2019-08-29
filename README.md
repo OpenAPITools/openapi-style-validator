@@ -5,6 +5,8 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/OpenAPITools/openapi-style-validator)
 
+[![Stable releaases in the Maven store](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/org/openapitools/openapi-style-validator/maven-metadata.xml.svg)](https://mvnrepository.com/artifact/org.openapitools.openapistylevalidator)
+
 [Official Website](https://openapitools.github.io/openapi-style-validator/)
 
 ## Summary
