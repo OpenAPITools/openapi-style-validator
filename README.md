@@ -5,6 +5,8 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 [![Join the Slack chat room](https://img.shields.io/badge/Slack-Join%20the%20chat%20room-orange)](https://join.slack.com/t/openapi-generator/shared_invite/enQtNzAyNDMyOTU0OTE1LTY5ZDBiNDI5NzI5ZjQ1Y2E5OWVjMjZkYzY1ZGM2MWQ4YWFjMzcyNDY5MGI4NjQxNDBiMTlmZTc5NjY2ZTQ5MGM)
 
+[![Maven Central](https://img.shields.io/maven-central/v/org.openapitools.openapistylevalidator/openapi-style-validator-cli)](https://mvnrepository.com/artifact/org.openapitools.openapistylevalidator)
+
 [Official Website](https://openapitools.github.io/openapi-style-validator/)
 
 ## Summary
