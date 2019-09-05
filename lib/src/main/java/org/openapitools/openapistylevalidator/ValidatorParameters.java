@@ -1,6 +1,6 @@
 package org.openapitools.openapistylevalidator;
 
-class ValidatorParameters {
+public class ValidatorParameters {
 
     enum NamingStrategy {
         UnderscoreCase("underscore_case"),
@@ -36,7 +36,7 @@ class ValidatorParameters {
     private NamingStrategy parameterNamingStrategy = NamingStrategy.CamelCase;
     private NamingStrategy propertyNamingStrategy = NamingStrategy.CamelCase;
 
-    ValidatorParameters() {
+    public ValidatorParameters() {
         //For Gson
     }
 

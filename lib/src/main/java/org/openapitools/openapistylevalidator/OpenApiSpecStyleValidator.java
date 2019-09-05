@@ -15,20 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class OpenApiSpecStyleValidator {
+public class OpenApiSpecStyleValidator {
 
     private final OpenAPI openAPI;
     private final ErrorAggregator errorAggregator;
     private ValidatorParameters parameters;
     private final NamingValidator namingValidator;
 
-    OpenApiSpecStyleValidator(OpenAPI openApi) {
+    public OpenApiSpecStyleValidator(OpenAPI openApi) {
         this.openAPI = openApi;
         errorAggregator = new ErrorAggregator();
         namingValidator = new NamingValidator();
     }
 
-    List<StyleError> validate(ValidatorParameters parameters) {
+    public List<StyleError> validate(ValidatorParameters parameters) {
         this.parameters = parameters;
         validateInfo();
         validateOperations();
