@@ -16,3 +16,6 @@ jobs:
       if: env(SONATYPE_USER) IS present AND type IN (push, api) AND branch IN (master) AND tag IS blank
       jdk: openjdk8
       script: ./gradlew publishToSonatype -PsonatypeUser=$SONATYPE_USER -PsonatypePassword=$SONATYPE_PASSWORD
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

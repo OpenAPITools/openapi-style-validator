@@ -24,6 +24,7 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'signing'
     apply plugin: 'de.marcphilipp.nexus-publish'
+    apply plugin: 'jacoco'
 
     repositories {
         mavenCentral()
@@ -54,6 +55,15 @@ subprojects {
             }
         }
     }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+            html.enabled false
+        }
+    }
+
+    check.dependsOn jacocoTestReport
 }
 
 nexusStaging {
