@@ -8,7 +8,7 @@ dependencies {
 	compile 'org.openapitools.empoa:empoa-swagger-core:1.0.0'
 }
 
-mainClassName = 'org.openapitools.openapistylevalidator.Main'
+mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'
 
 apply plugin: 'com.github.johnrengelman.shadow'
 
