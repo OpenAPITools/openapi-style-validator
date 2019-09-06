@@ -4,8 +4,11 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 
 class OutputUtils {
 
@@ -39,7 +42,14 @@ class OutputUtils {
     }
 
     private String getVersion() {
-        String tentativeVersion = getClass().getPackage().getImplementationVersion();
-        return tentativeVersion == null ? "DEVELOPMENT" : tentativeVersion;
+        try (InputStream input = OutputUtils.class.getResourceAsStream("/version.properties")) {
+            if (input != null) {
+                Properties prop = new Properties();
+                prop.load(input);
+                return prop.getProperty("version");
+            }
+        } catch (IOException ignored) { }
+
+        return "No version | Running in the IDE?";
     }
 }
