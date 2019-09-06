@@ -1,4 +1,4 @@
-package org.openapitools.openapistylevalidator;
+package org.openapitools.openapistylevalidator.cli;
 
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;

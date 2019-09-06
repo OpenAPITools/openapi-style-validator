@@ -1,4 +1,4 @@
-package org.openapitools.openapistylevalidator;
+package org.openapitools.openapistylevalidator.cli;
 
 import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.parser.core.models.ParseOptions;
@@ -6,6 +6,8 @@ import io.swagger.v3.parser.core.models.SwaggerParseResult;
 import org.apache.commons.cli.*;
 
 import org.openapitools.empoa.swagger.core.internal.SwAdapter;
+import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
+import org.openapitools.openapistylevalidator.ValidatorParameters;
 
 public class Main {
 

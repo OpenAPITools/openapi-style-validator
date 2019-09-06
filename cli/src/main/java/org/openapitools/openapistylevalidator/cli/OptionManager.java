@@ -1,4 +1,4 @@
-package org.openapitools.openapistylevalidator;
+package org.openapitools.openapistylevalidator.cli;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,6 +6,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
+import org.openapitools.openapistylevalidator.ValidatorParameters;
 import org.openapitools.openapistylevalidator.commons.Utils;
 
 import java.nio.charset.Charset;

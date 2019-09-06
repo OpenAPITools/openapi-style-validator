@@ -11,6 +11,7 @@
     <orderEntry type="module" module-name="lib_main" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-jdk14:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-simple-models-impl:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.1" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
