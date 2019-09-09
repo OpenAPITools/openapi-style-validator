@@ -11,6 +11,15 @@
     <orderEntry type="module" module-name="lib_main" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-jdk14:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser:2.0.14" level="project" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../cli/build/generated-version" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser-v2-converter:2.0.14" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger:swagger-compat-spec-parser:1.0.46" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger:swagger-parser:1.0.46" level="project" />
