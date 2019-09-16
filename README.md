@@ -7,6 +7,8 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.openapitools.openapistylevalidator/openapi-style-validator-cli)](https://mvnrepository.com/artifact/org.openapitools.openapistylevalidator)
 
+[![codecov](https://codecov.io/gh/OpenAPITools/openapi-style-validator/branch/master/graph/badge.svg)](https://codecov.io/gh/OpenAPITools/openapi-style-validator)
+
 [Official Website](https://openapitools.github.io/openapi-style-validator/)
 
 ## Summary
