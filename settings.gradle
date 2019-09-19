@@ -1,1 +1,4 @@
-include ":cli", ":lib"
+rootProject.name = 'openapi-style-validator'
+
+include ":lib"
+include ":cli"
