@@ -1,7 +1,7 @@
 dependencies {
     compile 'org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1'
-    testCompile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.25'
-    testCompile group: 'org.openapitools.empoa', name: 'empoa-simple-models-impl', version: '1.0.0'
+    testCompile 'org.slf4j:slf4j-jdk14:1.7.25'
+    testCompile 'org.openapitools.empoa:empoa-simple-models-impl:1.0.0'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
