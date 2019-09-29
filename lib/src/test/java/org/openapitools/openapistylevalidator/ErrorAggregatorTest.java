@@ -1,31 +1,34 @@
 package org.openapitools.openapistylevalidator;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ErrorAggregatorTest {
+class ErrorAggregatorTest {
 
     private ErrorAggregator errorAggregator;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void initEch() {
         errorAggregator = new ErrorAggregator();
     }
 
     @Test
-    public void logMissingOrEmptyAttributeShouldAddToErrorList() {
+    void logMissingOrEmptyAttributeShouldAddToErrorList() {
         //Arrange
 
         //Act
         errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "contact");
 
         //Assert
-        assertEquals(1, errorAggregator.getErrorList().size());
-        //TODO: Change this to use getter instead!!
-        assertEquals("*ERROR* Section: APIInfo: 'contact' -> Should be present and not empty", errorAggregator.getErrorList().get(0).toString());
+        Assertions.assertAll(
+                () -> assertEquals(1, errorAggregator.getErrorList().size()),
+                //TODO: Change this to use getter instead!!
+                () -> assertEquals("*ERROR* Section: APIInfo: 'contact' -> Should be present and not empty", errorAggregator.getErrorList().get(0).toString())
+        );
     }
 
 }

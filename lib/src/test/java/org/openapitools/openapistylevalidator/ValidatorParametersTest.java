@@ -1,40 +1,42 @@
 package org.openapitools.openapistylevalidator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ValidatorParametersTest {
+class ValidatorParametersTest {
 
     private ValidatorParameters parameters;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void initEach() {
         parameters = new ValidatorParameters();
     }
 
     @Test
-    public void validateDefaultValues() {
-        assertTrue(parameters.isValidateInfoLicense());
-        assertTrue(parameters.isValidateInfoDescription());
-        assertTrue(parameters.isValidateInfoContact());
-        assertTrue(parameters.isValidateOperationOperationId());
-        assertTrue(parameters.isValidateOperationDescription());
-        assertTrue(parameters.isValidateOperationTag());
-        assertTrue(parameters.isValidateOperationSummary());
-        assertTrue(parameters.isValidateModelPropertiesExample());
-        assertTrue(parameters.isValidateModelNoLocalDef());
-
-        assertTrue(parameters.isValidateNaming());
-        assertTrue(parameters.isIgnoreHeaderXNaming());
-        assertEquals(ValidatorParameters.NamingStrategy.HyphenCase, parameters.getPathNamingStrategy());
-        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy());
-        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy());
+    void validateDefaultValues() {
+        Assertions.assertAll(
+                () -> assertTrue(parameters.isValidateInfoLicense()),
+                () -> assertTrue(parameters.isValidateInfoDescription()),
+                () -> assertTrue(parameters.isValidateInfoContact()),
+                () -> assertTrue(parameters.isValidateOperationOperationId()),
+                () -> assertTrue(parameters.isValidateOperationDescription()),
+                () -> assertTrue(parameters.isValidateOperationTag()),
+                () -> assertTrue(parameters.isValidateOperationSummary()),
+                () -> assertTrue(parameters.isValidateModelPropertiesExample()),
+                () -> assertTrue(parameters.isValidateModelNoLocalDef()),
+                () -> assertTrue(parameters.isValidateNaming()),
+                () -> assertTrue(parameters.isIgnoreHeaderXNaming()),
+                () -> assertEquals(ValidatorParameters.NamingStrategy.HyphenCase, parameters.getPathNamingStrategy()),
+                () -> assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy()),
+                () -> assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy())
+        );
     }
 
     @Test
-    public void testAllGetterSetters() {
+    void testAllGetterSetters() {
         parameters.setValidateInfoLicense(false);
         parameters.setValidateInfoDescription(false);
         parameters.setValidateInfoContact(false);
@@ -51,21 +53,21 @@ public class ValidatorParametersTest {
         parameters.setParameterNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
         parameters.setPropertyNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
 
-        assertFalse(parameters.isValidateInfoLicense());
-        assertFalse(parameters.isValidateInfoDescription());
-        assertFalse(parameters.isValidateInfoContact());
-        assertFalse(parameters.isValidateOperationOperationId());
-        assertFalse(parameters.isValidateOperationDescription());
-        assertFalse(parameters.isValidateOperationTag());
-        assertFalse(parameters.isValidateOperationSummary());
-        assertFalse(parameters.isValidateModelPropertiesExample());
-        assertFalse(parameters.isValidateModelNoLocalDef());
-        assertFalse(parameters.isValidateNaming());
-        assertFalse(parameters.isIgnoreHeaderXNaming());
-
-        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPathNamingStrategy());
-        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy());
-        assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy());
+        Assertions.assertAll(
+                () -> assertFalse(parameters.isValidateInfoLicense()),
+                () -> assertFalse(parameters.isValidateInfoDescription()),
+                () -> assertFalse(parameters.isValidateInfoContact()),
+                () -> assertFalse(parameters.isValidateOperationOperationId()),
+                () -> assertFalse(parameters.isValidateOperationDescription()),
+                () -> assertFalse(parameters.isValidateOperationTag()),
+                () -> assertFalse(parameters.isValidateOperationSummary()),
+                () -> assertFalse(parameters.isValidateModelPropertiesExample()),
+                () -> assertFalse(parameters.isValidateModelNoLocalDef()),
+                () -> assertFalse(parameters.isValidateNaming()),
+                () -> assertFalse(parameters.isIgnoreHeaderXNaming()),
+                () -> assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPathNamingStrategy()),
+                () -> assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getParameterNamingStrategy()),
+                () -> assertEquals(ValidatorParameters.NamingStrategy.CamelCase, parameters.getPropertyNamingStrategy())
+        );
     }
-
 }

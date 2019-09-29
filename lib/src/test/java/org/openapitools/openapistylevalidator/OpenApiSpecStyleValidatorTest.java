@@ -1,19 +1,17 @@
 package org.openapitools.openapistylevalidator;
 
-import static org.junit.Assert.assertTrue;
-
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class OpenApiSpecStyleValidatorTest {
-
+class OpenApiSpecStyleValidatorTest {
     @Test
-    public void validatePingOpenAPI() {
+    void validatePingOpenAPI() {
         OpenAPI openAPI = createPingOpenAPI();
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
@@ -23,7 +21,7 @@ public class OpenApiSpecStyleValidatorTest {
         assertTrue(errors.isEmpty());
     }
 
-    public static OpenAPI createPingOpenAPI() {
+    private static OpenAPI createPingOpenAPI() {
         return OASFactory.createOpenAPI()
                 .openapi("3.0.1")
                 .info(
@@ -64,5 +62,4 @@ public class OpenApiSpecStyleValidatorTest {
                                 )
                 );
     }
-
 }

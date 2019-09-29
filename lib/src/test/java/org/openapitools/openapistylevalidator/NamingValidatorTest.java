@@ -1,21 +1,23 @@
 package org.openapitools.openapistylevalidator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class NamingValidatorTest {
+class NamingValidatorTest {
 
     private NamingValidator validator;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void initEach() {
         validator = new NamingValidator();
     }
 
     @Test
-    public void goodUnderscoreCaseShouldReturnTrue() {
+    void goodUnderscoreCaseShouldReturnTrue() {
         //Arrange
         String goodUnderscoreCase1 = "my_variable";
         String goodUnderscoreCase2 = "variable";
@@ -27,13 +29,15 @@ public class NamingValidatorTest {
         boolean actual3 = validator.isNamingValid(goodUnderscoreCase3, ValidatorParameters.NamingStrategy.UnderscoreCase);
 
         //Assert
-        assertTrue(actual1);
-        assertTrue(actual2);
-        assertTrue(actual3);
+        Assertions.assertAll(
+                () -> assertTrue(actual1),
+                () -> assertTrue(actual2),
+                () -> assertTrue(actual3)
+        );
     }
 
     @Test
-    public void badUnderscoreCaseShouldReturnFalse() {
+    void badUnderscoreCaseShouldReturnFalse() {
         //Arrange
         String badUnderscoreCase1 = "myVariable";
         String badUnderscoreCase2 = "my-variable";
@@ -51,16 +55,18 @@ public class NamingValidatorTest {
         boolean actual6 = validator.isNamingValid(badUnderscoreCase6, ValidatorParameters.NamingStrategy.UnderscoreCase);
 
         //Assert
-        assertFalse(actual1);
-        assertFalse(actual2);
-        assertFalse(actual3);
-        assertFalse(actual4);
-        assertFalse(actual5);
-        assertFalse(actual6);
+        Assertions.assertAll(
+                () -> assertFalse(actual1),
+                () -> assertFalse(actual2),
+                () -> assertFalse(actual3),
+                () -> assertFalse(actual4),
+                () -> assertFalse(actual5),
+                () -> assertFalse(actual6)
+        );
     }
 
     @Test
-    public void goodCamelCaseShouldReturnTrue() {
+    void goodCamelCaseShouldReturnTrue() {
         //Arrange
         String goodCamelCase1 = "myVariable";
         String goodCamelCase2 = "variable";
@@ -78,16 +84,18 @@ public class NamingValidatorTest {
         boolean actual6 = validator.isNamingValid(goodCamelCase6, ValidatorParameters.NamingStrategy.CamelCase);
 
         //Assert
-        assertTrue(actual1);
-        assertTrue(actual2);
-        assertTrue(actual3);
-        assertTrue(actual4);
-        assertTrue(actual5);
-        assertTrue(actual6);
+        Assertions.assertAll(
+                () -> assertTrue(actual1),
+                () -> assertTrue(actual2),
+                () -> assertTrue(actual3),
+                () -> assertTrue(actual4),
+                () -> assertTrue(actual5),
+                () -> assertTrue(actual6)
+        );
     }
 
     @Test
-    public void badCamelCaseShouldReturnFalse() {
+    void badCamelCaseShouldReturnFalse() {
         //Arrange
         String badCamelCase1 = "my_variable";
         String badCamelCase2 = "my-variable";
@@ -103,15 +111,17 @@ public class NamingValidatorTest {
         boolean actual5 = validator.isNamingValid(badCamelCase5, ValidatorParameters.NamingStrategy.CamelCase);
 
         //Assert
-        assertFalse(actual1);
-        assertFalse(actual2);
-        assertFalse(actual3);
-        assertFalse(actual4);
-        assertFalse(actual5);
+        Assertions.assertAll(
+                () -> assertFalse(actual1),
+                () -> assertFalse(actual2),
+                () -> assertFalse(actual3),
+                () -> assertFalse(actual4),
+                () -> assertFalse(actual5)
+        );
     }
 
     @Test
-    public void goodHyphenCaseShouldReturnTrue() {
+    void goodHyphenCaseShouldReturnTrue() {
         //Arrange
         String goodHyphenCase1 = "my-variable";
         String goodHyphenCase2 = "variable";
@@ -123,13 +133,15 @@ public class NamingValidatorTest {
         boolean actual3 = validator.isNamingValid(goodHyphenCase3, ValidatorParameters.NamingStrategy.HyphenCase);
 
         //Assert
-        assertTrue(actual1);
-        assertTrue(actual2);
-        assertTrue(actual3);
+        Assertions.assertAll(
+                () -> assertTrue(actual1),
+                () -> assertTrue(actual2),
+                () -> assertTrue(actual3)
+        );
     }
 
     @Test
-    public void badHyphenCaseShouldReturnFalse() {
+    void badHyphenCaseShouldReturnFalse() {
         //Arrange
         String badHyphenCase1 = "my_variable";
         String badHyphenCase2 = "myVariable";
@@ -147,12 +159,14 @@ public class NamingValidatorTest {
         boolean actual6 = validator.isNamingValid(badHyphenCase6, ValidatorParameters.NamingStrategy.HyphenCase);
 
         //Assert
-        assertFalse(actual1);
-        assertFalse(actual2);
-        assertFalse(actual3);
-        assertFalse(actual4);
-        assertFalse(actual5);
-        assertFalse(actual6);
+        Assertions.assertAll(
+                () -> assertFalse(actual1),
+                () -> assertFalse(actual2),
+                () -> assertFalse(actual3),
+                () -> assertFalse(actual4),
+                () -> assertFalse(actual5),
+                () -> assertFalse(actual6)
+        );
     }
 
 }
