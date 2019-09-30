@@ -12,7 +12,7 @@ class ErrorAggregatorTest {
     private ErrorAggregator errorAggregator;
 
     @BeforeEach
-    void initEch() {
+    void initEach() {
         errorAggregator = new ErrorAggregator();
     }
 
