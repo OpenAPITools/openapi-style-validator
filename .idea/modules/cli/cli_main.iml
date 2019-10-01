@@ -30,9 +30,9 @@
     <orderEntry type="library" name="Gradle: io.swagger:swagger-models:1.5.23" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.28" level="project" />
     <orderEntry type="library" name="Gradle: commons-cli:commons-cli:1.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.1" level="project" />
     <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Gradle: org.osgi:org.osgi.annotation.versioning:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser-core:2.0.14" level="project" />
