@@ -3,7 +3,9 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output-test url="file://$MODULE_DIR$/../../../cli/out/test/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../../cli/src/test" />
+    <content url="file://$MODULE_DIR$/../../../cli/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../cli/src/test/java" isTestSource="true" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="cli_main" />
