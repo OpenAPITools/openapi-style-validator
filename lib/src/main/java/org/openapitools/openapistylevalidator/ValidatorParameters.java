@@ -2,7 +2,7 @@ package org.openapitools.openapistylevalidator;
 
 public class ValidatorParameters {
 
-    enum NamingStrategy {
+    public static enum NamingStrategy {
         UnderscoreCase("underscore_case"),
         CamelCase("camelCase"),
         HyphenCase("hyphen-case");
@@ -40,115 +40,115 @@ public class ValidatorParameters {
         //For Gson
     }
 
-    boolean isValidateInfoLicense() {
+    public boolean isValidateInfoLicense() {
         return validateInfoLicense;
     }
 
-    boolean isValidateInfoDescription() {
+    public boolean isValidateInfoDescription() {
         return validateInfoDescription;
     }
 
-    boolean isValidateInfoContact() {
+    public boolean isValidateInfoContact() {
         return validateInfoContact;
     }
 
-    boolean isValidateOperationOperationId() {
+    public boolean isValidateOperationOperationId() {
         return validateOperationOperationId;
     }
 
-    boolean isValidateOperationDescription() {
+    public boolean isValidateOperationDescription() {
         return validateOperationDescription;
     }
 
-    boolean isValidateOperationTag() {
+    public boolean isValidateOperationTag() {
         return validateOperationTag;
     }
 
-    boolean isValidateOperationSummary() {
+    public boolean isValidateOperationSummary() {
         return validateOperationSummary;
     }
 
-    boolean isValidateModelPropertiesExample() {
+    public boolean isValidateModelPropertiesExample() {
         return validateModelPropertiesExample;
     }
 
-    boolean isValidateModelNoLocalDef() {
+    public boolean isValidateModelNoLocalDef() {
         return validateModelNoLocalDef;
     }
 
-    NamingStrategy getPathNamingStrategy() {
+    public NamingStrategy getPathNamingStrategy() {
         return pathNamingStrategy;
     }
 
-    NamingStrategy getParameterNamingStrategy() {
+    public NamingStrategy getParameterNamingStrategy() {
         return parameterNamingStrategy;
     }
 
-    NamingStrategy getPropertyNamingStrategy() {
+    public NamingStrategy getPropertyNamingStrategy() {
         return propertyNamingStrategy;
     }
 
-    void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
+    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
         this.propertyNamingStrategy = propertyNamingStrategy;
     }
 
-    void setValidateInfoLicense(boolean validateInfoLicense) {
+    public void setValidateInfoLicense(boolean validateInfoLicense) {
         this.validateInfoLicense = validateInfoLicense;
     }
 
-    void setValidateInfoDescription(boolean validateInfoDescription) {
+    public void setValidateInfoDescription(boolean validateInfoDescription) {
         this.validateInfoDescription = validateInfoDescription;
     }
 
-    void setValidateInfoContact(boolean validateInfoContact) {
+    public void setValidateInfoContact(boolean validateInfoContact) {
         this.validateInfoContact = validateInfoContact;
     }
 
-    void setValidateOperationOperationId(boolean validateOperationOperationId) {
+    public void setValidateOperationOperationId(boolean validateOperationOperationId) {
         this.validateOperationOperationId = validateOperationOperationId;
     }
 
-    void setValidateOperationDescription(boolean validateOperationDescription) {
+    public void setValidateOperationDescription(boolean validateOperationDescription) {
         this.validateOperationDescription = validateOperationDescription;
     }
 
-    void setValidateOperationTag(boolean validateOperationTag) {
+    public void setValidateOperationTag(boolean validateOperationTag) {
         this.validateOperationTag = validateOperationTag;
     }
 
-    void setValidateOperationSummary(boolean validateOperationSummary) {
+    public void setValidateOperationSummary(boolean validateOperationSummary) {
         this.validateOperationSummary = validateOperationSummary;
     }
 
-    void setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
+    public void setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
         this.validateModelPropertiesExample = validateModelPropertiesExample;
     }
 
-    void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
+    public void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
     }
 
-    void setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
+    public void setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
         this.pathNamingStrategy = pathNamingStrategy;
     }
 
-    void setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
+    public void setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
         this.parameterNamingStrategy = parameterNamingStrategy;
     }
 
-    boolean isValidateNaming() {
+    public boolean isValidateNaming() {
         return validateNaming;
     }
 
-    void setValidateNaming(boolean validateNaming) {
+    public void setValidateNaming(boolean validateNaming) {
         this.validateNaming = validateNaming;
     }
 
-    boolean isIgnoreHeaderXNaming() {
+    public boolean isIgnoreHeaderXNaming() {
         return ignoreHeaderXNaming;
     }
 
-    void setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
+    public void setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
         this.ignoreHeaderXNaming = ignoreHeaderXNaming;
     }
 }
