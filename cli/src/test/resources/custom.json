@@ -1,0 +1,8 @@
+{
+    "validateInfoLicense": false,
+    "validateInfoDescription": false,
+    "validateInfoContact": false,
+    "validateOperationDescription": false,
+    "validateOperationTag": false,
+    "validateOperationSummary": false
+}

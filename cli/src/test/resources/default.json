@@ -1,0 +1,16 @@
+{
+    "validateInfoLicense": true,
+    "validateInfoDescription": true,
+    "validateInfoContact": true,
+    "validateOperationOperationId": true,
+    "validateOperationDescription": true,
+    "validateOperationTag": true,
+    "validateOperationSummary": true,
+    "validateModelPropertiesExample": true,
+    "validateModelNoLocalDef": true,
+    "validateNaming": true,
+    "ignoreHeaderXNaming": true,
+    "pathNamingStrategy": "HyphenCase",
+    "parameterNamingStrategy": "CamelCase",
+    "propertyNamingStrategy": "CamelCase"
+}
