@@ -133,7 +133,7 @@ The command line tool (without dependency):
 
 The command line tool is also available as standalone jar (containing its dependencies):
 
-```
+```xml
 <dependency>
   <groupId>org.openapitools.openapistylevalidator</groupId>
   <artifactId>openapi-style-validator-cli</artifactId>
