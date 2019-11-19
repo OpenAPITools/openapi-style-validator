@@ -107,6 +107,43 @@ In no specific order
 - Make it available on Maven
 - Add some validations based on feedback
 
-## Maven / Releases
+## Releases on maven central
 
-The tool has not been released yet. Your only option for now is to download the source code and build it.
+The different components of this project are released on Maven Central:
+
+The core library:
+
+```xml
+<dependency>
+  <groupId>org.openapitools.openapistylevalidator</groupId>
+  <artifactId>openapi-style-validator-lib</artifactId>
+  <version>${validatorVersion}</version>
+</dependency>
+```
+
+The command line tool (without dependency):
+
+```xml
+<dependency>
+  <groupId>org.openapitools.openapistylevalidator</groupId>
+  <artifactId>openapi-style-validator-cli</artifactId>
+  <version>${validatorVersion}</version>
+</dependency>
+```
+
+The command line tool is also available as standalone jar (containing its dependencies):
+
+```
+<dependency>
+  <groupId>org.openapitools.openapistylevalidator</groupId>
+  <artifactId>openapi-style-validator-cli</artifactId>
+  <version>${validatorVersion}</version>
+  <classifier>all</classifier>
+</dependency>
+```
+
+You can download it manually (replace the `<version>` placeholder in following URL):
+
+```
+https://repo1.maven.org/maven2/org/openapitools/openapistylevalidator/openapi-style-validator-cli/<version>/openapi-style-validator-cli-<version>-all.jar
+```
