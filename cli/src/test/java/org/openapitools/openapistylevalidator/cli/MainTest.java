@@ -16,36 +16,36 @@ public class MainTest {
     private static final DefaultParser parser = new DefaultParser();
 
     @Test
-    void wihtoutOptionFile() throws Exception {
+    void validateShouldReturnSixErrorsWihtoutOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
 
-        defaultAssertions(errorList);
+        sixErrorsAssertions(errorList);
     }
 
     @Test
-    void wihtEmptyOptionFile() throws Exception {
+    void validateShouldReturnSixErrorsWithEmptyOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/empty.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
 
-        defaultAssertions(errorList);
+        sixErrorsAssertions(errorList);
     }
 
     @Test
-    void wihtDefaultOptionFile() throws Exception {
+    void validateShouldReturnSixErrorsWihtDefaultOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/default.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
 
-        defaultAssertions(errorList);
+        sixErrorsAssertions(errorList);
     }
 
-    private void defaultAssertions(List<StyleError> errorList) throws MultipleFailuresError {
+    private void sixErrorsAssertions(List<StyleError> errorList) throws MultipleFailuresError {
         Assertions.assertAll(
                 () -> assertEquals(6, errorList.size()),
                 () -> assertEquals("*ERROR* Section: APIInfo: 'license' -> Should be present and not empty", errorList.get(0).toString()),
@@ -58,7 +58,7 @@ public class MainTest {
     }
 
     @Test
-    void wihtCustomOptionFile() throws Exception {
+    void validateShouldReturnNoErrorsWihtCustomOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/custom.json"});

@@ -44,8 +44,7 @@ public class Main {
     }
 
     private static void validateAndPrint(OptionManager optionManager, CommandLine commandLine) {
-        List<StyleError> result = validate(optionManager, commandLine);
-        outputUtils.printResults(result);
+        outputUtils.printResults(validate(optionManager, commandLine));
     }
 
     static List<StyleError> validate(OptionManager optionManager, CommandLine commandLine) {
@@ -60,8 +59,7 @@ public class Main {
         OpenApiSpecStyleValidator openApiSpecStyleValidator = new OpenApiSpecStyleValidator(openAPI);
 
         ValidatorParameters parameters = optionManager.getOptionalValidatorParametersOrDefault(commandLine);
-        List<StyleError> result = openApiSpecStyleValidator.validate(parameters);
-        return result;
+        return openApiSpecStyleValidator.validate(parameters);
     }
 
 }
