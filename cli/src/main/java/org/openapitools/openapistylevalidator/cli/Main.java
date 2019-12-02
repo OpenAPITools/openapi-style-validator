@@ -8,6 +8,9 @@ import org.apache.commons.cli.*;
 import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
+import org.openapitools.openapistylevalidator.styleerror.StyleError;
+
+import java.util.List;
 
 public class Main {
 
@@ -41,6 +44,10 @@ public class Main {
     }
 
     private static void validateAndPrint(OptionManager optionManager, CommandLine commandLine) {
+        outputUtils.printResults(validate(optionManager, commandLine));
+    }
+
+    static List<StyleError> validate(OptionManager optionManager, CommandLine commandLine) {
         OpenAPIParser openApiParser = new OpenAPIParser();
         ParseOptions parseOptions = new ParseOptions();
         parseOptions.setResolve(true);
@@ -52,9 +59,7 @@ public class Main {
         OpenApiSpecStyleValidator openApiSpecStyleValidator = new OpenApiSpecStyleValidator(openAPI);
 
         ValidatorParameters parameters = optionManager.getOptionalValidatorParametersOrDefault(commandLine);
-
-        outputUtils.printResults(openApiSpecStyleValidator.validate(parameters));
+        return openApiSpecStyleValidator.validate(parameters);
     }
-
 
 }
