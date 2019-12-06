@@ -84,19 +84,19 @@ The options file is described in json (example in `specs/options.json`), and has
 
 |Option|Type|Possible Values|Description|
 |---|---|---|---|
-|validateInfoLicense|boolean|`true`, `false`|ensures that there is a license section in the info section|
-|validateInfoDescription|boolean|`true`, `false`|ensures that there is a description attribute in the info section|
-|validateInfoContact|boolean|`true`, `false`|ensures that there is a contact section in the info section|
-|validateOperationOperationId|boolean|`true`, `false`|ensures that there is an operation id for each operation|
-|validateOperationDescription|boolean|`true`, `false`|ensures that there is a description for each operation|
-|validateOperationTag|boolean|`true`, `false`|ensures that there is a tag for each operation|
-|validateOperationSummary|boolean|`true`, `false`|ensures that there is a summary for each operation|
-|validateModelPropertiesExample|boolean|`true`, `false`|ensures that the properties of the Schemas have an example value defined|
-|validateModelNoLocalDef|boolean|`true`, `false`| - not used - |
-|validateNaming|boolean|`true`, `false`|ensures the names follow a given strategy|
-|pathNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|naming strategy for paths|
-|parameterNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|naming strategy for parameters|
-|propertiesNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|naming strategy for properties|
+|validateInfoLicense|boolean|`true`, `false`|Ensures that there is a license section in the info section|
+|validateInfoDescription|boolean|`true`, `false`|Ensures that there is a description attribute in the info section|
+|validateInfoContact|boolean|`true`, `false`|Ensures that there is a contact section in the info section|
+|validateOperationOperationId|boolean|`true`, `false`|Ensures that there is an operation id for each operation|
+|validateOperationDescription|boolean|`true`, `false`|Ensures that there is a description for each operation|
+|validateOperationTag|boolean|`true`, `false`|Ensures that there is a tag for each operation|
+|validateOperationSummary|boolean|`true`, `false`|Ensures that there is a summary for each operation|
+|validateModelPropertiesExample|boolean|`true`, `false`|Ensures that the properties of the Schemas have an example value defined|
+|validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
+|validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
+|pathNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for paths|
+|parameterNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for parameters|
+|propertiesNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for properties|
 
 ## Roadmap
 
