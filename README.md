@@ -94,6 +94,7 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelPropertiesExample|boolean|`true`, `false`|Ensures that the properties of the Schemas have an example value defined|
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
+|ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
 |pathNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for paths|
 |parameterNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for parameters|
 |propertiesNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for properties|
