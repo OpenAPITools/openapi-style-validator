@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: some test
+  description: some description
+  version: '1.0'
+  contact:
+    email: "some@some.com"
+  license:
+    name: Apache-2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:9999/'
+paths:
+  /some_path/{some_id}:
+    post:
+      operationId: someOp
+      summary: some operation
+      description: some description
+      parameters:
+        - name: some_id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: some_name
+          required: true
+          in: query
+          schema:
+            type: string
+      tags:
+        - some
+      responses:
+        '201':
+          description: OK

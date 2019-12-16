@@ -16,7 +16,7 @@ public class MainTest {
     private static final DefaultParser parser = new DefaultParser();
 
     @Test
-    void validateShouldReturnSixErrorsWihtoutOptionFile() throws Exception {
+    void validateShouldReturnSixErrorsWithoutOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml"});
@@ -36,7 +36,7 @@ public class MainTest {
     }
 
     @Test
-    void validateShouldReturnSixErrorsWihtDefaultOptionFile() throws Exception {
+    void validateShouldReturnSixErrorsWithDefaultOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/default.json"});
@@ -58,11 +58,47 @@ public class MainTest {
     }
 
     @Test
-    void validateShouldReturnNoErrorsWihtCustomOptionFile() throws Exception {
+    void validateShouldReturnNoErrorsWithCustomOptionFile() throws Exception {
         OptionManager optionManager = new OptionManager();
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/custom.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
         assertEquals(0, errorList.size());
+    }
+
+    @Test
+    void validateWithoutOptionFileShouldReturnNamingErrors() throws Exception {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml"});
+        List<StyleError> errorList = Main.validate(optionManager, commandLine);
+        namingErrorsAssertions(errorList, "camelCase", "camelCase", "hyphen-case");
+    }
+
+    @Test
+    void validateWithAlternativeNamingOptionTestShouldReturnNamingErrors() throws Exception {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/alternative.json"});
+        List<StyleError> errorList = Main.validate(optionManager, commandLine);
+        namingErrorsAssertions(errorList, "hyphen-case", "hyphen-case", "camelCase");
+    }
+
+    @Test
+    void validateWithUnderscoreNamingOptionTestShouldReturnNoError() throws Exception {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/underscore.json"});
+        List<StyleError> errorList = Main.validate(optionManager, commandLine);
+        assertEquals(0, errorList.size());
+    }
+
+    private void namingErrorsAssertions(List<StyleError> errorList, String expectedPathParameterConvention, String expectedQueryParameterConvention, String expectedPathConvention) throws MultipleFailuresError {
+        Assertions.assertAll(
+                () -> assertEquals(3, errorList.size()),
+                () -> assertEquals("*ERROR* in path POST /some_path/{some_id} 'some_id' -> parameter should be in " + expectedPathParameterConvention, errorList.get(0).toString()),
+                () -> assertEquals("*ERROR* in path POST /some_path/{some_id} 'some_name' -> parameter should be in " + expectedQueryParameterConvention, errorList.get(1).toString()),
+                () -> assertEquals("*ERROR* in path /some_path/{some_id} 'some_path' -> path should be in " + expectedPathConvention, errorList.get(2).toString())
+                );
     }
 }

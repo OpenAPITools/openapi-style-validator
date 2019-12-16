@@ -180,8 +180,8 @@ public class OpenApiSpecStyleValidator {
 
                     String[] pathParts = key.split("/");
                     for (String part : pathParts) {
-                        if (!(part.startsWith("{") && part.endsWith("}"))) {
-                            boolean isValid = namingValidator.isNamingValid("part", parameters.getPathNamingStrategy());
+                        if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
+                            boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingStrategy());
                             if (!isValid) {
                                 errorAggregator.logOperationBadNaming(part,
                                         "path",
