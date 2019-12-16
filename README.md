@@ -32,8 +32,8 @@ description, etc...
 ### Models
 - All model properties must have examples
 
-### Naming strategy
-- Enforce naming strategy for paths, parameters and properties
+### Naming convention
+- Enforce naming convention for paths, parameters and properties
     - underscore_case
     - camelCase
     - hyphen-case
@@ -95,9 +95,9 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
-|pathNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for paths|
-|parameterNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for parameters|
-|propertiesNamingStrategy|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for properties|
+|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for parameters|
+|propertiesNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for properties|
 
 ## Roadmap
 
