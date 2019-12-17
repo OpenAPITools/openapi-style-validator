@@ -1,0 +1,5 @@
+{
+    "parameterNamingConvention": "UnderscoreCase",
+    "propertyNamingConvention": "UnderscoreCase",
+    "pathNamingConvention": "UnderscoreCase"
+}

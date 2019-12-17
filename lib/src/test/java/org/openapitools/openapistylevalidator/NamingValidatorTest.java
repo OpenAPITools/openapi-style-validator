@@ -24,9 +24,9 @@ class NamingValidatorTest {
         String goodUnderscoreCase3 = "my_super_variable";
 
         //Act
-        boolean actual1 = validator.isNamingValid(goodUnderscoreCase1, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual2 = validator.isNamingValid(goodUnderscoreCase2, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual3 = validator.isNamingValid(goodUnderscoreCase3, ValidatorParameters.NamingStrategy.UnderscoreCase);
+        boolean actual1 = validator.isNamingValid(goodUnderscoreCase1, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual2 = validator.isNamingValid(goodUnderscoreCase2, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual3 = validator.isNamingValid(goodUnderscoreCase3, ValidatorParameters.NamingConvention.UnderscoreCase);
 
         //Assert
         Assertions.assertAll(
@@ -47,12 +47,12 @@ class NamingValidatorTest {
         String badUnderscoreCase6 = "my_variable_";
 
         //Act
-        boolean actual1 = validator.isNamingValid(badUnderscoreCase1, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual2 = validator.isNamingValid(badUnderscoreCase2, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual3 = validator.isNamingValid(badUnderscoreCase3, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual4 = validator.isNamingValid(badUnderscoreCase4, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual5 = validator.isNamingValid(badUnderscoreCase5, ValidatorParameters.NamingStrategy.UnderscoreCase);
-        boolean actual6 = validator.isNamingValid(badUnderscoreCase6, ValidatorParameters.NamingStrategy.UnderscoreCase);
+        boolean actual1 = validator.isNamingValid(badUnderscoreCase1, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual2 = validator.isNamingValid(badUnderscoreCase2, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual3 = validator.isNamingValid(badUnderscoreCase3, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual4 = validator.isNamingValid(badUnderscoreCase4, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual5 = validator.isNamingValid(badUnderscoreCase5, ValidatorParameters.NamingConvention.UnderscoreCase);
+        boolean actual6 = validator.isNamingValid(badUnderscoreCase6, ValidatorParameters.NamingConvention.UnderscoreCase);
 
         //Assert
         Assertions.assertAll(
@@ -76,12 +76,12 @@ class NamingValidatorTest {
         String goodCamelCase6 = "address1";
 
         //Act
-        boolean actual1 = validator.isNamingValid(goodCamelCase1, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual2 = validator.isNamingValid(goodCamelCase2, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual3 = validator.isNamingValid(goodCamelCase3, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual4 = validator.isNamingValid(goodCamelCase4, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual5 = validator.isNamingValid(goodCamelCase5, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual6 = validator.isNamingValid(goodCamelCase6, ValidatorParameters.NamingStrategy.CamelCase);
+        boolean actual1 = validator.isNamingValid(goodCamelCase1, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual2 = validator.isNamingValid(goodCamelCase2, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual3 = validator.isNamingValid(goodCamelCase3, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual4 = validator.isNamingValid(goodCamelCase4, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual5 = validator.isNamingValid(goodCamelCase5, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual6 = validator.isNamingValid(goodCamelCase6, ValidatorParameters.NamingConvention.CamelCase);
 
         //Assert
         Assertions.assertAll(
@@ -104,11 +104,11 @@ class NamingValidatorTest {
         String badCamelCase5 = "my variable";
 
         //Act
-        boolean actual1 = validator.isNamingValid(badCamelCase1, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual2 = validator.isNamingValid(badCamelCase2, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual3 = validator.isNamingValid(badCamelCase3, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual4 = validator.isNamingValid(badCamelCase4, ValidatorParameters.NamingStrategy.CamelCase);
-        boolean actual5 = validator.isNamingValid(badCamelCase5, ValidatorParameters.NamingStrategy.CamelCase);
+        boolean actual1 = validator.isNamingValid(badCamelCase1, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual2 = validator.isNamingValid(badCamelCase2, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual3 = validator.isNamingValid(badCamelCase3, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual4 = validator.isNamingValid(badCamelCase4, ValidatorParameters.NamingConvention.CamelCase);
+        boolean actual5 = validator.isNamingValid(badCamelCase5, ValidatorParameters.NamingConvention.CamelCase);
 
         //Assert
         Assertions.assertAll(
@@ -128,9 +128,9 @@ class NamingValidatorTest {
         String goodHyphenCase3 = "my-super-variable";
 
         //Act
-        boolean actual1 = validator.isNamingValid(goodHyphenCase1, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual2 = validator.isNamingValid(goodHyphenCase2, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual3 = validator.isNamingValid(goodHyphenCase3, ValidatorParameters.NamingStrategy.HyphenCase);
+        boolean actual1 = validator.isNamingValid(goodHyphenCase1, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual2 = validator.isNamingValid(goodHyphenCase2, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual3 = validator.isNamingValid(goodHyphenCase3, ValidatorParameters.NamingConvention.HyphenCase);
 
         //Assert
         Assertions.assertAll(
@@ -151,12 +151,12 @@ class NamingValidatorTest {
         String badHyphenCase6 = "my_variable_";
 
         //Act
-        boolean actual1 = validator.isNamingValid(badHyphenCase1, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual2 = validator.isNamingValid(badHyphenCase2, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual3 = validator.isNamingValid(badHyphenCase3, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual4 = validator.isNamingValid(badHyphenCase4, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual5 = validator.isNamingValid(badHyphenCase5, ValidatorParameters.NamingStrategy.HyphenCase);
-        boolean actual6 = validator.isNamingValid(badHyphenCase6, ValidatorParameters.NamingStrategy.HyphenCase);
+        boolean actual1 = validator.isNamingValid(badHyphenCase1, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual2 = validator.isNamingValid(badHyphenCase2, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual3 = validator.isNamingValid(badHyphenCase3, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual4 = validator.isNamingValid(badHyphenCase4, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual5 = validator.isNamingValid(badHyphenCase5, ValidatorParameters.NamingConvention.HyphenCase);
+        boolean actual6 = validator.isNamingValid(badHyphenCase6, ValidatorParameters.NamingConvention.HyphenCase);
 
         //Assert
         Assertions.assertAll(

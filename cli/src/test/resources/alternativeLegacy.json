@@ -1,0 +1,5 @@
+{
+    "parameterNamingStrategy": "HyphenCase",
+    "propertyNamingStrategy": "HyphenCase",
+    "pathNamingStrategy": "CamelCase"
+}

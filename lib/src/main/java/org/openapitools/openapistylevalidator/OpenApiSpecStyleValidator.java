@@ -138,11 +138,11 @@ public class OpenApiSpecStyleValidator {
 
                     if (model.getProperties() != null) {
                         for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
-                            boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingStrategy());
+                            boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingConvention());
                             if (!isValid) {
                                 errorAggregator.logModelBadNaming(entry.getKey(),
                                         "property",
-                                        parameters.getPropertyNamingStrategy().getAppelation(),
+                                        parameters.getPropertyNamingConvention().getDesignation(),
                                         definition);
                             }
                         }
@@ -165,11 +165,11 @@ public class OpenApiSpecStyleValidator {
                                 }
 
                                 if (shouldValidate && opParam.getRef() == null) {
-                                    boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingStrategy());
+                                    boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
                                     if (!isValid) {
                                         errorAggregator.logOperationBadNaming(opParam.getName(),
                                                 "parameter",
-                                                parameters.getParameterNamingStrategy().getAppelation(),
+                                                parameters.getParameterNamingConvention().getDesignation(),
                                                 key,
                                                 method);
                                     }
@@ -180,12 +180,12 @@ public class OpenApiSpecStyleValidator {
 
                     String[] pathParts = key.split("/");
                     for (String part : pathParts) {
-                        if (!(part.startsWith("{") && part.endsWith("}"))) {
-                            boolean isValid = namingValidator.isNamingValid("part", parameters.getPathNamingStrategy());
+                        if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
+                            boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
                             if (!isValid) {
                                 errorAggregator.logOperationBadNaming(part,
                                         "path",
-                                        parameters.getPathNamingStrategy().getAppelation(),
+                                        parameters.getPathNamingConvention().getDesignation(),
                                         key,
                                         null);
                             }

@@ -41,7 +41,7 @@ class NamingValidator {
         return variableName.length() == (totalLength + tokens.length - 1);
     }
 
-    boolean isNamingValid(String name, ValidatorParameters.NamingStrategy namingStrategy) {
+    boolean isNamingValid(String name, ValidatorParameters.NamingConvention namingStrategy) {
         switch (namingStrategy) {
             case UnderscoreCase:
                 return isUnderscoreCase(name);
