@@ -88,9 +88,9 @@ class OptionManager {
 
     private void fixConventionRenaming(JsonElement jsonElement, String prefix) {
         JsonObject jsonObject = jsonElement.getAsJsonObject();
-        String strategyKey = prefix + "NamingStrategy";
+        String strategyKey = String.format("%sNamingStrategy", prefix);
         if(jsonObject.has(strategyKey)) {
-            String conventionKey = prefix + "NamingConvention";
+            String conventionKey = String.format("%sNamingConvention", prefix);
             if(jsonObject.has(conventionKey)) {
                 System.err.println("The deprecated option '" + strategyKey + "' is ignored, because its replacement '" + conventionKey + "' is set");
             } else {
