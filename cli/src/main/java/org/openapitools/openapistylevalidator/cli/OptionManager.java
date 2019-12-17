@@ -92,9 +92,9 @@ class OptionManager {
         if(jsonObject.has(strategyKey)) {
             String conventionKey = String.format("%sNamingConvention", prefix);
             if(jsonObject.has(conventionKey)) {
-                System.err.println("The deprecated option '" + strategyKey + "' is ignored, because its replacement '" + conventionKey + "' is set");
+                System.err.println(String.format("The deprecated option '%s' is ignored, because its replacement '%s' is set", strategyKey, conventionKey));
             } else {
-                System.err.println("The option '" + strategyKey + "' is depreacted, please use '" + conventionKey + "' instead");
+                System.err.println(String.format("The option '%s' is depreacted, please use '%s' instead", strategyKey, conventionKey));
                 jsonObject.add(conventionKey, jsonObject.get(strategyKey));
             }
         }
