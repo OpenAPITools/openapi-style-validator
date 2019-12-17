@@ -1,5 +1,5 @@
 {
-    "parameterNamingStrategy": "UnderscoreCase",
-    "propertyNamingStrategy": "UnderscoreCase",
-    "pathNamingStrategy": "UnderscoreCase"
+    "parameterNamingConvention": "UnderscoreCase",
+    "propertyNamingConvention": "UnderscoreCase",
+    "pathNamingConvention": "UnderscoreCase"
 }

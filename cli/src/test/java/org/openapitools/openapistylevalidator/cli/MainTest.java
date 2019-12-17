@@ -93,6 +93,33 @@ public class MainTest {
         assertEquals(0, errorList.size());
     }
 
+    @Test
+    void validateWithAlternativeLegacyNamingOptionTestShouldReturnNamingErrors() throws Exception {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/alternativeLegacy.json"});
+        List<StyleError> errorList = Main.validate(optionManager, commandLine);
+        namingErrorsAssertions(errorList, "hyphen-case", "hyphen-case", "camelCase");
+    }
+
+    @Test
+    void validateWithAlternativeAndLegacyNamingOptionTestShouldReturnNamingErrors() throws Exception {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/alternativeAndLegacy.json"});
+        List<StyleError> errorList = Main.validate(optionManager, commandLine);
+        namingErrorsAssertions(errorList, "hyphen-case", "hyphen-case", "camelCase");
+    }
+
+    @Test
+    void validateWithUnderscoreLegacyNamingOptionTestShouldReturnNoError() throws Exception {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/underscoreLegacy.json"});
+        List<StyleError> errorList = Main.validate(optionManager, commandLine);
+        assertEquals(0, errorList.size());
+    }
+
     private void namingErrorsAssertions(List<StyleError> errorList, String expectedPathParameterConvention, String expectedQueryParameterConvention, String expectedPathConvention) throws MultipleFailuresError {
         Assertions.assertAll(
                 () -> assertEquals(3, errorList.size()),

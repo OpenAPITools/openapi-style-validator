@@ -1,5 +1,5 @@
 {
-    "parameterNamingStrategy": "HyphenCase",
-    "propertyNamingStrategy": "HyphenCase",
-    "pathNamingStrategy": "CamelCase"
+    "parameterNamingConvention": "HyphenCase",
+    "propertyNamingConvention": "HyphenCase",
+    "pathNamingConvention": "CamelCase"
 }

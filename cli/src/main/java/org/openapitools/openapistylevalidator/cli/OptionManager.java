@@ -2,6 +2,10 @@ package org.openapitools.openapistylevalidator.cli;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
@@ -67,14 +71,33 @@ class OptionManager {
         ValidatorParameters parameters = new ValidatorParameters();
         if (commandLine.hasOption(OPTIONS_OPT_SHORT)) {
             try {
-                Gson gson = new GsonBuilder().create();
                 String content = Utils.readFile(commandLine.getOptionValue(OPTIONS_OPT_SHORT), Charset.defaultCharset());
-                parameters = gson.fromJson(content, ValidatorParameters.class);
+                JsonParser parser = new JsonParser();
+                JsonElement jsonElement = parser.parse(content);
+                fixConventionRenaming(jsonElement, "path");
+                fixConventionRenaming(jsonElement, "parameter");
+                fixConventionRenaming(jsonElement, "property");
+                Gson gson = new GsonBuilder().create();
+                parameters = gson.fromJson(jsonElement, ValidatorParameters.class);
             } catch (Exception ignored) {
                 System.out.println("Invalid path to option files, using default.");
             }
         }
         return parameters;
+    }
+
+    private void fixConventionRenaming(JsonElement jsonElement, String prefix) {
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String strategyKey = String.format("%sNamingStrategy", prefix);
+        if(jsonObject.has(strategyKey)) {
+            String conventionKey = String.format("%sNamingConvention", prefix);
+            if(jsonObject.has(conventionKey)) {
+                System.err.println(String.format("The deprecated option '%s' is ignored, because its replacement '%s' is set", strategyKey, conventionKey));
+            } else {
+                System.err.println(String.format("The option '%s' is depreacted, please use '%s' instead", strategyKey, conventionKey));
+                jsonObject.add(conventionKey, jsonObject.get(strategyKey));
+            }
+        }
     }
 
     String getSource(CommandLine commandLine) {

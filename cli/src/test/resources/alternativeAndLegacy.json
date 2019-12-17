@@ -1,0 +1,10 @@
+{
+    "parameterNamingStrategy": "UnderscoreCase",
+    "parameterNamingConvention": "HyphenCase",
+
+    "propertyNamingStrategy": "UnderscoreCase",
+    "propertyNamingConvention": "HyphenCase",
+
+    "pathNamingStrategy": "UnderscoreCase",
+    "pathNamingConvention": "CamelCase"
+}

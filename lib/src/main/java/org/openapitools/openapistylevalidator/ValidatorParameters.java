@@ -2,19 +2,51 @@ package org.openapitools.openapistylevalidator;
 
 public class ValidatorParameters {
 
-    public static enum NamingStrategy {
+    public static enum NamingConvention {
         UnderscoreCase("underscore_case"),
         CamelCase("camelCase"),
         HyphenCase("hyphen-case");
 
-        private final String appelation;
+        private final String designation;
 
-        NamingStrategy(String appelation) {
-            this.appelation = appelation;
+        NamingConvention(String appelation) {
+            this.designation = appelation;
         }
 
+        public String getDesignation() {
+            return designation;
+        }
+    }
+
+    /**
+     * @deprecated Please use {@link ValidatorParameters.NamingConvention} instead.
+     */
+    @Deprecated
+    public static enum NamingStrategy {
+        UnderscoreCase,
+        CamelCase,
+        HyphenCase;
+
+        /**
+         * @deprecated Please use {@link ValidatorParameters.NamingConvention#getDesignation()} instead.
+         */
+        @Deprecated
         public String getAppelation() {
-            return appelation;
+            return toConvention(this).getDesignation();
+        }
+
+        public static NamingStrategy valueOf(NamingConvention pathNamingConvention) {
+            if(pathNamingConvention == null) {
+                return null;
+            }
+            return NamingStrategy.valueOf(pathNamingConvention.name());
+        }
+
+        public static NamingConvention toConvention(NamingStrategy pathNamingStrategy) {
+            if(pathNamingStrategy == null) {
+                return null;
+            }
+            return NamingConvention.valueOf(pathNamingStrategy.name());
         }
     }
 
@@ -32,9 +64,9 @@ public class ValidatorParameters {
 
     private boolean validateNaming = true;
     private boolean ignoreHeaderXNaming = true;
-    private NamingStrategy pathNamingStrategy = NamingStrategy.HyphenCase;
-    private NamingStrategy parameterNamingStrategy = NamingStrategy.CamelCase;
-    private NamingStrategy propertyNamingStrategy = NamingStrategy.CamelCase;
+    private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
+    private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention propertyNamingConvention= NamingConvention.CamelCase;
 
     public ValidatorParameters() {
         //For Gson
@@ -76,20 +108,28 @@ public class ValidatorParameters {
         return validateModelNoLocalDef;
     }
 
+    public NamingConvention getPathNamingConvention() {
+        return pathNamingConvention;
+    }
+
+    public NamingConvention getParameterNamingConvention() {
+        return parameterNamingConvention;
+    }
+
+    public NamingConvention getPropertyNamingConvention() {
+        return propertyNamingConvention;
+    }
+
     public NamingStrategy getPathNamingStrategy() {
-        return pathNamingStrategy;
+        return NamingStrategy.valueOf(getPathNamingConvention());
     }
 
     public NamingStrategy getParameterNamingStrategy() {
-        return parameterNamingStrategy;
+        return NamingStrategy.valueOf(getParameterNamingConvention());
     }
 
     public NamingStrategy getPropertyNamingStrategy() {
-        return propertyNamingStrategy;
-    }
-
-    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
-        this.propertyNamingStrategy = propertyNamingStrategy;
+        return NamingStrategy.valueOf(getPropertyNamingConvention());
     }
 
     public void setValidateInfoLicense(boolean validateInfoLicense) {
@@ -128,12 +168,28 @@ public class ValidatorParameters {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
     }
 
+    public void setPathNamingConvention(NamingConvention pathNamingConvention) {
+        this.pathNamingConvention = pathNamingConvention;
+    }
+
+    public void setParameterNamingConvention(NamingConvention parameterNamingConvention) {
+        this.parameterNamingConvention = parameterNamingConvention;
+    }
+
+    public void setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
+        this.propertyNamingConvention = propertyNamingConvention;
+    }
+
     public void setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
-        this.pathNamingStrategy = pathNamingStrategy;
+        setPathNamingConvention(NamingStrategy.toConvention(pathNamingStrategy));
     }
 
     public void setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
-        this.parameterNamingStrategy = parameterNamingStrategy;
+        setParameterNamingConvention(NamingStrategy.toConvention(parameterNamingStrategy));
+    }
+
+    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
+        setPropertyNamingConvention(NamingStrategy.toConvention(propertyNamingStrategy));
     }
 
     public boolean isValidateNaming() {
