@@ -3,7 +3,6 @@ package org.openapitools.openapistylevalidator.gradle;
 import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
-
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.TaskAction;
@@ -57,7 +56,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
-    
+
     public OpenAPIStyleValidatorTask() {
         this.setGroup("Verification");
         this.setDescription("Validate that OpenAPI files against style rules");
@@ -65,10 +64,10 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
 
     @TaskAction
     public void execute() {
-        if(inputFile == null) {
-            throw new GradleException("The input file is not defined, set the '" + INPUT_FILE + "' option");
+        if (inputFile == null) {
+            throw new GradleException(String.format("The input file is not defined, set the '%s' option", INPUT_FILE));
         }
-        getLogger().quiet("Validating spec: " + inputFile);
+        getLogger().quiet(String.format("Validating spec: %s", inputFile));
 
         OpenAPIParser openApiParser = new OpenAPIParser();
         ParseOptions parseOptions = new ParseOptions();
@@ -82,9 +81,9 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
 
         ValidatorParameters parameters = createValidatorParameters();
         List<StyleError> result = openApiSpecStyleValidator.validate(parameters);
-        if(!result.isEmpty()) {
+        if (!result.isEmpty()) {
             getLogger().error("OpenAPI Specification does not meet the requirements. Issues:\n");
-            result.stream().map(StyleError::toString).forEach(m -> getLogger().error("\t" + m));
+            result.stream().map(StyleError::toString).forEach(m -> getLogger().error(String.format("\t%s", m)));
             throw new GradleException("OpenAPI Style validation failed");
         }
     }
