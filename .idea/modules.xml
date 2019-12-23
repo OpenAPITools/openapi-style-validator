@@ -5,6 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/cli.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/cli.iml" group="openapi-style-validator/cli" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/cli_main.iml" group="openapi-style-validator/cli" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/cli_test.iml" group="openapi-style-validator/cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.iml" group="openapi-style-validator/gradle-plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_functionalTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_functionalTest.iml" group="openapi-style-validator/gradle-plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_main.iml" group="openapi-style-validator/gradle-plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_test.iml" group="openapi-style-validator/gradle-plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/lib.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/lib.iml" group="openapi-style-validator/lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/lib_main.iml" group="openapi-style-validator/lib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/lib_test.iml" group="openapi-style-validator/lib" />
