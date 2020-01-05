@@ -13,6 +13,9 @@ public class ValidatorParameters {
             this.designation = appelation;
         }
 
+        /**
+         * @return the name of the naming convention as it can be used in the reports
+         */
         public String getDesignation() {
             return designation;
         }
@@ -29,6 +32,7 @@ public class ValidatorParameters {
 
         /**
          * @deprecated Please use {@link ValidatorParameters.NamingConvention#getDesignation()} instead.
+         * @return the name of the strategy as it can be used in the reports
          */
         @Deprecated
         public String getAppelation() {
