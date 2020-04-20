@@ -2,7 +2,9 @@ package org.openapitools.openapistylevalidator.styleerror;
 
 import org.eclipse.microprofile.openapi.models.PathItem;
 
-public class OperationNamingStyleError extends StyleError {
+import java.util.Objects;
+
+public final class OperationNamingStyleError extends StyleError {
 
     private final String path;
     private final PathItem.HttpMethod method;
@@ -11,6 +13,23 @@ public class OperationNamingStyleError extends StyleError {
         super(styleCheckSection, fieldNames, description);
         this.path = path;
         this.method = method;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OperationNamingStyleError that = (OperationNamingStyleError) o;
+        return styleCheckSection == that.styleCheckSection &&
+                Objects.equals(fieldNames, that.fieldNames) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(path, that.path) &&
+                method == that.method;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(styleCheckSection, fieldNames, description, path, method);
     }
 
     @Override

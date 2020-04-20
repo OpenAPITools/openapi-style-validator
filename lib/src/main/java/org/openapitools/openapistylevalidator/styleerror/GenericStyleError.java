@@ -1,6 +1,8 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
-public class GenericStyleError extends StyleError {
+import java.util.Objects;
+
+public final class GenericStyleError extends StyleError {
 
     private final String parentObjectName;
 
@@ -8,6 +10,22 @@ public class GenericStyleError extends StyleError {
         super(styleCheckSection, fieldNames, description);
 
         this.parentObjectName = parentObjectName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GenericStyleError that = (GenericStyleError) o;
+        return styleCheckSection == that.styleCheckSection &&
+                Objects.equals(fieldNames, that.fieldNames) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(parentObjectName, that.parentObjectName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(styleCheckSection, fieldNames, description, parentObjectName);
     }
 
     @Override
