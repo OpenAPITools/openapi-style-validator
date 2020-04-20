@@ -37,21 +37,21 @@ class ValidatorParametersTest {
 
     @Test
     void testAllGetterSetters() {
-        parameters.setValidateInfoLicense(false);
-        parameters.setValidateInfoDescription(false);
-        parameters.setValidateInfoContact(false);
-        parameters.setValidateOperationOperationId(false);
-        parameters.setValidateOperationDescription(false);
-        parameters.setValidateOperationTag(false);
-        parameters.setValidateOperationSummary(false);
-        parameters.setValidateModelPropertiesExample(false);
-        parameters.setValidateModelNoLocalDef(false);
-        parameters.setValidateNaming(false);
-        parameters.setIgnoreHeaderXNaming(false);
-
-        parameters.setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
-        parameters.setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
-        parameters.setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
+        parameters
+                .setValidateInfoLicense(false)
+                .setValidateInfoDescription(false)
+                .setValidateInfoContact(false)
+                .setValidateOperationOperationId(false)
+                .setValidateOperationDescription(false)
+                .setValidateOperationTag(false)
+                .setValidateOperationSummary(false)
+                .setValidateModelPropertiesExample(false)
+                .setValidateModelNoLocalDef(false)
+                .setValidateNaming(false)
+                .setIgnoreHeaderXNaming(false)
+                .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
 
         Assertions.assertAll(
                 () -> assertFalse(parameters.isValidateInfoLicense()),
