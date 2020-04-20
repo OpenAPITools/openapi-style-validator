@@ -136,79 +136,96 @@ public class ValidatorParameters {
         return NamingStrategy.valueOf(getPropertyNamingConvention());
     }
 
-    public void setValidateInfoLicense(boolean validateInfoLicense) {
+    public ValidatorParameters setValidateInfoLicense(boolean validateInfoLicense) {
         this.validateInfoLicense = validateInfoLicense;
+        return this;
     }
 
-    public void setValidateInfoDescription(boolean validateInfoDescription) {
+    public ValidatorParameters setValidateInfoDescription(boolean validateInfoDescription) {
         this.validateInfoDescription = validateInfoDescription;
+        return this;
     }
 
-    public void setValidateInfoContact(boolean validateInfoContact) {
+    public ValidatorParameters setValidateInfoContact(boolean validateInfoContact) {
         this.validateInfoContact = validateInfoContact;
+        return this;
     }
 
-    public void setValidateOperationOperationId(boolean validateOperationOperationId) {
+    public ValidatorParameters setValidateOperationOperationId(boolean validateOperationOperationId) {
         this.validateOperationOperationId = validateOperationOperationId;
+        return this;
     }
 
-    public void setValidateOperationDescription(boolean validateOperationDescription) {
+    public ValidatorParameters setValidateOperationDescription(boolean validateOperationDescription) {
         this.validateOperationDescription = validateOperationDescription;
+        return this;
     }
 
-    public void setValidateOperationTag(boolean validateOperationTag) {
+    public ValidatorParameters setValidateOperationTag(boolean validateOperationTag) {
         this.validateOperationTag = validateOperationTag;
+        return this;
     }
 
-    public void setValidateOperationSummary(boolean validateOperationSummary) {
+    public ValidatorParameters setValidateOperationSummary(boolean validateOperationSummary) {
         this.validateOperationSummary = validateOperationSummary;
+        return this;
     }
 
-    public void setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
+    public ValidatorParameters setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
         this.validateModelPropertiesExample = validateModelPropertiesExample;
+        return this;
     }
 
-    public void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
+    public ValidatorParameters setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
+        return this;
     }
 
-    public void setPathNamingConvention(NamingConvention pathNamingConvention) {
+    public ValidatorParameters setPathNamingConvention(NamingConvention pathNamingConvention) {
         this.pathNamingConvention = pathNamingConvention;
+        return this;
     }
 
-    public void setParameterNamingConvention(NamingConvention parameterNamingConvention) {
+    public ValidatorParameters setParameterNamingConvention(NamingConvention parameterNamingConvention) {
         this.parameterNamingConvention = parameterNamingConvention;
+        return this;
     }
 
-    public void setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
+    public ValidatorParameters setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
+        return this;
     }
 
-    public void setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
+    public ValidatorParameters setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
         setPathNamingConvention(NamingStrategy.toConvention(pathNamingStrategy));
+        return this;
     }
 
-    public void setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
+    public ValidatorParameters setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
         setParameterNamingConvention(NamingStrategy.toConvention(parameterNamingStrategy));
+        return this;
     }
 
-    public void setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
+    public ValidatorParameters setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
         setPropertyNamingConvention(NamingStrategy.toConvention(propertyNamingStrategy));
+        return this;
     }
 
     public boolean isValidateNaming() {
         return validateNaming;
     }
 
-    public void setValidateNaming(boolean validateNaming) {
+    public ValidatorParameters setValidateNaming(boolean validateNaming) {
         this.validateNaming = validateNaming;
+        return this;
     }
 
     public boolean isIgnoreHeaderXNaming() {
         return ignoreHeaderXNaming;
     }
 
-    public void setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
+    public ValidatorParameters setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
         this.ignoreHeaderXNaming = ignoreHeaderXNaming;
+        return this;
     }
 }
