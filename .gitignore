@@ -5,6 +5,11 @@
 .idea/libraries
 .gradle
 
+# Eclipse IDE
+.project
+.classpath
+.settings/
+
 # Sensitive or high-churn files:
 # IntelliJ
 /out/
