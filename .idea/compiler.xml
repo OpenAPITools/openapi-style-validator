@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
-      <module name="cli_main" target="1.8" />
-      <module name="cli_test" target="1.8" />
-      <module name="gradle-plugin_functionalTest" target="1.8" />
-      <module name="gradle-plugin_main" target="1.8" />
-      <module name="gradle-plugin_test" target="1.8" />
-      <module name="lib_main" target="1.8" />
-      <module name="lib_test" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
       <module name="modules_cli_main" target="1.8" />
       <module name="modules_cli_test" target="1.8" />
       <module name="modules_lib_main" target="1.8" />
