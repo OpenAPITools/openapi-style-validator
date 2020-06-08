@@ -1,6 +1,8 @@
 # OpenApi Tools: openapi-style-validator
 A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
+[![](https://img.shields.io/badge/Buy%20us%20a%20tree-%F0%9F%8C%B3-lightgreen)](https://offset.earth/darkjaff)
+
 [![Build Status](https://travis-ci.org/OpenAPITools/openapi-style-validator.svg?branch=master)](https://travis-ci.org/OpenAPITools/openapi-style-validator) [![Maven Central](https://img.shields.io/maven-central/v/org.openapitools.openapistylevalidator/openapi-style-validator-cli)](https://mvnrepository.com/artifact/org.openapitools.openapistylevalidator) [![codecov](https://codecov.io/gh/OpenAPITools/openapi-style-validator/branch/master/graph/badge.svg)](https://codecov.io/gh/OpenAPITools/openapi-style-validator)
 
 [![Join the Slack chat room](https://img.shields.io/badge/Slack-Join%20the%20chat%20room-orange)](https://join.slack.com/t/openapi-generator/shared_invite/enQtNzAyNDMyOTU0OTE1LTY5ZDBiNDI5NzI5ZjQ1Y2E5OWVjMjZkYzY1ZGM2MWQ4YWFjMzcyNDY5MGI4NjQxNDBiMTlmZTc5NjY2ZTQ5MGM)  [Official Website](https://openapitools.github.io/openapi-style-validator/)
