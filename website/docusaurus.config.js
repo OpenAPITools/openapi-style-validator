@@ -9,7 +9,7 @@ const loadYaml = relativePath => parseYaml(fs.readFileSync(path.join(__dirname, 
 
 const team = loadYaml("src/dynamic/team.yml");
 const users = loadYaml("src/dynamic/users.yml");
-const baseUrl = '/';
+const baseUrl = '/openapi-style-validator/';
 
 const docusaurusConfig = {
   title: 'OpenAPI Style Validator',
