@@ -70,9 +70,9 @@ This IDE is cross platform so it should work on any OS. This project was created
 
 `java -jar openapi-style-validator.jar -s ./path/to/spec.yaml -o ./path/to/options.json`
 
-Example using the default output path for the jar:
+Example using the default output path for the jar (replace `<version>` with the current version):
 
-`java -jar modules/cli/build/libs/openapi-style-validator-cli-1.0.jar -s specs/petstore.yaml -o specs/options.json`
+`java -jar modules/cli/build/libs/openapi-style-validator-cli-<version>-all.jar -s specs/petstore.yaml -o specs/options.json`
 
 #### Command Line
 
