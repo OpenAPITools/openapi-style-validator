@@ -7,7 +7,7 @@ dependencies {
     compile 'org.slf4j:slf4j-jdk14:1.7.25'
 
 	compile 'io.swagger.parser.v3:swagger-parser:2.0.20'
-	compile 'org.openapitools.empoa:empoa-swagger-core:1.1.0'
+	compile 'org.openapitools.empoa:empoa-swagger-core:1.2.0'
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'
