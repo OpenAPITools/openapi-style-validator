@@ -37,7 +37,7 @@ shadowJar {
 	//noinspection GroovyAccessibility
     archiveBaseName = "openapi-style-validator-cli"
 	//noinspection GroovyAccessibility
-	archiveClassifier = null
+	archiveClassifier = 'all'
 }
 
 project.tasks.assemble.dependsOn project.tasks.shadowJar
