@@ -83,7 +83,7 @@
     <orderEntry type="module" module-name="lib_main" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser:2.0.20" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.30" level="project" />
-    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser-v2-converter:2.0.20" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-ext:1.7.30" level="project" />
