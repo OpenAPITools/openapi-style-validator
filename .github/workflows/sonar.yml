@@ -1,12 +1,12 @@
 name: Sonar Scan
 
-on: [push, pull_request]
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '11, 13, 14' ]
+        java: [ '11', '13', '14' ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
