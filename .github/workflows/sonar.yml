@@ -17,5 +17,6 @@ jobs:
         run: java -version
       - name: SonarSource
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
         run: ./gradlew sonarqube -Dsonar.projectKey=OpenAPITools_openapi-style-validator -Dsonar.organization=openapitools -Dsonar.host.url=https://sonarcloud.io -Dsonar.login="$SONAR_LOGIN" --stacktrace
