@@ -1,22 +1,20 @@
+name: Sonar Scan
+
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request.
   push:
     branches:
       - master
-  pull_request:
-    types: [opened, synchronize, reopened]
-name: Sonar
+    pull_request:
+      types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1.3
+      - name: SonarSource
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_LOGIN }}
+          SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
+        run: ./gradlew sonarqube -Dsonar.projectKey=OpenAPITools_openapi-style-validator -Dsonar.organization=openapitools -Dsonar.host.url=https://sonarcloud.io -Dsonar.login="$SONAR_LOGIN" --stacktrace
