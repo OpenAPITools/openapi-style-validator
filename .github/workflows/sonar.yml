@@ -31,4 +31,4 @@ jobs:
       - name: SonarSource
         env:
           SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
-        run: ./gradlew sonarqube -Dsonar.projectKey=OpenAPITools_openapi-style-validator -Dsonar.organization=openapitools -Dsonar.host.url=https://sonarcloud.io -Dsonar.login="$SUPER_SECRET"
+        run: ./gradlew sonarqube -Dsonar.projectKey=OpenAPITools_openapi-style-validator -Dsonar.organization=openapitools -Dsonar.host.url=https://sonarcloud.io -Dsonar.login="$SONAR_LOGIN"
