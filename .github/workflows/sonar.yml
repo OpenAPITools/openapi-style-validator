@@ -1,11 +1,6 @@
 name: Sonar Scan
 
-on:
-  push:
-    branches:
-      - master
-    pull_request:
-      types: [opened, synchronize, reopened]
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
