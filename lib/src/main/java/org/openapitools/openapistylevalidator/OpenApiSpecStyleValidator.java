@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OpenApiSpecStyleValidator {
+    public static final String INPUT_FILE = "inputFile";
 
     private final OpenAPI openAPI;
     private final ErrorAggregator errorAggregator;

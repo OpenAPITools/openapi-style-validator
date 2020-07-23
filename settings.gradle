@@ -3,3 +3,4 @@ rootProject.name = 'openapi-style-validator'
 include ":lib"
 include ":cli"
 include ":gradle-plugin"
+include ":maven-plugin"
