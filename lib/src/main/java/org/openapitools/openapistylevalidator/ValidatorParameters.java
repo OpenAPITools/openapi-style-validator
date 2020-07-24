@@ -1,6 +1,23 @@
 package org.openapitools.openapistylevalidator;
 
 public class ValidatorParameters {
+    public static final String VALIDATE_INFO_LICENSE = "validateInfoLicense";
+    public static final String VALIDATE_INFO_DESCRIPTION = "validateInfoDescription";
+    public static final String VALIDATE_INFO_CONTACT = "validateInfoContact";
+
+    public static final String VALIDATE_OPERATION_OPERATION_ID = "validateOperationOperationId";
+    public static final String VALIDATE_OPERATION_DESCRIPTION = "validateOperationDescription";
+    public static final String VALIDATE_OPERATION_TAG = "validateOperationTag";
+    public static final String VALIDATE_OPERATION_SUMMARY = "validateOperationSummary";
+
+    public static final String VALIDATE_MODEL_PROPERTIES_EXAMPLE = "validateModelPropertiesExample";
+    public static final String VALIDATE_MODEL_NO_LOCAL_DEF = "validateModelNoLocalDef";
+
+    public static final String VALIDATE_NAMING = "validateNaming";
+    public static final String IGNORE_HEADER_X_NAMING = "ignoreHeaderXNaming";
+    public static final String PATH_NAMING_CONVENTION = "pathNamingConvention";
+    public static final String PARAMETER_NAMING_CONVENTION = "parameterNamingConvention";
+    public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
 
     public static enum NamingConvention {
         UnderscoreCase("underscore_case"),
@@ -227,5 +244,25 @@ public class ValidatorParameters {
     public ValidatorParameters setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
         this.ignoreHeaderXNaming = ignoreHeaderXNaming;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
+                validateInfoLicense, 
+                validateInfoDescription, 
+                validateInfoContact, 
+                validateOperationOperationId, 
+                validateOperationDescription,
+                validateOperationTag, 
+                validateOperationSummary,
+                validateModelPropertiesExample, 
+                validateModelNoLocalDef,
+                validateNaming, 
+                ignoreHeaderXNaming,
+                pathNamingConvention, 
+                parameterNamingConvention,
+                propertyNamingConvention);
     }
 }

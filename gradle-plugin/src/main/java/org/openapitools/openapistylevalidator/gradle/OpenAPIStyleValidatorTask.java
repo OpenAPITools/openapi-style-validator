@@ -17,26 +17,6 @@ import java.util.List;
 
 public class OpenAPIStyleValidatorTask extends DefaultTask {
 
-    public static final String INPUT_FILE = "inputFile";
-
-    public static final String VALIDATE_INFO_LICENSE = "validateInfoLicense";
-    public static final String VALIDATE_INFO_DESCRIPTION = "validateInfoDescription";
-    public static final String VALIDATE_INFO_CONTACT = "validateInfoContact";
-
-    public static final String VALIDATE_OPERATION_OPERATION_ID = "validateOperationOperationId";
-    public static final String VALIDATE_OPERATION_DESCRIPTION = "validateOperationDescription";
-    public static final String VALIDATE_OPERATION_TAG = "validateOperationTag";
-    public static final String VALIDATE_OPERATION_SUMMARY = "validateOperationSummary";
-
-    public static final String VALIDATE_MODEL_PROPERTIES_EXAMPLE = "validateModelPropertiesExample";
-    public static final String VALIDATE_MODEL_NO_LOCAL_DEF = "validateModelNoLocalDef";
-
-    public static final String VALIDATE_NAMING = "validateNaming";
-    public static final String IGNORE_HEADER_X_NAMING = "ignoreHeaderXNaming";
-    public static final String PATH_NAMING_CONVENTION = "pathNamingConvention";
-    public static final String PARAMETER_NAMING_CONVENTION = "parameterNamingConvention";
-    public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
-
     private String inputFile;
 
     private boolean validateInfoLicense = true;
@@ -65,7 +45,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     @TaskAction
     public void execute() {
         if (inputFile == null) {
-            throw new GradleException(String.format("The input file is not defined, set the '%s' option", INPUT_FILE));
+            throw new GradleException(String.format("The input file is not defined, set the '%s' option", OpenApiSpecStyleValidator.INPUT_FILE));
         }
         getLogger().quiet(String.format("Validating spec: %s", inputFile));
 
@@ -80,6 +60,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         OpenApiSpecStyleValidator openApiSpecStyleValidator = new OpenApiSpecStyleValidator(openAPI);
 
         ValidatorParameters parameters = createValidatorParameters();
+        getLogger().quiet(String.format("Validating with options: %s", parameters));
         List<StyleError> result = openApiSpecStyleValidator.validate(parameters);
         if (!result.isEmpty()) {
             getLogger().error("OpenAPI Specification does not meet the requirements. Issues:\n");
@@ -88,77 +69,77 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         }
     }
 
-    @Option(option = INPUT_FILE, description = "OpenAPI specification being validated")
+    @Option(option = OpenApiSpecStyleValidator.INPUT_FILE, description = "OpenAPI specification being validated")
     public void setInputFile(String inputFile) {
         this.inputFile = inputFile;
     }
 
-    @Option(option = VALIDATE_INFO_LICENSE, description = "Ensures that there is a license section in the info section")
+    @Option(option = ValidatorParameters.VALIDATE_INFO_LICENSE, description = "Ensures that there is a license section in the info section")
     public void setValidateInfoLicense(boolean validateInfoLicense) {
         this.validateInfoLicense = validateInfoLicense;
     }
 
-    @Option(option = VALIDATE_INFO_DESCRIPTION, description = "Ensures that there is a description attribute in the info section")
+    @Option(option = ValidatorParameters.VALIDATE_INFO_DESCRIPTION, description = "Ensures that there is a description attribute in the info section")
     public void setValidateInfoDescription(boolean validateInfoDescription) {
         this.validateInfoDescription = validateInfoDescription;
     }
 
-    @Option(option = VALIDATE_INFO_CONTACT, description = "Ensures that there is a contact section in the info section")
+    @Option(option = ValidatorParameters.VALIDATE_INFO_CONTACT, description = "Ensures that there is a contact section in the info section")
     public void setValidateInfoContact(boolean validateInfoContact) {
         this.validateInfoContact = validateInfoContact;
     }
 
-    @Option(option = VALIDATE_OPERATION_OPERATION_ID, description = "Ensures that there is an operation id for each operation")
+    @Option(option = ValidatorParameters.VALIDATE_OPERATION_OPERATION_ID, description = "Ensures that there is an operation id for each operation")
     public void setValidateOperationOperationId(boolean validateOperationOperationId) {
         this.validateOperationOperationId = validateOperationOperationId;
     }
 
-    @Option(option = VALIDATE_OPERATION_DESCRIPTION, description = "Ensures that there is a description for each operation")
+    @Option(option = ValidatorParameters.VALIDATE_OPERATION_DESCRIPTION, description = "Ensures that there is a description for each operation")
     public void setValidateOperationDescription(boolean validateOperationDescription) {
         this.validateOperationDescription = validateOperationDescription;
     }
 
-    @Option(option = VALIDATE_OPERATION_TAG, description = "Ensures that there is a tag for each operation")
+    @Option(option = ValidatorParameters.VALIDATE_OPERATION_TAG, description = "Ensures that there is a tag for each operation")
     public void setValidateOperationTag(boolean validateOperationTag) {
         this.validateOperationTag = validateOperationTag;
     }
 
-    @Option(option = VALIDATE_OPERATION_SUMMARY, description = "Ensures that there is a summary for each operation")
+    @Option(option = ValidatorParameters.VALIDATE_OPERATION_SUMMARY, description = "Ensures that there is a summary for each operation")
     public void setValidateOperationSummary(boolean validateOperationSummary) {
         this.validateOperationSummary = validateOperationSummary;
     }
 
-    @Option(option = VALIDATE_MODEL_PROPERTIES_EXAMPLE, description = "Ensures that the properties of the Schemas have an example value defined")
+    @Option(option = ValidatorParameters.VALIDATE_MODEL_PROPERTIES_EXAMPLE, description = "Ensures that the properties of the Schemas have an example value defined")
     public void setValidateModelPropertiesExample(boolean validateModelPropertiesExample) {
         this.validateModelPropertiesExample = validateModelPropertiesExample;
     }
 
-    @Option(option = VALIDATE_MODEL_NO_LOCAL_DEF, description = "Not implemented yet")
+    @Option(option = ValidatorParameters.VALIDATE_MODEL_NO_LOCAL_DEF, description = "Not implemented yet")
     public void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
     }
 
-    @Option(option = VALIDATE_NAMING, description = "Ensures the names follow a given naming convention")
+    @Option(option = ValidatorParameters.VALIDATE_NAMING, description = "Ensures the names follow a given naming convention")
     public void setValidateNaming(boolean validateNaming) {
         this.validateNaming = validateNaming;
     }
 
-    @Option(option = IGNORE_HEADER_X_NAMING, description = "Exclude from validation header parameters starting with 'x-'")
+    @Option(option = ValidatorParameters.IGNORE_HEADER_X_NAMING, description = "Exclude from validation header parameters starting with 'x-'")
     public void setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
         this.ignoreHeaderXNaming = ignoreHeaderXNaming;
     }
 
-    @Option(option = PATH_NAMING_CONVENTION, description = "Naming convention for paths")
+    @Option(option = ValidatorParameters.PATH_NAMING_CONVENTION, description = "Naming convention for paths")
     public void setPathNamingConvention(NamingConvention pathNamingConvention) {
         this.pathNamingConvention = pathNamingConvention;
     }
 
-    @Option(option = PARAMETER_NAMING_CONVENTION, description = "Naming convention for parameters")
+    @Option(option = ValidatorParameters.PARAMETER_NAMING_CONVENTION, description = "Naming convention for parameters")
     public void setParameterNamingConvention(NamingConvention parameterNamingConvention) {
         this.parameterNamingConvention = parameterNamingConvention;
     }
 
-    @Option(option = PROPERTY_NAMING_CONVENTION, description = "Naming convention for properties")
+    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for properties")
     public void setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
     }
