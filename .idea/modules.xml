@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/cli.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/cli.iml" group="openapi-style-validator/cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/cli_main.iml" group="openapi-style-validator/cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/cli_test.iml" group="openapi-style-validator/cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.iml" group="openapi-style-validator/gradle-plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_functionalTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_functionalTest.iml" group="openapi-style-validator/gradle-plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_main.iml" group="openapi-style-validator/gradle-plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin_test.iml" group="openapi-style-validator/gradle-plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/lib.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/lib.iml" group="openapi-style-validator/lib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/lib_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/lib_main.iml" group="openapi-style-validator/lib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/lib_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/lib_test.iml" group="openapi-style-validator/lib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" filepath="$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" group="openapi-style-validator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" filepath="$PROJECT_DIR$/.idea/modules/openapi-style-validator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/openapi-style-validator.cli.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/openapi-style-validator.cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/openapi-style-validator.cli.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/openapi-style-validator.cli.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli/openapi-style-validator.cli.test.iml" filepath="$PROJECT_DIR$/.idea/modules/cli/openapi-style-validator.cli.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.functionalTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.functionalTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/openapi-style-validator.gradle-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.test.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.test.iml" />
     </modules>
   </component>
 </project>

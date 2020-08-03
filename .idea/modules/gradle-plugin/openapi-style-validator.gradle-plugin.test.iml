@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="gradle-plugin_main" />
+    <orderEntry type="module" module-name="openapi-style-validator.gradle-plugin.main" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -81,18 +81,18 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="lib_main" />
+    <orderEntry type="module" module-name="openapi-style-validator.lib.main" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser:2.0.20" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.30" level="project" />
-    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.1.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-swagger-core:1.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.6.2" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser-v2-converter:2.0.20" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-ext:1.7.30" level="project" />
     <orderEntry type="library" name="Gradle: io.swagger.parser.v3:swagger-parser-v3:2.0.20" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.6" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
@@ -142,8 +142,8 @@
     <orderEntry type="library" name="Gradle: org.mozilla:rhino:1.7R4" level="project" />
     <orderEntry type="library" name="Gradle: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.github.fge:btf:1.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.5.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.5.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.6.2" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="gradle-plugin_main" />
+  <component name="TestModuleProperties" production-module="openapi-style-validator.gradle-plugin.main" />
 </module>

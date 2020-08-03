@@ -9,7 +9,7 @@
         <option name="disableWrapperSourceDistributionNotification" value="true" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:/Gradle/gradle-4.1" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../Gradle/gradle-4.1" />
         <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
@@ -17,9 +17,9 @@
             <option value="$PROJECT_DIR$/cli" />
             <option value="$PROJECT_DIR$/gradle-plugin" />
             <option value="$PROJECT_DIR$/lib" />
+            <option value="$PROJECT_DIR$/maven-plugin" />
           </set>
         </option>
-        <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
     </option>
   </component>
