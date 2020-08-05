@@ -15,7 +15,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.test.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/openapi-style-validator.lib.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/maven-plugin/openapi-style-validator.maven-plugin.test.iml" />
     </modules>
   </component>
 </project>

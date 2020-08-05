@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
@@ -12,11 +13,9 @@ import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConventi
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 import org.opentest4j.MultipleFailuresError;
 
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 
 public class MainTest {
 	private static final String PREFIX = "    \"";
@@ -142,9 +141,8 @@ public class MainTest {
     
     @Test
     void defaultJsonFileContainsConstants() throws Exception {
-        String filePath = Objects.requireNonNull(MainTest.class.getClassLoader().getResource("default.json")).getPath();
-        byte[] bytes = Files.readAllBytes(Paths.get(filePath));
-        String content = new String(bytes, StandardCharsets.UTF_8);
+        InputStream stream = getClass().getResourceAsStream("/default.json");
+        String content = IOUtils.toString(stream, StandardCharsets.UTF_8);
 
         StringBuilder sb = new StringBuilder();
         sb.append("{\n");
