@@ -42,7 +42,7 @@ const docusaurusConfig = {
         alt: 'OpenAPI Style Validator logo',
       },
 
-      links: [
+      items: [
         {to: 'docs/installation', label: 'Install'},
         {to: 'docs/roadmap', label: 'Roadmap'},
         {to: "docs/faq", label: "FAQ" },

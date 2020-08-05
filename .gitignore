@@ -23,3 +23,8 @@ build
 /lib/build
 /lib/out
 /.idea/sonarlint/issuestore/
+/gradle-plugin/out/functionalTest/classes/org/openapitools/openapistylevalidator/gradle/OpenAPIStyleValidatorGradlePluginFunctionalTest.class
+/gradle-plugin/out/production/classes/org/openapitools/openapistylevalidator/gradle/OpenAPIStyleValidatorGradlePlugin.class
+/gradle-plugin/out/production/classes/org/openapitools/openapistylevalidator/gradle/OpenAPIStyleValidatorTask.class
+/gradle-plugin/out/test/classes/org/openapitools/openapistylevalidator/gradle/OpenAPIStyleValidatorGradlePluginTest.class
+/maven-plugin/out/production/classes/org/openapitools/openapistylevalidator/maven/OpenAPIStyleValidatorMojo.class

@@ -8,19 +8,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="lib_main" />
+    <orderEntry type="module" module-name="openapi-style-validator.lib.main" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-jdk14:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-simple-models-impl:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.openapitools.empoa:empoa-simple-models-impl:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1" level="project" />
     <orderEntry type="library" name="Gradle: nl.jqno.equalsverifier:equalsverifier:3.1.13" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.osgi:org.osgi.annotation.versioning:1.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.6.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.opentest4j:opentest4j:1.2.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.5.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.5.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.6.2" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="lib_main" />
+  <component name="TestModuleProperties" production-module="openapi-style-validator.lib.main" />
 </module>
