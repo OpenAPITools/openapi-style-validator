@@ -1,4 +1,7 @@
-# OpenApi Tools: openapi-style-validator
+# OpenApi Tools: OpenAPI Style Validator
+
+![](website/static/img/logo.png)
+
 A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
 [![](https://img.shields.io/badge/Buy%20us%20a%20tree-%F0%9F%8C%B3-lightgreen)](https://offset.earth/darkjaff)
