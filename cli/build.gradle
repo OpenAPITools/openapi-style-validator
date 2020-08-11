@@ -4,7 +4,7 @@ dependencies {
 	compile project(':lib')
 	compile 'commons-cli:commons-cli:1.4'
     compile 'com.google.code.gson:gson:2.8.1'
-    compile 'org.slf4j:slf4j-jdk14:1.7.25'
+    compile 'org.slf4j:slf4j-jdk14:1.7.30'
 
 	compile 'io.swagger.parser.v3:swagger-parser:2.0.20'
 	compile 'org.openapitools.empoa:empoa-swagger-core:1.2.0'
