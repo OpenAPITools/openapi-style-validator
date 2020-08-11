@@ -3,7 +3,7 @@ apply plugin: 'application'
 dependencies {
 	compile project(':lib')
 	compile 'commons-cli:commons-cli:1.4'
-    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.google.code.gson:gson:2.8.6'
     compile 'org.slf4j:slf4j-jdk14:1.7.30'
 
 	compile 'io.swagger.parser.v3:swagger-parser:2.0.20'
