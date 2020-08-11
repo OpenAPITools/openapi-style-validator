@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
-        classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.3.0"
+        classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     }
 }
 
