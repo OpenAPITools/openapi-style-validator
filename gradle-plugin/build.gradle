@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':lib')
-    implementation 'io.swagger.parser.v3:swagger-parser:2.0.21'
+    implementation 'io.swagger.parser.v3:swagger-parser:2.0.22'
     implementation 'org.openapitools.empoa:empoa-swagger-core:1.2.1'
     testImplementation 'junit:junit:4.13'
 }
