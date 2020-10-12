@@ -22,7 +22,7 @@ jobs:
         java-version: ${{ matrix.java }}
     - name: print Java version
       run: java -version
-    - uses: actions/cache@v2.1.1
+    - uses: actions/cache@v2.1.2
       with:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
