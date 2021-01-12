@@ -17,7 +17,7 @@ plugins {
 }
 
 wrapper {
-    gradleVersion = '6.3'
+    gradleVersion = '6.8'
 }
 
 allprojects {
