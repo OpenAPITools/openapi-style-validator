@@ -166,13 +166,25 @@ public class OpenApiSpecStyleValidator {
                                 }
 
                                 if (shouldValidate && opParam.getRef() == null) {
-                                    boolean isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
-                                    if (!isValid) {
-                                        errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                "parameter",
-                                                parameters.getParameterNamingConvention().getDesignation(),
-                                                key,
-                                                method);
+                                    boolean isValid = false;
+                                    if (opParam.getIn() == Parameter.In.HEADER) {
+                                        isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getHeaderNamingConvention());
+                                        if (!isValid) {
+                                            errorAggregator.logOperationBadNaming(opParam.getName(),
+                                                    "header",
+                                                    parameters.getHeaderNamingConvention().getDesignation(),
+                                                    key,
+                                                    method);
+                                        }
+                                    } else {
+                                        isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
+                                        if (!isValid) {
+                                            errorAggregator.logOperationBadNaming(opParam.getName(),
+                                                    "parameter",
+                                                    parameters.getParameterNamingConvention().getDesignation(),
+                                                    key,
+                                                    method);
+                                        }
                                     }
                                 }
                             }
