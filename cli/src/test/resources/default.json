@@ -11,6 +11,7 @@
     "validateNaming": true,
     "ignoreHeaderXNaming": true,
     "pathNamingConvention": "HyphenCase",
+    "headerNamingConvention": "UnderscoreUpperCase",
     "parameterNamingConvention": "CamelCase",
     "propertyNamingConvention": "CamelCase"
 }

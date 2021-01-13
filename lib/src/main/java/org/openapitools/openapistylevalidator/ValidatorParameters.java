@@ -17,10 +17,12 @@ public class ValidatorParameters {
     public static final String IGNORE_HEADER_X_NAMING = "ignoreHeaderXNaming";
     public static final String PATH_NAMING_CONVENTION = "pathNamingConvention";
     public static final String PARAMETER_NAMING_CONVENTION = "parameterNamingConvention";
+    public static final String HEADER_NAMING_CONVENTION = "headerNamingConvention";
     public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
 
     public static enum NamingConvention {
         UnderscoreCase("underscore_case"),
+        UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
         CamelCase("camelCase"),
         HyphenCase("hyphen-case");
 
@@ -44,6 +46,7 @@ public class ValidatorParameters {
     @Deprecated
     public static enum NamingStrategy {
         UnderscoreCase,
+        UnderscoreUpperCase,
         CamelCase,
         HyphenCase;
 
@@ -87,6 +90,7 @@ public class ValidatorParameters {
     private boolean ignoreHeaderXNaming = true;
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention propertyNamingConvention= NamingConvention.CamelCase;
 
     public ValidatorParameters() {
@@ -137,6 +141,10 @@ public class ValidatorParameters {
         return parameterNamingConvention;
     }
 
+    public NamingConvention getHeaderNamingConvention() {
+		return headerNamingConvention;
+	}
+
     public NamingConvention getPropertyNamingConvention() {
         return propertyNamingConvention;
     }
@@ -147,6 +155,10 @@ public class ValidatorParameters {
 
     public NamingStrategy getParameterNamingStrategy() {
         return NamingStrategy.valueOf(getParameterNamingConvention());
+    }
+
+    public NamingStrategy getHeaderNamingStrategy() {
+        return NamingStrategy.valueOf(getHeaderNamingConvention());
     }
 
     public NamingStrategy getPropertyNamingStrategy() {
@@ -208,6 +220,11 @@ public class ValidatorParameters {
         return this;
     }
 
+    public ValidatorParameters setHeaderNamingConvention(NamingConvention headerNamingConvention) {
+        this.headerNamingConvention = headerNamingConvention;
+        return this;
+    }
+
     public ValidatorParameters setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
         return this;
@@ -220,6 +237,11 @@ public class ValidatorParameters {
 
     public ValidatorParameters setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
         setParameterNamingConvention(NamingStrategy.toConvention(parameterNamingStrategy));
+        return this;
+    }
+
+    public ValidatorParameters setHeaderNamingStrategy(NamingStrategy headerNamingStrategy) {
+        setHeaderNamingConvention(NamingStrategy.toConvention(headerNamingStrategy));
         return this;
     }
 
@@ -249,7 +271,7 @@ public class ValidatorParameters {
     @Override
     public String toString() {
         return String.format(
-                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
+                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, headerNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
                 validateInfoLicense, 
                 validateInfoDescription, 
                 validateInfoContact, 
@@ -261,7 +283,8 @@ public class ValidatorParameters {
                 validateModelNoLocalDef,
                 validateNaming, 
                 ignoreHeaderXNaming,
-                pathNamingConvention, 
+                pathNamingConvention,
+                headerNamingConvention,
                 parameterNamingConvention,
                 propertyNamingConvention);
     }
