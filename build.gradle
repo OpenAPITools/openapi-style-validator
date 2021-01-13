@@ -31,6 +31,9 @@ subprojects {
     apply plugin: 'de.marcphilipp.nexus-publish'
     apply plugin: 'jacoco'
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
     test {
         useJUnitPlatform()
     }
