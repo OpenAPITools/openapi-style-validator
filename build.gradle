@@ -31,6 +31,9 @@ subprojects {
     apply plugin: 'de.marcphilipp.nexus-publish'
     apply plugin: 'jacoco'
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
     test {
         useJUnitPlatform()
     }
@@ -42,7 +45,7 @@ subprojects {
     group = 'org.openapitools.openapistylevalidator'
 
     dependencies {
-        compile 'org.slf4j:slf4j-api:1.7.30'
+        implementation 'org.slf4j:slf4j-api:1.7.30'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     }
