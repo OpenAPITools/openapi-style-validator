@@ -79,8 +79,10 @@ class OptionManager {
                 fixConventionRenaming(jsonElement, "property");
                 Gson gson = new GsonBuilder().create();
                 parameters = gson.fromJson(jsonElement, ValidatorParameters.class);
-            } catch (Exception ignored) {
+            } catch (java.io.IOException ignored) {
                 System.out.println("Invalid path to option files, using default.");
+            } catch (com.google.gson.JsonSyntaxException e) {
+                System.out.println("Invalid JSON, using default.");;
             }
         }
         return parameters;
