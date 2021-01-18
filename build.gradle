@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id 'io.codearte.nexus-staging' version '0.22.0'
-    id "org.sonarqube" version "3.0"
+    id "org.sonarqube" version "3.1"
 }
 
 wrapper {
