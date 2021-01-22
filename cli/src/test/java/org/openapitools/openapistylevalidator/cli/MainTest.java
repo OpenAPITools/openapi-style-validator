@@ -209,6 +209,11 @@ public class MainTest {
         sb.append(NamingConvention.HyphenCase);
         sb.append(NEXT_LINE_QUOTE);
         sb.append(PREFIX);
+        sb.append(ValidatorParameters.HEADER_NAMING_CONVENTION);
+        sb.append(SEPARATOR_QUOTE);
+        sb.append(NamingConvention.UnderscoreUpperCase);
+        sb.append(NEXT_LINE_QUOTE);
+        sb.append(PREFIX);
         sb.append(ValidatorParameters.PARAMETER_NAMING_CONVENTION);
         sb.append(SEPARATOR_QUOTE);
         sb.append(NamingConvention.CamelCase);

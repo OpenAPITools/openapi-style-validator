@@ -40,6 +40,7 @@ description, etc...
 ### Naming convention
 - Enforce naming convention for paths, parameters and properties
     - underscore_case
+    - UNDERSCORE_UPPER_CASE
     - camelCase
     - hyphen-case
 
@@ -100,9 +101,10 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for parameters|
-|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for properties|
+|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
+|headerNamingStrategyConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
+|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for properties|
 
 ## Roadmap
 

@@ -35,6 +35,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private boolean ignoreHeaderXNaming = true;
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
 
     public OpenAPIStyleValidatorTask() {
@@ -139,6 +140,11 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         this.parameterNamingConvention = parameterNamingConvention;
     }
 
+    @Option(option = ValidatorParameters.HEADER_NAMING_CONVENTION, description = "Naming convention for headers")
+    public void setHeaderNamingConvention(NamingConvention headerNamingConvention) {
+        this.headerNamingConvention = headerNamingConvention;
+    }
+
     @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for properties")
     public void setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
@@ -159,6 +165,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         parameters.setIgnoreHeaderXNaming(ignoreHeaderXNaming);
         parameters.setPathNamingConvention(pathNamingConvention);
         parameters.setParameterNamingConvention(parameterNamingConvention);
+        parameters.setHeaderNamingConvention(headerNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
         return parameters;
     }
