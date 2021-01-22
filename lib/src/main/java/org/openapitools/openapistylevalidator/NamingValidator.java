@@ -3,10 +3,15 @@ package org.openapitools.openapistylevalidator;
 class NamingValidator {
 
     private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
+    private static final String REGEX_UPPER_CASE_ALPHA_NUMERIC_ONLY = "[A-Z0-9]+";
     private static final String REGEX_CAMEL_CASE = "([a-z0-9]+[A-Z]+\\w+)+";
 
     private boolean isUnderscoreCase(String variableName) {
-        return isSeparatorCaseValid(variableName, "_");
+        return isSeparatorCaseValid(variableName, "_", false);
+    }
+
+    private boolean isUnderscoreUpperCase(String variableName) {
+        return isSeparatorCaseValid(variableName, "_", true);
     }
 
     private boolean isCamelCase(String variableName) {
@@ -14,10 +19,12 @@ class NamingValidator {
     }
 
     private boolean isHyphenCase(String variableName) {
-        return isSeparatorCaseValid(variableName, "-");
+        return isSeparatorCaseValid(variableName, "-", false);
     }
 
-    private boolean isSeparatorCaseValid(String variableName, String separator) {
+    
+    
+    private boolean isSeparatorCaseValid(String variableName, String separator, boolean isUpperCase) {
         if (variableName.startsWith(separator) || variableName.endsWith(separator)) {
             return false;
         }
@@ -29,12 +36,22 @@ class NamingValidator {
                 return false;
             }
             totalLength += token.length();
-            if (!token.toLowerCase().equals(token)) {
-                return false;
-            }
-
-            if (!token.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY)) {
-                return false;
+            if (isUpperCase) {
+                if (!token.toUpperCase().equals(token)) {
+                    return false;
+                }
+    
+                if (!token.matches(REGEX_UPPER_CASE_ALPHA_NUMERIC_ONLY)) {
+                    return false;
+                }    
+            } else {
+                if (!token.toLowerCase().equals(token)) {
+                    return false;
+                }
+    
+                if (!token.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY)) {
+                    return false;
+                }    
             }
         }
 
@@ -45,6 +62,8 @@ class NamingValidator {
         switch (namingStrategy) {
             case UnderscoreCase:
                 return isUnderscoreCase(name);
+            case UnderscoreUpperCase:
+                return isUnderscoreUpperCase(name);
             case CamelCase:
                 return isCamelCase(name);
             case HyphenCase:

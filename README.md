@@ -1,11 +1,14 @@
-# OpenApi Tools: openapi-style-validator
+# OpenApi Tools: OpenAPI Style Validator
+
+![](website/static/img/logo.png)
+
 A customizable style validator to make sure your OpenApi spec follows your organization's standards.
 
 [![](https://img.shields.io/badge/Buy%20us%20a%20tree-%F0%9F%8C%B3-lightgreen)](https://offset.earth/darkjaff)
 
 [![Build Status](https://travis-ci.org/OpenAPITools/openapi-style-validator.svg?branch=master)](https://travis-ci.org/OpenAPITools/openapi-style-validator) [![Maven Central](https://img.shields.io/maven-central/v/org.openapitools.openapistylevalidator/openapi-style-validator-cli)](https://mvnrepository.com/artifact/org.openapitools.openapistylevalidator) [![codecov](https://codecov.io/gh/OpenAPITools/openapi-style-validator/branch/master/graph/badge.svg)](https://codecov.io/gh/OpenAPITools/openapi-style-validator)
 
-[![Join the Slack chat room](https://img.shields.io/badge/Slack-Join%20the%20chat%20room-orange)](https://join.slack.com/t/openapi-generator/shared_invite/enQtNzAyNDMyOTU0OTE1LTY5ZDBiNDI5NzI5ZjQ1Y2E5OWVjMjZkYzY1ZGM2MWQ4YWFjMzcyNDY5MGI4NjQxNDBiMTlmZTc5NjY2ZTQ5MGM)  [Official Website](https://openapitools.github.io/openapi-style-validator/)
+[![Join the Slack chat room](https://img.shields.io/badge/Slack-Join%20the%20chat%20room-orange)](https://join.slack.com/t/openapi-generator/shared_invite/enQtNzAyNDMyOTU0OTE1LTY5ZDBiNDI5NzI5ZjQ1Y2E5OWVjMjZkYzY1ZGM2MWQ4YWFjMzcyNDY5MGI4NjQxNDBiMTlmZTc5NjY2ZTQ5MGM) [![Website and documentation](https://img.shields.io/badge/Website%20and%20Documentation-Click%20to%20View-green)](https://openapitools.github.io/openapi-style-validator/)
 
 ## Summary
 
@@ -37,6 +40,7 @@ description, etc...
 ### Naming convention
 - Enforce naming convention for paths, parameters and properties
     - underscore_case
+    - UNDERSCORE_UPPER_CASE
     - camelCase
     - hyphen-case
 
@@ -97,9 +101,10 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for parameters|
-|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`|Naming convention for properties|
+|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
+|headerNamingStrategyConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
+|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for properties|
 
 ## Roadmap
 

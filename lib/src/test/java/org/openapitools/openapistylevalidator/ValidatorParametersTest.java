@@ -31,6 +31,7 @@ class ValidatorParametersTest {
                 () -> assertTrue(parameters.isIgnoreHeaderXNaming()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
+                () -> assertEquals(ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention())
         );
     }
@@ -51,6 +52,7 @@ class ValidatorParametersTest {
                 .setIgnoreHeaderXNaming(false)
                 .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setHeaderNamingConvention(ValidatorParameters.NamingConvention.UnderscoreUpperCase)
                 .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
 
         Assertions.assertAll(
@@ -67,6 +69,7 @@ class ValidatorParametersTest {
                 () -> assertFalse(parameters.isIgnoreHeaderXNaming()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
+                () -> assertEquals(ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention())
         );
     }
@@ -81,11 +84,13 @@ class ValidatorParametersTest {
 
         parameters.setPathNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
         parameters.setParameterNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
+        parameters.setHeaderNamingStrategy(ValidatorParameters.NamingStrategy.UnderscoreUpperCase);
         parameters.setPropertyNamingStrategy(ValidatorParameters.NamingStrategy.CamelCase);
 
         Assertions.assertAll(
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
+                () -> assertEquals(ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention()),
                 () -> assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention())
         );
     }

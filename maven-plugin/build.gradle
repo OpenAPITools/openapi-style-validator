@@ -1,13 +1,13 @@
 plugins {
-    id 'de.benediktritter.maven-plugin-development' version '0.2.1'
+    id 'de.benediktritter.maven-plugin-development' version '0.3.1'
 }
 
 dependencies {
     implementation project(':lib')
-    implementation 'io.swagger.parser.v3:swagger-parser:2.0.20'
-    implementation 'org.openapitools.empoa:empoa-swagger-core:1.2.0'
+    implementation 'io.swagger.parser.v3:swagger-parser:2.0.24'
+    implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
 
-    compile 'org.apache.maven:maven-plugin-api:3.6.3'
+    implementation 'org.apache.maven:maven-plugin-api:3.6.3'
     compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.6.0'
 }
 

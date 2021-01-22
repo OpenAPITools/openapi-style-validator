@@ -38,11 +38,11 @@ const docusaurusConfig = {
     navbar: {
       title: 'OpenAPI Style Validator',
       logo: {
-        src: 'img/docusaurus.svg',
+        src: 'img/logo.png',
         alt: 'OpenAPI Style Validator logo',
       },
 
-      links: [
+      items: [
         {to: 'docs/installation', label: 'Install'},
         {to: 'docs/roadmap', label: 'Roadmap'},
         {to: "docs/faq", label: "FAQ" },
@@ -63,7 +63,7 @@ const docusaurusConfig = {
 
       logo: {
         alt: 'OpenAPI Tools',
-        src: 'img/mono-logo.svg',
+        src: 'img/logo.png',
         href: 'https://openapi-generator.tech/',
       },
 

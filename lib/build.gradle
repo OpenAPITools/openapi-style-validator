@@ -1,8 +1,8 @@
 dependencies {
-    compile 'org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0-MR1'
-    testCompile 'org.slf4j:slf4j-jdk14:1.7.25'
-    testCompile 'org.openapitools.empoa:empoa-simple-models-impl:1.2.0'
-    testCompile 'nl.jqno.equalsverifier:equalsverifier:3.1.13'
+    implementation 'org.eclipse.microprofile.openapi:microprofile-openapi-api:2.0'
+    testImplementation 'org.slf4j:slf4j-jdk14:1.7.30'
+    testImplementation 'org.openapitools.empoa:empoa-simple-models-impl:2.0.0'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.5.2'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
