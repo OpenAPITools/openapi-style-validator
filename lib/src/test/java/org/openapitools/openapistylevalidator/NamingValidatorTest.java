@@ -17,6 +17,26 @@ class NamingValidatorTest {
     }
 
     @Test
+    void anyCaseAlwaysReturnTrue() {
+        //Arrange
+        String whateverCase1 = "my_variable";
+        String whateverCase2 = "my-variable";
+        String whateverCase3 = "variable";
+
+        //Act
+        boolean actual1 = validator.isNamingValid(whateverCase1, ValidatorParameters.NamingConvention.AnyCase);
+        boolean actual2 = validator.isNamingValid(whateverCase2, ValidatorParameters.NamingConvention.AnyCase);
+        boolean actual3 = validator.isNamingValid(whateverCase3, ValidatorParameters.NamingConvention.AnyCase);
+
+        //Assert
+        Assertions.assertAll(
+                () -> assertTrue(actual1),
+                () -> assertTrue(actual2),
+                () -> assertTrue(actual3)
+        );
+    }
+
+    @Test
     void goodUnderscoreCaseShouldReturnTrue() {
         //Arrange
         String goodUnderscoreCase1 = "my_variable";
