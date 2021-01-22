@@ -21,8 +21,8 @@ public class MainTest {
 	private static final String PREFIX = "    \"";
 	private static final String SEPARATOR = "\": ";
 	private static final String SEPARATOR_QUOTE = "\": \"";
-	private static final String NEXT_LINE = ",\n";
-	private static final String NEXT_LINE_QUOTE = "\",\n";
+	private static final String NEXT_LINE = "," + System.lineSeparator();
+	private static final String NEXT_LINE_QUOTE = "\"," + System.lineSeparator();
 	private static final DefaultParser parser = new DefaultParser();
 
     @Test
@@ -145,7 +145,8 @@ public class MainTest {
         String content = IOUtils.toString(stream, StandardCharsets.UTF_8);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("{\n");
+        sb.append("{");
+        sb.append(System.lineSeparator());
         sb.append(PREFIX);
         sb.append(ValidatorParameters.VALIDATE_INFO_LICENSE);
         sb.append(SEPARATOR);
@@ -220,7 +221,8 @@ public class MainTest {
         sb.append(ValidatorParameters.PROPERTY_NAMING_CONVENTION);
         sb.append(SEPARATOR_QUOTE);
         sb.append(NamingConvention.CamelCase);
-        sb.append("\"\n");
+        sb.append("\"");
+        sb.append(System.lineSeparator());
         sb.append("}");
         assertEquals(sb.toString(), content);
     }
