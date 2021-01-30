@@ -18,7 +18,7 @@ import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
 
-@Mojo(name = "validate", defaultPhase = LifecyclePhase.VERIFY)
+@Mojo(name = "validate", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true)
 public class OpenAPIStyleValidatorMojo extends AbstractMojo {
 
     @Parameter(property = OpenApiSpecStyleValidator.INPUT_FILE)
