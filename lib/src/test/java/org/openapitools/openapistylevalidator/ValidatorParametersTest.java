@@ -26,6 +26,7 @@ class ValidatorParametersTest {
                 () -> assertTrue(parameters.isValidateOperationTag()),
                 () -> assertTrue(parameters.isValidateOperationSummary()),
                 () -> assertTrue(parameters.isValidateModelPropertiesExample()),
+                () -> assertTrue(parameters.isValidateModelRequiredProperties()),
                 () -> assertTrue(parameters.isValidateModelNoLocalDef()),
                 () -> assertTrue(parameters.isValidateNaming()),
                 () -> assertTrue(parameters.isIgnoreHeaderXNaming()),
@@ -38,17 +39,7 @@ class ValidatorParametersTest {
 
     @Test
     void testAllGetterSetters() {
-        parameters
-                .setValidateInfoLicense(false)
-                .setValidateInfoDescription(false)
-                .setValidateInfoContact(false)
-                .setValidateOperationOperationId(false)
-                .setValidateOperationDescription(false)
-                .setValidateOperationTag(false)
-                .setValidateOperationSummary(false)
-                .setValidateModelPropertiesExample(false)
-                .setValidateModelNoLocalDef(false)
-                .setValidateNaming(false)
+        parameters = TestDataProvider.createParametersDisablingAllValidations()
                 .setIgnoreHeaderXNaming(false)
                 .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
@@ -64,6 +55,7 @@ class ValidatorParametersTest {
                 () -> assertFalse(parameters.isValidateOperationTag()),
                 () -> assertFalse(parameters.isValidateOperationSummary()),
                 () -> assertFalse(parameters.isValidateModelPropertiesExample()),
+                () -> assertFalse(parameters.isValidateModelRequiredProperties()),
                 () -> assertFalse(parameters.isValidateModelNoLocalDef()),
                 () -> assertFalse(parameters.isValidateNaming()),
                 () -> assertFalse(parameters.isIgnoreHeaderXNaming()),

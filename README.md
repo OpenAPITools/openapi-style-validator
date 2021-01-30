@@ -36,6 +36,7 @@ description, etc...
 
 ### Models
 - All model properties must have examples
+- All required properties must be listed among the properties
 
 ### Naming convention
 - Enforce naming convention for paths, parameters and properties
@@ -98,6 +99,7 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateOperationTag|boolean|`true`, `false`|Ensures that there is a tag for each operation|
 |validateOperationSummary|boolean|`true`, `false`|Ensures that there is a summary for each operation|
 |validateModelPropertiesExample|boolean|`true`, `false`|Ensures that the properties of the Schemas have an example value defined|
+|validateModelRequiredProperties|boolean|`true`, `false`|Ensures that all required properties of the Schemas are listed among their properties|
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|

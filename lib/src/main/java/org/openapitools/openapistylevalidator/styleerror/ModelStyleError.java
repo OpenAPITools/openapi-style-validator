@@ -36,10 +36,10 @@ public final class ModelStyleError extends StyleError {
 
     @Override
     public String toString() {
-        return String.format("*ERROR* in Model '%s', property '%s', field '%s' -> %s",
+        return String.format("*ERROR* in Model '%s', property '%s'%s -> %s",
                 modelName,
                 propertyName,
-                fieldNames,
+                fieldNames == null ? "" : String.format(", field '%s'", fieldNames),
                 description);
     }
 }

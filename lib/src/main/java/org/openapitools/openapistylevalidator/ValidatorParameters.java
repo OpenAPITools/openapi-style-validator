@@ -11,6 +11,7 @@ public class ValidatorParameters {
     public static final String VALIDATE_OPERATION_SUMMARY = "validateOperationSummary";
 
     public static final String VALIDATE_MODEL_PROPERTIES_EXAMPLE = "validateModelPropertiesExample";
+    public static final String VALIDATE_MODEL_REQUIRED_PROPERTIES = "validateModelRequiredProperties";
     public static final String VALIDATE_MODEL_NO_LOCAL_DEF = "validateModelNoLocalDef";
 
     public static final String VALIDATE_NAMING = "validateNaming";
@@ -84,6 +85,7 @@ public class ValidatorParameters {
     private boolean validateOperationSummary = true;
 
     private boolean validateModelPropertiesExample = true;
+    private boolean validateModelRequiredProperties = true;
     private boolean validateModelNoLocalDef = true;
 
     private boolean validateNaming = true;
@@ -127,6 +129,10 @@ public class ValidatorParameters {
 
     public boolean isValidateModelPropertiesExample() {
         return validateModelPropertiesExample;
+    }
+
+    public boolean isValidateModelRequiredProperties() {
+        return validateModelRequiredProperties;
     }
 
     public boolean isValidateModelNoLocalDef() {
@@ -205,6 +211,11 @@ public class ValidatorParameters {
         return this;
     }
 
+    public ValidatorParameters setValidateModelRequiredProperties(boolean validateModelRequiredProperties) {
+        this.validateModelRequiredProperties = validateModelRequiredProperties;
+        return this;
+    }
+
     public ValidatorParameters setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
         return this;
@@ -271,7 +282,7 @@ public class ValidatorParameters {
     @Override
     public String toString() {
         return String.format(
-                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, headerNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
+                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelRequiredProperties=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, headerNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
                 validateInfoLicense, 
                 validateInfoDescription, 
                 validateInfoContact, 
@@ -279,7 +290,8 @@ public class ValidatorParameters {
                 validateOperationDescription,
                 validateOperationTag, 
                 validateOperationSummary,
-                validateModelPropertiesExample, 
+                validateModelPropertiesExample,
+                validateModelRequiredProperties,
                 validateModelNoLocalDef,
                 validateNaming, 
                 ignoreHeaderXNaming,
