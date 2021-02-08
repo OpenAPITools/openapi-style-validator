@@ -103,7 +103,7 @@ The options file is described in json (example in `specs/options.json`), and has
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
 |pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for paths|
 |parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
-|headerNamingStrategyConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
+|headerNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for headers|
 |propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for properties|
 
 ## Roadmap
