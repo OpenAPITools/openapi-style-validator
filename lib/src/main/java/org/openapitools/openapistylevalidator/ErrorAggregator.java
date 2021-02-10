@@ -59,6 +59,14 @@ class ErrorAggregator {
                 modelName, propertyName));
     }
 
+    void logMissingModelProperty(String modelName, String propertyName) {
+        errorList.add(new ModelStyleError(
+                null,
+                "This property should be present or removed from the list of required",
+                modelName, propertyName
+                ));
+    }
+
     void logOperationBadNaming(String variableName, String variableType, String neededNamingStrategy, String path, PathItem.HttpMethod httpMethod) {
         errorList.add(new OperationNamingStyleError(StyleError.StyleCheckSection.Naming, variableName,
                 String.format("%s should be in %s", variableType, neededNamingStrategy), path, httpMethod));

@@ -1,6 +1,5 @@
 package org.openapitools.openapistylevalidator;
 
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -9,11 +8,9 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OpenApiSpecStyleValidator {
     public static final String INPUT_FILE = "inputFile";
@@ -108,26 +105,40 @@ public class OpenApiSpecStyleValidator {
 
     private void validateModels() {
         if (openAPI.getComponents() != null && openAPI.getComponents().getSchemas() != null) {
-            for (String definition : openAPI.getComponents().getSchemas().keySet()) {
-                Schema model = openAPI.getComponents().getSchemas().get(definition);
+            openAPI.getComponents().getSchemas().forEach((modelName, model) -> {
+                validateModelProperties(modelName, model);
+                validateModelRequiredProperties(modelName, model);
+            });
+        }
+    }
 
-                if (model.getProperties() != null) {
-                    for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
-                        Schema property = entry.getValue();
-
-                        if (parameters.isValidateModelPropertiesExample()) {
-                            if (property.getRef() == null && property.getExample() == null) {
-                                errorAggregator.logMissingOrEmptyModelAttribute(definition, entry.getKey(), "example");
-                            }
-                        }
-                        
-                        /*
-                    if (parameters.isValidateModelNoLocalDef()) {
-                        //TODO:
-                    }*/
-                    }
+    private void validateModelProperties(String modelName, Schema model) {
+        if (model.getProperties() != null) {
+            model.getProperties().forEach((propertyName, property) -> {
+                if (parameters.isValidateModelPropertiesExample()
+                        && property.getRef() == null && property.getExample() == null) {
+                        errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
                 }
-            }
+                /*
+                if (parameters.isValidateModelNoLocalDef()) {
+                    //TODO:
+                }*/
+            });
+        }
+    }
+
+    private void validateModelRequiredProperties(String modelName, Schema model) {
+        if (parameters.isValidateModelRequiredProperties() && model.getRequired() != null) {
+            Set<String> namesOfProperties = Optional.ofNullable(model.getProperties())
+                    .map(Map::keySet)
+                    .orElse(Collections.emptySet());
+            model.getRequired().forEach(
+                    nameOfRequiredProperty -> {
+                        if (!namesOfProperties.contains(nameOfRequiredProperty)) {
+                            errorAggregator.logMissingModelProperty(modelName, nameOfRequiredProperty);
+                        }
+                    }
+            );
         }
     }
 

@@ -29,6 +29,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private boolean validateOperationSummary = true;
 
     private boolean validateModelPropertiesExample = true;
+    private boolean validateModelRequiredProperties = true;
     private boolean validateModelNoLocalDef = true;
 
     private boolean validateNaming = true;
@@ -115,6 +116,11 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         this.validateModelPropertiesExample = validateModelPropertiesExample;
     }
 
+    @Option(option = ValidatorParameters.VALIDATE_MODEL_REQUIRED_PROPERTIES, description = "Ensures that all required properties of the Schemas are listed among their properties")
+    public void setValidateModelRequiredProperties(boolean validateModelRequiredProperties) {
+        this.validateModelRequiredProperties = validateModelRequiredProperties;
+    }
+
     @Option(option = ValidatorParameters.VALIDATE_MODEL_NO_LOCAL_DEF, description = "Not implemented yet")
     public void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
@@ -160,6 +166,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         parameters.setValidateOperationTag(validateOperationTag);
         parameters.setValidateOperationSummary(validateOperationSummary);
         parameters.setValidateModelPropertiesExample(validateModelPropertiesExample);
+        parameters.setValidateModelRequiredProperties(validateModelRequiredProperties);
         parameters.setValidateModelNoLocalDef(validateModelNoLocalDef);
         parameters.setValidateNaming(validateNaming);
         parameters.setIgnoreHeaderXNaming(ignoreHeaderXNaming);
