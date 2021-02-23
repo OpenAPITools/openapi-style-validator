@@ -12,6 +12,7 @@ import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConventi
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 import org.opentest4j.MultipleFailuresError;
 
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,8 +23,9 @@ public class MainTest {
 	private static final String PREFIX = "    \"";
 	private static final String SEPARATOR = "\": ";
 	private static final String SEPARATOR_QUOTE = "\": \"";
-	private static final String NEXT_LINE = ",\n";
-	private static final String NEXT_LINE_QUOTE = "\",\n";
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	private static final String NEXT_LINE = "," + LINE_SEPARATOR;
+	private static final String NEXT_LINE_QUOTE = "\"," + LINE_SEPARATOR;
 	private static final DefaultParser parser = new DefaultParser();
 
     @Test
@@ -142,12 +144,12 @@ public class MainTest {
     
     @Test
     void defaultJsonFileContainsConstants() throws Exception {
-        String filePath = Objects.requireNonNull(MainTest.class.getClassLoader().getResource("default.json")).getPath();
-        byte[] bytes = Files.readAllBytes(Paths.get(filePath));
+        URI uri = Objects.requireNonNull(MainTest.class.getClassLoader().getResource("default.json")).toURI();
+        byte[] bytes = Files.readAllBytes(Paths.get(uri));
         String content = new String(bytes, StandardCharsets.UTF_8);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("{\n");
+        sb.append("{").append(LINE_SEPARATOR);
         sb.append(PREFIX);
         sb.append(ValidatorParameters.VALIDATE_INFO_LICENSE);
         sb.append(SEPARATOR);
@@ -189,6 +191,11 @@ public class MainTest {
         sb.append("true");
         sb.append(NEXT_LINE);
         sb.append(PREFIX);
+        sb.append(ValidatorParameters.VALIDATE_MODEL_REQUIRED_PROPERTIES);
+        sb.append(SEPARATOR);
+        sb.append("true");
+        sb.append(NEXT_LINE);
+        sb.append(PREFIX);
         sb.append(ValidatorParameters.VALIDATE_MODEL_NO_LOCAL_DEF);
         sb.append(SEPARATOR);
         sb.append("true");
@@ -222,7 +229,7 @@ public class MainTest {
         sb.append(ValidatorParameters.PROPERTY_NAMING_CONVENTION);
         sb.append(SEPARATOR_QUOTE);
         sb.append(NamingConvention.CamelCase);
-        sb.append("\"\n");
+        sb.append("\"").append(LINE_SEPARATOR);
         sb.append("}");
         assertEquals(sb.toString(), content);
     }
