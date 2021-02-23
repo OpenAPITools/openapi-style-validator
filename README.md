@@ -108,6 +108,27 @@ The options file is described in json (example in `specs/options.json`), and has
 |headerNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for headers|
 |propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for properties|
 
+## Supported Extensions
+
+We sometimes have some paths in our API that are there for legacy reasons. To support this scenario, there is now the possibility to add an extension property in your spec named `x-style-validator-ignored`. Here is an example:
+
+```yaml
+/my-pathWithWeird_NAMING-FoRLeGaCyReAsOnSLOL:
+  x-style-validator-ignored: true
+  post:
+    tags:
+      - Whatever
+    summary: A summary
+    /* missing operating id or other important property */
+    responses:
+      200:
+        description: OK
+  get:
+    ...
+```
+
+The path (GET, POST, etc..) will completely be ignored by the style validator.
+
 ## Roadmap
 
 In no specific order
