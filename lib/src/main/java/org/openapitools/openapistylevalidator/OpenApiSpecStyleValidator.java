@@ -14,6 +14,7 @@ import java.util.*;
 
 public class OpenApiSpecStyleValidator {
     public static final String INPUT_FILE = "inputFile";
+    public static final String X_STYLE_VALIDATOR_IGNORED = "x-style-validator-ignored";
 
     private final OpenAPI openAPI;
     private final ErrorAggregator errorAggregator;
@@ -74,33 +75,46 @@ public class OpenApiSpecStyleValidator {
     private void validateOperations() {
         for (String key : openAPI.getPaths().getPathItems().keySet()) {
             PathItem path = openAPI.getPaths().getPathItems().get(key);
-            for (PathItem.HttpMethod method : path.getOperations().keySet()) {
-                Operation op = path.getOperations().get(method);
-                if (parameters.isValidateOperationOperationId()) {
-                    if (op.getOperationId() == null || op.getOperationId().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "operationId");
-                    }
-                }
+            boolean ignoreValidation = isPathIgnored(path);
 
-                if (parameters.isValidateOperationDescription()) {
-                    if (op.getDescription() == null || op.getDescription().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "description");
+            if (!ignoreValidation) {
+                for (PathItem.HttpMethod method : path.getOperations().keySet()) {
+                    Operation op = path.getOperations().get(method);
+                    if (parameters.isValidateOperationOperationId()) {
+                        if (op.getOperationId() == null || op.getOperationId().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "operationId");
+                        }
                     }
-                }
 
-                if (parameters.isValidateOperationSummary()) {
-                    if (op.getSummary() == null || op.getSummary().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "summary");
+                    if (parameters.isValidateOperationDescription()) {
+                        if (op.getDescription() == null || op.getDescription().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "description");
+                        }
                     }
-                }
 
-                if (parameters.isValidateOperationTag()) {
-                    if (op.getTags() == null || op.getTags().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
+                    if (parameters.isValidateOperationSummary()) {
+                        if (op.getSummary() == null || op.getSummary().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "summary");
+                        }
+                    }
+
+                    if (parameters.isValidateOperationTag()) {
+                        if (op.getTags() == null || op.getTags().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
+                        }
                     }
                 }
             }
         }
+    }
+
+    private boolean isPathIgnored(PathItem path) {
+        Object ignoreValidationObj = path.getExtensions() != null ? path.getExtensions().get(X_STYLE_VALIDATOR_IGNORED) : null;
+        boolean ignoreValidation = false;
+        if (ignoreValidationObj != null) {
+            ignoreValidation = (boolean) ignoreValidationObj;
+        }
+        return ignoreValidation;
     }
 
     private void validateModels() {
@@ -165,53 +179,57 @@ public class OpenApiSpecStyleValidator {
             if (openAPI.getPaths() != null && openAPI.getPaths().getPathItems() != null) {
                 for (String key : openAPI.getPaths().getPathItems().keySet()) {
                     PathItem path = openAPI.getPaths().getPathItems().get(key);
-                    for (PathItem.HttpMethod method : path.getOperations().keySet()) {
-                        Operation op = path.getOperations().get(method);
-                        if (op != null && op.getParameters() != null) {
-                            for (Parameter opParam : op.getParameters()) {
-                                boolean shouldValidate;
-                                if (opParam.getIn() == Parameter.In.HEADER && opParam.getName().startsWith("X-")) {
-                                    shouldValidate = !parameters.isIgnoreHeaderXNaming();
-                                } else {
-                                    shouldValidate = true;
-                                }
+                    boolean ignoreValidation = isPathIgnored(path);
 
-                                if (shouldValidate && opParam.getRef() == null) {
-                                    boolean isValid = false;
-                                    if (opParam.getIn() == Parameter.In.HEADER) {
-                                        isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getHeaderNamingConvention());
-                                        if (!isValid) {
-                                            errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                    "header",
-                                                    parameters.getHeaderNamingConvention().getDesignation(),
-                                                    key,
-                                                    method);
-                                        }
+                    if (!ignoreValidation) {
+                        for (PathItem.HttpMethod method : path.getOperations().keySet()) {
+                            Operation op = path.getOperations().get(method);
+                            if (op != null && op.getParameters() != null) {
+                                for (Parameter opParam : op.getParameters()) {
+                                    boolean shouldValidate;
+                                    if (opParam.getIn() == Parameter.In.HEADER && opParam.getName().startsWith("X-")) {
+                                        shouldValidate = !parameters.isIgnoreHeaderXNaming();
                                     } else {
-                                        isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
-                                        if (!isValid) {
-                                            errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                    "parameter",
-                                                    parameters.getParameterNamingConvention().getDesignation(),
-                                                    key,
-                                                    method);
+                                        shouldValidate = true;
+                                    }
+
+                                    if (shouldValidate && opParam.getRef() == null) {
+                                        boolean isValid = false;
+                                        if (opParam.getIn() == Parameter.In.HEADER) {
+                                            isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getHeaderNamingConvention());
+                                            if (!isValid) {
+                                                errorAggregator.logOperationBadNaming(opParam.getName(),
+                                                        "header",
+                                                        parameters.getHeaderNamingConvention().getDesignation(),
+                                                        key,
+                                                        method);
+                                            }
+                                        } else {
+                                            isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
+                                            if (!isValid) {
+                                                errorAggregator.logOperationBadNaming(opParam.getName(),
+                                                        "parameter",
+                                                        parameters.getParameterNamingConvention().getDesignation(),
+                                                        key,
+                                                        method);
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    String[] pathParts = key.split("/");
-                    for (String part : pathParts) {
-                        if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
-                            boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
-                            if (!isValid) {
-                                errorAggregator.logOperationBadNaming(part,
-                                        "path",
-                                        parameters.getPathNamingConvention().getDesignation(),
-                                        key,
-                                        null);
+                        String[] pathParts = key.split("/");
+                        for (String part : pathParts) {
+                            if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
+                                boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
+                                if (!isValid) {
+                                    errorAggregator.logOperationBadNaming(part,
+                                            "path",
+                                            parameters.getPathNamingConvention().getDesignation(),
+                                            key,
+                                            null);
+                                }
                             }
                         }
                     }
