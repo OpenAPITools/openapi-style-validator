@@ -25,7 +25,8 @@ public class ValidatorParameters {
         UnderscoreCase("underscore_case"),
         UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
         CamelCase("camelCase"),
-        HyphenCase("hyphen-case");
+        HyphenCase("hyphen-case"),
+        AnyCase("AnyCase");
 
         private final String designation;
 
@@ -38,40 +39,6 @@ public class ValidatorParameters {
          */
         public String getDesignation() {
             return designation;
-        }
-    }
-
-    /**
-     * @deprecated Please use {@link ValidatorParameters.NamingConvention} instead.
-     */
-    @Deprecated
-    public static enum NamingStrategy {
-        UnderscoreCase,
-        UnderscoreUpperCase,
-        CamelCase,
-        HyphenCase;
-
-        /**
-         * @deprecated Please use {@link ValidatorParameters.NamingConvention#getDesignation()} instead.
-         * @return the name of the strategy as it can be used in the reports
-         */
-        @Deprecated
-        public String getAppelation() {
-            return toConvention(this).getDesignation();
-        }
-
-        public static NamingStrategy valueOf(NamingConvention pathNamingConvention) {
-            if(pathNamingConvention == null) {
-                return null;
-            }
-            return NamingStrategy.valueOf(pathNamingConvention.name());
-        }
-
-        public static NamingConvention toConvention(NamingStrategy pathNamingStrategy) {
-            if(pathNamingStrategy == null) {
-                return null;
-            }
-            return NamingConvention.valueOf(pathNamingStrategy.name());
         }
     }
 
@@ -155,22 +122,6 @@ public class ValidatorParameters {
         return propertyNamingConvention;
     }
 
-    public NamingStrategy getPathNamingStrategy() {
-        return NamingStrategy.valueOf(getPathNamingConvention());
-    }
-
-    public NamingStrategy getParameterNamingStrategy() {
-        return NamingStrategy.valueOf(getParameterNamingConvention());
-    }
-
-    public NamingStrategy getHeaderNamingStrategy() {
-        return NamingStrategy.valueOf(getHeaderNamingConvention());
-    }
-
-    public NamingStrategy getPropertyNamingStrategy() {
-        return NamingStrategy.valueOf(getPropertyNamingConvention());
-    }
-
     public ValidatorParameters setValidateInfoLicense(boolean validateInfoLicense) {
         this.validateInfoLicense = validateInfoLicense;
         return this;
@@ -238,26 +189,6 @@ public class ValidatorParameters {
 
     public ValidatorParameters setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
-        return this;
-    }
-
-    public ValidatorParameters setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
-        setPathNamingConvention(NamingStrategy.toConvention(pathNamingStrategy));
-        return this;
-    }
-
-    public ValidatorParameters setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
-        setParameterNamingConvention(NamingStrategy.toConvention(parameterNamingStrategy));
-        return this;
-    }
-
-    public ValidatorParameters setHeaderNamingStrategy(NamingStrategy headerNamingStrategy) {
-        setHeaderNamingConvention(NamingStrategy.toConvention(headerNamingStrategy));
-        return this;
-    }
-
-    public ValidatorParameters setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
-        setPropertyNamingConvention(NamingStrategy.toConvention(propertyNamingStrategy));
         return this;
     }
 
