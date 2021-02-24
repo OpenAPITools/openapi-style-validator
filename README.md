@@ -127,7 +127,7 @@ We sometimes have some paths in our API that are there for legacy reasons. To su
     ...
 ```
 
-The path (GET, POST, etc..) will completely be ignored by the style validator.
+The path (GET, POST, etc..) will be completely ignored by the style validator.
 
 ## Roadmap
 
