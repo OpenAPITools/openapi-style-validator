@@ -18,11 +18,13 @@ class NamingValidator {
         return variableName.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
     }
 
+    private boolean isAnyCase() {
+        return true;
+    }
+
     private boolean isHyphenCase(String variableName) {
         return isSeparatorCaseValid(variableName, "-", false);
     }
-
-    
     
     private boolean isSeparatorCaseValid(String variableName, String separator, boolean isUpperCase) {
         if (variableName.startsWith(separator) || variableName.endsWith(separator)) {
@@ -37,7 +39,7 @@ class NamingValidator {
             }
             totalLength += token.length();
             if (isUpperCase) {
-                if (!token.toUpperCase().equals(token)) {
+                if (!token.equalsIgnoreCase(token)) {
                     return false;
                 }
     
@@ -45,7 +47,7 @@ class NamingValidator {
                     return false;
                 }    
             } else {
-                if (!token.toLowerCase().equals(token)) {
+                if (!token.equalsIgnoreCase(token)) {
                     return false;
                 }
     
@@ -68,6 +70,8 @@ class NamingValidator {
                 return isCamelCase(name);
             case HyphenCase:
                 return isHyphenCase(name);
+            case AnyCase:
+                return isAnyCase();
         }
         return false;
     }

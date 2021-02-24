@@ -1,6 +1,8 @@
 package org.openapitools.openapistylevalidator;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
@@ -76,6 +78,42 @@ class OpenApiSpecStyleValidatorTest {
 
         ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
                 .setValidateModelPropertiesExample(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+  
+    @Test
+    void validationSkipsIgnoredOperations() {
+        Map<String, Object> extensions = new HashMap<>();
+        extensions.put("x-style-validator-ignored", Boolean.TRUE);
+
+        OpenAPI openAPI = createValidOpenAPI()
+                .paths(
+                        OASFactory.createPaths()
+
+                                .addPathItem(
+                                        "/my-pathWithWeird_NAMING", OASFactory.createPathItem()
+                                                .extensions(extensions)
+                                                .GET(
+                                                        OASFactory.createOperation()
+                                                                .responses(
+                                                                        OASFactory.createAPIResponses()
+                                                                                .addAPIResponse(
+                                                                                        "200", OASFactory.createAPIResponse()
+                                                                                                .description("OK")
+                                                                                )
+                                                                )
+                                                )
+                                )
+                );
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
+                .setValidateNaming(true)
+                .setValidateOperationOperationId(true)
+                .setValidateOperationDescription(true)
+                .setValidateOperationTag(true)
+                .setValidateOperationSummary(true);
 
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         assertEquals(0, errors.size());
