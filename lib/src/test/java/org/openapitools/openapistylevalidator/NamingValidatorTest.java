@@ -17,7 +17,7 @@ class NamingValidatorTest {
     }
 
     @Test
-    void anyCaseAlwaysReturnTrue() {
+    void anyCaseShouldAlwaysReturnTrue() {
         //Arrange
         String whateverCase1 = "my_variable";
         String whateverCase2 = "my-variable";
