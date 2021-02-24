@@ -1,6 +1,7 @@
 package org.openapitools.openapistylevalidator;
 
 import java.util.List;
+
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.media.Schema.SchemaType;
@@ -61,6 +62,25 @@ class OpenApiSpecStyleValidatorTest {
         assertEquals(0, errors.size());
     }
 
+    //Test for bug 169
+    @Test
+    void testModelPropertiesExampleValidationIgnoresItemsRefProperty() {
+         OpenAPI openAPI = createValidOpenAPI()
+                .components(
+                        OASFactory.createComponents()
+                                .addSchema("MyObject", OASFactory.createSchema()
+                                        .addProperty("refProperty", OASFactory.createSchema()
+                                                .items( OASFactory.createSchema()
+                                                .ref("#/components/schemas/RefProperty"))))
+                );
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
+                .setValidateModelPropertiesExample(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void validateModelRequiredProperties(boolean isValidateModelRequiredProperties) {
@@ -96,6 +116,7 @@ class OpenApiSpecStyleValidatorTest {
         List<StyleError> errors = validator.validate(new ValidatorParameters());
         assertEquals(0, errors.size());
     }
+
 
     private static OpenAPI createValidOpenAPI() {
         return OASFactory.createOpenAPI()
