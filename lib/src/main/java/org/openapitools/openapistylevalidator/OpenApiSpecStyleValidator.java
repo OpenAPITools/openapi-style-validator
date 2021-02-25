@@ -129,8 +129,9 @@ public class OpenApiSpecStyleValidator {
     private void validateModelProperties(String modelName, Schema model) {
         if (model.getProperties() != null) {
             model.getProperties().forEach((propertyName, property) -> {
-                if (parameters.isValidateModelPropertiesExample()
-                        && property.getRef() == null && property.getExample() == null) {
+                if (parameters.isValidateModelPropertiesExample() && property.getExample() == null
+                        && ((property.getItems() == null && property.getRef() == null)
+                            || (property.getItems() != null && property.getItems().getRef() == null))) {
                         errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
                 }
                 /*

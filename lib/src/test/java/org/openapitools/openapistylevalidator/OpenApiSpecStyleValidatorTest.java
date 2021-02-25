@@ -64,6 +64,25 @@ class OpenApiSpecStyleValidatorTest {
         assertEquals(0, errors.size());
     }
 
+    //Test for bug 169
+    @Test
+    void testModelPropertiesExampleValidationIgnoresItemsRefProperty() {
+         OpenAPI openAPI = createValidOpenAPI()
+                .components(
+                        OASFactory.createComponents()
+                                .addSchema("MyObject", OASFactory.createSchema()
+                                        .addProperty("refProperty", OASFactory.createSchema()
+                                                .items( OASFactory.createSchema()
+                                                .ref("#/components/schemas/RefProperty"))))
+                );
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
+                .setValidateModelPropertiesExample(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+  
     @Test
     void validationSkipsIgnoredOperations() {
         Map<String, Object> extensions = new HashMap<>();
@@ -135,6 +154,7 @@ class OpenApiSpecStyleValidatorTest {
         List<StyleError> errors = validator.validate(new ValidatorParameters());
         assertEquals(0, errors.size());
     }
+
 
     private static OpenAPI createValidOpenAPI() {
         return OASFactory.createOpenAPI()
