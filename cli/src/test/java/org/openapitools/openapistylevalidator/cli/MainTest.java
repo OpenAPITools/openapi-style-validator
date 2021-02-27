@@ -191,6 +191,11 @@ public class MainTest {
         sb.append("true");
         sb.append(NEXT_LINE);
         sb.append(PREFIX);
+        sb.append(ValidatorParameters.VALIDATE_MODEL_PROPERTIES_DESCRIPTION);
+        sb.append(SEPARATOR);
+        sb.append("true");
+        sb.append(NEXT_LINE);
+        sb.append(PREFIX);
         sb.append(ValidatorParameters.VALIDATE_MODEL_REQUIRED_PROPERTIES);
         sb.append(SEPARATOR);
         sb.append("true");

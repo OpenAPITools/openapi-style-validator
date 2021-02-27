@@ -48,6 +48,9 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
     @Parameter(property = ValidatorParameters.VALIDATE_MODEL_PROPERTIES_EXAMPLE, defaultValue = "true")
     private boolean validateModelPropertiesExample = true;
 
+    @Parameter(property = ValidatorParameters.VALIDATE_MODEL_PROPERTIES_DESCRIPTION, defaultValue = "true")
+    private boolean validateModelPropertiesDescription = true;
+
     @Parameter(property = ValidatorParameters.VALIDATE_MODEL_REQUIRED_PROPERTIES, defaultValue = "true")
     private boolean validateModelRequiredProperties = true;
 
@@ -109,6 +112,7 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
         parameters.setValidateOperationTag(validateOperationTag);
         parameters.setValidateOperationSummary(validateOperationSummary);
         parameters.setValidateModelPropertiesExample(validateModelPropertiesExample);
+        parameters.setValidateModelPropertiesDescription(validateModelPropertiesDescription);
         parameters.setValidateModelRequiredProperties(validateModelRequiredProperties);
         parameters.setValidateModelNoLocalDef(validateModelNoLocalDef);
         parameters.setValidateNaming(validateNaming);
