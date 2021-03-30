@@ -189,4 +189,50 @@ class NamingValidatorTest {
         );
     }
 
+    @Test
+    void goodHyphenUpperCaseShouldReturnTrue() {
+        // Arrange
+        String goodHyphenUpperCase1 = "My-Variable";
+        String goodHyphenUpperCase2 = "Variable";
+        String goodHyphenUpperCase3 = "My-Super-Variable";
+
+        // Act
+        boolean actual1 = validator.isNamingValid(goodHyphenUpperCase1, ValidatorParameters.NamingConvention.HyphenUpperCase);
+        boolean actual2 = validator.isNamingValid(goodHyphenUpperCase2, ValidatorParameters.NamingConvention.HyphenUpperCase);
+        boolean actual3 = validator.isNamingValid(goodHyphenUpperCase3, ValidatorParameters.NamingConvention.HyphenUpperCase);
+
+        // Assert
+        Assertions.assertAll(
+                () -> assertTrue(actual1),
+                () -> assertTrue(actual2),
+                () -> assertTrue(actual3)
+        );
+    }
+
+    @Test
+    void badHyphenUpperCaseShouldReturnFalse() {
+        // Arrange
+        String badHyphenUpperCase1 = "my-Variable";
+        String badHyphenUpperCase2 = "variable";
+        String badHyphenUpperCase3 = "my--variable";
+        String badHyphenUpperCase4 = "My_Variable";
+        String badHyphenUpperCase5 = "MyVariable";
+
+        // Act
+        boolean actual1 = validator.isNamingValid(badHyphenUpperCase1, ValidatorParameters.NamingConvention.HyphenUpperCase);
+        boolean actual2 = validator.isNamingValid(badHyphenUpperCase2, ValidatorParameters.NamingConvention.HyphenUpperCase);
+        boolean actual3 = validator.isNamingValid(badHyphenUpperCase3, ValidatorParameters.NamingConvention.HyphenUpperCase);
+        boolean actual4 = validator.isNamingValid(badHyphenUpperCase4, ValidatorParameters.NamingConvention.HyphenUpperCase);
+        boolean actual5 = validator.isNamingValid(badHyphenUpperCase5, ValidatorParameters.NamingConvention.HyphenUpperCase);
+
+        // Assert
+        Assertions.assertAll(
+                () -> assertFalse(actual1, badHyphenUpperCase1),
+                () -> assertFalse(actual2, badHyphenUpperCase2),
+                () -> assertFalse(actual3, badHyphenUpperCase3),
+                () -> assertFalse(actual4, badHyphenUpperCase4),
+                () -> assertFalse(actual5, badHyphenUpperCase5)
+        );
+    }
+
 }

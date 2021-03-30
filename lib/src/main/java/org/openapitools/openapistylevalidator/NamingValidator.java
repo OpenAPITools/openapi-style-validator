@@ -1,5 +1,8 @@
 package org.openapitools.openapistylevalidator;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 class NamingValidator {
 
     private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
@@ -24,6 +27,19 @@ class NamingValidator {
 
     private boolean isHyphenCase(String variableName) {
         return isSeparatorCaseValid(variableName, "-", false);
+    }
+
+    private boolean isHyphenUpperCase(String variableName) {
+        if (variableName.startsWith("-") || variableName.endsWith("-")) {
+            return false;
+        }
+
+        String expectedTokenFormat = "[A-Z][a-z]+";
+
+        Optional<String> firstInvalidToken = Arrays.stream(variableName.split("-"))
+                .filter(token -> !token.matches(expectedTokenFormat))
+                .findFirst();
+        return !firstInvalidToken.isPresent();
     }
     
     private boolean isSeparatorCaseValid(String variableName, String separator, boolean isUpperCase) {
@@ -60,6 +76,8 @@ class NamingValidator {
         return variableName.length() == (totalLength + tokens.length - 1);
     }
 
+
+
     boolean isNamingValid(String name, ValidatorParameters.NamingConvention namingStrategy) {
         switch (namingStrategy) {
             case UnderscoreCase:
@@ -72,6 +90,8 @@ class NamingValidator {
                 return isHyphenCase(name);
             case AnyCase:
                 return isAnyCase();
+            case HyphenUpperCase:
+                return isHyphenUpperCase(name);
         }
         return false;
     }
