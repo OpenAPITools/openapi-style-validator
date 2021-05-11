@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
-      <module name="modules_cli_main" target="1.8" />
-      <module name="modules_cli_test" target="1.8" />
-      <module name="modules_lib_main" target="1.8" />
-      <module name="modules_lib_test" target="1.8" />
-      <module name="openapi-style-validator_main" target="1.8" />
-      <module name="openapi-style-validator_test" target="1.8" />
-    </bytecodeTargetLevel>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8" />
   </component>
 </project>
