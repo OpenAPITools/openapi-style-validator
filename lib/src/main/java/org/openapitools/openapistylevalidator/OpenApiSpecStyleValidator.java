@@ -1,6 +1,5 @@
 package org.openapitools.openapistylevalidator;
 
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -9,14 +8,13 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OpenApiSpecStyleValidator {
     public static final String INPUT_FILE = "inputFile";
+    public static final String X_STYLE_VALIDATOR_IGNORED = "x-style-validator-ignored";
 
     private final OpenAPI openAPI;
     private final ErrorAggregator errorAggregator;
@@ -77,57 +75,85 @@ public class OpenApiSpecStyleValidator {
     private void validateOperations() {
         for (String key : openAPI.getPaths().getPathItems().keySet()) {
             PathItem path = openAPI.getPaths().getPathItems().get(key);
-            for (PathItem.HttpMethod method : path.getOperations().keySet()) {
-                Operation op = path.getOperations().get(method);
-                if (parameters.isValidateOperationOperationId()) {
-                    if (op.getOperationId() == null || op.getOperationId().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "operationId");
-                    }
-                }
+            boolean ignoreValidation = isPathIgnored(path);
 
-                if (parameters.isValidateOperationDescription()) {
-                    if (op.getDescription() == null || op.getDescription().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "description");
+            if (!ignoreValidation) {
+                for (PathItem.HttpMethod method : path.getOperations().keySet()) {
+                    Operation op = path.getOperations().get(method);
+                    if (parameters.isValidateOperationOperationId()) {
+                        if (op.getOperationId() == null || op.getOperationId().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "operationId");
+                        }
                     }
-                }
 
-                if (parameters.isValidateOperationSummary()) {
-                    if (op.getSummary() == null || op.getSummary().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "summary");
+                    if (parameters.isValidateOperationDescription()) {
+                        if (op.getDescription() == null || op.getDescription().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "description");
+                        }
                     }
-                }
 
-                if (parameters.isValidateOperationTag()) {
-                    if (op.getTags() == null || op.getTags().isEmpty()) {
-                        errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
+                    if (parameters.isValidateOperationSummary()) {
+                        if (op.getSummary() == null || op.getSummary().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationAttribute(key, method, "summary");
+                        }
+                    }
+
+                    if (parameters.isValidateOperationTag()) {
+                        if (op.getTags() == null || op.getTags().isEmpty()) {
+                            errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
+                        }
                     }
                 }
             }
         }
     }
 
+    private boolean isPathIgnored(PathItem path) {
+        Object ignoreValidationObj = path.getExtensions() != null ? path.getExtensions().get(X_STYLE_VALIDATOR_IGNORED) : null;
+        boolean ignoreValidation = false;
+        if (ignoreValidationObj != null) {
+            ignoreValidation = (boolean) ignoreValidationObj;
+        }
+        return ignoreValidation;
+    }
+
     private void validateModels() {
         if (openAPI.getComponents() != null && openAPI.getComponents().getSchemas() != null) {
-            for (String definition : openAPI.getComponents().getSchemas().keySet()) {
-                Schema model = openAPI.getComponents().getSchemas().get(definition);
+            openAPI.getComponents().getSchemas().forEach((modelName, model) -> {
+                validateModelProperties(modelName, model);
+                validateModelRequiredProperties(modelName, model);
+            });
+        }
+    }
 
-                if (model.getProperties() != null) {
-                    for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
-                        Schema property = entry.getValue();
-
-                        if (parameters.isValidateModelPropertiesExample()) {
-                            if (property.getRef() == null && property.getExample() == null) {
-                                errorAggregator.logMissingOrEmptyModelAttribute(definition, entry.getKey(), "example");
-                            }
-                        }
-                        
-                        /*
-                    if (parameters.isValidateModelNoLocalDef()) {
-                        //TODO:
-                    }*/
-                    }
+    private void validateModelProperties(String modelName, Schema model) {
+        if (model.getProperties() != null) {
+            model.getProperties().forEach((propertyName, property) -> {
+                if (parameters.isValidateModelPropertiesExample() && property.getExample() == null
+                        && ((property.getItems() == null && property.getRef() == null)
+                            || (property.getItems() != null && property.getItems().getRef() == null))) {
+                        errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
                 }
-            }
+                /*
+                if (parameters.isValidateModelNoLocalDef()) {
+                    //TODO:
+                }*/
+            });
+        }
+    }
+
+    private void validateModelRequiredProperties(String modelName, Schema model) {
+        if (parameters.isValidateModelRequiredProperties() && model.getRequired() != null) {
+            Set<String> namesOfProperties = Optional.ofNullable(model.getProperties())
+                    .map(Map::keySet)
+                    .orElse(Collections.emptySet());
+            model.getRequired().forEach(
+                    nameOfRequiredProperty -> {
+                        if (!namesOfProperties.contains(nameOfRequiredProperty)) {
+                            errorAggregator.logMissingModelProperty(modelName, nameOfRequiredProperty);
+                        }
+                    }
+            );
         }
     }
 
@@ -154,53 +180,57 @@ public class OpenApiSpecStyleValidator {
             if (openAPI.getPaths() != null && openAPI.getPaths().getPathItems() != null) {
                 for (String key : openAPI.getPaths().getPathItems().keySet()) {
                     PathItem path = openAPI.getPaths().getPathItems().get(key);
-                    for (PathItem.HttpMethod method : path.getOperations().keySet()) {
-                        Operation op = path.getOperations().get(method);
-                        if (op != null && op.getParameters() != null) {
-                            for (Parameter opParam : op.getParameters()) {
-                                boolean shouldValidate;
-                                if (opParam.getIn() == Parameter.In.HEADER && opParam.getName().startsWith("X-")) {
-                                    shouldValidate = !parameters.isIgnoreHeaderXNaming();
-                                } else {
-                                    shouldValidate = true;
-                                }
+                    boolean ignoreValidation = isPathIgnored(path);
 
-                                if (shouldValidate && opParam.getRef() == null) {
-                                    boolean isValid = false;
-                                    if (opParam.getIn() == Parameter.In.HEADER) {
-                                        isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getHeaderNamingConvention());
-                                        if (!isValid) {
-                                            errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                    "header",
-                                                    parameters.getHeaderNamingConvention().getDesignation(),
-                                                    key,
-                                                    method);
-                                        }
+                    if (!ignoreValidation) {
+                        for (PathItem.HttpMethod method : path.getOperations().keySet()) {
+                            Operation op = path.getOperations().get(method);
+                            if (op != null && op.getParameters() != null) {
+                                for (Parameter opParam : op.getParameters()) {
+                                    boolean shouldValidate;
+                                    if (opParam.getIn() == Parameter.In.HEADER && opParam.getName().startsWith("X-")) {
+                                        shouldValidate = !parameters.isIgnoreHeaderXNaming();
                                     } else {
-                                        isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
-                                        if (!isValid) {
-                                            errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                    "parameter",
-                                                    parameters.getParameterNamingConvention().getDesignation(),
-                                                    key,
-                                                    method);
+                                        shouldValidate = true;
+                                    }
+
+                                    if (shouldValidate && opParam.getRef() == null) {
+                                        boolean isValid = false;
+                                        if (opParam.getIn() == Parameter.In.HEADER) {
+                                            isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getHeaderNamingConvention());
+                                            if (!isValid) {
+                                                errorAggregator.logOperationBadNaming(opParam.getName(),
+                                                        "header",
+                                                        parameters.getHeaderNamingConvention().getDesignation(),
+                                                        key,
+                                                        method);
+                                            }
+                                        } else {
+                                            isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
+                                            if (!isValid) {
+                                                errorAggregator.logOperationBadNaming(opParam.getName(),
+                                                        "parameter",
+                                                        parameters.getParameterNamingConvention().getDesignation(),
+                                                        key,
+                                                        method);
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    String[] pathParts = key.split("/");
-                    for (String part : pathParts) {
-                        if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
-                            boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
-                            if (!isValid) {
-                                errorAggregator.logOperationBadNaming(part,
-                                        "path",
-                                        parameters.getPathNamingConvention().getDesignation(),
-                                        key,
-                                        null);
+                        String[] pathParts = key.split("/");
+                        for (String part : pathParts) {
+                            if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
+                                boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
+                                if (!isValid) {
+                                    errorAggregator.logOperationBadNaming(part,
+                                            "path",
+                                            parameters.getPathNamingConvention().getDesignation(),
+                                            key,
+                                            null);
+                                }
                             }
                         }
                     }

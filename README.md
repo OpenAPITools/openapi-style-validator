@@ -36,6 +36,7 @@ description, etc...
 
 ### Models
 - All model properties must have examples
+- All required properties must be listed among the properties
 
 ### Naming convention
 - Enforce naming convention for paths, parameters and properties
@@ -98,21 +99,41 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateOperationTag|boolean|`true`, `false`|Ensures that there is a tag for each operation|
 |validateOperationSummary|boolean|`true`, `false`|Ensures that there is a summary for each operation|
 |validateModelPropertiesExample|boolean|`true`, `false`|Ensures that the properties of the Schemas have an example value defined|
+|validateModelRequiredProperties|boolean|`true`, `false`|Ensures that all required properties of the Schemas are listed among their properties|
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
-|headerNamingStrategyConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for parameters|
-|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`|Naming convention for properties|
+|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for parameters|
+|headerNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for headers|
+|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for properties|
+
+## Supported Extensions
+
+We sometimes have some paths in our API that are there for legacy reasons. To support this scenario, there is now the possibility to add an extension property in your spec named `x-style-validator-ignored`. Here is an example:
+
+```yaml
+/my-pathWithWeird_NAMING-FoRLeGaCyReAsOnSLOL:
+  x-style-validator-ignored: true
+  post:
+    tags:
+      - Whatever
+    summary: A summary
+    /* missing operating id or other important property */
+    responses:
+      200:
+        description: OK
+  get:
+    ...
+```
+
+The path (GET, POST, etc..) will be completely ignored by the style validator.
 
 ## Roadmap
 
 In no specific order
 
 - Try to reach 100% unit test code coverage
-- Make an official release
-- Make it available on Maven
 - Add some validations based on feedback
 
 ## Releases on maven central

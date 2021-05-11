@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id 'io.codearte.nexus-staging' version '0.22.0'
-    id "org.sonarqube" version "3.1"
+    id "org.sonarqube" version "3.1.1"
 }
 
 wrapper {
@@ -21,7 +21,7 @@ wrapper {
 }
 
 allprojects {
-    version = '1.6-SNAPSHOT'
+    version = '1.7-SNAPSHOT'
 }
 
 subprojects {
@@ -46,8 +46,9 @@ subprojects {
 
     dependencies {
         implementation 'org.slf4j:slf4j-api:1.7.30'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-params:5.7.1'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
     }
 
     signing {

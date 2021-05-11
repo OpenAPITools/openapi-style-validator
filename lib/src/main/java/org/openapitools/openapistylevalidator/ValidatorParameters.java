@@ -11,6 +11,7 @@ public class ValidatorParameters {
     public static final String VALIDATE_OPERATION_SUMMARY = "validateOperationSummary";
 
     public static final String VALIDATE_MODEL_PROPERTIES_EXAMPLE = "validateModelPropertiesExample";
+    public static final String VALIDATE_MODEL_REQUIRED_PROPERTIES = "validateModelRequiredProperties";
     public static final String VALIDATE_MODEL_NO_LOCAL_DEF = "validateModelNoLocalDef";
 
     public static final String VALIDATE_NAMING = "validateNaming";
@@ -24,7 +25,8 @@ public class ValidatorParameters {
         UnderscoreCase("underscore_case"),
         UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
         CamelCase("camelCase"),
-        HyphenCase("hyphen-case");
+        HyphenCase("hyphen-case"),
+        AnyCase("AnyCase");
 
         private final String designation;
 
@@ -40,40 +42,6 @@ public class ValidatorParameters {
         }
     }
 
-    /**
-     * @deprecated Please use {@link ValidatorParameters.NamingConvention} instead.
-     */
-    @Deprecated
-    public static enum NamingStrategy {
-        UnderscoreCase,
-        UnderscoreUpperCase,
-        CamelCase,
-        HyphenCase;
-
-        /**
-         * @deprecated Please use {@link ValidatorParameters.NamingConvention#getDesignation()} instead.
-         * @return the name of the strategy as it can be used in the reports
-         */
-        @Deprecated
-        public String getAppelation() {
-            return toConvention(this).getDesignation();
-        }
-
-        public static NamingStrategy valueOf(NamingConvention pathNamingConvention) {
-            if(pathNamingConvention == null) {
-                return null;
-            }
-            return NamingStrategy.valueOf(pathNamingConvention.name());
-        }
-
-        public static NamingConvention toConvention(NamingStrategy pathNamingStrategy) {
-            if(pathNamingStrategy == null) {
-                return null;
-            }
-            return NamingConvention.valueOf(pathNamingStrategy.name());
-        }
-    }
-
     private boolean validateInfoLicense = true;
     private boolean validateInfoDescription = true;
     private boolean validateInfoContact = true;
@@ -84,6 +52,7 @@ public class ValidatorParameters {
     private boolean validateOperationSummary = true;
 
     private boolean validateModelPropertiesExample = true;
+    private boolean validateModelRequiredProperties = true;
     private boolean validateModelNoLocalDef = true;
 
     private boolean validateNaming = true;
@@ -129,6 +98,10 @@ public class ValidatorParameters {
         return validateModelPropertiesExample;
     }
 
+    public boolean isValidateModelRequiredProperties() {
+        return validateModelRequiredProperties;
+    }
+
     public boolean isValidateModelNoLocalDef() {
         return validateModelNoLocalDef;
     }
@@ -147,22 +120,6 @@ public class ValidatorParameters {
 
     public NamingConvention getPropertyNamingConvention() {
         return propertyNamingConvention;
-    }
-
-    public NamingStrategy getPathNamingStrategy() {
-        return NamingStrategy.valueOf(getPathNamingConvention());
-    }
-
-    public NamingStrategy getParameterNamingStrategy() {
-        return NamingStrategy.valueOf(getParameterNamingConvention());
-    }
-
-    public NamingStrategy getHeaderNamingStrategy() {
-        return NamingStrategy.valueOf(getHeaderNamingConvention());
-    }
-
-    public NamingStrategy getPropertyNamingStrategy() {
-        return NamingStrategy.valueOf(getPropertyNamingConvention());
     }
 
     public ValidatorParameters setValidateInfoLicense(boolean validateInfoLicense) {
@@ -205,6 +162,11 @@ public class ValidatorParameters {
         return this;
     }
 
+    public ValidatorParameters setValidateModelRequiredProperties(boolean validateModelRequiredProperties) {
+        this.validateModelRequiredProperties = validateModelRequiredProperties;
+        return this;
+    }
+
     public ValidatorParameters setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
         return this;
@@ -230,26 +192,6 @@ public class ValidatorParameters {
         return this;
     }
 
-    public ValidatorParameters setPathNamingStrategy(NamingStrategy pathNamingStrategy) {
-        setPathNamingConvention(NamingStrategy.toConvention(pathNamingStrategy));
-        return this;
-    }
-
-    public ValidatorParameters setParameterNamingStrategy(NamingStrategy parameterNamingStrategy) {
-        setParameterNamingConvention(NamingStrategy.toConvention(parameterNamingStrategy));
-        return this;
-    }
-
-    public ValidatorParameters setHeaderNamingStrategy(NamingStrategy headerNamingStrategy) {
-        setHeaderNamingConvention(NamingStrategy.toConvention(headerNamingStrategy));
-        return this;
-    }
-
-    public ValidatorParameters setPropertyNamingStrategy(NamingStrategy propertyNamingStrategy) {
-        setPropertyNamingConvention(NamingStrategy.toConvention(propertyNamingStrategy));
-        return this;
-    }
-
     public boolean isValidateNaming() {
         return validateNaming;
     }
@@ -271,7 +213,7 @@ public class ValidatorParameters {
     @Override
     public String toString() {
         return String.format(
-                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, headerNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
+                "ValidatorParameters [validateInfoLicense=%s, validateInfoDescription=%s, validateInfoContact=%s, validateOperationOperationId=%s, validateOperationDescription=%s, validateOperationTag=%s, validateOperationSummary=%s, validateModelPropertiesExample=%s, validateModelRequiredProperties=%s, validateModelNoLocalDef=%s, validateNaming=%s, ignoreHeaderXNaming=%s, pathNamingConvention=%s, headerNamingConvention=%s, parameterNamingConvention=%s, propertyNamingConvention=%s]",
                 validateInfoLicense, 
                 validateInfoDescription, 
                 validateInfoContact, 
@@ -279,7 +221,8 @@ public class ValidatorParameters {
                 validateOperationDescription,
                 validateOperationTag, 
                 validateOperationSummary,
-                validateModelPropertiesExample, 
+                validateModelPropertiesExample,
+                validateModelRequiredProperties,
                 validateModelNoLocalDef,
                 validateNaming, 
                 ignoreHeaderXNaming,
