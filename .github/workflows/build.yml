@@ -1,4 +1,4 @@
-name: Sonarqube
+name: Build and validate
 on:
   push:
     branches:
