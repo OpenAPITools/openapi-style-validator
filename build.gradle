@@ -21,7 +21,6 @@ sonarqube {
         property "sonar.projectKey", "OpenAPITools_openapi-style-validator"
         property "sonar.organization", "openapitools"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.verbose", "true"
     }
 }
 
