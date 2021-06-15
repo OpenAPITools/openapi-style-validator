@@ -132,7 +132,7 @@ public class OpenApiSpecStyleValidator {
                 if (parameters.isValidateModelPropertiesExample() && property.getExample() == null
                         && ((property.getItems() == null && property.getRef() == null)
                             || (property.getItems() != null && property.getItems().getRef() == null)) &&
-                            property.getAllOf()==null) {
+                            property.getAllOf() == null) {
                         errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
                 }
                 /*
