@@ -6,7 +6,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.slf4j:slf4j-jdk14:1.7.30'
 
-    implementation 'io.swagger.parser.v3:swagger-parser:2.0.24'
+    implementation 'io.swagger.parser.v3:swagger-parser:2.0.26'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
 }
 
