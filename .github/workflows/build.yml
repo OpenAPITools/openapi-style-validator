@@ -9,9 +9,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java: [ '8', '11', '16' ]
+    #strategy:
+    #  matrix:
+    #    java: [ '8', '11', '16' ]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: 11 #${{ matrix.java }}
       - name: print Java version
         run: java -version
       - name: Cache SonarCloud packages
