@@ -44,6 +44,34 @@ class OpenApiSpecStyleValidatorTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void testModelPropertiesDescriptionValidation(boolean isValidateModelPropertiesDescription) {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(
+                        OASFactory.createComponents()
+                                .addSchema("MyObject", OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty("propertyWithDescription", OASFactory.createSchema()
+                                                .type(SchemaType.STRING)
+                                                .description("description"))
+                                        .addProperty("propertyWithoutDescription", OASFactory.createSchema()
+                                                .type(SchemaType.STRING))
+                                )
+                );
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations();
+        parameters.setValidateModelPropertiesDescription(isValidateModelPropertiesDescription);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        if (isValidateModelPropertiesDescription) {
+            assertEquals(1, errors.size());
+            assertEquals("*ERROR* in Model 'MyObject', property 'propertyWithoutDescription', field 'description' -> This field should be present and not empty", errors.get(0).toString());
+        } else {
+            assertEquals(0, errors.size());
+        }
+    }
+
     /**
      * Test for the bug #88
      */
