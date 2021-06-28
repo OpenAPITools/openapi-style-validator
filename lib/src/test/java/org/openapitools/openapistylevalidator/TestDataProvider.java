@@ -14,6 +14,7 @@ class TestDataProvider {
                 .setValidateOperationTag(false)
                 .setValidateOperationSummary(false)
                 .setValidateModelPropertiesExample(false)
+                .setValidateModelPropertiesDescription(false)
                 .setValidateModelRequiredProperties(false)
                 .setValidateModelNoLocalDef(false)
                 .setValidateNaming(false);
