@@ -19,6 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2.1.0
         with:
+          distribution: 'adopt'
           java-version: 11 #${{ matrix.java }}
       - name: print Java version
         run: java -version
