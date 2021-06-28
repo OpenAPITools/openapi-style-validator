@@ -27,7 +27,8 @@ public class ValidatorParameters {
         UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
         CamelCase("camelCase"),
         HyphenCase("hyphen-case"),
-        AnyCase("AnyCase");
+        AnyCase("AnyCase"),
+        HyphenUpperCase("Hyphen-Upper-Case");
 
         private final String designation;
 

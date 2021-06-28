@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.media.Schema.SchemaType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -110,7 +111,35 @@ class OpenApiSpecStyleValidatorTest {
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         assertEquals(0, errors.size());
     }
-  
+
+    // https://github.com/OpenAPITools/openapi-style-validator/issues/178
+    @Test
+    void testModelPropertiesExampleValidationIgnoresAllOffComposition() {
+        Schema component = OASFactory.createSchema()
+                .type(SchemaType.OBJECT)
+                .addProperty("property1", OASFactory.createSchema()
+                        .type(SchemaType.STRING)
+                        .example("Just a string property"));
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(
+                        OASFactory.createComponents()
+                        .addSchema("Component", component)
+                        .addSchema("Composition", OASFactory.createSchema()
+                                .type(SchemaType.OBJECT)
+                                .addProperty("component", OASFactory.createSchema()
+                                    .type(SchemaType.OBJECT)
+                                    .addAllOf(component))
+                                .addProperty("other", OASFactory.createSchema()
+                                    .type(SchemaType.STRING)
+                                    .example("Example")))
+                );
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
+                .setValidateModelPropertiesExample(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
     @Test
     void validationSkipsIgnoredOperations() {
         Map<String, Object> extensions = new HashMap<>();
