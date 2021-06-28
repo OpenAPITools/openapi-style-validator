@@ -9,6 +9,7 @@
   "validateOperationSummary": true,
 
   "validateModelPropertiesExample": false,
+  "validateModelPropertiesDescription": true,
   "validateModelRequiredProperties": true,
   "validateModelNoLocalDef": true,
 
