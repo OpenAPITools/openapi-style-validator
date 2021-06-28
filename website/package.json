@@ -10,7 +10,6 @@
     "version": "docusaurus version",
     "rename-version": "docusaurus rename-version"
   },
-  "devDependencies": {},
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.61",
     "@docusaurus/preset-classic": "2.0.0-alpha.61",
