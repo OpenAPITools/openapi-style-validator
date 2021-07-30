@@ -6,13 +6,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
         classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     }
 }
 
 plugins {
-    id 'io.codearte.nexus-staging' version '0.22.0'
+    id 'io.codearte.nexus-staging' version '0.30.0'
     id "org.sonarqube" version "3.3"
 }
 
@@ -29,7 +29,7 @@ wrapper {
 }
 
 allprojects {
-    version = '1.7-SNAPSHOT'
+    version = '1.8-SNAPSHOT'
 }
 
 subprojects {
@@ -53,9 +53,9 @@ subprojects {
     group = 'org.openapitools.openapistylevalidator'
 
     dependencies {
-        implementation 'org.slf4j:slf4j-api:1.7.30'
+        implementation 'org.slf4j:slf4j-api:1.7.31'
         testCompileOnly 'org.junit.jupiter:junit-jupiter-params:5.7.2'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
     }
 
