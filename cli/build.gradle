@@ -8,6 +8,8 @@ dependencies {
 
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.28'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
+
+    testImplementation "org.mockito:mockito-core:3.+"
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'

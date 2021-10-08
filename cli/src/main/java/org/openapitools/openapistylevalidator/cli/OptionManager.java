@@ -1,11 +1,7 @@
 package org.openapitools.openapistylevalidator.cli;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.*;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
@@ -30,8 +26,10 @@ class OptionManager {
     private static final String VERSION_OPT_LONG = "version";
 
     private final Options options;
+    private final OutputUtils outputUtils;
 
-    OptionManager() {
+    OptionManager(OutputUtils outputUtils) {
+        this.outputUtils = outputUtils;
         options = new Options();
 
         OptionGroup mutualExclusiveOptions = new OptionGroup();
@@ -70,6 +68,7 @@ class OptionManager {
     ValidatorParameters getOptionalValidatorParametersOrDefault(CommandLine commandLine) {
         ValidatorParameters parameters = new ValidatorParameters();
         if (commandLine.hasOption(OPTIONS_OPT_SHORT)) {
+            ObjectMapper json = new ObjectMapper();
             try {
                 String content = Utils.readFile(commandLine.getOptionValue(OPTIONS_OPT_SHORT), Charset.defaultCharset());
                 JsonParser parser = new JsonParser();
@@ -86,19 +85,18 @@ class OptionManager {
                 System.out.println("Invalid JSON, using default.");;
             }
         }
-
         return parameters;
     }
 
     private void fixConventionRenaming(JsonElement jsonElement, String prefix) {
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String strategyKey = String.format("%sNamingStrategy", prefix);
-        if (jsonObject.has(strategyKey)) {
+        if(jsonObject.has(strategyKey)) {
             String conventionKey = String.format("%sNamingConvention", prefix);
-            if (jsonObject.has(conventionKey)) {
-                System.err.println(String.format("The deprecated option '%s' is ignored, because its replacement '%s' is set", strategyKey, conventionKey));
+            if(jsonObject.has(conventionKey)) {
+                outputUtils.printReplacementUsage(strategyKey, conventionKey);
             } else {
-                System.err.println(String.format("The option '%s' is deprecated, please use '%s' instead", strategyKey, conventionKey));
+                outputUtils.printDeprecationWarning(strategyKey, conventionKey);
                 jsonObject.add(conventionKey, jsonObject.get(strategyKey));
             }
         }
