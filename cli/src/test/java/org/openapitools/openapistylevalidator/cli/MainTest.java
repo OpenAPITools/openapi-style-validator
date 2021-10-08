@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -235,6 +236,66 @@ public class MainTest {
         sb.append(System.lineSeparator());
         sb.append("}");
         assertEquals(sb.toString(), content);
+    }
+
+    @Test
+    void validateShouldThrowIllegalArgumentExceptionForInvalidPathNamingConvention() throws ParseException {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{
+                "-s", "src/test/resources/some.yaml",
+                "-o", "src/test/resources/invalidPathNamingConvention.json"
+        });
+
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Main.validate(optionManager, commandLine);
+        });
+        Assertions.assertEquals("Invalid pathNamingConvention", thrown.getMessage());
+    }
+
+    @Test
+    void validateShouldThrowIllegalArgumentExceptionForInvalidParameterNamingConvention() throws ParseException {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{
+                "-s", "src/test/resources/some.yaml",
+                "-o", "src/test/resources/invalidParameterNamingConvention.json"
+        });
+
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Main.validate(optionManager, commandLine);
+        });
+        Assertions.assertEquals("Invalid parameterNamingConvention", thrown.getMessage());
+    }
+
+    @Test
+    void validateShouldThrowIllegalArgumentExceptionForInvalidHeaderNamingConvention() throws ParseException {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{
+                "-s", "src/test/resources/some.yaml",
+                "-o", "src/test/resources/invalidHeaderNamingConvention.json"
+        });
+
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Main.validate(optionManager, commandLine);
+        });
+        Assertions.assertEquals("Invalid headerNamingConvention", thrown.getMessage());
+    }
+
+    @Test
+    void validateShouldThrowIllegalArgumentExceptionForInvalidPropertyNamingConvention() throws ParseException {
+        OptionManager optionManager = new OptionManager();
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{
+                "-s", "src/test/resources/some.yaml",
+                "-o", "src/test/resources/invalidPropertyNamingConvention.json"
+        });
+
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Main.validate(optionManager, commandLine);
+        });
+        Assertions.assertEquals("Invalid propertyNamingConvention", thrown.getMessage());
     }
 
 }
