@@ -40,11 +40,12 @@ description, etc...
 - All required properties must be listed among the properties
 
 ### Naming convention
-- Enforce naming convention for paths, parameters and properties
-    - underscore_case
-    - UNDERSCORE_UPPER_CASE
-    - camelCase
-    - hyphen-case
+- Enforce naming convention for paths, parameters, headers and properties
+  - underscore_case
+  - UNDERSCORE_UPPER_CASE
+  - camelCase
+  - hyphen-case
+  - Hyphen-Upper-Case
 
 ## Paid Alternatives
 
@@ -105,10 +106,10 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for parameters|
-|headerNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for headers|
-|propertyNamingConvention|string|`CamelCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for properties|
+|pathNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for parameters|
+|headerNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for headers|
+|propertyNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for properties|
 
 ## Supported Extensions
 
