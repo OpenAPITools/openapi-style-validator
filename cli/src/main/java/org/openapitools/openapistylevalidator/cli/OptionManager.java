@@ -79,27 +79,42 @@ class OptionManager {
                 fixConventionRenaming(jsonElement, "property");
                 Gson gson = new GsonBuilder().create();
                 parameters = gson.fromJson(jsonElement, ValidatorParameters.class);
+                validateNamingConventions(parameters);
             } catch (java.io.IOException ignored) {
                 System.out.println("Invalid path to option files, using default.");
             } catch (com.google.gson.JsonSyntaxException e) {
                 System.out.println("Invalid JSON, using default.");;
             }
         }
+
         return parameters;
     }
 
     private void fixConventionRenaming(JsonElement jsonElement, String prefix) {
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String strategyKey = String.format("%sNamingStrategy", prefix);
-        if(jsonObject.has(strategyKey)) {
+        if (jsonObject.has(strategyKey)) {
             String conventionKey = String.format("%sNamingConvention", prefix);
-            if(jsonObject.has(conventionKey)) {
+            if (jsonObject.has(conventionKey)) {
                 System.err.println(String.format("The deprecated option '%s' is ignored, because its replacement '%s' is set", strategyKey, conventionKey));
             } else {
-                System.err.println(String.format("The option '%s' is depreacted, please use '%s' instead", strategyKey, conventionKey));
+                System.err.println(String.format("The option '%s' is deprecated, please use '%s' instead", strategyKey, conventionKey));
                 jsonObject.add(conventionKey, jsonObject.get(strategyKey));
             }
         }
+    }
+
+    private void validateNamingConventions(ValidatorParameters parameters) {
+        validateNamingConvention("header", parameters.getHeaderNamingConvention());
+        validateNamingConvention("parameter", parameters.getParameterNamingConvention());
+        validateNamingConvention("path", parameters.getPathNamingConvention());
+        validateNamingConvention("property", parameters.getPropertyNamingConvention());
+    }
+
+    private void validateNamingConvention(String kind, ValidatorParameters.NamingConvention convention) {
+        if (convention != null) return;
+        throw new IllegalArgumentException(
+                "Invalid " + (kind.toLowerCase()) + "NamingConvention");
     }
 
     String getSource(CommandLine commandLine) {
