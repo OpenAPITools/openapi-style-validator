@@ -1,15 +1,19 @@
 package org.openapitools.openapistylevalidator.cli;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.*;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
-import org.openapitools.openapistylevalidator.commons.Utils;
+import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 
-import java.nio.charset.Charset;
+import java.io.File;
+import java.io.IOException;
 
 class OptionManager {
 
@@ -68,37 +72,56 @@ class OptionManager {
     ValidatorParameters getOptionalValidatorParametersOrDefault(CommandLine commandLine) {
         ValidatorParameters parameters = new ValidatorParameters();
         if (commandLine.hasOption(OPTIONS_OPT_SHORT)) {
-            ObjectMapper json = new ObjectMapper();
+            ObjectMapper deserializer = new ObjectMapper()
+                    .registerModule(
+                            new SimpleModule("NamingConvention")
+                                    .addDeserializer(NamingConvention.class, new JsonDeserializer<NamingConvention>() {
+                                        @Override
+                                        public NamingConvention deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+                                            String name = parser.getText();
+                                            NamingConvention[] values = NamingConvention.values();
+                                            for (NamingConvention value : values) {
+                                                if ( value.name().equals(name) ) {
+                                                    return value;
+                                                }
+                                            }
+                                            /* Return null for unknown values so that validateNamingConvention
+                                             * can report this error */
+                                            return null;
+                                        }
+                                    })
+                    );
             try {
-                String content = Utils.readFile(commandLine.getOptionValue(OPTIONS_OPT_SHORT), Charset.defaultCharset());
-                JsonParser parser = new JsonParser();
-                JsonElement jsonElement = parser.parse(content);
-                fixConventionRenaming(jsonElement, "path");
-                fixConventionRenaming(jsonElement, "parameter");
-                fixConventionRenaming(jsonElement, "property");
-                Gson gson = new GsonBuilder().create();
-                parameters = gson.fromJson(jsonElement, ValidatorParameters.class);
+                JsonNode json = deserializer.readTree(new File(commandLine.getOptionValue(OPTIONS_OPT_SHORT)));
+                fixConventionRenaming(json, "path");
+                fixConventionRenaming(json, "parameter");
+                fixConventionRenaming(json, "property");
+                parameters = deserializer.treeToValue(json, ValidatorParameters.class);
                 validateNamingConventions(parameters);
-            } catch (java.io.IOException ignored) {
+            } catch (JsonMappingException json) {
+                System.out.println("Invalid JSON, using default.");
+            } catch (IOException ignored) {
                 System.out.println("Invalid path to option files, using default.");
-            } catch (com.google.gson.JsonSyntaxException e) {
-                System.out.println("Invalid JSON, using default.");;
             }
         }
         return parameters;
     }
 
-    private void fixConventionRenaming(JsonElement jsonElement, String prefix) {
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
+    private void fixConventionRenaming(JsonNode json, String prefix) {
         String strategyKey = String.format("%sNamingStrategy", prefix);
-        if(jsonObject.has(strategyKey)) {
+        if (json.has(strategyKey)) {
+            // JsonNode.has does a type check on ObjectNode, we can safely cast
+            ObjectNode object = (ObjectNode) json;
             String conventionKey = String.format("%sNamingConvention", prefix);
-            if(jsonObject.has(conventionKey)) {
+            if (object.has(conventionKey)) {
                 outputUtils.printReplacementUsage(strategyKey, conventionKey);
             } else {
                 outputUtils.printDeprecationWarning(strategyKey, conventionKey);
-                jsonObject.add(conventionKey, jsonObject.get(strategyKey));
+                object.set(conventionKey, object.get(strategyKey));
             }
+            /* Jackson will fail on unknown properties, we have to remove the
+             * old (unknown) key */
+            object.remove(strategyKey);
         }
     }
 
