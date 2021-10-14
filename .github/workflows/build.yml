@@ -38,4 +38,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonarqube --info --stacktrace
-      - uses: codecov/codecov-action@v2
+      - name: Send code coverage info to codecov
+        uses: codecov/codecov-action@v2
