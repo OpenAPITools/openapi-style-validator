@@ -1,0 +1,23 @@
+name: Publish
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v2.3.1
+        with:
+          distribution: 'adopt'
+          java-version: 11
+          cache: 'gradle'
+      - name: Build
+        run: ./gradlew build
+      - name: Publish snapshot to sonatype
+        env:
+          SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        run: ./gradlew publishToSonatype -PsonatypeUser=$SONATYPE_USER -PsonatypePassword=$SONATYPE_PASSWORD
