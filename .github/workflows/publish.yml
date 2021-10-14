@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   build:
+    name: Publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,4 +21,4 @@ jobs:
         env:
           SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-        run: ./gradlew publishToSonatype -PsonatypeUser=$SONATYPE_USER -PsonatypePassword=$SONATYPE_PASSWORD
+        run: ./gradlew publishToSonatype
