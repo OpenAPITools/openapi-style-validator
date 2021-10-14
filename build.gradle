@@ -24,13 +24,6 @@ sonarqube {
     }
 }
 
-publishToSonatype {
-    properties {
-        property "sonatypeUser", System.getenv('SONATYPE_USER')
-        property "sonatypePassword", System.getenv('SONATYPE_PASSWORD')
-    }
-}
-
 wrapper {
     gradleVersion = '6.8'
 }
@@ -80,8 +73,8 @@ subprojects {
     nexusPublishing {
         repositories {
             sonatype {
-                username = project.findProperty('sonatypeUser') ?: ''
-                password = project.findProperty('sonatypePassword') ?: ''
+                username = System.getenv('SONATYPE_USER') ?: ''
+                password = System.getenv('SONATYPE_PASSWORD') ?: ''
             }
         }
     }
