@@ -1,4 +1,4 @@
-name: Build and validate
+name: Build
 on:
   push:
     branches:
