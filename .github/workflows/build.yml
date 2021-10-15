@@ -36,5 +36,5 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: e7841e61331b369433b333d95ee26795003e5038 # Need to be in clear to be available in pull request. This only give access to run analysis on sonarcloud and is considered the only way to do it right now because Github prevent secrets passing to forks.
         run: ./gradlew build sonarqube --info --stacktrace
