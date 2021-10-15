@@ -72,31 +72,13 @@ class OptionManager {
     ValidatorParameters getOptionalValidatorParametersOrDefault(CommandLine commandLine) {
         ValidatorParameters parameters = new ValidatorParameters();
         if (commandLine.hasOption(OPTIONS_OPT_SHORT)) {
-            ObjectMapper deserializer = new ObjectMapper()
-                    .registerModule(
-                            new SimpleModule("NamingConvention")
-                                    .addDeserializer(NamingConvention.class, new JsonDeserializer<NamingConvention>() {
-                                        @Override
-                                        public NamingConvention deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-                                            String name = parser.getText();
-                                            NamingConvention[] values = NamingConvention.values();
-                                            for (NamingConvention value : values) {
-                                                if ( value.name().equals(name) ) {
-                                                    return value;
-                                                }
-                                            }
-                                            /* Return null for unknown values so that validateNamingConvention
-                                             * can report this error */
-                                            return null;
-                                        }
-                                    })
-                    );
+            ObjectMapper objectMapper = new ObjectMapperProvider().getOptionsObjectMapper();
             try {
-                JsonNode json = deserializer.readTree(new File(commandLine.getOptionValue(OPTIONS_OPT_SHORT)));
+                JsonNode json = objectMapper.readTree(new File(commandLine.getOptionValue(OPTIONS_OPT_SHORT)));
                 fixConventionRenaming(json, "path");
                 fixConventionRenaming(json, "parameter");
                 fixConventionRenaming(json, "property");
-                parameters = deserializer.treeToValue(json, ValidatorParameters.class);
+                parameters = objectMapper.treeToValue(json, ValidatorParameters.class);
                 validateNamingConventions(parameters);
             } catch (JsonMappingException json) {
                 System.out.println("Invalid JSON, using default.");
