@@ -1,9 +1,5 @@
 package org.openapitools.openapistylevalidator;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -12,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -209,7 +209,45 @@ class OpenApiSpecStyleValidatorTest {
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
         List<StyleError> errors = validator.validate(new ValidatorParameters());
-        assertEquals(0, errors.size());
+        assertEquals(0, errors.size(), errors.toString());
+    }
+
+    /**
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/190
+     */
+    @Test
+    void shouldNotFailWhenThereAreNoPaths() throws Throwable {
+        OpenAPI openAPI = createValidOpenAPI()
+                .paths(null);
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        // Test will fail if an exception is thrown
+        validator.validate(new ValidatorParameters());
+    }
+
+    @Test
+    void shouldNotFailWhenThereAreNoComponents() throws Throwable {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(null);
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        // Test will fail if an exception is thrown
+        validator.validate(new ValidatorParameters());
+    }
+
+    @Test
+    void shouldReportMissingPathsOrComponents() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .paths(null)
+                .components(null);
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        List<StyleError> errors = validator.validate(new ValidatorParameters());
+        assertEquals(1, errors.size());
+        assertEquals(
+                "*ERROR* Section: OpenAPI: 'paths,components' -> Should have at least one of paths or components",
+                errors.get(0).toString());
     }
 
 

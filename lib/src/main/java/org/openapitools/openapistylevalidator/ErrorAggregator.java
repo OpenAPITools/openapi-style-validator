@@ -76,4 +76,12 @@ class ErrorAggregator {
         errorList.add(new ModelNamingStyleError(StyleError.StyleCheckSection.Naming, variableName,
                 String.format("%s should be in %s", variableType, neededNamingStrategy), model));
     }
+
+    public void logMissingPathsOrComponents() {
+        errorList.add(new StyleError(
+                StyleError.StyleCheckSection.OpenAPI,
+                "paths,components",
+                "Should have at least one of paths or components"
+        ));
+    }
 }

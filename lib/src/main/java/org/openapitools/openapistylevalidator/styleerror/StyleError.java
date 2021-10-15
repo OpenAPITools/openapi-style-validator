@@ -1,12 +1,15 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
+import java.util.Objects;
+
 public class StyleError {
 
     public enum StyleCheckSection {
         APIInfo,
         Operations,
         Models,
-        Naming
+        Naming,
+        OpenAPI,
     }
 
     final StyleCheckSection styleCheckSection;
@@ -28,4 +31,5 @@ public class StyleError {
                 fieldNames,
                 description);
     }
+
 }
