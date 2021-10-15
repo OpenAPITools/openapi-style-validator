@@ -14,8 +14,6 @@ class OptionManagerTest {
 
     private OutputUtils outputUtils = Mockito.mock(OutputUtils.class);
     private OptionManager subject = new OptionManager(outputUtils);
-    private CommandLine commandLine;
-
 
     @Test
     void shouldPrintReplacementUsageForPathNamingStrategy() throws Exception {
