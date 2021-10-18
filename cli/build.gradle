@@ -8,7 +8,7 @@ dependencies {
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 
-    testImplementation "org.mockito:mockito-core:3.+"
+    testImplementation "org.mockito:mockito-core:4.+"
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'
