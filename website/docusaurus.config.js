@@ -50,14 +50,6 @@ const docusaurusConfig = {
       ],
     },
 
-    //TODO fix this
-    /*
-    algolia: {
-      apiKey: '28e55aff9bab37236baa1c5f0f84f4bb',
-      indexName: 'openapi-generator',
-      algoliaOptions: { advancedSyntax: true, hitsPerPage: 5},
-    },*/
-
     footer: {
       style: 'dark',
 
