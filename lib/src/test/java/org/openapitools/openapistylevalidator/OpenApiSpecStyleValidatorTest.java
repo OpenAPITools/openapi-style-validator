@@ -4,6 +4,7 @@ import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.media.Schema.SchemaType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -223,8 +224,9 @@ class OpenApiSpecStyleValidatorTest {
                 .paths(null);
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
-        // Test will fail if an exception is thrown
-        validator.validate(new ValidatorParameters());
+        Assertions.assertDoesNotThrow(() -> {
+            validator.validate(new ValidatorParameters());
+        });
     }
 
     @Test
@@ -234,8 +236,9 @@ class OpenApiSpecStyleValidatorTest {
                 .components(null);
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
-        // Test will fail if an exception is thrown
-        validator.validate(new ValidatorParameters());
+        Assertions.assertDoesNotThrow(() -> {
+            validator.validate(new ValidatorParameters());
+        });
     }
 
     @Test
