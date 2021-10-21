@@ -42,7 +42,7 @@ public class OpenApiSpecStyleValidator {
         boolean hasNoPaths = openAPI.getPaths() == null;
         boolean hasNoComponents = openAPI.getComponents() == null;
         if (hasNoPaths && hasNoComponents) {
-            errorAggregator.logMissingPathsOrComponents();
+            errorAggregator.logMissingPathsAndComponents();
         }
     }
 

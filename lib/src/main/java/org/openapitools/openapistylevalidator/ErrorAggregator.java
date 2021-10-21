@@ -77,7 +77,7 @@ class ErrorAggregator {
                 String.format("%s should be in %s", variableType, neededNamingStrategy), model));
     }
 
-    public void logMissingPathsOrComponents() {
+    public void logMissingPathsAndComponents() {
         errorList.add(new StyleError(
                 StyleError.StyleCheckSection.OpenAPI,
                 "paths,components",
