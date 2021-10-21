@@ -250,10 +250,12 @@ class OpenApiSpecStyleValidatorTest {
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
         List<StyleError> errors = validator.validate(new ValidatorParameters());
-        assertEquals(1, errors.size());
-        assertEquals(
-                "*ERROR* Section: OpenAPI: 'paths,components' -> Should have at least one of paths or components",
-                errors.get(0).toString());
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* Section: OpenAPI: 'paths,components' -> Should have at least one of paths or components",
+                        errors.get(0).toString())
+        );
     }
 
 
