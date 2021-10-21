@@ -218,6 +218,8 @@ class OpenApiSpecStyleValidatorTest {
     @Test
     void shouldNotFailWhenThereAreNoPaths() throws Throwable {
         OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema("sample", OASFactory.createSchema().type(SchemaType.STRING)))
                 .paths(null);
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
@@ -228,6 +230,7 @@ class OpenApiSpecStyleValidatorTest {
     @Test
     void shouldNotFailWhenThereAreNoComponents() throws Throwable {
         OpenAPI openAPI = createValidOpenAPI()
+                .paths(OASFactory.createPaths().addPathItem("sample", OASFactory.createPathItem()))
                 .components(null);
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
