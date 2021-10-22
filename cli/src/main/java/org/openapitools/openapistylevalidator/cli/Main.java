@@ -19,7 +19,7 @@ public class Main {
     private static final OutputUtils outputUtils = new OutputUtils();
 
     public static void main(String[] args) {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
 
         try {
             Options options = optionManager.getOptions();

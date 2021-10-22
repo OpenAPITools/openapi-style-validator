@@ -48,8 +48,17 @@ class OutputUtils {
                 prop.load(input);
                 return prop.getProperty("version");
             }
-        } catch (IOException ignored) { }
+        } catch (IOException ignored) {
+        }
 
         return "No version | Running in the IDE?";
+    }
+
+    public void printReplacementUsage(String strategyKey, String conventionKey) {
+        System.err.println(String.format("The deprecated option '%s' is ignored, because its replacement '%s' is set", strategyKey, conventionKey));
+    }
+
+    public void printDeprecationWarning(String strategyKey, String conventionKey) {
+        System.err.println(String.format("The option '%s' is deprecated, please use '%s' instead", strategyKey, conventionKey));
     }
 }
