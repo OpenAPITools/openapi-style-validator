@@ -19,16 +19,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class MainTest {
-	private static final String PREFIX = "    \"";
-	private static final String SEPARATOR = "\": ";
-	private static final String SEPARATOR_QUOTE = "\": \"";
-	private static final String NEXT_LINE = "," + System.lineSeparator();
-	private static final String NEXT_LINE_QUOTE = "\"," + System.lineSeparator();
-	private static final DefaultParser parser = new DefaultParser();
+    private static final String PREFIX = "    \"";
+    private static final String SEPARATOR = "\": ";
+    private static final String SEPARATOR_QUOTE = "\": \"";
+    private static final String NEXT_LINE = "," + System.lineSeparator();
+    private static final String NEXT_LINE_QUOTE = "\"," + System.lineSeparator();
+    private static final DefaultParser parser = new DefaultParser();
+
+    private final OutputUtils outputUtils = new OutputUtils();
 
     @Test
     void validateShouldReturnSixErrorsWithoutOptionFile() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -38,7 +40,7 @@ public class MainTest {
 
     @Test
     void validateShouldReturnSixErrorsWithEmptyOptionFile() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/empty.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -48,7 +50,7 @@ public class MainTest {
 
     @Test
     void validateShouldReturnSixErrorsWithDefaultOptionFile() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/default.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -70,7 +72,7 @@ public class MainTest {
 
     @Test
     void validateShouldReturnNoErrorsWithCustomOptionFile() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/ping.yaml", "-o", "src/test/resources/custom.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -79,7 +81,7 @@ public class MainTest {
 
     @Test
     void validateWithoutOptionFileShouldReturnNamingErrors() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -88,7 +90,7 @@ public class MainTest {
 
     @Test
     void validateWithAlternativeNamingOptionTestShouldReturnNamingErrors() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/alternative.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -97,7 +99,7 @@ public class MainTest {
 
     @Test
     void validateWithUnderscoreNamingOptionTestShouldReturnNoError() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/underscore.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -106,7 +108,7 @@ public class MainTest {
 
     @Test
     void validateWithAlternativeLegacyNamingOptionTestShouldReturnNamingErrors() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/alternativeLegacy.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -115,7 +117,7 @@ public class MainTest {
 
     @Test
     void validateWithAlternativeAndLegacyNamingOptionTestShouldReturnNamingErrors() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/alternativeAndLegacy.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -124,7 +126,7 @@ public class MainTest {
 
     @Test
     void validateWithUnderscoreLegacyNamingOptionTestShouldReturnNoError() throws Exception {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{"-s", "src/test/resources/some.yaml", "-o", "src/test/resources/underscoreLegacy.json"});
         List<StyleError> errorList = Main.validate(optionManager, commandLine);
@@ -240,7 +242,7 @@ public class MainTest {
 
     @Test
     void validateShouldThrowIllegalArgumentExceptionForInvalidPathNamingConvention() throws ParseException {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{
                 "-s", "src/test/resources/some.yaml",
@@ -255,7 +257,7 @@ public class MainTest {
 
     @Test
     void validateShouldThrowIllegalArgumentExceptionForInvalidParameterNamingConvention() throws ParseException {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{
                 "-s", "src/test/resources/some.yaml",
@@ -270,7 +272,7 @@ public class MainTest {
 
     @Test
     void validateShouldThrowIllegalArgumentExceptionForInvalidHeaderNamingConvention() throws ParseException {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{
                 "-s", "src/test/resources/some.yaml",
@@ -285,7 +287,7 @@ public class MainTest {
 
     @Test
     void validateShouldThrowIllegalArgumentExceptionForInvalidPropertyNamingConvention() throws ParseException {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{
                 "-s", "src/test/resources/some.yaml",
@@ -303,7 +305,7 @@ public class MainTest {
      */
     @Test
     void shouldNotFailWhenThereAreNoPaths() throws Throwable {
-        OptionManager optionManager = new OptionManager();
+        OptionManager optionManager = new OptionManager(outputUtils);
         Options options = optionManager.getOptions();
         CommandLine commandLine = parser.parse(options, new String[]{
                 "-s", "src/test/resources/openApiWithoutPaths.yaml",

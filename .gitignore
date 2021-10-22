@@ -4,6 +4,7 @@
 .idea/gradle.xml
 .idea/libraries
 .gradle
+.idea/jarRepositories.xml
 
 # Eclipse IDE
 .project
