@@ -300,4 +300,20 @@ public class MainTest {
         Assertions.assertEquals("Invalid propertyNamingConvention", thrown.getMessage());
     }
 
+    /**
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/190
+     */
+    @Test
+    void shouldNotFailWhenThereAreNoPaths() throws Throwable {
+        OptionManager optionManager = new OptionManager(outputUtils);
+        Options options = optionManager.getOptions();
+        CommandLine commandLine = parser.parse(options, new String[]{
+                "-s", "src/test/resources/openApiWithoutPaths.yaml",
+                "-o", "src/test/resources/default.json"
+        });
+
+        // Test will fail if any exception is thrown
+        Main.validate(optionManager, commandLine);
+    }
+
 }

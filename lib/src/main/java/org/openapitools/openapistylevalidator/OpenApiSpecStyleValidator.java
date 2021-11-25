@@ -29,12 +29,21 @@ public class OpenApiSpecStyleValidator {
 
     public List<StyleError> validate(ValidatorParameters parameters) {
         this.parameters = parameters;
+        validateStructure();
         validateInfo();
         validateOperations();
         validateModels();
         validateNaming();
 
         return errorAggregator.getErrorList();
+    }
+
+    private void validateStructure() {
+        boolean hasNoPaths = openAPI.getPaths() == null;
+        boolean hasNoComponents = openAPI.getComponents() == null;
+        if (hasNoPaths && hasNoComponents) {
+            errorAggregator.logMissingPathsAndComponents();
+        }
     }
 
     private void validateInfo() {
@@ -73,6 +82,12 @@ public class OpenApiSpecStyleValidator {
     }
 
     private void validateOperations() {
+        /* An OpenAPI specification may be valid without any `paths`. The
+         * parser returns null in that case.
+         * See https://github.com/OpenAPITools/openapi-style-validator/issues/190
+         */
+        if (openAPI.getPaths() == null) return;
+
         for (String key : openAPI.getPaths().getPathItems().keySet()) {
             PathItem path = openAPI.getPaths().getPathItems().get(key);
             boolean ignoreValidation = isPathIgnored(path);
