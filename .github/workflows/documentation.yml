@@ -2,9 +2,9 @@ name: documentation
 
 on:
   pull_request:
-    branches: [master]
+    branches: [fix-83-add-deploy-of-documentation]
   push:
-    branches: [master]
+    branches: [fix-83-add-deploy-of-documentation]
 
 jobs:
   checks:
