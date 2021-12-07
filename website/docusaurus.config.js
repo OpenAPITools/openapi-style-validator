@@ -14,8 +14,8 @@ const baseUrl = '/openapi-style-validator/';
 const docusaurusConfig = {
   title: 'OpenAPI Style Validator',
   tagline: 'A customizable style validator to make sure your OpenAPI spec follows your organization\'s standards.',
-  url: 'https://openapitools.github.io/openapi-style-validator/', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  url: 'https://openapitools.github.io', // Your website URL
+  baseUrl: '/openapi-style-validator/', // Base URL for your project */
   favicon: 'img/favicon.png',
   organizationName: 'OpenAPITools',
   projectName: 'openapi-style-validator',
