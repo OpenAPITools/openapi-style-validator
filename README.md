@@ -134,7 +134,7 @@ The path (GET, POST, etc..) will be completely ignored by the style validator.
 
 ## Roadmap
 
-To view the latest version of the roadmap, please see the [official roadmap](https://openapitools.github.io/openapi-style-validator/docs/roadmap).
+To view the latest version of the roadmap, please see the [official roadmap](https://openapitools.github.io/openapi-style-validator/docs/roadmap/).
 
 ## Releases on maven central
 
