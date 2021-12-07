@@ -3,8 +3,11 @@ id: roadmap
 title: Roadmap
 ---
 
-This document lists short-term, medium-term, and long-term goals for the project.
+In no specific order
 
----
-
-An updated version of the roadmap is coming very soon! Come back later.
+- Fix known bugs.
+- Add more explanations on how to use the validator (cli, library, gradle/maven/sbt plugin)
+- Try to reach 100% unit test code coverage.
+- Add GitHub Action automation for releases.
+- Support for specific OpenAPI V3 features.
+- Add some validations based on feedback.
