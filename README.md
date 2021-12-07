@@ -134,10 +134,7 @@ The path (GET, POST, etc..) will be completely ignored by the style validator.
 
 ## Roadmap
 
-In no specific order
-
-- Try to reach 100% unit test code coverage
-- Add some validations based on feedback
+To view the latest version of the roadmap, please see the [official roadmap](https://openapitools.github.io/openapi-style-validator/docs/roadmap).
 
 ## Releases on maven central
 
