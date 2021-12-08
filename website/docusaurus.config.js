@@ -15,7 +15,7 @@ const docusaurusConfig = {
   title: 'OpenAPI Style Validator',
   tagline: 'A customizable style validator to make sure your OpenAPI spec follows your organization\'s standards.',
   url: 'https://openapitools.github.io', // Your website URL
-  baseUrl: '/openapi-style-validator/', // Base URL for your project */
+  baseUrl: baseUrl, // Base URL for your project */
   favicon: 'img/favicon.png',
   organizationName: 'OpenAPITools',
   projectName: 'openapi-style-validator',
@@ -28,8 +28,6 @@ const docusaurusConfig = {
   themeConfig: {
     // Open Graph and Twitter card images.
     image: 'img/docusaurus.png',
-
-    sidebarCollapsible: true,
 
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),
