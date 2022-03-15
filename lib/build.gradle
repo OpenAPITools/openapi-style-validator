@@ -5,14 +5,9 @@ dependencies {
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.9'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 publishing {
@@ -45,8 +40,6 @@ publishing {
                 }
             }
             from components.java
-            artifact sourcesJar
-            artifact javadocJar
         }
     }
 }

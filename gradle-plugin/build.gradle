@@ -18,14 +18,9 @@ gradlePlugin {
     }
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 // Add a source set for the functional test suite
@@ -80,8 +75,6 @@ publishing {
             pluginMaven {
                 artifactId = 'openapi-style-validator-gradle-plugin'
                 // customize main publications here
-                artifact sourcesJar
-                artifact javadocJar
                 pom {
                     name = 'OpenAPI Style Validator - gradle plugin'
                     description = 'Gradle plugin to validate the style and standards of an OpenAPI specification'
