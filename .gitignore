@@ -16,6 +16,7 @@
 /out/
 bin
 build
+target
 
 /website/node_modules
 /cli/build

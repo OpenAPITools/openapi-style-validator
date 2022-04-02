@@ -2,13 +2,30 @@ plugins {
     id 'de.benediktritter.maven-plugin-development' version '0.4.0'
 }
 
+configurations {
+    takariWorkspace
+}
+
 dependencies {
+    takariWorkspace('io.takari.m2e.workspace:org.eclipse.m2e.workspace.cli:0.4.0') {
+        exclude group: 'javax.inject', module: 'javax.inject'
+        exclude group: 'org.codehaus.plexus', module: 'plexus-component-annotations'
+    }
+
     implementation project(':openapi-style-validator-lib')
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.31'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
 
     implementation 'org.apache.maven:maven-plugin-api:3.8.5'
     compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.6.4'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.hamcrest:hamcrest-core:1.3'
+    testImplementation 'io.takari.maven.plugins:takari-plugin-testing:3.0.0'
+    testImplementation 'io.takari.maven.plugins:takari-plugin-integration-testing:3.0.0'
+    testImplementation 'org.assertj:assertj-core:3.6.2'
+    testRuntimeOnly 'org.apache.maven:maven-compat:3.6.3'
+    testRuntimeOnly 'org.apache.maven:maven-core:3.6.3'
 }
 
 mavenPlugin {
@@ -52,3 +69,63 @@ publishing {
         }
     }
 }
+
+// Add the mojo descriptor to the test source-set (workaround https://github.com/britter/maven-plugin-development/issues/76)
+sourceSets.test.output.dir file("$buildDir/mavenPlugin/descriptor"), builtBy: generateMavenPluginDescriptor
+
+def genOutputDir = file("$buildDir/generated/test-resources")
+
+task generateTakariTestResources {
+    dependsOn getRootProject().getTasksByName("jar", true)
+    dependsOn getRootProject().getTasksByName("generatePomFileForMavenJavaPublication", true)
+
+    def testProperties = new File(genOutputDir, "test.properties")
+    outputs.file(testProperties)
+
+    def workspaceStateProperties = file("$buildDir/maven-work/workspacestate.properties")
+    outputs.file(workspaceStateProperties)
+
+    doLast {
+        // Generate 'workspacestate.properties' file
+        java.util.Properties workspaceProp = new java.util.Properties();
+        getRootProject().getAllprojects().each { prj -> 
+            def ext = prj.getExtensions().findByType(PublishingExtension.class);
+            if(ext != null) {
+                ext.getPublications().each { pub -> 
+                    addProject(workspaceProp, prj)
+                }
+            }
+        }
+        workspaceProp.store(new java.io.FileOutputStream(workspaceStateProperties), "workspace state file")
+
+        // Generate 'test.properties' file
+        // See https://github.com/takari/takari-plugin-testing-project/blob/master/testproperties.md
+        java.util.Properties testProp = new java.util.Properties();
+
+        testProp.setProperty("project.groupId", getProject().getGroup().toString());
+        testProp.setProperty("project.artifactId", getProject().getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName());
+        testProp.setProperty("project.version", getProject().getVersion().toString());
+
+        testProp.setProperty("classpath", "" + jar.archiveFile.get().asFile + ":" + configurations.runtimeClasspath.getAsPath());
+
+        testProp.setProperty("localRepository", System.getProperty("user.home") + "/.m2/repository");
+        testProp.setProperty("repository.0", "<id>central</id><url>https://repo.maven.apache.org/maven2</url><releases><enabled>true</enabled></releases><snapshots><enabled>false</enabled></snapshots>");
+        testProp.setProperty("updateSnapshots", "false");
+        // testProp.setProperty("globalSettingsFile", null);
+        File userSettingsFile = new File(System.getProperty("user.home") + "/.m2/settings.xml")
+        if(userSettingsFile.exists()) {
+            testProp.setProperty("userSettingsFile", userSettingsFile.getAbsolutePath());
+        }
+        testProp.setProperty("workspaceResolver", project.configurations.takariWorkspace.asPath);
+        testProp.setProperty("workspaceStateProperties", workspaceStateProperties.getAbsolutePath());
+
+        testProp.store(new java.io.FileOutputStream(testProperties), "See https://github.com/takari/takari-plugin-testing-project/blob/master/testproperties.md")
+    }
+}
+
+def void addProject(java.util.Properties workspaceProp, Project p) {
+    workspaceProp.setProperty(p.getGroup().toString() + ":" + p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName() + ":jar::" + p.getVersion().toString(), new File(p.getBuildDir(), "/libs/${p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName()}-${p.getVersion().toString()}.jar").getAbsolutePath()); // jar.archiveFile.get().asFile.getAbsolutePath() ??
+    workspaceProp.setProperty(p.getGroup().toString() + ":" + p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName() + ":pom::" + p.getVersion().toString(), new File(p.getBuildDir(), "/publications/mavenJava/pom-default.xml").getAbsolutePath());
+}
+
+sourceSets.test.output.dir genOutputDir, builtBy: generateTakariTestResources
