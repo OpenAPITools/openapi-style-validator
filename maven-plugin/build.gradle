@@ -111,7 +111,6 @@ task generateTakariTestResources {
         testProp.setProperty("localRepository", System.getProperty("user.home") + "/.m2/repository");
         testProp.setProperty("repository.0", "<id>central</id><url>https://repo.maven.apache.org/maven2</url><releases><enabled>true</enabled></releases><snapshots><enabled>false</enabled></snapshots>");
         testProp.setProperty("updateSnapshots", "false");
-        // testProp.setProperty("globalSettingsFile", null);
         File userSettingsFile = new File(System.getProperty("user.home") + "/.m2/settings.xml")
         if (userSettingsFile.exists()) {
             testProp.setProperty("userSettingsFile", userSettingsFile.getAbsolutePath());
