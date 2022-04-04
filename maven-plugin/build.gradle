@@ -123,7 +123,7 @@ task generateTakariTestResources {
 }
 
 def void addProject(java.util.Properties workspaceProp, Project p) {
-    workspaceProp.setProperty(p.getGroup().toString() + ":" + p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName() + ":jar::" + p.getVersion().toString(), new File(p.getBuildDir(), "/libs/${p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName()}-${p.getVersion().toString()}.jar").getAbsolutePath()); // jar.archiveFile.get().asFile.getAbsolutePath() ??
+    workspaceProp.setProperty(p.getGroup().toString() + ":" + p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName() + ":jar::" + p.getVersion().toString(), new File(p.getBuildDir(), "/libs/${p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName()}-${p.getVersion().toString()}.jar").getAbsolutePath());
     workspaceProp.setProperty(p.getGroup().toString() + ":" + p.getConvention().getPlugin(BasePluginConvention.class).getArchivesBaseName() + ":pom::" + p.getVersion().toString(), new File(p.getBuildDir(), "/publications/mavenJava/pom-default.xml").getAbsolutePath());
 }
 
