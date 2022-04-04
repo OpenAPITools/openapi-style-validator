@@ -43,7 +43,9 @@ subprojects {
     targetCompatibility = 1.8
 
     test {
-        useJUnitPlatform()
+        if(project.name != 'openapi-style-validator-maven-plugin') {
+            useJUnitPlatform()
+        }
     }
 
     repositories {
