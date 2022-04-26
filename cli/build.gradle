@@ -6,7 +6,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-jdk14:1.7.36'
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.32'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
 
     testImplementation "org.mockito:mockito-core:4.+"
 }
