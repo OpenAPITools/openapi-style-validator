@@ -7,8 +7,9 @@ dependencies {
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.32'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
 
-    testImplementation "org.mockito:mockito-core:4.+"
+    testImplementation "org.mockito:mockito-core:4.5.1"
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'

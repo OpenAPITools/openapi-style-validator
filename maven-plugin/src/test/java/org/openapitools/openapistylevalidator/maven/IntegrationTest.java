@@ -57,7 +57,7 @@ public class IntegrationTest {
   private void sixErrorsAssertions(MavenExecutionResult result) {
     result
         .assertLogText("Validating spec:")
-        .assertLogText("cli/src/test/resources/ping.yaml")
+        .assertLogText(Paths.get("cli", "src", "test", "resources", "ping.yaml").toString())
         .assertLogText("OpenAPI Specification does not meet the requirements. Issues:")
         .assertLogText("*ERROR* Section: APIInfo: 'license' -> Should be present and not empty")
         .assertLogText("*ERROR* Section: APIInfo: 'description' -> Should be present and not empty")
@@ -79,7 +79,7 @@ public class IntegrationTest {
 
     result
         .assertLogText("Validating spec:")
-        .assertLogText("cli/src/test/resources/ping.yaml")
+        .assertLogText(Paths.get("cli", "src", "test", "resources", "ping.yaml").toString())
         .assertLogText("BUILD SUCCESS");
   }
 
@@ -94,7 +94,7 @@ public class IntegrationTest {
 
     result
         .assertLogText("Validating spec:")
-        .assertLogText("cli/src/test/resources/some.yaml")
+        .assertLogText(Paths.get("cli", "src", "test", "resources", "some.yaml").toString())
         .assertLogText("OpenAPI Specification does not meet the requirements. Issues:")
         .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_id' -> parameter should be in camelCase")
         .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_name' -> parameter should be in camelCase")
