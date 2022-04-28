@@ -24,7 +24,6 @@ public class Main {
                 } else if (optionManager.isVersionRequested(commandLine)) {
                     outputUtils.printVersion();
                 } else if (optionManager.isSourceProvided(commandLine)) {
-
                     outputUtils.printResults(validationInitiator.validate(optionManager, commandLine));
                 } else {
                     outputUtils.printRequestError();
