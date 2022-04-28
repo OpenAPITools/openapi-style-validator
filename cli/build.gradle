@@ -7,8 +7,9 @@ dependencies {
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.32'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
-    implementation 'org.owasp:security-logging-log4j:1.1.7'
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.0'
 
     testImplementation "org.mockito:mockito-core:4.5.1"
 }
