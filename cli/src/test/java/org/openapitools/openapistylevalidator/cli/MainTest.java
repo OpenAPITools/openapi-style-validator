@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class MainTest {
+class MainTest {
     private static final String PREFIX = "    \"";
     private static final String SEPARATOR = "\": ";
     private static final String SEPARATOR_QUOTE = "\": \"";

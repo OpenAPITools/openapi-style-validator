@@ -1,21 +1,20 @@
 package org.openapitools.openapistylevalidator.cli;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
-import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 
 import java.io.File;
 import java.io.IOException;
 
 class OptionManager {
+    private static final Logger logger = LogManager.getLogger(OptionManager.class);
 
     private static final String SOURCE_OPT_SHORT = "s";
     private static final String SOURCE_OPT_LONG = "source";
@@ -80,10 +79,10 @@ class OptionManager {
                 fixConventionRenaming(json, "property");
                 parameters = objectMapper.treeToValue(json, ValidatorParameters.class);
                 validateNamingConventions(parameters);
-            } catch (JsonMappingException json) {
-                System.out.println("Invalid JSON, using default.");
-            } catch (IOException ignored) {
-                System.out.println("Invalid path to option files, using default.");
+            } catch (JsonMappingException jsonException) {
+                logger.error("Invalid JSON, using default.");
+            } catch (IOException ioException) {
+                logger.error("Invalid path to option files, using default.");
             }
         }
         return parameters;
