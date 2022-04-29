@@ -41,7 +41,7 @@ class NamingValidator {
                 .findFirst();
         return !firstInvalidToken.isPresent();
     }
-    
+
     private boolean isSeparatorCaseValid(String variableName, String separator, boolean isUpperCase) {
         if (variableName.startsWith(separator) || variableName.endsWith(separator)) {
             return false;
@@ -58,25 +58,23 @@ class NamingValidator {
                 if (!token.equalsIgnoreCase(token)) {
                     return false;
                 }
-    
+
                 if (!token.matches(REGEX_UPPER_CASE_ALPHA_NUMERIC_ONLY)) {
                     return false;
-                }    
+                }
             } else {
                 if (!token.equalsIgnoreCase(token)) {
                     return false;
                 }
-    
+
                 if (!token.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY)) {
                     return false;
-                }    
+                }
             }
         }
 
         return variableName.length() == (totalLength + tokens.length - 1);
     }
-
-
 
     boolean isNamingValid(String name, ValidatorParameters.NamingConvention namingStrategy) {
         switch (namingStrategy) {

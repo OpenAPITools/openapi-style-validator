@@ -2,6 +2,8 @@ package org.openapitools.openapistylevalidator.cli;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.io.File;
+import java.io.IOException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
@@ -9,9 +11,6 @@ import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
-
-import java.io.File;
-import java.io.IOException;
 
 class OptionManager {
     private static final Logger logger = LogManager.getLogger(OptionManager.class);
@@ -36,29 +35,19 @@ class OptionManager {
         options = new Options();
 
         OptionGroup mutualExclusiveOptions = new OptionGroup();
-        Option help = new Option(HELP_OPT_SHORT,
-                HELP_OPT_LONG,
-                false,
-                "Show help");
+        Option help = new Option(HELP_OPT_SHORT, HELP_OPT_LONG, false, "Show help");
 
-        Option version = new Option(VERSION_OPT_SHORT,
-                VERSION_OPT_LONG,
-                false,
-                "Show current version");
+        Option version = new Option(VERSION_OPT_SHORT, VERSION_OPT_LONG, false, "Show current version");
 
-        Option source = new Option(SOURCE_OPT_SHORT,
-                SOURCE_OPT_LONG,
-                true,
-                "Path to your yaml or json swagger/openApi spec file");
+        Option source = new Option(
+                SOURCE_OPT_SHORT, SOURCE_OPT_LONG, true, "Path to your yaml or json swagger/openApi spec file");
 
         mutualExclusiveOptions.addOption(help);
         mutualExclusiveOptions.addOption(version);
         mutualExclusiveOptions.addOption(source);
 
-        Option optionFile = new Option(OPTIONS_OPT_SHORT,
-                OPTIONS_OPT_LONG,
-                true,
-                "Path to the json file containing the options");
+        Option optionFile =
+                new Option(OPTIONS_OPT_SHORT, OPTIONS_OPT_LONG, true, "Path to the json file containing the options");
 
         options.addOption(optionFile);
         options.addOptionGroup(mutualExclusiveOptions);
@@ -115,8 +104,7 @@ class OptionManager {
 
     private void validateNamingConvention(String kind, ValidatorParameters.NamingConvention convention) {
         if (convention != null) return;
-        throw new IllegalArgumentException(
-                "Invalid " + (kind.toLowerCase()) + "NamingConvention");
+        throw new IllegalArgumentException("Invalid " + (kind.toLowerCase()) + "NamingConvention");
     }
 
     String getSource(CommandLine commandLine) {

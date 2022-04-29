@@ -1,3 +1,7 @@
+plugins {
+    id "com.diffplug.spotless" version "6.5.1"
+}
+
 apply plugin: 'application'
 
 dependencies {
@@ -49,6 +53,14 @@ project.tasks.assemble.dependsOn project.tasks.shadowJar
 java {
     withJavadocJar()
     withSourcesJar()
+}
+
+spotless {
+    java {
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        palantirJavaFormat()
+    }
 }
 
 publishing {

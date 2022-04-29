@@ -1,3 +1,7 @@
+plugins {
+    id "com.diffplug.spotless" version "6.5.1"
+}
+
 dependencies {
     implementation 'org.eclipse.microprofile.openapi:microprofile-openapi-api:3.0'
     testImplementation 'org.slf4j:slf4j-jdk14:1.7.36'
@@ -8,6 +12,14 @@ dependencies {
 java {
     withJavadocJar()
     withSourcesJar()
+}
+
+spotless {
+    java {
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        palantirJavaFormat()
+    }
 }
 
 publishing {

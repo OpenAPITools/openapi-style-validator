@@ -6,7 +6,11 @@ public final class GenericStyleError extends StyleError {
 
     private final String parentObjectName;
 
-    public GenericStyleError(StyleCheckSection styleCheckSection, String parentObjectName, String fieldNames, @SuppressWarnings("SameParameterValue") String description) {
+    public GenericStyleError(
+            StyleCheckSection styleCheckSection,
+            String parentObjectName,
+            String fieldNames,
+            @SuppressWarnings("SameParameterValue") String description) {
         super(styleCheckSection, fieldNames, description);
 
         this.parentObjectName = parentObjectName;
@@ -17,10 +21,10 @@ public final class GenericStyleError extends StyleError {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GenericStyleError that = (GenericStyleError) o;
-        return styleCheckSection == that.styleCheckSection &&
-                Objects.equals(fieldNames, that.fieldNames) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(parentObjectName, that.parentObjectName);
+        return styleCheckSection == that.styleCheckSection
+                && Objects.equals(fieldNames, that.fieldNames)
+                && Objects.equals(description, that.description)
+                && Objects.equals(parentObjectName, that.parentObjectName);
     }
 
     @Override
@@ -30,7 +34,8 @@ public final class GenericStyleError extends StyleError {
 
     @Override
     public String toString() {
-        return String.format("*ERROR* Section: %s: '%s' %s -> %s",
+        return String.format(
+                "*ERROR* Section: %s: '%s' %s -> %s",
                 styleCheckSection.toString(),
                 fieldNames,
                 parentObjectName.isEmpty() ? "" : String.format("in %s", parentObjectName),

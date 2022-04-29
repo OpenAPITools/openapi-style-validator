@@ -1,9 +1,9 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModelStyleErrorTest {
     @Test
