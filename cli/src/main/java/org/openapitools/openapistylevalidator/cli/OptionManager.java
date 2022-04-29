@@ -104,7 +104,7 @@ class OptionManager {
 
     private void validateNamingConvention(String kind, ValidatorParameters.NamingConvention convention) {
         if (convention != null) return;
-        throw new IllegalArgumentException("Invalid " +  kind.toLowerCase() + "NamingConvention");
+        throw new IllegalArgumentException("Invalid " + kind.toLowerCase() + "NamingConvention");
     }
 
     String getSource(CommandLine commandLine) {
