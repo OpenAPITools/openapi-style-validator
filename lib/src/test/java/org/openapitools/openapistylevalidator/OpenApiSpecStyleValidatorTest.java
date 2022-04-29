@@ -1,5 +1,10 @@
 package org.openapitools.openapistylevalidator;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -10,29 +15,25 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class OpenApiSpecStyleValidatorTest {
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void testModelPropertiesExampleValidation(boolean isValidateModelPropertiesExample) {
         OpenAPI openAPI = createValidOpenAPI()
-                .components(
-                        OASFactory.createComponents()
-                                .addSchema("MyObject", OASFactory.createSchema()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
                                         .type(SchemaType.OBJECT)
-                                        .addProperty("propertyWithExample", OASFactory.createSchema()
-                                                .type(SchemaType.STRING)
-                                                .example("example"))
-                                        .addProperty("propertyWithoutExample", OASFactory.createSchema()
-                                                .type(SchemaType.STRING))
-                                )
-                );
+                                        .addProperty(
+                                                "propertyWithExample",
+                                                OASFactory.createSchema()
+                                                        .type(SchemaType.STRING)
+                                                        .example("example"))
+                                        .addProperty(
+                                                "propertyWithoutExample",
+                                                OASFactory.createSchema().type(SchemaType.STRING))));
 
         ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations();
         parameters.setValidateModelPropertiesExample(isValidateModelPropertiesExample);
@@ -40,7 +41,9 @@ class OpenApiSpecStyleValidatorTest {
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         if (isValidateModelPropertiesExample) {
             assertEquals(1, errors.size());
-            assertEquals("*ERROR* in Model 'MyObject', property 'propertyWithoutExample', field 'example' -> This field should be present and not empty", errors.get(0).toString());
+            assertEquals(
+                    "*ERROR* in Model 'MyObject', property 'propertyWithoutExample', field 'example' -> This field should be present and not empty",
+                    errors.get(0).toString());
         } else {
             assertEquals(0, errors.size());
         }
@@ -50,17 +53,19 @@ class OpenApiSpecStyleValidatorTest {
     @ValueSource(booleans = {true, false})
     void testModelPropertiesDescriptionValidation(boolean isValidateModelPropertiesDescription) {
         OpenAPI openAPI = createValidOpenAPI()
-                .components(
-                        OASFactory.createComponents()
-                                .addSchema("MyObject", OASFactory.createSchema()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
                                         .type(SchemaType.OBJECT)
-                                        .addProperty("propertyWithDescription", OASFactory.createSchema()
-                                                .type(SchemaType.STRING)
-                                                .description("description"))
-                                        .addProperty("propertyWithoutDescription", OASFactory.createSchema()
-                                                .type(SchemaType.STRING))
-                                )
-                );
+                                        .addProperty(
+                                                "propertyWithDescription",
+                                                OASFactory.createSchema()
+                                                        .type(SchemaType.STRING)
+                                                        .description("description"))
+                                        .addProperty(
+                                                "propertyWithoutDescription",
+                                                OASFactory.createSchema().type(SchemaType.STRING))));
 
         ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations();
         parameters.setValidateModelPropertiesDescription(isValidateModelPropertiesDescription);
@@ -68,7 +73,9 @@ class OpenApiSpecStyleValidatorTest {
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         if (isValidateModelPropertiesDescription) {
             assertEquals(1, errors.size());
-            assertEquals("*ERROR* in Model 'MyObject', property 'propertyWithoutDescription', field 'description' -> This field should be present and not empty", errors.get(0).toString());
+            assertEquals(
+                    "*ERROR* in Model 'MyObject', property 'propertyWithoutDescription', field 'description' -> This field should be present and not empty",
+                    errors.get(0).toString());
         } else {
             assertEquals(0, errors.size());
         }
@@ -80,34 +87,37 @@ class OpenApiSpecStyleValidatorTest {
     @Test
     void testModelPropertiesExampleValidationIgnoresRefProperty() {
         OpenAPI openAPI = createValidOpenAPI()
-                .components(
-                        OASFactory.createComponents()
-                                .addSchema("MyObject", OASFactory.createSchema()
-                                        .addProperty("refProperty", OASFactory.createSchema()
-                                                .ref("#/components/schemas/RefProperty")))
-                );
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .addProperty(
+                                                "refProperty",
+                                                OASFactory.createSchema().ref("#/components/schemas/RefProperty"))));
 
-        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
-                .setValidateModelPropertiesExample(true);
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelPropertiesExample(true);
 
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         assertEquals(0, errors.size());
     }
 
-    //Test for bug 169
+    // Test for bug 169
     @Test
     void testModelPropertiesExampleValidationIgnoresItemsRefProperty() {
-         OpenAPI openAPI = createValidOpenAPI()
-                .components(
-                        OASFactory.createComponents()
-                                .addSchema("MyObject", OASFactory.createSchema()
-                                        .addProperty("refProperty", OASFactory.createSchema()
-                                                .items( OASFactory.createSchema()
-                                                .ref("#/components/schemas/RefProperty"))))
-                );
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .addProperty(
+                                                "refProperty",
+                                                OASFactory.createSchema()
+                                                        .items(OASFactory.createSchema()
+                                                                .ref("#/components/schemas/RefProperty")))));
 
-        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
-                .setValidateModelPropertiesExample(true);
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelPropertiesExample(true);
 
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         assertEquals(0, errors.size());
@@ -118,24 +128,28 @@ class OpenApiSpecStyleValidatorTest {
     void testModelPropertiesExampleValidationIgnoresAllOffComposition() {
         Schema component = OASFactory.createSchema()
                 .type(SchemaType.OBJECT)
-                .addProperty("property1", OASFactory.createSchema()
-                        .type(SchemaType.STRING)
-                        .example("Just a string property"));
+                .addProperty(
+                        "property1",
+                        OASFactory.createSchema().type(SchemaType.STRING).example("Just a string property"));
         OpenAPI openAPI = createValidOpenAPI()
-                .components(
-                        OASFactory.createComponents()
+                .components(OASFactory.createComponents()
                         .addSchema("Component", component)
-                        .addSchema("Composition", OASFactory.createSchema()
-                                .type(SchemaType.OBJECT)
-                                .addProperty("component", OASFactory.createSchema()
-                                    .type(SchemaType.OBJECT)
-                                    .addAllOf(component))
-                                .addProperty("other", OASFactory.createSchema()
-                                    .type(SchemaType.STRING)
-                                    .example("Example")))
-                );
-        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
-                .setValidateModelPropertiesExample(true);
+                        .addSchema(
+                                "Composition",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "component",
+                                                OASFactory.createSchema()
+                                                        .type(SchemaType.OBJECT)
+                                                        .addAllOf(component))
+                                        .addProperty(
+                                                "other",
+                                                OASFactory.createSchema()
+                                                        .type(SchemaType.STRING)
+                                                        .example("Example"))));
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelPropertiesExample(true);
 
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         assertEquals(0, errors.size());
@@ -147,24 +161,17 @@ class OpenApiSpecStyleValidatorTest {
         extensions.put("x-style-validator-ignored", Boolean.TRUE);
 
         OpenAPI openAPI = createValidOpenAPI()
-                .paths(
-                        OASFactory.createPaths()
-
-                                .addPathItem(
-                                        "/my-pathWithWeird_NAMING", OASFactory.createPathItem()
-                                                .extensions(extensions)
-                                                .GET(
-                                                        OASFactory.createOperation()
-                                                                .responses(
-                                                                        OASFactory.createAPIResponses()
-                                                                                .addAPIResponse(
-                                                                                        "200", OASFactory.createAPIResponse()
-                                                                                                .description("OK")
-                                                                                )
-                                                                )
-                                                )
-                                )
-                );
+                .paths(OASFactory.createPaths()
+                        .addPathItem(
+                                "/my-pathWithWeird_NAMING",
+                                OASFactory.createPathItem()
+                                        .extensions(extensions)
+                                        .GET(OASFactory.createOperation()
+                                                .responses(OASFactory.createAPIResponses()
+                                                        .addAPIResponse(
+                                                                "200",
+                                                                OASFactory.createAPIResponse()
+                                                                        .description("OK"))))));
 
         ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
                 .setValidateNaming(true)
@@ -181,16 +188,15 @@ class OpenApiSpecStyleValidatorTest {
     @ValueSource(booleans = {true, false})
     void validateModelRequiredProperties(boolean isValidateModelRequiredProperties) {
         OpenAPI openAPI = createValidOpenAPI()
-                .components(
-                        OASFactory.createComponents()
-                                .addSchema("MyObject", OASFactory.createSchema()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
                                         .type(SchemaType.OBJECT)
                                         .addRequired("id")
-                                        .addProperty("name", OASFactory.createSchema()
-                                                .type(SchemaType.STRING)
-                                        )
-                                )
-                );
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING))));
 
         ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations()
                 .setValidateModelRequiredProperties(isValidateModelRequiredProperties);
@@ -198,7 +204,9 @@ class OpenApiSpecStyleValidatorTest {
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         if (isValidateModelRequiredProperties) {
             assertEquals(1, errors.size());
-            assertEquals("*ERROR* in Model 'MyObject', property 'id' -> This property should be present or removed from the list of required", errors.get(0).toString());
+            assertEquals(
+                    "*ERROR* in Model 'MyObject', property 'id' -> This property should be present or removed from the list of required",
+                    errors.get(0).toString());
         } else {
             assertEquals(0, errors.size());
         }
@@ -243,9 +251,7 @@ class OpenApiSpecStyleValidatorTest {
 
     @Test
     void shouldReportMissingPathsOrComponents() {
-        OpenAPI openAPI = createValidOpenAPI()
-                .paths(null)
-                .components(null);
+        OpenAPI openAPI = createValidOpenAPI().paths(null).components(null);
 
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
@@ -254,50 +260,36 @@ class OpenApiSpecStyleValidatorTest {
                 () -> assertEquals(1, errors.size()),
                 () -> assertEquals(
                         "*ERROR* Section: OpenAPI: 'paths,components' -> Should have at least one of paths or components",
-                        errors.get(0).toString())
-        );
+                        errors.get(0).toString()));
     }
-
 
     private static OpenAPI createValidOpenAPI() {
         return OASFactory.createOpenAPI()
                 .openapi("3.0.1")
-                .info(
-                        OASFactory.createInfo()
-                                .title("Ping Specification")
-                                .version("1.0")
-                                .license(OASFactory.createLicense()
-                                        .name("Eclipse Public License - v2.0")
-                                        .url("https://www.eclipse.org/legal/epl-2.0/"))
-                                .description("This is a test spec")
-                                .contact(
-                                        OASFactory.createContact()
-                                                .name("OpenAPI Tools")
-                                                .email("team@openapitools.org"))
-                )
-                .addServer(
-                        OASFactory.createServer()
-                                .url("http://localhost:8000/")
-                )
-                .paths(
-                        OASFactory.createPaths()
-                                .addPathItem(
-                                        "/ping", OASFactory.createPathItem()
-                                                .GET(
-                                                        OASFactory.createOperation()
-                                                                .operationId("pingGet")
-                                                                .summary("A simple get call")
-                                                                .description("When this method is called, the server answers with 200 OKs")
-                                                                .addTag("demo")
-                                                                .responses(
-                                                                        OASFactory.createAPIResponses()
-                                                                                .addAPIResponse(
-                                                                                        "200", OASFactory.createAPIResponse()
-                                                                                                .description("OK")
-                                                                                )
-                                                                )
-                                                )
-                                )
-                );
+                .info(OASFactory.createInfo()
+                        .title("Ping Specification")
+                        .version("1.0")
+                        .license(OASFactory.createLicense()
+                                .name("Eclipse Public License - v2.0")
+                                .url("https://www.eclipse.org/legal/epl-2.0/"))
+                        .description("This is a test spec")
+                        .contact(
+                                OASFactory.createContact().name("OpenAPI Tools").email("team@openapitools.org")))
+                .addServer(OASFactory.createServer().url("http://localhost:8000/"))
+                .paths(OASFactory.createPaths()
+                        .addPathItem(
+                                "/ping",
+                                OASFactory.createPathItem()
+                                        .GET(OASFactory.createOperation()
+                                                .operationId("pingGet")
+                                                .summary("A simple get call")
+                                                .description(
+                                                        "When this method is called, the server answers with 200 OKs")
+                                                .addTag("demo")
+                                                .responses(OASFactory.createAPIResponses()
+                                                        .addAPIResponse(
+                                                                "200",
+                                                                OASFactory.createAPIResponse()
+                                                                        .description("OK"))))));
     }
 }

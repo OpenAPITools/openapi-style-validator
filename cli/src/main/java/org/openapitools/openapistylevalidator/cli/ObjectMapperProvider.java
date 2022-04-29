@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.openapitools.openapistylevalidator.ValidatorParameters;
-
 import java.io.IOException;
+import org.openapitools.openapistylevalidator.ValidatorParameters;
 
 class ObjectMapperProvider {
 
@@ -23,14 +22,14 @@ class ObjectMapperProvider {
 
         optionsObjectMapper = new ObjectMapper()
                 .registerModule(new SimpleModule("NamingConvention")
-                        .addDeserializer(ValidatorParameters.NamingConvention.class, new NamingOptionsDeserializer())
-                );
+                        .addDeserializer(ValidatorParameters.NamingConvention.class, new NamingOptionsDeserializer()));
         return optionsObjectMapper;
     }
 
     private class NamingOptionsDeserializer extends JsonDeserializer<ValidatorParameters.NamingConvention> {
         @Override
-        public ValidatorParameters.NamingConvention deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        public ValidatorParameters.NamingConvention deserialize(JsonParser parser, DeserializationContext ctxt)
+                throws IOException, JsonProcessingException {
             String name = parser.getText();
             ValidatorParameters.NamingConvention[] values = ValidatorParameters.NamingConvention.values();
             for (ValidatorParameters.NamingConvention value : values) {

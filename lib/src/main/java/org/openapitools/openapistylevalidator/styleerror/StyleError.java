@@ -1,7 +1,5 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
-import java.util.Objects;
-
 public class StyleError {
 
     public enum StyleCheckSection {
@@ -16,9 +14,7 @@ public class StyleError {
     final String fieldNames;
     final String description;
 
-    public StyleError(StyleCheckSection styleCheckSection,
-                      String fieldNames,
-                      String description) {
+    public StyleError(StyleCheckSection styleCheckSection, String fieldNames, String description) {
         this.styleCheckSection = styleCheckSection;
         this.fieldNames = fieldNames;
         this.description = description;
@@ -26,10 +22,6 @@ public class StyleError {
 
     @Override
     public String toString() {
-        return String.format("*ERROR* Section: %s: '%s' -> %s",
-                styleCheckSection.toString(),
-                fieldNames,
-                description);
+        return String.format("*ERROR* Section: %s: '%s' -> %s", styleCheckSection.toString(), fieldNames, description);
     }
-
 }

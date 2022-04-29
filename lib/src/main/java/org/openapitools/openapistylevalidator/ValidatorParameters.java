@@ -63,10 +63,10 @@ public class ValidatorParameters {
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
-    private NamingConvention propertyNamingConvention= NamingConvention.CamelCase;
+    private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
 
     public ValidatorParameters() {
-        //For Gson
+        // For Gson
     }
 
     public boolean isValidateInfoLicense() {
@@ -122,8 +122,8 @@ public class ValidatorParameters {
     }
 
     public NamingConvention getHeaderNamingConvention() {
-		return headerNamingConvention;
-	}
+        return headerNamingConvention;
+    }
 
     public NamingConvention getPropertyNamingConvention() {
         return propertyNamingConvention;
@@ -225,36 +225,35 @@ public class ValidatorParameters {
     @Override
     public String toString() {
         return String.format(
-                "ValidatorParameters [" +
-                        "validateInfoLicense=%s, " +
-                        "validateInfoDescription=%s, " +
-                        "validateInfoContact=%s, " +
-                        "validateOperationOperationId=%s, " +
-                        "validateOperationDescription=%s, " +
-                        "validateOperationTag=%s, validateOperationSummary=%s, " +
-                        "validateModelPropertiesExample=%s, " +
-                        "validateModelPropertiesDescription=%s, " +
-                        "validateModelRequiredProperties=%s, " +
-                        "validateModelNoLocalDef=%s, " +
-                        "validateNaming=%s, " +
-                        "ignoreHeaderXNaming=%s, " +
-                        "pathNamingConvention=%s, " +
-                        "headerNamingConvention=%s, " +
-                        "parameterNamingConvention=%s, " +
-                        "propertyNamingConvention=%s" +
-                        "]",
-                validateInfoLicense, 
-                validateInfoDescription, 
-                validateInfoContact, 
-                validateOperationOperationId, 
+                "ValidatorParameters [" + "validateInfoLicense=%s, "
+                        + "validateInfoDescription=%s, "
+                        + "validateInfoContact=%s, "
+                        + "validateOperationOperationId=%s, "
+                        + "validateOperationDescription=%s, "
+                        + "validateOperationTag=%s, validateOperationSummary=%s, "
+                        + "validateModelPropertiesExample=%s, "
+                        + "validateModelPropertiesDescription=%s, "
+                        + "validateModelRequiredProperties=%s, "
+                        + "validateModelNoLocalDef=%s, "
+                        + "validateNaming=%s, "
+                        + "ignoreHeaderXNaming=%s, "
+                        + "pathNamingConvention=%s, "
+                        + "headerNamingConvention=%s, "
+                        + "parameterNamingConvention=%s, "
+                        + "propertyNamingConvention=%s"
+                        + "]",
+                validateInfoLicense,
+                validateInfoDescription,
+                validateInfoContact,
+                validateOperationOperationId,
                 validateOperationDescription,
-                validateOperationTag, 
+                validateOperationTag,
                 validateOperationSummary,
                 validateModelPropertiesExample,
                 validateModelPropertiesDescription,
                 validateModelRequiredProperties,
                 validateModelNoLocalDef,
-                validateNaming, 
+                validateNaming,
                 ignoreHeaderXNaming,
                 pathNamingConvention,
                 headerNamingConvention,
