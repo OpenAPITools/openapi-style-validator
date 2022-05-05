@@ -93,6 +93,6 @@ subprojects {
 
 nexusStaging {
     packageGroup = 'org.openapitools'
-    username = project.findProperty('sonatypeUser') ?: ''
-    password = project.findProperty('sonatypePassword') ?: ''
+    username = System.getenv('SONATYPE_USER') ?: ''
+    password = System.getenv('SONATYPE_PASSWORD') ?: ''
 }
