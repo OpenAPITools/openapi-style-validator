@@ -1,0 +1,5 @@
+{
+    "queryParamNamingConvention": "HyphenCase",
+    "cookieParamNamingConvention": "HyphenCase",
+    "parameterNamingConvention": "UnderscoreUpperCase"
+}

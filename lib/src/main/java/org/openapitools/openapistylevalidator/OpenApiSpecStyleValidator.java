@@ -240,17 +240,45 @@ public class OpenApiSpecStyleValidator {
                                                         method);
                                             }
                                         } else {
-                                            isValid = namingValidator.isNamingValid(
-                                                    opParam.getName(), parameters.getParameterNamingConvention());
-                                            if (!isValid) {
-                                                errorAggregator.logOperationBadNaming(
-                                                        opParam.getName(),
-                                                        "parameter",
-                                                        parameters
-                                                                .getParameterNamingConvention()
-                                                                .getDesignation(),
-                                                        key,
-                                                        method);
+                                            if (opParam.getIn() == Parameter.In.QUERY) {
+                                                isValid = namingValidator.isNamingValid(
+                                                    opParam.getName(), parameters.getQueryParamNamingConvention());
+                                                if (!isValid) {
+                                                    errorAggregator.logOperationBadNaming(
+                                                            opParam.getName(),
+                                                            "query parameter",
+                                                            parameters
+                                                                    .getQueryParamNamingConvention()
+                                                                    .getDesignation(),
+                                                            key,
+                                                            method);
+                                                }
+                                            } else if (opParam.getIn() == Parameter.In.PATH) {
+                                                isValid = namingValidator.isNamingValid(
+                                                    opParam.getName(), parameters.getPathParamNamingConvention());
+                                                if (!isValid) {
+                                                    errorAggregator.logOperationBadNaming(
+                                                            opParam.getName(),
+                                                            "path parameter",
+                                                            parameters
+                                                                    .getPathParamNamingConvention()
+                                                                    .getDesignation(),
+                                                            key,
+                                                            method);
+                                                }
+                                            } else if (opParam.getIn() == Parameter.In.COOKIE) {
+                                                isValid = namingValidator.isNamingValid(
+                                                    opParam.getName(), parameters.getCookieParamNamingConvention());
+                                                if (!isValid) {
+                                                    errorAggregator.logOperationBadNaming(
+                                                            opParam.getName(),
+                                                            "cookie parameter",
+                                                            parameters
+                                                                    .getCookieParamNamingConvention()
+                                                                    .getDesignation(),
+                                                            key,
+                                                            method);
+                                                }
                                             }
                                         }
                                     }
