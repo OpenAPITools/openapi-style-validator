@@ -76,7 +76,7 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException {
         if (inputFile == null) {
             throw new MojoExecutionException(String.format("The input file is not defined, set the '%s' option", OpenApiSpecStyleValidator.INPUT_FILE));
         }

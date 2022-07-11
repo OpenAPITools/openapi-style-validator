@@ -54,20 +54,6 @@ public class IntegrationTest {
     sixErrorsAssertions(result);
   }
 
-  private void sixErrorsAssertions(MavenExecutionResult result) {
-    result
-        .assertLogText("Validating spec:")
-        .assertLogText(Paths.get("cli", "src", "test", "resources", "ping.yaml").toString())
-        .assertLogText("OpenAPI Specification does not meet the requirements. Issues:")
-        .assertLogText("*ERROR* Section: APIInfo: 'license' -> Should be present and not empty")
-        .assertLogText("*ERROR* Section: APIInfo: 'description' -> Should be present and not empty")
-        .assertLogText("*ERROR* Section: APIInfo: 'contact' -> Should be present and not empty")
-        .assertLogText("*ERROR* in Operation POST /ping 'description' -> This field should be present and not empty")
-        .assertLogText("*ERROR* in Operation POST /ping 'summary' -> This field should be present and not empty")
-        .assertLogText("*ERROR* in Operation POST /ping 'tags' -> The collection should be present and there should be at least one item in it")
-        .assertLogText("BUILD FAILURE");
-  }
-
   @Test
   public void withCustomPomShouldDisplaySixErrors() throws Exception {
     Path file = Paths.get("../cli/src/test/resources/ping.yaml");
@@ -100,5 +86,19 @@ public class IntegrationTest {
         .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_name' -> parameter should be in camelCase")
         .assertLogText("*ERROR* in path /some_path/{some_id} 'some_path' -> path should be in hyphen-case")
         .assertLogText("BUILD FAILURE");
+  }
+
+  private void sixErrorsAssertions(MavenExecutionResult result) {
+    result
+            .assertLogText("Validating spec:")
+            .assertLogText(Paths.get("cli", "src", "test", "resources", "ping.yaml").toString())
+            .assertLogText("OpenAPI Specification does not meet the requirements. Issues:")
+            .assertLogText("*ERROR* Section: APIInfo: 'license' -> Should be present and not empty")
+            .assertLogText("*ERROR* Section: APIInfo: 'description' -> Should be present and not empty")
+            .assertLogText("*ERROR* Section: APIInfo: 'contact' -> Should be present and not empty")
+            .assertLogText("*ERROR* in Operation POST /ping 'description' -> This field should be present and not empty")
+            .assertLogText("*ERROR* in Operation POST /ping 'summary' -> This field should be present and not empty")
+            .assertLogText("*ERROR* in Operation POST /ping 'tags' -> The collection should be present and there should be at least one item in it")
+            .assertLogText("BUILD FAILURE");
   }
 }
