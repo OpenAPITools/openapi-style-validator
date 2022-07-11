@@ -136,7 +136,8 @@ class OptionManagerTest {
     /* begin - tests for issue #367 */
     @Test
     void shouldParseDetailedParameterNamingConventionOptions() throws Exception {
-        ValidatorParameters parameters = subject.getOptionalValidatorParametersOrDefault(withOptions("detailedParameterNamingConvention"));
+        ValidatorParameters parameters =
+                subject.getOptionalValidatorParametersOrDefault(withOptions("detailedParameterNamingConvention"));
 
         Assertions.assertEquals(true, parameters.isValidateNaming());
         Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
@@ -180,7 +181,8 @@ class OptionManagerTest {
      * 'parameterNamingConvention' option.
      */
     void shouldParseCoexistingParameterNamingConventionOptions() throws Exception {
-        ValidatorParameters parameters = subject.getOptionalValidatorParametersOrDefault(withOptions("parameterNamingConventionCoexistence"));
+        ValidatorParameters parameters =
+                subject.getOptionalValidatorParametersOrDefault(withOptions("parameterNamingConventionCoexistence"));
 
         Assertions.assertEquals(true, parameters.isValidateNaming());
         Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
