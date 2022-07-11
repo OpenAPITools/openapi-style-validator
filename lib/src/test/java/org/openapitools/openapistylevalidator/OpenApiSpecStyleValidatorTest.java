@@ -270,22 +270,20 @@ class OpenApiSpecStyleValidatorTest {
     @Test
     void shouldReportPathNamingConventionError() {
         OpenAPI openAPI = createValidOpenAPI();
-        openAPI.paths(
-                openAPI.getPaths()
+        openAPI.paths(openAPI.getPaths()
                 .addPathItem(
                         "/foo_path",
                         OASFactory.createPathItem()
-                        .GET(OASFactory.createOperation()
-                                .operationId("pingGet")
-                                .summary("A simple get call")
-                                .description(
-                                        "When this method is called, the server answers with 200 OKs")
-                                .addTag("demo")
-                                .responses(OASFactory.createAPIResponses()
-                                        .addAPIResponse(
-                                                "200",
-                                                OASFactory.createAPIResponse()
-                                                        .description("OK"))))));
+                                .GET(OASFactory.createOperation()
+                                        .operationId("pingGet")
+                                        .summary("A simple get call")
+                                        .description("When this method is called, the server answers with 200 OKs")
+                                        .addTag("demo")
+                                        .responses(OASFactory.createAPIResponses()
+                                                .addAPIResponse(
+                                                        "200",
+                                                        OASFactory.createAPIResponse()
+                                                                .description("OK"))))));
 
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
@@ -467,15 +465,20 @@ class OpenApiSpecStyleValidatorTest {
                                                         .in(In.COOKIE)
                                                         .required(true)
                                                         .description("Foo cookie param number one"))
-                                                .requestBody(OASFactory.createRequestBody()
-                                                        .description("Foo request body")
-                                                        .required(true)
-                                                        .content(OASFactory.createContent()
-                                                                .addMediaType(
-                                                                        "application/json",
-                                                                        OASFactory.createMediaType()
-                                                                                .schema(OASFactory.createSchema()
-                                                                                        .ref("#/components/schemas/FooSchema")))))
+                                                .requestBody(
+                                                        OASFactory.createRequestBody()
+                                                                .description("Foo request body")
+                                                                .required(true)
+                                                                .content(
+                                                                        OASFactory.createContent()
+                                                                                .addMediaType(
+                                                                                        "application/json",
+                                                                                        OASFactory.createMediaType()
+                                                                                                .schema(
+                                                                                                        OASFactory
+                                                                                                                .createSchema()
+                                                                                                                .ref(
+                                                                                                                        "#/components/schemas/FooSchema")))))
                                                 .responses(OASFactory.createAPIResponses()
                                                         .addAPIResponse(
                                                                 "200",
@@ -490,57 +493,82 @@ class OpenApiSpecStyleValidatorTest {
                                                 .description(
                                                         "When this method is called, the server answers with 200 OKs")
                                                 .addTag("demo")
-                                                .requestBody(OASFactory.createRequestBody()
-                                                        .description("Baz request body")
-                                                        .required(true)
-                                                        .content(OASFactory.createContent()
-                                                                .addMediaType(
-                                                                        "application/json",
-                                                                        OASFactory.createMediaType()
-                                                                                .schema(OASFactory.createSchema()
-                                                                                        .ref("#/components/schemas/BazSchema")))))
+                                                .requestBody(
+                                                        OASFactory.createRequestBody()
+                                                                .description("Baz request body")
+                                                                .required(true)
+                                                                .content(
+                                                                        OASFactory.createContent()
+                                                                                .addMediaType(
+                                                                                        "application/json",
+                                                                                        OASFactory.createMediaType()
+                                                                                                .schema(
+                                                                                                        OASFactory
+                                                                                                                .createSchema()
+                                                                                                                .ref(
+                                                                                                                        "#/components/schemas/BazSchema")))))
                                                 .responses(OASFactory.createAPIResponses()
                                                         .addAPIResponse(
                                                                 "200",
                                                                 OASFactory.createAPIResponse()
                                                                         .description("OK"))))))
-                        
-                .components(OASFactory.createComponents()
-                        .schemas(new HashMap<String, Schema>() {{
-                                put("FooSchema", OASFactory.createSchema()
+                .components(OASFactory.createComponents().schemas(new HashMap<String, Schema>() {
+                    {
+                        put(
+                                "FooSchema",
+                                OASFactory.createSchema()
                                         .title("Foo schema title")
                                         .type(SchemaType.OBJECT)
-                                        .properties(new HashMap<String, Schema>() {{
-                                                put("fooPropertyOne", OASFactory.createSchema()
-                                                        .type(SchemaType.STRING)
-                                                        .example("example1")
-                                                        .description("Simple property description 1"));
-                                                put("fooPropertyTwo", OASFactory.createSchema()
-                                                        .type(SchemaType.INTEGER)
-                                                        .example("example2")
-                                                        .description("Simple property description 2"));
-                                        }})
-                                        .required(new ArrayList<String>() {{
+                                        .properties(new HashMap<String, Schema>() {
+                                            {
+                                                put(
+                                                        "fooPropertyOne",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.STRING)
+                                                                .example("example1")
+                                                                .description("Simple property description 1"));
+                                                put(
+                                                        "fooPropertyTwo",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.INTEGER)
+                                                                .example("example2")
+                                                                .description("Simple property description 2"));
+                                            }
+                                        })
+                                        .required(new ArrayList<String>() {
+                                            {
                                                 add("fooPropertyOne");
                                                 add("fooPropertyTwo");
-                                        }}));
-                                put("BazSchema", OASFactory.createSchema()
+                                            }
+                                        }));
+                        put(
+                                "BazSchema",
+                                OASFactory.createSchema()
                                         .title("Baz schema title")
                                         .type(SchemaType.OBJECT)
-                                        .properties(new HashMap<String, Schema>() {{
-                                                put("bazPropertyOne", OASFactory.createSchema()
-                                                        .type(SchemaType.STRING)
-                                                        .example("example1")
-                                                        .description("Simple property description 1"));
-                                                put("bazPropertyTwo", OASFactory.createSchema()
-                                                        .type(SchemaType.INTEGER)
-                                                        .example("example2")
-                                                        .description("Simple property description 2"));
-                                        }})
-                                        .required(new ArrayList<String>() {{
+                                        .properties(new HashMap<String, Schema>() {
+                                            {
+                                                put(
+                                                        "bazPropertyOne",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.STRING)
+                                                                .example("example1")
+                                                                .description("Simple property description 1"));
+                                                put(
+                                                        "bazPropertyTwo",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.INTEGER)
+                                                                .example("example2")
+                                                                .description("Simple property description 2"));
+                                            }
+                                        })
+                                        .required(new ArrayList<String>() {
+                                            {
                                                 add("bazPropertyOne");
                                                 add("bazPropertyTwo");
-                                        }}));
-                        }}));
+                                            }
+                                        }));
+                    }
+                }));
     }
 }

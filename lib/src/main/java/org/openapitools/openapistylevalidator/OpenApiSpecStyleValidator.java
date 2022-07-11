@@ -242,7 +242,7 @@ public class OpenApiSpecStyleValidator {
                                         } else {
                                             if (opParam.getIn() == Parameter.In.QUERY) {
                                                 isValid = namingValidator.isNamingValid(
-                                                    opParam.getName(), parameters.getQueryParamNamingConvention());
+                                                        opParam.getName(), parameters.getQueryParamNamingConvention());
                                                 if (!isValid) {
                                                     errorAggregator.logOperationBadNaming(
                                                             opParam.getName(),
@@ -255,7 +255,7 @@ public class OpenApiSpecStyleValidator {
                                                 }
                                             } else if (opParam.getIn() == Parameter.In.PATH) {
                                                 isValid = namingValidator.isNamingValid(
-                                                    opParam.getName(), parameters.getPathParamNamingConvention());
+                                                        opParam.getName(), parameters.getPathParamNamingConvention());
                                                 if (!isValid) {
                                                     errorAggregator.logOperationBadNaming(
                                                             opParam.getName(),
@@ -268,7 +268,7 @@ public class OpenApiSpecStyleValidator {
                                                 }
                                             } else if (opParam.getIn() == Parameter.In.COOKIE) {
                                                 isValid = namingValidator.isNamingValid(
-                                                    opParam.getName(), parameters.getCookieParamNamingConvention());
+                                                        opParam.getName(), parameters.getCookieParamNamingConvention());
                                                 if (!isValid) {
                                                     errorAggregator.logOperationBadNaming(
                                                             opParam.getName(),

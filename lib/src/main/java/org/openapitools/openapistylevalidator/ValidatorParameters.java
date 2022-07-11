@@ -226,7 +226,7 @@ public class ValidatorParameters {
         if (!this.queryParamNamingConventionWasExplicitlySet) {
             this.queryParamNamingConvention = parameterNamingConvention;
         }
-        
+
         return this;
     }
 
