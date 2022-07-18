@@ -75,6 +75,15 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
     @Parameter(property = ValidatorParameters.PROPERTY_NAMING_CONVENTION, defaultValue = "CamelCase")
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
 
+    @Parameter(property = ValidatorParameters.PATH_PARAM_NAMING_CONVENTION, defaultValue = "CamelCase")
+    private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
+
+    @Parameter(property = ValidatorParameters.QUERY_PARAM_NAMING_CONVENTION, defaultValue = "CamelCase")
+    private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
+
+    @Parameter(property = ValidatorParameters.COOKIE_PARAM_NAMING_CONVENTION, defaultValue = "CamelCase")
+    private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (inputFile == null) {
@@ -121,6 +130,9 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
         parameters.setHeaderNamingConvention(headerNamingConvention);
         parameters.setParameterNamingConvention(parameterNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
+        parameters.setPathParamNamingConvention(pathParamNamingConvention);
+        parameters.setQueryParamNamingConvention(queryParamNamingConvention);
+        parameters.setCookieParamNamingConvention(cookieParamNamingConvention);
         return parameters;
     }
 }
