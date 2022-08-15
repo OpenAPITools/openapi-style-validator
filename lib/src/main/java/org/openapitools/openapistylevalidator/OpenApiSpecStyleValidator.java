@@ -1,5 +1,6 @@
 package org.openapitools.openapistylevalidator;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
@@ -33,7 +34,13 @@ public class OpenApiSpecStyleValidator {
         validateOperations();
         validateModels();
         validateNaming();
-
+        UserDefinedRuleExecutor userDefinedRuleExecutor = new UserDefinedRuleExecutor(errorAggregator, openAPI);
+        try {
+            userDefinedRuleExecutor.loadAndExecuteRules();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException |
+                 NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
         return errorAggregator.getErrorList();
     }
 

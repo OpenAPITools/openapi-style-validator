@@ -5,15 +5,15 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.models.PathItem;
 import org.openapitools.openapistylevalidator.styleerror.*;
 
-class ErrorAggregator {
+public class ErrorAggregator {
 
     private final List<StyleError> errorList = new ArrayList<>();
 
-    void logMissingOrEmptyAttribute(StyleError.StyleCheckSection styleCheckSection, String fieldNames) {
+   public void logMissingOrEmptyAttribute(StyleError.StyleCheckSection styleCheckSection, String fieldNames) {
         errorList.add(new StyleError(styleCheckSection, fieldNames, "Should be present and not empty"));
     }
 
-    void validateMinimumInfo(
+    public void validateMinimumInfo(
             List<Boolean> infoPresence,
             StyleError.StyleCheckSection styleCheckSection,
             String parentObjectName,
@@ -39,26 +39,26 @@ class ErrorAggregator {
         return errorList;
     }
 
-    void logMissingOrEmptyOperationAttribute(String path, PathItem.HttpMethod method, String field) {
+    public void logMissingOrEmptyOperationAttribute(String path, PathItem.HttpMethod method, String field) {
         errorList.add(new OperationStyleError(field, "This field should be present and not empty", path, method));
     }
 
-    void logMissingOrEmptyOperationCollection(String path, PathItem.HttpMethod method, String field) {
+    public void logMissingOrEmptyOperationCollection(String path, PathItem.HttpMethod method, String field) {
         errorList.add(new OperationStyleError(
                 field, "The collection should be present and there should be at least one item in it", path, method));
     }
 
-    void logMissingOrEmptyModelAttribute(String modelName, String propertyName, String field) {
+    public void logMissingOrEmptyModelAttribute(String modelName, String propertyName, String field) {
         errorList.add(
                 new ModelStyleError(field, "This field should be present and not empty", modelName, propertyName));
     }
 
-    void logMissingModelProperty(String modelName, String propertyName) {
+    public void logMissingModelProperty(String modelName, String propertyName) {
         errorList.add(new ModelStyleError(
                 null, "This property should be present or removed from the list of required", modelName, propertyName));
     }
 
-    void logOperationBadNaming(
+    public void logOperationBadNaming(
             String variableName,
             String variableType,
             String neededNamingStrategy,
@@ -72,7 +72,7 @@ class ErrorAggregator {
                 httpMethod));
     }
 
-    void logModelBadNaming(String variableName, String variableType, String neededNamingStrategy, String model) {
+    public void logModelBadNaming(String variableName, String variableType, String neededNamingStrategy, String model) {
         errorList.add(new ModelNamingStyleError(
                 StyleError.StyleCheckSection.Naming,
                 variableName,
@@ -85,5 +85,9 @@ class ErrorAggregator {
                 StyleError.StyleCheckSection.OpenAPI,
                 "paths,components",
                 "Should have at least one of paths or components"));
+    }
+
+    public void logUndefinedTag(String missingTagName) {
+        errorList.add(new StyleError(StyleError.StyleCheckSection.Operations, "tags", String.format("%s is not defined under tag section", missingTagName)));
     }
 }
