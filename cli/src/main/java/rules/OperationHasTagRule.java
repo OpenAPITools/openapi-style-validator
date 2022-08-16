@@ -1,3 +1,5 @@
+package rules;
+
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -26,5 +28,4 @@ public class OperationHasTagRule extends OpenAPIRule {
             }
         }
     }
-
 }

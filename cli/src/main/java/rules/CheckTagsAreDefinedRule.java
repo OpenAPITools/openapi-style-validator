@@ -1,3 +1,5 @@
+package rules;
+
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.ErrorAggregator;
 import org.openapitools.openapistylevalidator.custom.OpenAPIRule;
