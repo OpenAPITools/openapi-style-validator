@@ -9,6 +9,7 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 public class OpenApiSpecStyleValidator {
@@ -225,60 +226,39 @@ public class OpenApiSpecStyleValidator {
                                     }
 
                                     if (shouldValidate && opParam.getRef() == null) {
-                                        boolean isValid = false;
                                         if (opParam.getIn() == Parameter.In.HEADER) {
-                                            isValid = namingValidator.isNamingValid(
-                                                    opParam.getName(), parameters.getHeaderNamingConvention());
-                                            if (!isValid) {
-                                                errorAggregator.logOperationBadNaming(
-                                                        opParam.getName(),
-                                                        "header",
-                                                        parameters
-                                                                .getHeaderNamingConvention()
-                                                                .getDesignation(),
-                                                        key,
-                                                        method);
-                                            }
+                                            validateParamNaming(
+                                                    opParam.getName(),
+                                                    "header",
+                                                    parameters.getHeaderNamingConvention(),
+                                                    key,
+                                                    method);
+
                                         } else {
                                             if (opParam.getIn() == Parameter.In.QUERY) {
-                                                isValid = namingValidator.isNamingValid(
-                                                        opParam.getName(), parameters.getQueryParamNamingConvention());
-                                                if (!isValid) {
-                                                    errorAggregator.logOperationBadNaming(
-                                                            opParam.getName(),
-                                                            "query parameter",
-                                                            parameters
-                                                                    .getQueryParamNamingConvention()
-                                                                    .getDesignation(),
-                                                            key,
-                                                            method);
-                                                }
+                                                validateParamNaming(
+                                                        opParam.getName(),
+                                                        "query parameter",
+                                                        parameters.getQueryParamNamingConvention(),
+                                                        key,
+                                                        method);
+
                                             } else if (opParam.getIn() == Parameter.In.PATH) {
-                                                isValid = namingValidator.isNamingValid(
-                                                        opParam.getName(), parameters.getPathParamNamingConvention());
-                                                if (!isValid) {
-                                                    errorAggregator.logOperationBadNaming(
-                                                            opParam.getName(),
-                                                            "path parameter",
-                                                            parameters
-                                                                    .getPathParamNamingConvention()
-                                                                    .getDesignation(),
-                                                            key,
-                                                            method);
-                                                }
+                                                validateParamNaming(
+                                                        opParam.getName(),
+                                                        "path parameter",
+                                                        parameters.getPathParamNamingConvention(),
+                                                        key,
+                                                        method);
+                                                
                                             } else if (opParam.getIn() == Parameter.In.COOKIE) {
-                                                isValid = namingValidator.isNamingValid(
-                                                        opParam.getName(), parameters.getCookieParamNamingConvention());
-                                                if (!isValid) {
-                                                    errorAggregator.logOperationBadNaming(
-                                                            opParam.getName(),
-                                                            "cookie parameter",
-                                                            parameters
-                                                                    .getCookieParamNamingConvention()
-                                                                    .getDesignation(),
-                                                            key,
-                                                            method);
-                                                }
+                                                validateParamNaming(
+                                                        opParam.getName(),
+                                                        "cookie parameter",
+                                                        parameters.getCookieParamNamingConvention(),
+                                                        key,
+                                                        method);
+
                                             }
                                         }
                                     }
@@ -304,6 +284,25 @@ public class OpenApiSpecStyleValidator {
                     }
                 }
             }
+        }
+    }
+
+    private void validateParamNaming(
+            String paramName,
+            String variableType,
+            NamingConvention namingConvention,
+            String key,
+            PathItem.HttpMethod method) {
+        boolean isValid = namingValidator.isNamingValid(
+                paramName, namingConvention);
+        if (!isValid) {
+            errorAggregator.logOperationBadNaming(
+                    paramName,
+                    variableType,
+                    namingConvention
+                            .getDesignation(),
+                    key,
+                    method);
         }
     }
 }
