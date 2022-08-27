@@ -1,5 +1,5 @@
 plugins {
-    id "com.diffplug.spotless" version "6.9.0"
+    id "com.diffplug.spotless" version "6.9.1"
 }
 
 apply plugin: 'application'
@@ -7,7 +7,7 @@ apply plugin: 'application'
 dependencies {
     implementation project(':openapi-style-validator-lib')
     implementation 'commons-cli:commons-cli:1.5.0'
-    implementation 'org.slf4j:slf4j-jdk14:1.7.36'
+    implementation 'org.slf4j:slf4j-jdk14:2.0.0'
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.33'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
@@ -15,7 +15,7 @@ dependencies {
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.18.0'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.18.0'
 
-    testImplementation "org.mockito:mockito-core:4.6.1"
+    testImplementation "org.mockito:mockito-core:4.7.0"
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'

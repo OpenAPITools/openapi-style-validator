@@ -1,10 +1,10 @@
 plugins {
-    id "com.diffplug.spotless" version "6.9.0"
+    id "com.diffplug.spotless" version "6.9.1"
 }
 
 dependencies {
     implementation 'org.eclipse.microprofile.openapi:microprofile-openapi-api:3.0'
-    testImplementation 'org.slf4j:slf4j-jdk14:1.7.36'
+    testImplementation 'org.slf4j:slf4j-jdk14:2.0.0'
     testImplementation 'org.openapitools.empoa:empoa-simple-models-impl:2.0.0'
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.10.1'
 }
