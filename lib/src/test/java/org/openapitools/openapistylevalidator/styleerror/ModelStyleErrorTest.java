@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.openapitools.openapistylevalidator.error.ModelStyleError;
 
 class ModelStyleErrorTest {
     @Test

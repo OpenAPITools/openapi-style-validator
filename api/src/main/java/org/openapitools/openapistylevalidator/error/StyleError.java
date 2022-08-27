@@ -1,14 +1,6 @@
-package org.openapitools.openapistylevalidator.styleerror;
+package org.openapitools.openapistylevalidator.error;
 
 public class StyleError {
-
-    public enum StyleCheckSection {
-        APIInfo,
-        Operations,
-        Models,
-        Naming,
-        OpenAPI,
-    }
 
     final StyleCheckSection styleCheckSection;
     final String fieldNames;

@@ -11,11 +11,11 @@ import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
 import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true)
 public class OpenAPIStyleValidatorMojo extends AbstractMojo {

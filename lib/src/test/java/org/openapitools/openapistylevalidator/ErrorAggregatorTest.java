@@ -6,8 +6,8 @@ import java.util.Collections;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openapitools.openapistylevalidator.styleerror.ModelStyleError;
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.error.ModelStyleError;
+import org.openapitools.openapistylevalidator.error.StyleCheckSection;
 
 class ErrorAggregatorTest {
 
@@ -23,7 +23,7 @@ class ErrorAggregatorTest {
         // Arrange
 
         // Act
-        errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "contact");
+        errorAggregator.logMissingOrEmptyAttribute(StyleCheckSection.APIInfo, "contact");
 
         // Assert
         Assertions.assertAll(

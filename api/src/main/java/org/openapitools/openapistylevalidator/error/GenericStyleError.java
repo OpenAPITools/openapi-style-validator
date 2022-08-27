@@ -1,4 +1,4 @@
-package org.openapitools.openapistylevalidator.styleerror;
+package org.openapitools.openapistylevalidator.error;
 
 import java.util.Objects;
 

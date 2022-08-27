@@ -9,7 +9,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.error.StyleError;
 import org.opentest4j.MultipleFailuresError;
 
 class ValidationInitiatorTest {

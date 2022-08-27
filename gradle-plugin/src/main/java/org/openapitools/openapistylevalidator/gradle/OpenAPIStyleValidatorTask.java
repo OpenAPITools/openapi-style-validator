@@ -11,7 +11,7 @@ import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
 import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 import java.util.List;
 

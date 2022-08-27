@@ -3,19 +3,25 @@ package org.openapitools.openapistylevalidator;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.microprofile.openapi.models.PathItem;
-import org.openapitools.openapistylevalidator.styleerror.*;
+import org.openapitools.openapistylevalidator.error.GenericStyleError;
+import org.openapitools.openapistylevalidator.error.ModelNamingStyleError;
+import org.openapitools.openapistylevalidator.error.ModelStyleError;
+import org.openapitools.openapistylevalidator.error.OperationNamingStyleError;
+import org.openapitools.openapistylevalidator.error.OperationStyleError;
+import org.openapitools.openapistylevalidator.error.StyleCheckSection;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class ErrorAggregator {
 
     private final List<StyleError> errorList = new ArrayList<>();
 
-   public void logMissingOrEmptyAttribute(StyleError.StyleCheckSection styleCheckSection, String fieldNames) {
+    public void logMissingOrEmptyAttribute(StyleCheckSection styleCheckSection, String fieldNames) {
         errorList.add(new StyleError(styleCheckSection, fieldNames, "Should be present and not empty"));
     }
 
     public void validateMinimumInfo(
             List<Boolean> infoPresence,
-            StyleError.StyleCheckSection styleCheckSection,
+            StyleCheckSection styleCheckSection,
             String parentObjectName,
             String fieldNames) {
         boolean hasMinimumInfo = false;
@@ -65,7 +71,7 @@ public class ErrorAggregator {
             String path,
             PathItem.HttpMethod httpMethod) {
         errorList.add(new OperationNamingStyleError(
-                StyleError.StyleCheckSection.Naming,
+                StyleCheckSection.Naming,
                 variableName,
                 String.format("%s should be in %s", variableType, neededNamingStrategy),
                 path,
@@ -74,7 +80,7 @@ public class ErrorAggregator {
 
     public void logModelBadNaming(String variableName, String variableType, String neededNamingStrategy, String model) {
         errorList.add(new ModelNamingStyleError(
-                StyleError.StyleCheckSection.Naming,
+                StyleCheckSection.Naming,
                 variableName,
                 String.format("%s should be in %s", variableType, neededNamingStrategy),
                 model));
@@ -82,12 +88,6 @@ public class ErrorAggregator {
 
     public void logMissingPathsAndComponents() {
         errorList.add(new StyleError(
-                StyleError.StyleCheckSection.OpenAPI,
-                "paths,components",
-                "Should have at least one of paths or components"));
-    }
-
-    public void logUndefinedTag(String missingTagName) {
-        errorList.add(new StyleError(StyleError.StyleCheckSection.Operations, "tags", String.format("%s is not defined under tag section", missingTagName)));
+                StyleCheckSection.OpenAPI, "paths,components", "Should have at least one of paths or components"));
     }
 }

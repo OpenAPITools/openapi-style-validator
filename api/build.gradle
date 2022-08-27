@@ -3,7 +3,6 @@ plugins {
 }
 
 dependencies {
-    implementation project(':openapi-style-validator-api')
     implementation 'org.eclipse.microprofile.openapi:microprofile-openapi-api:3.0'
     testImplementation 'org.slf4j:slf4j-jdk14:2.0.0'
     testImplementation 'org.openapitools.empoa:empoa-simple-models-impl:2.0.0'
@@ -28,10 +27,10 @@ spotless {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'openapi-style-validator-lib'
+            artifactId = 'openapi-style-validator-api'
             pom {
-                name = 'OpenAPI Style Validator - lib'
-                description = 'Library to validate the style and standards of an OpenAPI specification'
+                name = 'OpenAPI Style Validator - api'
+                description = 'module to expose API for writing rules to validate the style and standards of an OpenAPI specification'
                 packaging = 'jar'
                 url = 'https://openapitools.github.io/openapi-style-validator/'
                 inceptionYear = "2019"
