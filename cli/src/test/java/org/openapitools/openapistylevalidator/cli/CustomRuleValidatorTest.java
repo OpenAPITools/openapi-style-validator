@@ -86,26 +86,4 @@ class CustomRuleValidatorTest {
                         "*ERROR* Section: OpenAPI: 'tags' -> Should be present and not empty",
                         errorList.get(6).toString()));
     }
-
-    private void namingErrorsAssertions(
-            List<StyleError> errorList,
-            String expectedPathParameterConvention,
-            String expectedQueryParameterConvention,
-            String expectedPathConvention)
-            throws MultipleFailuresError {
-        Assertions.assertAll(
-                () -> assertEquals(3, errorList.size()),
-                () -> assertEquals(
-                        "*ERROR* in path POST /some_path/{some_id} 'some_id' -> parameter should be in "
-                                + expectedPathParameterConvention,
-                        errorList.get(0).toString()),
-                () -> assertEquals(
-                        "*ERROR* in path POST /some_path/{some_id} 'some_name' -> parameter should be in "
-                                + expectedQueryParameterConvention,
-                        errorList.get(1).toString()),
-                () -> assertEquals(
-                        "*ERROR* in path /some_path/{some_id} 'some_path' -> path should be in "
-                                + expectedPathConvention,
-                        errorList.get(2).toString()));
-    }
 }
