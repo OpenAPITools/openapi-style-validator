@@ -46,7 +46,7 @@ public class RulesManager {
     private Rule instantiateRule(String className) {
         try {
             Class<?> aClass = Class.forName(className);
-            return (Rule) aClass.newInstance();
+            return (Rule) aClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             logger.severe("Could not instantiate the rule name=" + className + " reason=" + e.getMessage());
             return null;

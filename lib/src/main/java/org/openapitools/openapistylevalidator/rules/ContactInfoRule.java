@@ -1,7 +1,5 @@
 package org.openapitools.openapistylevalidator.rules;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
@@ -32,15 +30,15 @@ public class ContactInfoRule implements Rule {
         if (contact == null) {
             StyleError styleError =
                     new StyleError(StyleCheckSection.APIInfo, "contact", "Should be present and not empty");
-            return of(styleError);
+            return Optional.of(styleError);
         }
         if (isEmpty(contact.getName()) && isEmpty(contact.getUrl()) && isNotEmpty(contact.getEmail())) {
             StyleError styleError = new StyleError(
                     StyleCheckSection.APIInfo,
                     "contact",
                     "At least one field should be present and not empty. name|url|email");
-            return of(styleError);
+            return Optional.of(styleError);
         }
-        return empty();
+        return Optional.empty();
     }
 }
