@@ -1,5 +1,8 @@
 package org.openapitools.openapistylevalidator;
 
+import java.util.function.Predicate;
+import org.openapitools.openapistylevalidator.naming.PatternPredicates;
+
 public class ValidatorParameters {
     public static final String VALIDATE_INFO_LICENSE = "validateInfoLicense";
     public static final String VALIDATE_INFO_DESCRIPTION = "validateInfoDescription";
@@ -23,17 +26,21 @@ public class ValidatorParameters {
     public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
 
     public static enum NamingConvention {
-        UnderscoreCase("underscore_case"),
-        UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
-        CamelCase("camelCase"),
-        HyphenCase("hyphen-case"),
-        AnyCase("AnyCase"),
-        HyphenUpperCase("Hyphen-Upper-Case");
+        UnderscoreCase("underscore_case", PatternPredicates.underscoreCaseMatcher),
+        UnderscoreUpperCase("UNDERSCORE_UPPER_CASE", PatternPredicates.underScoreUpperCaseMatcher),
+        CamelCase("camelCase", PatternPredicates.camelCaseMatcher),
+        HyphenCase("hyphen-case", PatternPredicates.hyphenCaseMatcher),
+        AnyCase("AnyCase", PatternPredicates.anyCaseMatcher),
+        HyphenUpperCase("Hyphen-Upper-Case", PatternPredicates.hyphenUpperCaseMatcher);
 
         private final String designation;
 
-        NamingConvention(String appelation) {
+        private final Predicate<String> predicate;
+
+        NamingConvention(String appelation, Predicate<String> matcher) {
+
             this.designation = appelation;
+            this.predicate = matcher;
         }
 
         /**
@@ -41,6 +48,10 @@ public class ValidatorParameters {
          */
         public String getDesignation() {
             return designation;
+        }
+
+        public Predicate<String> getPredicate() {
+            return predicate;
         }
     }
 

@@ -1,7 +1,6 @@
 package org.openapitools.openapistylevalidator.rules;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
@@ -32,7 +31,7 @@ public class ContactInfoRule implements Rule {
                     new StyleError(StyleCheckSection.APIInfo, "contact", "Should be present and not empty");
             return Optional.of(styleError);
         }
-        if (isEmpty(contact.getName()) && isEmpty(contact.getUrl()) && isNotEmpty(contact.getEmail())) {
+        if (isEmpty(contact.getName()) && isEmpty(contact.getUrl()) && isEmpty(contact.getEmail())) {
             StyleError styleError = new StyleError(
                     StyleCheckSection.APIInfo,
                     "contact",

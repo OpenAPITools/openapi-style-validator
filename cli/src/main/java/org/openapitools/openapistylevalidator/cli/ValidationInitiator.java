@@ -9,6 +9,7 @@ import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenAPIStyleValidator;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
+import org.openapitools.openapistylevalidator.RulesManager;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
 import org.openapitools.openapistylevalidator.error.StyleError;
 
@@ -36,7 +37,8 @@ public class ValidationInitiator {
     public List<StyleError> validateV2(OptionManager optionManager, CommandLine commandLine) {
         OpenAPI openAPI = parseToOpenAPIModels(optionManager, commandLine);
         ValidatorParameters parameters = optionManager.getOptionalValidatorParametersOrDefault(commandLine);
-        OpenAPIStyleValidator openAPIStyleValidator = new OpenAPIStyleValidator(openAPI, parameters);
+        RulesManager rulesManager = new RulesManager(parameters);
+        OpenAPIStyleValidator openAPIStyleValidator = new OpenAPIStyleValidator(openAPI, rulesManager);
         return openAPIStyleValidator.validate();
     }
 }

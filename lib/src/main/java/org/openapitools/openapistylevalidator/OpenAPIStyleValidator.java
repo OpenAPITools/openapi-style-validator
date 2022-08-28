@@ -12,19 +12,16 @@ public class OpenAPIStyleValidator {
 
     private final OpenAPI openAPI;
 
-    private final ValidatorParameters validatorParameters;
-
     private final RulesManager rulesManager;
 
-    public OpenAPIStyleValidator(OpenAPI openAPI, ValidatorParameters validatorParameters) {
+    public OpenAPIStyleValidator(OpenAPI openAPI, RulesManager rulesManager) {
         this.openAPI = openAPI;
-        this.validatorParameters = validatorParameters;
-        this.rulesManager = new RulesManager();
+        this.rulesManager = rulesManager;
     }
 
     public List<StyleError> validate() {
         List<Rule> rules = rulesManager.loadAllRules();
-        List<String> ignoredRules = rulesManager.convertToIgnoredRules(validatorParameters);
+        List<String> ignoredRules = rulesManager.convertToIgnoredRules();
         List<Rule> rulesToExecute = rules.stream()
                 .filter(rule -> !ignoredRules.contains(rule.ruleName()))
                 .collect(toList());

@@ -40,7 +40,7 @@ class ValidationInitiatorV2Test {
     @DisplayName("Method: validate")
     class Validate {
         @Nested
-        class GivenFileProvidedWithInvalidTagDefinedYaml {
+        class GivenFileProvidedWithInvalidAPIInfoYaml {
             @BeforeEach
             void init() throws ParseException {
                 commandLine = parser.parse(options, new String[] {"-s", SRC_TEST_RESOURCES_PING_YAML});
@@ -50,6 +50,27 @@ class ValidationInitiatorV2Test {
             void returnSevenErrors() {
                 List<StyleError> errorList = validationInitiator.validateV2(optionManager, commandLine);
                 fiveErrorsAssertions(errorList);
+            }
+        }
+
+        @Nested
+        class GivenInvalidHeaderNamingConvention {
+
+            public static final String INVALID_HEADER_NAMING_YAML = "src/test/resources/invalid_header_naming.yaml";
+            public static final String VALID_HEADER_NAMING_YAML = "src/test/resources/vaild_header_naming.yaml";
+
+            @Test
+            void invalidHeaderNamingConventionTest() throws ParseException {
+                commandLine = parser.parse(options, new String[] {"-s", INVALID_HEADER_NAMING_YAML});
+                List<StyleError> errorList = validationInitiator.validateV2(optionManager, commandLine);
+                namingErrorsAssertions(errorList);
+            }
+
+            @Test
+            void validHeaderNamingConventionTest() throws ParseException {
+                commandLine = parser.parse(options, new String[] {"-s", VALID_HEADER_NAMING_YAML});
+                List<StyleError> errorList = validationInitiator.validateV2(optionManager, commandLine);
+                assertEquals(0, errorList.size());
             }
         }
     }
@@ -66,5 +87,13 @@ class ValidationInitiatorV2Test {
                 () -> assertEquals(
                         "*ERROR* Section: APIInfo: 'contact' -> Should be present and not empty",
                         errorList.get(2).toString()));
+    }
+
+    private void namingErrorsAssertions(List<StyleError> errorList) throws MultipleFailuresError {
+        Assertions.assertAll(
+                () -> assertEquals(1, errorList.size()),
+                () -> assertEquals(
+                        "*ERROR* in path GET /ping 'user-name' -> header should be in " + "UNDERSCORE_UPPER_CASE",
+                        errorList.get(0).toString()));
     }
 }

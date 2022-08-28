@@ -217,7 +217,7 @@ class ValidationInitiatorTest {
         }
 
         @Nested
-        class GivenInvalidParameterNamingConvention {
+        class GivenInvalidParameterNamingRule {
             @BeforeEach
             void init() throws ParseException {
                 commandLine = parser.parse(options, new String[] {

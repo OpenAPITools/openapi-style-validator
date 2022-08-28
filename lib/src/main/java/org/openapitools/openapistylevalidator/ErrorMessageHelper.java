@@ -1,6 +1,8 @@
 package org.openapitools.openapistylevalidator;
 
+import org.eclipse.microprofile.openapi.models.PathItem;
 import org.openapitools.openapistylevalidator.error.GenericStyleError;
+import org.openapitools.openapistylevalidator.error.OperationNamingStyleError;
 import org.openapitools.openapistylevalidator.error.StyleCheckSection;
 import org.openapitools.openapistylevalidator.error.StyleError;
 
@@ -22,5 +24,19 @@ public class ErrorMessageHelper {
 
         return new GenericStyleError(
                 styleCheckSection, parentObjectName, fieldNames, "At least one field should be present and not empty");
+    }
+
+    public static StyleError logOperationBadNaming(
+            String variableName,
+            String variableType,
+            String neededNamingStrategy,
+            String path,
+            PathItem.HttpMethod httpMethod) {
+        return new OperationNamingStyleError(
+                StyleCheckSection.Naming,
+                variableName,
+                String.format("%s should be in %s", variableType, neededNamingStrategy),
+                path,
+                httpMethod);
     }
 }
