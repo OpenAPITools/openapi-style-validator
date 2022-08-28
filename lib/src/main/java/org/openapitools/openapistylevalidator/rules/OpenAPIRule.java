@@ -2,6 +2,8 @@ package org.openapitools.openapistylevalidator.rules;
 
 import static org.openapitools.openapistylevalidator.ErrorMessageHelper.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.api.Rule;
@@ -22,10 +24,10 @@ public class OpenAPIRule implements Rule {
     }
 
     @Override
-    public Optional<StyleError> execute(OpenAPI api) {
+    public List<StyleError> execute(OpenAPI api) {
         if (api.getPaths() == null && api.getComponents() == null) {
-            return Optional.of(logMissingPathsAndComponents());
+            return Collections.singletonList(logMissingPathsAndComponents());
         }
-        return Optional.empty();
+        return Collections.emptyList();
     }
 }

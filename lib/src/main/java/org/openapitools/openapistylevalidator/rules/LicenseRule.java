@@ -5,6 +5,8 @@ import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissi
 import static org.openapitools.openapistylevalidator.ErrorMessageHelper.validateMinimumInfo;
 import static org.openapitools.openapistylevalidator.error.StyleCheckSection.APIInfo;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.info.Info;
@@ -27,16 +29,16 @@ public class LicenseRule implements Rule {
     }
 
     @Override
-    public Optional<StyleError> execute(OpenAPI api) {
+    public List<StyleError> execute(OpenAPI api) {
         Info info = api.getInfo();
         License license = info.getLicense();
         if (license == null) {
-            return Optional.of(logMissingOrEmptyAttribute(APIInfo, "license"));
+            return Collections.singletonList(logMissingOrEmptyAttribute(APIInfo, "license"));
         }
 
         if (isEmpty(license.getName()) && isEmpty(license.getUrl())) {
-            return Optional.of(validateMinimumInfo(APIInfo, "license", "name|url"));
+            return Collections.singletonList(validateMinimumInfo(APIInfo, "license", "name|url"));
         }
-        return Optional.empty();
+        return Collections.emptyList();
     }
 }

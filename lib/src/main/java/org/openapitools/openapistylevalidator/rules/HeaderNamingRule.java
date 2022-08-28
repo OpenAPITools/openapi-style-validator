@@ -1,5 +1,7 @@
 package org.openapitools.openapistylevalidator.rules;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
@@ -30,8 +32,8 @@ public class HeaderNamingRule implements Rule {
     }
 
     @Override
-    public Optional<StyleError> execute(OpenAPI openAPI) {
-        StyleError error = null;
+    public List<StyleError> execute(OpenAPI openAPI) {
+        List<StyleError> errors = new ArrayList<>();
         if (openAPI.getPaths() != null && openAPI.getPaths().getPathItems() != null) {
             for (String key : openAPI.getPaths().getPathItems().keySet()) {
                 PathItem path = openAPI.getPaths().getPathItems().get(key);
@@ -46,12 +48,13 @@ public class HeaderNamingRule implements Rule {
                                             .negate()
                                             .test(opParam.getName());
                                     if (isNamingConventionMisMatch) {
-                                        error = ErrorMessageHelper.logOperationBadNaming(
+                                        StyleError styleError = ErrorMessageHelper.logOperationBadNaming(
                                                 opParam.getName(),
                                                 "header",
                                                 checker.getHeaderNamingChecker().getDesignation(),
                                                 key,
                                                 method);
+                                        errors.add(styleError);
                                     }
                                 }
                             }
@@ -60,6 +63,6 @@ public class HeaderNamingRule implements Rule {
                 }
             }
         }
-        return Optional.ofNullable(error);
+        return errors;
     }
 }

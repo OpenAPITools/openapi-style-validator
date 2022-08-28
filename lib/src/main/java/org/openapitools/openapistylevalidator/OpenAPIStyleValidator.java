@@ -27,8 +27,7 @@ public class OpenAPIStyleValidator {
                 .collect(toList());
         return rulesToExecute.stream()
                 .map(rule -> rule.execute(openAPI))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .flatMap(List::stream)
                 .collect(toList());
     }
 }

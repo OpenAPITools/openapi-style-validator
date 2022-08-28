@@ -4,6 +4,8 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingOrEmptyAttribute;
 import static org.openapitools.openapistylevalidator.error.StyleCheckSection.APIInfo;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.api.Rule;
@@ -24,11 +26,11 @@ public class InfoDescriptionRule implements Rule {
     }
 
     @Override
-    public Optional<StyleError> execute(OpenAPI api) {
+    public List<StyleError> execute(OpenAPI api) {
         String description = api.getInfo().getDescription();
         if (isEmpty(description)) {
-            return Optional.of(logMissingOrEmptyAttribute(APIInfo, "description"));
+            return Collections.singletonList(logMissingOrEmptyAttribute(APIInfo, "description"));
         }
-        return Optional.empty();
+        return Collections.emptyList();
     }
 }

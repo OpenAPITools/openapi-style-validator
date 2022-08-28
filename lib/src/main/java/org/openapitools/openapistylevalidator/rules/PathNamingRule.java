@@ -1,5 +1,7 @@
 package org.openapitools.openapistylevalidator.rules;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.api.Rule;
@@ -26,8 +28,8 @@ public class PathNamingRule implements Rule {
     }
 
     @Override
-    public Optional<StyleError> execute(OpenAPI api) {
+    public List<StyleError> execute(OpenAPI api) {
         // TODO actual implementation
-        return Optional.empty();
+        return Collections.emptyList();
     }
 }
