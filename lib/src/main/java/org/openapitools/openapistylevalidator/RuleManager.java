@@ -8,10 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
-
 import org.openapitools.openapistylevalidator.api.IRuleManager;
 import org.openapitools.openapistylevalidator.api.Rule;
-import org.openapitools.openapistylevalidator.naming.NamingChecker;
+import org.openapitools.openapistylevalidator.naming.RuleParameterProvider;
 import org.reflections.Reflections;
 import org.reflections.Store;
 import org.reflections.util.QueryFunction;
@@ -22,13 +21,12 @@ public class RuleManager implements IRuleManager {
 
     private final List<String> ignoredRules;
 
-    private final NamingChecker checker;
+    private final RuleParameterProvider checker;
 
-    public RuleManager(List<String> ignoredRules, NamingChecker checker) {
+    public RuleManager(List<String> ignoredRules, RuleParameterProvider checker) {
         this.ignoredRules = ignoredRules;
         this.checker = checker;
     }
-
 
     @Override
     public List<Rule> loadRules() {
@@ -49,7 +47,7 @@ public class RuleManager implements IRuleManager {
                     .map(Constructor::getParameterTypes)
                     .filter(params -> params.length == 1)
                     .flatMap(Arrays::stream)
-                    .anyMatch(clz -> clz.isAssignableFrom(NamingChecker.class));
+                    .anyMatch(clz -> clz.isAssignableFrom(RuleParameterProvider.class));
             if (isNamingCheckerNeeded) {
                 return instantiate(aClass, checker);
             }
@@ -69,9 +67,9 @@ public class RuleManager implements IRuleManager {
         }
     }
 
-    private Rule instantiate(Class<?> clazz, NamingChecker namingChecker) {
+    private Rule instantiate(Class<?> clazz, RuleParameterProvider ruleParameterProvider) {
         try {
-            return (Rule) clazz.getConstructor(NamingChecker.class).newInstance(namingChecker);
+            return (Rule) clazz.getConstructor(RuleParameterProvider.class).newInstance(ruleParameterProvider);
         } catch (Exception e) {
             logger.severe("Could not instantiate the rule which accepts config type in the constructor. name="
                     + clazz.getName() + " reason=" + e.getMessage());

@@ -4,7 +4,6 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.info.Contact;
 import org.openapitools.openapistylevalidator.api.Rule;

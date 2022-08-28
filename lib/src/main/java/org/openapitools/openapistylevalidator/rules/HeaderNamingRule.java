@@ -2,7 +2,6 @@ package org.openapitools.openapistylevalidator.rules;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -10,15 +9,15 @@ import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.openapitools.openapistylevalidator.ErrorMessageHelper;
 import org.openapitools.openapistylevalidator.api.Rule;
 import org.openapitools.openapistylevalidator.error.StyleError;
-import org.openapitools.openapistylevalidator.naming.NamingChecker;
+import org.openapitools.openapistylevalidator.naming.RuleParameterProvider;
 
 public class HeaderNamingRule implements Rule {
 
     public static final String HEADER_NAMING = "Header Naming";
-    private final NamingChecker checker;
+    private final RuleParameterProvider parameterProvider;
 
-    public HeaderNamingRule(NamingChecker checker) {
-        this.checker = checker;
+    public HeaderNamingRule(RuleParameterProvider parameterProvider) {
+        this.parameterProvider = parameterProvider;
     }
 
     @Override
@@ -43,7 +42,8 @@ public class HeaderNamingRule implements Rule {
                         for (Parameter opParam : op.getParameters()) {
                             if (opParam.getRef() == null) {
                                 if (opParam.getIn() == Parameter.In.HEADER) {
-                                    boolean isNamingConventionMisMatch = checker.getHeaderNamingChecker()
+                                    boolean isNamingConventionMisMatch = parameterProvider
+                                            .getHeaderNamingConvention()
                                             .getPredicate()
                                             .negate()
                                             .test(opParam.getName());
@@ -51,7 +51,9 @@ public class HeaderNamingRule implements Rule {
                                         StyleError styleError = ErrorMessageHelper.logOperationBadNaming(
                                                 opParam.getName(),
                                                 "header",
-                                                checker.getHeaderNamingChecker().getDesignation(),
+                                                parameterProvider
+                                                        .getHeaderNamingConvention()
+                                                        .getDesignation(),
                                                 key,
                                                 method);
                                         errors.add(styleError);

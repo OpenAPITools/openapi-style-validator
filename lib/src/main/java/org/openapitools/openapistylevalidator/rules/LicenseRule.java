@@ -7,7 +7,6 @@ import static org.openapitools.openapistylevalidator.error.StyleCheckSection.API
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;

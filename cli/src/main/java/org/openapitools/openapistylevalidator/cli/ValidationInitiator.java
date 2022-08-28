@@ -11,9 +11,8 @@ import org.openapitools.openapistylevalidator.OpenAPIStyleValidator;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
 import org.openapitools.openapistylevalidator.RuleManager;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
-import org.openapitools.openapistylevalidator.ValidatorParametersUtils;
 import org.openapitools.openapistylevalidator.error.StyleError;
-import org.openapitools.openapistylevalidator.naming.NamingChecker;
+import org.openapitools.openapistylevalidator.naming.RuleParameterProvider;
 
 public class ValidationInitiator {
     public List<StyleError> validate(OptionManager optionManager, CommandLine commandLine) {
@@ -40,8 +39,8 @@ public class ValidationInitiator {
         OpenAPI openAPI = parseToOpenAPIModels(optionManager, commandLine);
         ValidatorParameters parameters = optionManager.getOptionalValidatorParametersOrDefault(commandLine);
         List<String> ignoredRules = ValidatorParametersUtils.toIgnoredRules(parameters);
-        NamingChecker namingChecker = ValidatorParametersUtils.toNamingChecker(parameters);
-        RuleManager defaultRuleExecutor = new RuleManager(ignoredRules, namingChecker);
+        RuleParameterProvider ruleParameterProvider = ValidatorParametersUtils.toParameterProvider(parameters);
+        RuleManager defaultRuleExecutor = new RuleManager(ignoredRules, ruleParameterProvider);
         OpenAPIStyleValidator openAPIStyleValidator = new OpenAPIStyleValidator(openAPI, defaultRuleExecutor);
         return openAPIStyleValidator.validate();
     }

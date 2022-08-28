@@ -3,7 +3,6 @@ package org.openapitools.openapistylevalidator;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.api.IRuleManager;
 import org.openapitools.openapistylevalidator.api.Rule;

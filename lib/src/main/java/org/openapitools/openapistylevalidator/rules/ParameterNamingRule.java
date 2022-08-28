@@ -2,19 +2,18 @@ package org.openapitools.openapistylevalidator.rules;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.api.Rule;
 import org.openapitools.openapistylevalidator.error.StyleError;
-import org.openapitools.openapistylevalidator.naming.NamingChecker;
+import org.openapitools.openapistylevalidator.naming.RuleParameterProvider;
 
 public class ParameterNamingRule implements Rule {
 
     public static final String PARAMETER_NAMING = "parameter naming";
-    private final NamingChecker namingChecker;
+    private final RuleParameterProvider ruleParameterProvider;
 
-    public ParameterNamingRule(NamingChecker namingChecker) {
-        this.namingChecker = namingChecker;
+    public ParameterNamingRule(RuleParameterProvider ruleParameterProvider) {
+        this.ruleParameterProvider = ruleParameterProvider;
     }
 
     @Override

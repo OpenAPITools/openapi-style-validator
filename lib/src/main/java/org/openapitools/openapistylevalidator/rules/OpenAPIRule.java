@@ -4,7 +4,6 @@ import static org.openapitools.openapistylevalidator.ErrorMessageHelper.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.openapistylevalidator.api.Rule;
 import org.openapitools.openapistylevalidator.error.StyleError;

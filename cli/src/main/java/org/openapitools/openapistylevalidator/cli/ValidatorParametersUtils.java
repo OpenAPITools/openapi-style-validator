@@ -1,9 +1,4 @@
-package org.openapitools.openapistylevalidator;
-
-import org.openapitools.openapistylevalidator.naming.NamingChecker;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.openapitools.openapistylevalidator.cli;
 
 import static org.openapitools.openapistylevalidator.rules.ContactInfoRule.CONTACT_INFO;
 import static org.openapitools.openapistylevalidator.rules.HeaderNamingRule.HEADER_NAMING;
@@ -12,6 +7,11 @@ import static org.openapitools.openapistylevalidator.rules.LicenseRule.LICENCE_I
 import static org.openapitools.openapistylevalidator.rules.ParameterNamingRule.PARAMETER_NAMING;
 import static org.openapitools.openapistylevalidator.rules.PathNamingRule.PATH_NAMING;
 import static org.openapitools.openapistylevalidator.rules.PropertyNamingRule.PROPERTY_NAMING;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.openapitools.openapistylevalidator.ValidatorParameters;
+import org.openapitools.openapistylevalidator.naming.RuleParameterProvider;
 
 public class ValidatorParametersUtils {
 
@@ -35,8 +35,8 @@ public class ValidatorParametersUtils {
         return ignoredRules;
     }
 
-    public static NamingChecker toNamingChecker(ValidatorParameters parameters) {
-        NamingChecker.Builder builder = new NamingChecker.Builder();
+    public static RuleParameterProvider toParameterProvider(ValidatorParameters parameters) {
+        RuleParameterProvider.Builder builder = new RuleParameterProvider.Builder();
         builder.withParameterNamingChecker(parameters.getParameterNamingConvention());
         builder.withHeaderNamingChecker(parameters.getHeaderNamingConvention());
         builder.withPathNamingChecker(parameters.getPathNamingConvention());
