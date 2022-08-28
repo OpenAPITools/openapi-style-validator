@@ -3,7 +3,7 @@ package org.openapitools.openapistylevalidator.naming;
 import java.util.function.Predicate;
 import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 
-public class NamingChecker {
+public final class NamingChecker {
 
     private final NamingConvention pathNamingChecker;
 
@@ -13,7 +13,7 @@ public class NamingChecker {
 
     private final NamingConvention propertyNamingChecker;
 
-    protected NamingChecker(
+    private NamingChecker(
             NamingConvention pathNamingChecker,
             NamingConvention parameterNamingChecker,
             NamingConvention headerNamingChecker,

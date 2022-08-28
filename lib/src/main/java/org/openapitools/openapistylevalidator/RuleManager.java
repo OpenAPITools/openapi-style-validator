@@ -1,79 +1,49 @@
 package org.openapitools.openapistylevalidator;
 
 import static java.util.stream.Collectors.toList;
-import static org.openapitools.openapistylevalidator.rules.ContactInfoRule.CONTACT_INFO;
-import static org.openapitools.openapistylevalidator.rules.HeaderNamingRule.*;
-import static org.openapitools.openapistylevalidator.rules.InfoDescriptionRule.INFO_DESCRIPTION;
-import static org.openapitools.openapistylevalidator.rules.LicenseRule.LICENCE_INFO;
-import static org.openapitools.openapistylevalidator.rules.ParameterNamingRule.PARAMETER_NAMING;
-import static org.openapitools.openapistylevalidator.rules.PathNamingRule.*;
-import static org.openapitools.openapistylevalidator.rules.PropertyNamingRule.PROPERTY_NAMING;
 import static org.reflections.scanners.Scanners.SubTypes;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import org.openapitools.openapistylevalidator.api.IRuleManager;
 import org.openapitools.openapistylevalidator.api.Rule;
 import org.openapitools.openapistylevalidator.naming.NamingChecker;
 import org.reflections.Reflections;
 import org.reflections.Store;
 import org.reflections.util.QueryFunction;
 
-public class RulesManager {
+public class RuleManager implements IRuleManager {
 
-    private static final Logger logger = Logger.getLogger(RulesManager.class.getName());
+    private static final Logger logger = Logger.getLogger(RuleManager.class.getName());
 
-    private final ValidatorParameters parameters;
+    private final List<String> ignoredRules;
 
-    public RulesManager(ValidatorParameters parameters) {
-        this.parameters = parameters;
+    private final NamingChecker checker;
+
+    public RuleManager(List<String> ignoredRules, NamingChecker checker) {
+        this.ignoredRules = ignoredRules;
+        this.checker = checker;
     }
 
-    public List<String> convertToIgnoredRules() {
-        ArrayList<String> ignoredRules = new ArrayList<>();
-        if (!parameters.isValidateInfoContact()) {
-            ignoredRules.add(CONTACT_INFO);
-        }
-        if (!parameters.isValidateInfoLicense()) {
-            ignoredRules.add(LICENCE_INFO);
-        }
-        if (!parameters.isValidateInfoDescription()) {
-            ignoredRules.add(INFO_DESCRIPTION);
-        }
-        if (!parameters.isValidateNaming()) {
-            ignoredRules.add(HEADER_NAMING);
-            ignoredRules.add(PARAMETER_NAMING);
-            ignoredRules.add(PATH_NAMING);
-            ignoredRules.add(PROPERTY_NAMING);
-        }
-        return ignoredRules;
-    }
 
-    private NamingChecker toNamingChecker() {
-        NamingChecker.Builder builder = new NamingChecker.Builder();
-        builder.withParameterNamingChecker(parameters.getParameterNamingConvention());
-        builder.withHeaderNamingChecker(parameters.getHeaderNamingConvention());
-        builder.withPathNamingChecker(parameters.getPathNamingConvention());
-        builder.withPropertyNamingChecker(parameters.getPropertyNamingConvention());
-        return builder.build();
-    }
-
-    public List<Rule> loadAllRules() {
+    @Override
+    public List<Rule> loadRules() {
         Reflections reflections = new Reflections();
         QueryFunction<Store, Class<?>> ruleQueryFunction =
                 SubTypes.of(Rule.class).asClass();
         return reflections.get(ruleQueryFunction).stream()
                 .map(subType -> instantiateRule(subType.getName()))
                 .filter(Objects::nonNull)
+                .filter(rule -> !ignoredRules.contains(rule.ruleName()))
                 .collect(toList());
     }
 
     private Rule instantiateRule(String className) {
         try {
-            NamingChecker namingChecker = toNamingChecker();
             Class<?> aClass = Class.forName(className);
             boolean isNamingCheckerNeeded = Arrays.stream(aClass.getDeclaredConstructors())
                     .map(Constructor::getParameterTypes)
@@ -81,7 +51,7 @@ public class RulesManager {
                     .flatMap(Arrays::stream)
                     .anyMatch(clz -> clz.isAssignableFrom(NamingChecker.class));
             if (isNamingCheckerNeeded) {
-                return instantiate(aClass, namingChecker);
+                return instantiate(aClass, checker);
             }
             return instantiate(aClass);
         } catch (ClassNotFoundException e) {

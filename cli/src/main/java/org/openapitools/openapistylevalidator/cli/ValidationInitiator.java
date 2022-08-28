@@ -9,9 +9,11 @@ import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenAPIStyleValidator;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
-import org.openapitools.openapistylevalidator.RulesManager;
+import org.openapitools.openapistylevalidator.RuleManager;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
+import org.openapitools.openapistylevalidator.ValidatorParametersUtils;
 import org.openapitools.openapistylevalidator.error.StyleError;
+import org.openapitools.openapistylevalidator.naming.NamingChecker;
 
 public class ValidationInitiator {
     public List<StyleError> validate(OptionManager optionManager, CommandLine commandLine) {
@@ -37,8 +39,10 @@ public class ValidationInitiator {
     public List<StyleError> validateV2(OptionManager optionManager, CommandLine commandLine) {
         OpenAPI openAPI = parseToOpenAPIModels(optionManager, commandLine);
         ValidatorParameters parameters = optionManager.getOptionalValidatorParametersOrDefault(commandLine);
-        RulesManager rulesManager = new RulesManager(parameters);
-        OpenAPIStyleValidator openAPIStyleValidator = new OpenAPIStyleValidator(openAPI, rulesManager);
+        List<String> ignoredRules = ValidatorParametersUtils.toIgnoredRules(parameters);
+        NamingChecker namingChecker = ValidatorParametersUtils.toNamingChecker(parameters);
+        RuleManager defaultRuleExecutor = new RuleManager(ignoredRules, namingChecker);
+        OpenAPIStyleValidator openAPIStyleValidator = new OpenAPIStyleValidator(openAPI, defaultRuleExecutor);
         return openAPIStyleValidator.validate();
     }
 }
