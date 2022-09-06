@@ -39,7 +39,13 @@ class ValidatorParametersTest {
                         ValidatorParameters.NamingConvention.UnderscoreUpperCase,
                         parameters.getHeaderNamingConvention()),
                 () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()));
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getCookieParamNamingConvention()));
     }
 
     @Test
@@ -49,7 +55,10 @@ class ValidatorParametersTest {
                 .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setHeaderNamingConvention(ValidatorParameters.NamingConvention.UnderscoreUpperCase)
-                .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
+                .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setQueryParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setPathParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setCookieParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
 
         Assertions.assertAll(
                 () -> assertFalse(parameters.isValidateInfoLicense()),
@@ -73,6 +82,12 @@ class ValidatorParametersTest {
                         ValidatorParameters.NamingConvention.UnderscoreUpperCase,
                         parameters.getHeaderNamingConvention()),
                 () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()));
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.CamelCase, parameters.getCookieParamNamingConvention()));
     }
 }

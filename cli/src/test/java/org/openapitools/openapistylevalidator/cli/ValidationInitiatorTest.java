@@ -319,11 +319,11 @@ class ValidationInitiatorTest {
         Assertions.assertAll(
                 () -> assertEquals(3, errorList.size()),
                 () -> assertEquals(
-                        "*ERROR* in path POST /some_path/{some_id} 'some_id' -> parameter should be in "
+                        "*ERROR* in path POST /some_path/{some_id} 'some_id' -> path parameter should be in "
                                 + expectedPathParameterConvention,
                         errorList.get(0).toString()),
                 () -> assertEquals(
-                        "*ERROR* in path POST /some_path/{some_id} 'some_name' -> parameter should be in "
+                        "*ERROR* in path POST /some_path/{some_id} 'some_name' -> query parameter should be in "
                                 + expectedQueryParameterConvention,
                         errorList.get(1).toString()),
                 () -> assertEquals(

@@ -133,6 +133,69 @@ class OptionManagerTest {
                 ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
     }
 
+    /* begin - tests for issue #367 */
+    @Test
+    void shouldParseDetailedParameterNamingConventionOptions() throws Exception {
+        ValidatorParameters parameters =
+                subject.getOptionalValidatorParametersOrDefault(withOptions("detailedParameterNamingConvention"));
+
+        Assertions.assertEquals(true, parameters.isValidateNaming());
+        Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathParamNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getQueryParamNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getCookieParamNamingConvention());
+    }
+
+    @Test
+    /**
+     * When only the 'parameterNamingConvention' naming convention option is set, it should rule over all parameters types.
+     * Note that 'getPathParamNamingConvention', 'getQueryParamNamingConvention' and 'getCookieParamNamingConvention'
+     * must return the same naming convention returned for 'getParameterNamingConvention'.
+     */
+    void shouldSetAllParametersNamingConventionUnderSameNameConvention() throws Exception {
+        ValidatorParameters parameters = subject.getOptionalValidatorParametersOrDefault(withOptions("alternative"));
+
+        Assertions.assertEquals(true, parameters.isValidateNaming());
+        Assertions.assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getPathParamNamingConvention());
+        Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getQueryParamNamingConvention());
+        Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getCookieParamNamingConvention());
+    }
+
+    @Test
+    /**
+     * If 'parameterNamingConvention' naming convention option is set and another naming convention for specific parameters
+     * (query, path or cookie) is also set, the getters must return the specified values.
+     * The parameters which hadn't had their naming conventions explicitly specified, will be ruled by the
+     * 'parameterNamingConvention' option.
+     */
+    void shouldParseCoexistingParameterNamingConventionOptions() throws Exception {
+        ValidatorParameters parameters =
+                subject.getOptionalValidatorParametersOrDefault(withOptions("parameterNamingConventionCoexistence"));
+
+        Assertions.assertEquals(true, parameters.isValidateNaming());
+        Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getPathParamNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getQueryParamNamingConvention());
+        Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.HyphenCase, parameters.getCookieParamNamingConvention());
+    }
+    /* end - tests for issue #367 */
+
     private CommandLine withOptions(String fileName) throws Exception {
         DefaultParser parser = new DefaultParser();
         Options options = subject.getOptions();

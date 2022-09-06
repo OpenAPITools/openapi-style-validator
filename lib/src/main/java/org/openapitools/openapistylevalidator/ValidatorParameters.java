@@ -21,6 +21,9 @@ public class ValidatorParameters {
     public static final String PARAMETER_NAMING_CONVENTION = "parameterNamingConvention";
     public static final String HEADER_NAMING_CONVENTION = "headerNamingConvention";
     public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
+    public static final String QUERY_PARAM_NAMING_CONVENTION = "queryParamNamingConvention";
+    public static final String PATH_PARAM_NAMING_CONVENTION = "pathParamNamingConvention";
+    public static final String COOKIE_PARAM_NAMING_CONVENTION = "cookieParamNamingConvention";
 
     public static enum NamingConvention {
         UnderscoreCase("underscore_case"),
@@ -64,6 +67,13 @@ public class ValidatorParameters {
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
+
+    private boolean queryParamNamingConventionWasExplicitlySet = false;
+    private boolean pathParamNamingConventionWasExplicitlySet = false;
+    private boolean cookieParamNamingConventionWasExplicitlySet = false;
 
     public ValidatorParameters() {
         // For Gson
@@ -129,6 +139,18 @@ public class ValidatorParameters {
         return propertyNamingConvention;
     }
 
+    public NamingConvention getQueryParamNamingConvention() {
+        return queryParamNamingConvention;
+    }
+
+    public NamingConvention getPathParamNamingConvention() {
+        return pathParamNamingConvention;
+    }
+
+    public NamingConvention getCookieParamNamingConvention() {
+        return cookieParamNamingConvention;
+    }
+
     public ValidatorParameters setValidateInfoLicense(boolean validateInfoLicense) {
         this.validateInfoLicense = validateInfoLicense;
         return this;
@@ -191,6 +213,20 @@ public class ValidatorParameters {
 
     public ValidatorParameters setParameterNamingConvention(NamingConvention parameterNamingConvention) {
         this.parameterNamingConvention = parameterNamingConvention;
+
+        // Setting the higher level parameter naming convention overrides the sub-conventions
+        if (!this.cookieParamNamingConventionWasExplicitlySet) {
+            this.cookieParamNamingConvention = parameterNamingConvention;
+        }
+
+        if (!this.pathParamNamingConventionWasExplicitlySet) {
+            this.pathParamNamingConvention = parameterNamingConvention;
+        }
+
+        if (!this.queryParamNamingConventionWasExplicitlySet) {
+            this.queryParamNamingConvention = parameterNamingConvention;
+        }
+
         return this;
     }
 
@@ -201,6 +237,24 @@ public class ValidatorParameters {
 
     public ValidatorParameters setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
+        return this;
+    }
+
+    public ValidatorParameters setQueryParamNamingConvention(NamingConvention queryParamNamingConvention) {
+        this.queryParamNamingConvention = queryParamNamingConvention;
+        this.queryParamNamingConventionWasExplicitlySet = true;
+        return this;
+    }
+
+    public ValidatorParameters setPathParamNamingConvention(NamingConvention pathParamNamingConvention) {
+        this.pathParamNamingConvention = pathParamNamingConvention;
+        this.pathParamNamingConventionWasExplicitlySet = true;
+        return this;
+    }
+
+    public ValidatorParameters setCookieParamNamingConvention(NamingConvention cookieParamNamingConvention) {
+        this.cookieParamNamingConvention = cookieParamNamingConvention;
+        this.cookieParamNamingConventionWasExplicitlySet = true;
         return this;
     }
 
@@ -240,7 +294,10 @@ public class ValidatorParameters {
                         + "pathNamingConvention=%s, "
                         + "headerNamingConvention=%s, "
                         + "parameterNamingConvention=%s, "
-                        + "propertyNamingConvention=%s"
+                        + "propertyNamingConvention=%s, "
+                        + "queryParamNamingConvention=%s, "
+                        + "pathParamNamingConvention=%s, "
+                        + "cookieParamNamingConvention=%s"
                         + "]",
                 validateInfoLicense,
                 validateInfoDescription,
@@ -258,6 +315,9 @@ public class ValidatorParameters {
                 pathNamingConvention,
                 headerNamingConvention,
                 parameterNamingConvention,
-                propertyNamingConvention);
+                propertyNamingConvention,
+                queryParamNamingConvention,
+                pathParamNamingConvention,
+                cookieParamNamingConvention);
     }
 }

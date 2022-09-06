@@ -82,8 +82,8 @@ public class IntegrationTest {
         .assertLogText("Validating spec:")
         .assertLogText(Paths.get("cli", "src", "test", "resources", "some.yaml").toString())
         .assertLogText("OpenAPI Specification does not meet the requirements. Issues:")
-        .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_id' -> parameter should be in camelCase")
-        .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_name' -> parameter should be in camelCase")
+        .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_id' -> path parameter should be in camelCase")
+        .assertLogText("*ERROR* in path POST /some_path/{some_id} 'some_name' -> query parameter should be in camelCase")
         .assertLogText("*ERROR* in path /some_path/{some_id} 'some_path' -> path should be in hyphen-case")
         .assertLogText("BUILD FAILURE");
   }
