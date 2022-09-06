@@ -250,7 +250,7 @@ public class OpenApiSpecStyleValidator {
                                                         parameters.getPathParamNamingConvention(),
                                                         key,
                                                         method);
-                                                
+
                                             } else if (opParam.getIn() == Parameter.In.COOKIE) {
                                                 validateParamNaming(
                                                         opParam.getName(),
@@ -258,7 +258,6 @@ public class OpenApiSpecStyleValidator {
                                                         parameters.getCookieParamNamingConvention(),
                                                         key,
                                                         method);
-
                                             }
                                         }
                                     }
@@ -293,16 +292,10 @@ public class OpenApiSpecStyleValidator {
             NamingConvention namingConvention,
             String key,
             PathItem.HttpMethod method) {
-        boolean isValid = namingValidator.isNamingValid(
-                paramName, namingConvention);
+        boolean isValid = namingValidator.isNamingValid(paramName, namingConvention);
         if (!isValid) {
             errorAggregator.logOperationBadNaming(
-                    paramName,
-                    variableType,
-                    namingConvention
-                            .getDesignation(),
-                    key,
-                    method);
+                    paramName, variableType, namingConvention.getDesignation(), key, method);
         }
     }
 }
