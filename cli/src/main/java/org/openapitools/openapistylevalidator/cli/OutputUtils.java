@@ -10,7 +10,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 class OutputUtils {
     private static final Logger logger = LogManager.getLogger(OutputUtils.class);
