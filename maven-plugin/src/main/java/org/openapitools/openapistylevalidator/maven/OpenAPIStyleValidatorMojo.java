@@ -10,7 +10,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
-import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 import org.openapitools.openapistylevalidator.error.StyleError;
 
 import io.swagger.parser.OpenAPIParser;

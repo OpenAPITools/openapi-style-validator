@@ -14,7 +14,7 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
-import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 import org.openapitools.openapistylevalidator.error.StyleCheckSection;
 import org.openapitools.openapistylevalidator.error.StyleError;
 

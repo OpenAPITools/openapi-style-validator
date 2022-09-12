@@ -2,6 +2,7 @@ package org.openapitools.openapistylevalidator;
 
 import java.util.Arrays;
 import java.util.Optional;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 
 class NamingValidator {
 
@@ -76,7 +77,7 @@ class NamingValidator {
         return variableName.length() == (totalLength + tokens.length - 1);
     }
 
-    boolean isNamingValid(String name, ValidatorParameters.NamingConvention namingStrategy) {
+    boolean isNamingValid(String name, NamingConvention namingStrategy) {
         switch (namingStrategy) {
             case UnderscoreCase:
                 return isUnderscoreCase(name);

@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 
 class ResourceTest {
     private static final String PREFIX = "    \"";
@@ -90,22 +91,22 @@ class ResourceTest {
                 + PREFIX
                 + ValidatorParameters.PATH_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
-                + ValidatorParameters.NamingConvention.HyphenCase
+                + NamingConvention.HyphenCase
                 + NEXT_LINE_QUOTE
                 + PREFIX
                 + ValidatorParameters.HEADER_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
-                + ValidatorParameters.NamingConvention.UnderscoreUpperCase
+                + NamingConvention.UnderscoreUpperCase
                 + NEXT_LINE_QUOTE
                 + PREFIX
                 + ValidatorParameters.PARAMETER_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
-                + ValidatorParameters.NamingConvention.CamelCase
+                + NamingConvention.CamelCase
                 + NEXT_LINE_QUOTE
                 + PREFIX
                 + ValidatorParameters.PROPERTY_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
-                + ValidatorParameters.NamingConvention.CamelCase
+                + NamingConvention.CamelCase
                 + "\""
                 + System.lineSeparator()
                 + "}";

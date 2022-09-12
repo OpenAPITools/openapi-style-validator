@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 
 class OptionManagerTest {
 
@@ -62,7 +63,7 @@ class OptionManagerTest {
         ValidatorParameters parameters =
                 subject.getOptionalValidatorParametersOrDefault(withOptions("alternativeLegacy"));
 
-        Assertions.assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getPathNamingConvention());
     }
 
     @Test
@@ -70,8 +71,7 @@ class OptionManagerTest {
         ValidatorParameters parameters =
                 subject.getOptionalValidatorParametersOrDefault(withOptions("alternativeLegacy"));
 
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
     }
 
     @Test
@@ -79,8 +79,7 @@ class OptionManagerTest {
         ValidatorParameters parameters =
                 subject.getOptionalValidatorParametersOrDefault(withOptions("alternativeLegacy"));
 
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
     }
 
     @Test
@@ -88,7 +87,7 @@ class OptionManagerTest {
         ValidatorParameters parameters =
                 subject.getOptionalValidatorParametersOrDefault(withOptions("alternativeAndLegacy"));
 
-        Assertions.assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getPathNamingConvention());
     }
 
     @Test
@@ -96,8 +95,7 @@ class OptionManagerTest {
         ValidatorParameters parameters =
                 subject.getOptionalValidatorParametersOrDefault(withOptions("alternativeAndLegacy"));
 
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
     }
 
     @Test
@@ -105,8 +103,7 @@ class OptionManagerTest {
         ValidatorParameters parameters =
                 subject.getOptionalValidatorParametersOrDefault(withOptions("alternativeAndLegacy"));
 
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
     }
 
     @Test
@@ -124,13 +121,10 @@ class OptionManagerTest {
         Assertions.assertEquals(true, parameters.isValidateModelPropertiesDescription());
         Assertions.assertEquals(true, parameters.isValidateModelRequiredProperties());
         Assertions.assertEquals(true, parameters.isValidateNaming());
-        Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
     }
 
     /* begin - tests for issue #367 */
@@ -140,17 +134,12 @@ class OptionManagerTest {
                 subject.getOptionalValidatorParametersOrDefault(withOptions("detailedParameterNamingConvention"));
 
         Assertions.assertEquals(true, parameters.isValidateNaming());
-        Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathParamNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getQueryParamNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getCookieParamNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPathParamNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getQueryParamNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getCookieParamNamingConvention());
     }
 
     @Test
@@ -163,11 +152,9 @@ class OptionManagerTest {
         ValidatorParameters parameters = subject.getOptionalValidatorParametersOrDefault(withOptions("alternative"));
 
         Assertions.assertEquals(true, parameters.isValidateNaming());
-        Assertions.assertEquals(ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
+        Assertions.assertEquals(NamingConvention.CamelCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPropertyNamingConvention());
         Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getPathParamNamingConvention());
         Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getQueryParamNamingConvention());
         Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getCookieParamNamingConvention());
@@ -185,14 +172,11 @@ class OptionManagerTest {
                 subject.getOptionalValidatorParametersOrDefault(withOptions("parameterNamingConventionCoexistence"));
 
         Assertions.assertEquals(true, parameters.isValidateNaming());
-        Assertions.assertEquals(ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getParameterNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getPathNamingConvention());
+        Assertions.assertEquals(NamingConvention.UnderscoreUpperCase, parameters.getParameterNamingConvention());
         Assertions.assertEquals(parameters.getParameterNamingConvention(), parameters.getPathParamNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getQueryParamNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.HyphenCase, parameters.getCookieParamNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getQueryParamNamingConvention());
+        Assertions.assertEquals(NamingConvention.HyphenCase, parameters.getCookieParamNamingConvention());
     }
     /* end - tests for issue #367 */
 
