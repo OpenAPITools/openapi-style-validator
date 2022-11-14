@@ -22,7 +22,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest-core:2.2'
     testImplementation 'io.takari.maven.plugins:takari-plugin-testing:3.0.1'
-    testImplementation 'io.takari.maven.plugins:takari-plugin-integration-testing:3.0.0'
+    testImplementation 'io.takari.maven.plugins:takari-plugin-integration-testing:3.0.1'
     testImplementation 'org.assertj:assertj-core:3.23.1'
     testRuntimeOnly 'org.apache.maven:maven-compat:3.8.6'
     testRuntimeOnly 'org.apache.maven:maven-core:3.8.6'
