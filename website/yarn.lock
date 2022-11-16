@@ -6719,13 +6719,13 @@ fsevents@~2.3.2:
   linkType: hard
 
 "loader-utils@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "loader-utils@npm:2.0.0"
+  version: 2.0.4
+  resolution: "loader-utils@npm:2.0.4"
   dependencies:
     big.js: ^5.2.2
     emojis-list: ^3.0.0
     json5: ^2.1.2
-  checksum: a1c2e48781e1501e126a32c39bc1fb1a7e2f02bd99e5aeb8853ddaf3c121fffefcc4579367f97ca6890b58369e571af1c9ec82e4e20db238d560ab359ff25c33
+  checksum: 3580906e021e94ed3b13b8179d557bd953494cc690015fa0b8bb99dfe8abfbe44e984c01cd0df68156c4b541a5b711019490124f83daaa5b8584f8e205b2a2c3
   languageName: node
   linkType: hard
 
