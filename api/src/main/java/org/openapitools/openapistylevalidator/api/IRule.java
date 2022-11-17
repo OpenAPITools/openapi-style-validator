@@ -6,7 +6,7 @@ import org.openapitools.openapistylevalidator.error.StyleError;
 
 public interface IRule {
 
-    String ruleName();
+    String name();
 
     String description();
 

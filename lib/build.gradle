@@ -41,9 +41,9 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'JFCote'
-                        name = 'Jean-Francois Cote'
-                        email = 'jcote@stingray.com'
+                        id = 'thiyagu'
+                        name = 'Thiyagu GK'
+                        email = 'thiyagu103@gmail.com'
                     }
                 }
                 scm {
