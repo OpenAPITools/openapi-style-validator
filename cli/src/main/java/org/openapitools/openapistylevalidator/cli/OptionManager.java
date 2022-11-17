@@ -11,6 +11,7 @@ import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 
 class OptionManager {
     private static final Logger logger = LogManager.getLogger(OptionManager.class);
@@ -102,7 +103,7 @@ class OptionManager {
         validateNamingConvention("property", parameters.getPropertyNamingConvention());
     }
 
-    private void validateNamingConvention(String kind, ValidatorParameters.NamingConvention convention) {
+    private void validateNamingConvention(String kind, NamingConvention convention) {
         if (convention != null) return;
         throw new IllegalArgumentException("Invalid " + kind.toLowerCase() + "NamingConvention");
     }

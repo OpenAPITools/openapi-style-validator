@@ -1,4 +1,4 @@
-package org.openapitools.openapistylevalidator.styleerror;
+package org.openapitools.openapistylevalidator.error;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

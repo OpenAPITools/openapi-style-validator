@@ -1,5 +1,7 @@
 package org.openapitools.openapistylevalidator;
 
+import org.openapitools.openapistylevalidator.api.NamingConvention;
+
 public class ValidatorParameters {
     public static final String VALIDATE_INFO_LICENSE = "validateInfoLicense";
     public static final String VALIDATE_INFO_DESCRIPTION = "validateInfoDescription";
@@ -24,28 +26,6 @@ public class ValidatorParameters {
     public static final String QUERY_PARAM_NAMING_CONVENTION = "queryParamNamingConvention";
     public static final String PATH_PARAM_NAMING_CONVENTION = "pathParamNamingConvention";
     public static final String COOKIE_PARAM_NAMING_CONVENTION = "cookieParamNamingConvention";
-
-    public static enum NamingConvention {
-        UnderscoreCase("underscore_case"),
-        UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
-        CamelCase("camelCase"),
-        HyphenCase("hyphen-case"),
-        AnyCase("AnyCase"),
-        HyphenUpperCase("Hyphen-Upper-Case");
-
-        private final String designation;
-
-        NamingConvention(String appelation) {
-            this.designation = appelation;
-        }
-
-        /**
-         * @return the name of the naming convention as it can be used in the reports
-         */
-        public String getDesignation() {
-            return designation;
-        }
-    }
 
     private boolean validateInfoLicense = true;
     private boolean validateInfoDescription = true;

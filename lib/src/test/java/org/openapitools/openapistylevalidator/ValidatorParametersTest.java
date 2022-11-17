@@ -1,10 +1,13 @@
 package org.openapitools.openapistylevalidator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
 
 class ValidatorParametersTest {
 
@@ -31,34 +34,26 @@ class ValidatorParametersTest {
                 () -> assertTrue(parameters.isValidateModelNoLocalDef()),
                 () -> assertTrue(parameters.isValidateNaming()),
                 () -> assertTrue(parameters.isIgnoreHeaderXNaming()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.HyphenCase, parameters.getPathNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.UnderscoreUpperCase,
-                        parameters.getHeaderNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getCookieParamNamingConvention()));
+                () -> assertEquals(NamingConvention.HyphenCase, parameters.getPathNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
+                () -> assertEquals(NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getCookieParamNamingConvention()));
     }
 
     @Test
     void testAllGetterSetters() {
         parameters = TestDataProvider.createParametersDisablingAllValidations()
                 .setIgnoreHeaderXNaming(false)
-                .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
-                .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
-                .setHeaderNamingConvention(ValidatorParameters.NamingConvention.UnderscoreUpperCase)
-                .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
-                .setQueryParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
-                .setPathParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
-                .setCookieParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
+                .setPathNamingConvention(NamingConvention.CamelCase)
+                .setParameterNamingConvention(NamingConvention.CamelCase)
+                .setHeaderNamingConvention(NamingConvention.UnderscoreUpperCase)
+                .setPropertyNamingConvention(NamingConvention.CamelCase)
+                .setQueryParamNamingConvention(NamingConvention.CamelCase)
+                .setPathParamNamingConvention(NamingConvention.CamelCase)
+                .setCookieParamNamingConvention(NamingConvention.CamelCase);
 
         Assertions.assertAll(
                 () -> assertFalse(parameters.isValidateInfoLicense()),
@@ -74,20 +69,12 @@ class ValidatorParametersTest {
                 () -> assertFalse(parameters.isValidateModelNoLocalDef()),
                 () -> assertFalse(parameters.isValidateNaming()),
                 () -> assertFalse(parameters.isIgnoreHeaderXNaming()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPathNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.UnderscoreUpperCase,
-                        parameters.getHeaderNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.CamelCase, parameters.getCookieParamNamingConvention()));
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getPathNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getParameterNamingConvention()),
+                () -> assertEquals(NamingConvention.UnderscoreUpperCase, parameters.getHeaderNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
+                () -> assertEquals(NamingConvention.CamelCase, parameters.getCookieParamNamingConvention()));
     }
 }

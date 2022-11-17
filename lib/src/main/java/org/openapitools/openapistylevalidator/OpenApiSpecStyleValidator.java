@@ -1,6 +1,11 @@
 package org.openapitools.openapistylevalidator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -9,8 +14,9 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
-import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
-import org.openapitools.openapistylevalidator.styleerror.StyleError;
+import org.openapitools.openapistylevalidator.api.NamingConvention;
+import org.openapitools.openapistylevalidator.error.StyleCheckSection;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class OpenApiSpecStyleValidator {
     public static final String INPUT_FILE = "inputFile";
@@ -54,17 +60,16 @@ public class OpenApiSpecStyleValidator {
                 List<Boolean> infoPresence = new ArrayList<>();
                 infoPresence.add(license.getName() != null && !license.getName().isEmpty());
                 infoPresence.add(license.getUrl() != null && !license.getUrl().isEmpty());
-                errorAggregator.validateMinimumInfo(
-                        infoPresence, StyleError.StyleCheckSection.APIInfo, "license", "name|url");
+                errorAggregator.validateMinimumInfo(infoPresence, StyleCheckSection.APIInfo, "license", "name|url");
             } else {
-                errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "license");
+                errorAggregator.logMissingOrEmptyAttribute(StyleCheckSection.APIInfo, "license");
             }
         }
 
         if (parameters.isValidateInfoDescription()) {
             String description = info.getDescription();
             if (description == null || description.isEmpty()) {
-                errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "description");
+                errorAggregator.logMissingOrEmptyAttribute(StyleCheckSection.APIInfo, "description");
             }
         }
 
@@ -77,9 +82,9 @@ public class OpenApiSpecStyleValidator {
                 infoPresence.add(
                         contact.getEmail() != null && !contact.getEmail().isEmpty());
                 errorAggregator.validateMinimumInfo(
-                        infoPresence, StyleError.StyleCheckSection.APIInfo, "contact", "name|url|email");
+                        infoPresence, StyleCheckSection.APIInfo, "contact", "name|url|email");
             } else {
-                errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "contact");
+                errorAggregator.logMissingOrEmptyAttribute(StyleCheckSection.APIInfo, "contact");
             }
         }
     }
