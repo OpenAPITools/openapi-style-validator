@@ -5,10 +5,11 @@ plugins {
 dependencies {
     implementation project(':openapi-style-validator-api')
     implementation 'org.eclipse.microprofile.openapi:microprofile-openapi-api:3.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
     testImplementation 'org.slf4j:slf4j-jdk14:2.0.3'
     testImplementation 'org.openapitools.empoa:empoa-simple-models-impl:2.1.0'
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.10.1'
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 }
 
 java {
