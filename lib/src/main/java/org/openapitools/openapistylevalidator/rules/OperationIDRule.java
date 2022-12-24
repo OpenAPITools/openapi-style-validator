@@ -1,22 +1,18 @@
 package org.openapitools.openapistylevalidator.rules;
 
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingOrEmptyOperationAttribute;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
-import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
 import org.openapitools.openapistylevalidator.api.IRule;
 import org.openapitools.openapistylevalidator.commons.OpenAPIUtils;
 import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class OperationIDRule implements IRule {
-
-    private final Predicate<Operation> predicate = operation -> StringUtils.isEmpty(operation.getOperationId());
 
     @Override
     public String name() {
@@ -38,7 +34,7 @@ public class OperationIDRule implements IRule {
     }
 
     private List<StyleError> validateTags(String path, PathItem pathItem) {
-        return OpenAPIUtils.validateOperation(pathItem, predicate).stream()
+        return OpenAPIUtils.validateOperation(pathItem, op -> isEmpty(op.getOperationId())).stream()
                 .map(method -> logMissingOrEmptyOperationAttribute(path, method, "operationId"))
                 .collect(toList());
     }
