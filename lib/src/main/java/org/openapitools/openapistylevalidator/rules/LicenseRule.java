@@ -1,18 +1,17 @@
 package org.openapitools.openapistylevalidator.rules;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingOrEmptyAttribute;
+import static org.openapitools.openapistylevalidator.ErrorMessageHelper.validateMinimumInfo;
+import static org.openapitools.openapistylevalidator.error.StyleCheckSection.APIInfo;
+
+import java.util.Collections;
+import java.util.List;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.openapitools.openapistylevalidator.api.IRule;
 import org.openapitools.openapistylevalidator.error.StyleError;
-
-import java.util.Collections;
-import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingOrEmptyAttribute;
-import static org.openapitools.openapistylevalidator.ErrorMessageHelper.validateMinimumInfo;
-import static org.openapitools.openapistylevalidator.error.StyleCheckSection.APIInfo;
 
 public class LicenseRule implements IRule {
 

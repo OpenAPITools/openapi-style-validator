@@ -1,17 +1,15 @@
 package org.openapitools.openapistylevalidator.rules;
 
-import org.eclipse.microprofile.openapi.OASFactory;
-import org.eclipse.microprofile.openapi.models.OpenAPI;
-import org.junit.jupiter.api.Test;
-import org.openapitools.openapistylevalidator.TestDataProvider;
-import org.openapitools.openapistylevalidator.api.IRule;
-import org.openapitools.openapistylevalidator.error.StyleError;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openapitools.openapistylevalidator.TestDataProvider.createValidOpenApi;
+
+import java.util.List;
+import org.eclipse.microprofile.openapi.OASFactory;
+import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.junit.jupiter.api.Test;
+import org.openapitools.openapistylevalidator.api.IRule;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class OperationDescriptionRuleTest {
 
@@ -27,7 +25,9 @@ public class OperationDescriptionRuleTest {
     public void testWithInValidOpenAPI() {
         List<StyleError> styleErrors = rule.execute(createInValidOpenAPI());
         assertEquals(1, styleErrors.size());
-        assertEquals("*ERROR* in Operation GET /ping 'description' -> This field should be present and not empty", styleErrors.get(0).toString());
+        assertEquals(
+                "*ERROR* in Operation GET /ping 'description' -> This field should be present and not empty",
+                styleErrors.get(0).toString());
     }
 
     private OpenAPI createInValidOpenAPI() {

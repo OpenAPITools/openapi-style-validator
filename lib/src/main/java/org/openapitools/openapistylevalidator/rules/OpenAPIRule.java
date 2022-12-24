@@ -1,13 +1,12 @@
 package org.openapitools.openapistylevalidator.rules;
 
-import org.eclipse.microprofile.openapi.models.OpenAPI;
-import org.openapitools.openapistylevalidator.api.IRule;
-import org.openapitools.openapistylevalidator.error.StyleError;
+import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingPathsAndComponents;
 
 import java.util.Collections;
 import java.util.List;
-
-import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingPathsAndComponents;
+import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.openapitools.openapistylevalidator.api.IRule;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class OpenAPIRule implements IRule {
 

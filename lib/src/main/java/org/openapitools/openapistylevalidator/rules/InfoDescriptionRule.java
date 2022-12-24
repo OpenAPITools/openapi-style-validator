@@ -1,15 +1,14 @@
 package org.openapitools.openapistylevalidator.rules;
 
-import org.eclipse.microprofile.openapi.models.OpenAPI;
-import org.openapitools.openapistylevalidator.api.IRule;
-import org.openapitools.openapistylevalidator.error.StyleError;
-
-import java.util.Collections;
-import java.util.List;
-
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.openapitools.openapistylevalidator.ErrorMessageHelper.logMissingOrEmptyAttribute;
 import static org.openapitools.openapistylevalidator.error.StyleCheckSection.APIInfo;
+
+import java.util.Collections;
+import java.util.List;
+import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.openapitools.openapistylevalidator.api.IRule;
+import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class InfoDescriptionRule implements IRule {
 
@@ -33,4 +32,3 @@ public class InfoDescriptionRule implements IRule {
         return Collections.emptyList();
     }
 }
-

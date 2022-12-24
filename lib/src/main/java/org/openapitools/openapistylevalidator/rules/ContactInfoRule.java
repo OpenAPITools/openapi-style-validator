@@ -1,15 +1,14 @@
 package org.openapitools.openapistylevalidator.rules;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+import java.util.Collections;
+import java.util.List;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.info.Contact;
 import org.openapitools.openapistylevalidator.api.IRule;
 import org.openapitools.openapistylevalidator.error.StyleCheckSection;
 import org.openapitools.openapistylevalidator.error.StyleError;
-
-import java.util.Collections;
-import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class ContactInfoRule implements IRule {
 

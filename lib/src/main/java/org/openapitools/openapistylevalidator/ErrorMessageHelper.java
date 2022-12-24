@@ -9,8 +9,7 @@ import org.openapitools.openapistylevalidator.error.StyleError;
 
 public class ErrorMessageHelper {
 
-    private ErrorMessageHelper() {
-    }
+    private ErrorMessageHelper() {}
 
     public static StyleError logMissingOrEmptyAttribute(StyleCheckSection styleCheckSection, String fieldNames) {
         return new StyleError(styleCheckSection, fieldNames, "Should be present and not empty");
@@ -28,12 +27,14 @@ public class ErrorMessageHelper {
                 styleCheckSection, parentObjectName, fieldNames, "At least one field should be present and not empty");
     }
 
-    public static StyleError logMissingOrEmptyOperationCollection(String path, PathItem.HttpMethod method, String field) {
+    public static StyleError logMissingOrEmptyOperationCollection(
+            String path, PathItem.HttpMethod method, String field) {
         return new OperationStyleError(
                 field, "The collection should be present and there should be at least one item in it", path, method);
     }
 
-    public static StyleError logMissingOrEmptyOperationAttribute(String path, PathItem.HttpMethod method, String field) {
+    public static StyleError logMissingOrEmptyOperationAttribute(
+            String path, PathItem.HttpMethod method, String field) {
         return new OperationStyleError(field, "This field should be present and not empty", path, method);
     }
 
