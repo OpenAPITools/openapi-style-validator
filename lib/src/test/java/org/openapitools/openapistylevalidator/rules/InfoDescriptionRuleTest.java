@@ -6,57 +6,27 @@ import org.junit.jupiter.api.Test;
 import org.openapitools.openapistylevalidator.api.IRule;
 import org.openapitools.openapistylevalidator.error.StyleError;
 
-import javax.sound.sampled.Line;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.openapitools.openapistylevalidator.TestDataProvider.createValidOpenApi;
 
 public class InfoDescriptionRuleTest {
 
-    private IRule rule = new InfoDescriptionRule();
+    private final IRule rule = new InfoDescriptionRule();
 
     @Test
-    public void validOpenAPI() {
-        List<StyleError> violation = rule.execute(createOpenApi());
+    public void testWithValidOpenAPI() {
+        List<StyleError> violation = rule.execute(createValidOpenApi());
         assertTrue(violation.isEmpty());
     }
 
     @Test
-    public void invalidOpenAPI() {
+    public void testWithInValidOpenAPI() {
         OpenAPI openapi = OASFactory.createOpenAPI().openapi("3.0.1").info(OASFactory.createInfo().description(""));
         List<StyleError> styleErrors = rule.execute(openapi);
         assertEquals(1, styleErrors.size());
         assertEquals("*ERROR* Section: APIInfo: 'description' -> Should be present and not empty", styleErrors.get(0).toString());
-    }
-
-    private OpenAPI createOpenApi() {
-        return OASFactory.createOpenAPI()
-                .openapi("3.0.1")
-                .info(OASFactory.createInfo()
-                        .title("Ping Specification")
-                        .version("1.0")
-                        .description("Ping Specification")
-                        .license(OASFactory.createLicense()
-                                .name("Eclipse Public License - v2.0")
-                                .url("https://www.eclipse.org/legal/epl-2.0/"))
-                        .contact(
-                                OASFactory.createContact().name("OpenAPI Tools").email("team@openapitools.org")))
-                .addServer(OASFactory.createServer().url("http://localhost:8000/"))
-                .paths(OASFactory.createPaths()
-                        .addPathItem(
-                                "/ping",
-                                OASFactory.createPathItem()
-                                        .GET(OASFactory.createOperation()
-                                                .operationId("pingGet")
-                                                .summary("A simple get call")
-                                                .description(
-                                                        "When this method is called, the server answers with 200 OKs")
-                                                .addTag("demo")
-                                                .responses(OASFactory.createAPIResponses()
-                                                        .addAPIResponse(
-                                                                "200",
-                                                                OASFactory.createAPIResponse()
-                                                                        .description("OK"))))));
     }
 }
