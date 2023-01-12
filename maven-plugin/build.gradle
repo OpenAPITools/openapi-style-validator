@@ -16,7 +16,7 @@ dependencies {
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.33'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
 
-    implementation 'org.apache.maven:maven-plugin-api:3.8.6'
+    implementation 'org.apache.maven:maven-plugin-api:3.8.7'
     compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.7.0'
 
     testImplementation 'junit:junit:4.12'
