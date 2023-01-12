@@ -20,7 +20,7 @@ jobs:
       - name: print Java version
         run: java -version
       - name: Cache Gradle packages
-        uses: actions/cache@v3.2.1
+        uses: actions/cache@v3.2.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
