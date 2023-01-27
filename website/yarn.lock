@@ -10314,9 +10314,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "ua-parser-js@npm:^0.7.18":
-  version: 0.7.31
-  resolution: "ua-parser-js@npm:0.7.31"
-  checksum: ef79216e6f7c91d445c37fc67d9c7b893114f78887f65bb63bb3c31fe083b78ec11afe3089019a61ae92746afbc3939cf6213569f73091c959ff1352ebed1304
+  version: 0.7.33
+  resolution: "ua-parser-js@npm:0.7.33"
+  checksum: db8af639b9526d2d9f7117c02f096b1b5e9430424aaded57650528b271f95c76acb5c467f4db27f484414723d127cb04090d571981d85daf2eaba9bdac6edaed
   languageName: node
   linkType: hard
 
