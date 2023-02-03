@@ -5842,9 +5842,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "http-cache-semantics@npm:^4.0.0, http-cache-semantics@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "http-cache-semantics@npm:4.1.0"
-  checksum: 451df9784af2acbe0cc1fd70291285c08ca4a8966ab5ee4d3975e003d1ad4d74c81473086d628f31296b31221966fda8bc5ea1e29dd8f1f33f9fc2b0fdca65ca
+  version: 4.1.1
+  resolution: "http-cache-semantics@npm:4.1.1"
+  checksum: ea193328de177fedad7790cbe2217d81bf013a24d021331e826ddda0de347dc94f2adfb383e9b92d4e5889baa76f356d78ea5b0b8843668b8a788540946b9faa
   languageName: node
   linkType: hard
 
