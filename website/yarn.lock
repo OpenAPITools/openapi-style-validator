@@ -2189,9 +2189,9 @@ __metadata:
   linkType: hard
 
 "@sideway/formula@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@sideway/formula@npm:3.0.0"
-  checksum: b83ecd35fea33e7b826ddcdc9f0735a79bd374927efea36885203200c418ad0f9975c329eaf9e990a7c61cf96f560ed2020227a35e699324ddd3c94dd3f4045f
+  version: 3.0.1
+  resolution: "@sideway/formula@npm:3.0.1"
+  checksum: 91186a7e00eb810856d3f7edb7a25f95efecf9ba0fcc7651ee473d5e69ffcf8a16e3afcebd74326f82d3ad8194d1f69cc72a27837c3a0a353d256ab095f9798b
   languageName: node
   linkType: hard
 
