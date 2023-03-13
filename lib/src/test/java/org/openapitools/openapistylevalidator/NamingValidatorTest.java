@@ -139,6 +139,59 @@ class NamingValidatorTest {
     }
 
     @Test
+    void goodPascalCaseShouldReturnTrue1() {
+        // Arrange
+        String goodPascalCase1 = "V";
+        String goodPascalCase2 = "Variable";
+        String goodPascalCase3 = "MySuperVariable";
+        String goodPascalCase4 = "MySuperVariableIsAFunnyOne";
+        String goodPascalCase5 = "Zone2Delete";
+        String goodPascalCase6 = "Address1";
+
+        // Act
+        boolean actual1 = validator.isNamingValid(goodPascalCase1, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual2 = validator.isNamingValid(goodPascalCase2, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual3 = validator.isNamingValid(goodPascalCase3, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual4 = validator.isNamingValid(goodPascalCase4, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual5 = validator.isNamingValid(goodPascalCase5, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual6 = validator.isNamingValid(goodPascalCase6, ValidatorParameters.NamingConvention.PascalCase);
+
+        // Assert
+        Assertions.assertAll(
+                () -> assertTrue(actual1),
+                () -> assertTrue(actual2),
+                () -> assertTrue(actual3),
+                () -> assertTrue(actual4),
+                () -> assertTrue(actual5),
+                () -> assertTrue(actual6));
+    }
+
+    @Test
+    void badPascalCaseShouldReturnFalse() {
+        // Arrange
+        String badPascalCase1 = "my_variable";
+        String badPascalCase2 = "my-variable";
+        String badPascalCase3 = "my-Variable";
+        String badPascalCase4 = "variable";
+        String badPascalCase5 = "my variable";
+
+        // Act
+        boolean actual1 = validator.isNamingValid(badPascalCase1, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual2 = validator.isNamingValid(badPascalCase2, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual3 = validator.isNamingValid(badPascalCase3, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual4 = validator.isNamingValid(badPascalCase4, ValidatorParameters.NamingConvention.PascalCase);
+        boolean actual5 = validator.isNamingValid(badPascalCase5, ValidatorParameters.NamingConvention.PascalCase);
+
+        // Assert
+        Assertions.assertAll(
+                () -> assertFalse(actual1),
+                () -> assertFalse(actual2),
+                () -> assertFalse(actual3),
+                () -> assertFalse(actual4),
+                () -> assertFalse(actual5));
+    }
+
+    @Test
     void goodHyphenCaseShouldReturnTrue() {
         // Arrange
         String goodHyphenCase1 = "my-variable";

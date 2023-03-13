@@ -106,13 +106,13 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelNoLocalDef|boolean|`true`, `false`|`true`|Not implemented yet|
 |validateNaming|boolean|`true`, `false`|`true`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean|`true`, `false`|`true`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`HyphenCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Global naming convention for all parameter types (path, query and cookie) [(note)](#parameter-naming-convention-hierarchy)|
-|pathParamNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for path parameters [(note)](#parameter-naming-convention-hierarchy)|
-|queryParamNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for query parameters [(note)](#parameter-naming-convention-hierarchy)|
-|cookieParamNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for cookie parameters [(note)](#parameter-naming-convention-hierarchy)|
-|headerNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`UnderscoreUpperCase`|Naming convention for headers|
-|propertyNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Naming convention for properties|
+|pathNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`HyphenCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Global naming convention for all parameter types (path, query and cookie) [(note)](#parameter-naming-convention-hierarchy)|
+|pathParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for path parameters [(note)](#parameter-naming-convention-hierarchy)|
+|queryParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for query parameters [(note)](#parameter-naming-convention-hierarchy)|
+|cookieParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for cookie parameters [(note)](#parameter-naming-convention-hierarchy)|
+|headerNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`UnderscoreUpperCase`|Naming convention for headers|
+|propertyNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Naming convention for properties|
 
 #### Parameter Naming Convention hierarchy
 
