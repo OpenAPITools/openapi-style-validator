@@ -24,7 +24,7 @@ dependencies {
     testImplementation 'io.takari.maven.plugins:takari-plugin-testing:3.0.1'
     testImplementation 'io.takari.maven.plugins:takari-plugin-integration-testing:3.0.1'
     testImplementation 'org.assertj:assertj-core:3.24.2'
-    testRuntimeOnly 'org.apache.maven:maven-compat:3.9.0'
+    testRuntimeOnly 'org.apache.maven:maven-compat:3.9.1'
     testRuntimeOnly 'org.apache.maven:maven-core:3.9.0'
 }
 
