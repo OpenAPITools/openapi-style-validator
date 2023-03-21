@@ -43,7 +43,7 @@ jobs:
           GIT_USER: git
         run: |
           cd website
-          git config --global user.email "jcote@stingray.com"
+          git config --global user.email "jfcote@hey.com"
           git config --global user.name "Jean-François Côté"
           if [ -e yarn.lock ]; then
             yarn install --immutable --immutable-cache
