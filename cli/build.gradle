@@ -10,7 +10,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-jdk14:2.0.7'
     implementation 'io.swagger.parser.v3:swagger-parser:2.0.33'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
 
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.20.0'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0'
