@@ -9491,13 +9491,13 @@ fsevents@~2.3.2:
   linkType: hard
 
 "semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5":
-  version: 7.3.5
-  resolution: "semver@npm:7.3.5"
+  version: 7.5.4
+  resolution: "semver@npm:7.5.4"
   dependencies:
     lru-cache: ^6.0.0
   bin:
     semver: bin/semver.js
-  checksum: c53624ddf4b9779bcbf55a1eb8b37074cc44bfeca416f3cc263429408202a8a3c59b00eef8c647d697303bc39b95c022a5c61959221d3814bfb1270ff7c14986
+  checksum: 9bc02fd8e2b3c9e5dea66f0d733a3c801c67f3c7f0190efa03112a7b516e39845456ae107214d7972c4be9c67bbc50c0f27bbaf49a79a0234de83717cdaf2058
   languageName: node
   linkType: hard
 
