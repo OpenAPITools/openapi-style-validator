@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -75,8 +74,17 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
     @Parameter(property = ValidatorParameters.PROPERTY_NAMING_CONVENTION, defaultValue = "CamelCase")
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
 
+    @Parameter(property = ValidatorParameters.PATH_PARAM_NAMING_CONVENTION, defaultValue = "CamelCase")
+    private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
+
+    @Parameter(property = ValidatorParameters.QUERY_PARAM_NAMING_CONVENTION, defaultValue = "CamelCase")
+    private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
+
+    @Parameter(property = ValidatorParameters.COOKIE_PARAM_NAMING_CONVENTION, defaultValue = "CamelCase")
+    private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
+
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException {
         if (inputFile == null) {
             throw new MojoExecutionException(String.format("The input file is not defined, set the '%s' option", OpenApiSpecStyleValidator.INPUT_FILE));
         }
@@ -121,6 +129,9 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
         parameters.setHeaderNamingConvention(headerNamingConvention);
         parameters.setParameterNamingConvention(parameterNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
+        parameters.setPathParamNamingConvention(pathParamNamingConvention);
+        parameters.setQueryParamNamingConvention(queryParamNamingConvention);
+        parameters.setCookieParamNamingConvention(cookieParamNamingConvention);
         return parameters;
     }
 }

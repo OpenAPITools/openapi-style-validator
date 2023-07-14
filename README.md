@@ -8,7 +8,7 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 ![Build Status](https://github.com/OpenAPITools/openapi-style-validator/actions/workflows/build.yml/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.openapitools.openapistylevalidator/openapi-style-validator-cli)](https://mvnrepository.com/artifact/org.openapitools.openapistylevalidator) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=OpenAPITools_openapi-style-validator&metric=alert_status)](https://sonarcloud.io/dashboard?id=OpenAPITools_openapi-style-validator) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=OpenAPITools_openapi-style-validator&metric=coverage)](https://sonarcloud.io/dashboard?id=OpenAPITools_openapi-style-validator)
 
-[![Join the Slack chat room](https://img.shields.io/badge/Slack-Join%20the%20chat%20room-orange)](https://join.slack.com/t/openapi-generator/shared_invite/enQtNzAyNDMyOTU0OTE1LTY5ZDBiNDI5NzI5ZjQ1Y2E5OWVjMjZkYzY1ZGM2MWQ4YWFjMzcyNDY5MGI4NjQxNDBiMTlmZTc5NjY2ZTQ5MGM) [![Website and documentation](https://img.shields.io/badge/Website%20and%20Documentation-Click%20to%20View-green)](https://openapitools.github.io/openapi-style-validator/)
+[![Join the Slack chat room](https://img.shields.io/badge/Slack-Join%20the%20chat%20room-orange)](https://join.slack.com/t/openapi-generator/shared_invite/enQtNzAyNDMyOTU0OTE1LTY5ZDBiNDI5NzI5ZjQ1Y2E5OWVjMjZkYzY1ZGM2MWQ4YWFjMzcyNDY5MGI4NjQxNDBiMTlmZTc5NjY2ZTQ5MGM) [![Website and documentation](https://img.shields.io/badge/Website%20and%20Documentation-Click%20to%20View-green)](https://openapitools.github.io/openapi-style-validator/) [![Contribute with Gitpod](https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/OpenAPITools/openapi-style-validator)
 
 ## Summary
 
@@ -40,7 +40,7 @@ description, etc...
 - All required properties must be listed among the properties
 
 ### Naming convention
-- Enforce naming convention for paths, parameters, headers and properties
+- Enforce naming convention for paths, parameters (path, query and cookie), headers and properties
   - underscore_case
   - UNDERSCORE_UPPER_CASE
   - camelCase
@@ -91,25 +91,71 @@ Example using the default output path for the jar (replace `<version>` with the 
 #### Options File
 The options file is described in json (example in `specs/options.json`), and has the following possible values:
 
-|Option|Type|Possible Values|Description|
-|---|---|---|---|
-|validateInfoLicense|boolean|`true`, `false`|Ensures that there is a license section in the info section|
-|validateInfoDescription|boolean|`true`, `false`|Ensures that there is a description attribute in the info section|
-|validateInfoContact|boolean|`true`, `false`|Ensures that there is a contact section in the info section|
-|validateOperationOperationId|boolean|`true`, `false`|Ensures that there is an operation id for each operation|
-|validateOperationDescription|boolean|`true`, `false`|Ensures that there is a description for each operation|
-|validateOperationTag|boolean|`true`, `false`|Ensures that there is a tag for each operation|
-|validateOperationSummary|boolean|`true`, `false`|Ensures that there is a summary for each operation|
-|validateModelPropertiesExample|boolean|`true`, `false`|Ensures that the properties of the Schemas have an example value defined|
-|validateModelPropertiesDescription|boolean|`true`, `false`|Ensures that the properties of the Schemas have a description value defined|
-|validateModelRequiredProperties|boolean|`true`, `false`|Ensures that all required properties of the Schemas are listed among their properties|
-|validateModelNoLocalDef|boolean|`true`, `false`|Not implemented yet|
-|validateNaming|boolean|`true`, `false`|Ensures the names follow a given naming convention|
-|ignoreHeaderXNaming|boolean|`true`, `false`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for parameters|
-|headerNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for headers|
-|propertyNamingConvention|string|`CamelCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|Naming convention for properties|
+|Option|Type|Possible Values|Default Value|Description|
+|---|---|---|---|---|
+|validateInfoLicense|boolean|`true`, `false`|`true`|Ensures that there is a license section in the info section|
+|validateInfoDescription|boolean|`true`, `false`|`true`|Ensures that there is a description attribute in the info section|
+|validateInfoContact|boolean|`true`, `false`|`true`|Ensures that there is a contact section in the info section|
+|validateOperationOperationId|boolean|`true`, `false`|`true`|Ensures that there is an operation id for each operation|
+|validateOperationDescription|boolean|`true`, `false`|`true`|Ensures that there is a description for each operation|
+|validateOperationTag|boolean|`true`, `false`|`true`|Ensures that there is a tag for each operation|
+|validateOperationSummary|boolean|`true`, `false`|`true`|Ensures that there is a summary for each operation|
+|validateModelPropertiesExample|boolean|`true`, `false`|`true`|Ensures that the properties of the Schemas have an example value defined|
+|validateModelPropertiesDescription|boolean|`true`, `false`|`true`|Ensures that the properties of the Schemas have a description value defined|
+|validateModelRequiredProperties|boolean|`true`, `false`|`true`|Ensures that all required properties of the Schemas are listed among their properties|
+|validateModelNoLocalDef|boolean|`true`, `false`|`true`|Not implemented yet|
+|validateNaming|boolean|`true`, `false`|`true`|Ensures the names follow a given naming convention|
+|ignoreHeaderXNaming|boolean|`true`, `false`|`true`|Exclude from validation header parameters starting with `x-`|
+|pathNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`HyphenCase`|Naming convention for paths|
+|parameterNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Global naming convention for all parameter types (path, query and cookie) [(note)](#parameter-naming-convention-hierarchy)|
+|pathParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for path parameters [(note)](#parameter-naming-convention-hierarchy)|
+|queryParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for query parameters [(note)](#parameter-naming-convention-hierarchy)|
+|cookieParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for cookie parameters [(note)](#parameter-naming-convention-hierarchy)|
+|headerNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`UnderscoreUpperCase`|Naming convention for headers|
+|propertyNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Naming convention for properties|
+
+#### Parameter Naming Convention hierarchy
+
+The Parameter Naming Convention can be defined by a combination of the following options in the `options.json` file:
+- parameterNamingConvention
+- pathParamNamingConvention
+- queryParamNamingConvention
+- cookieParamNamingConvention
+
+The first option (parameterNamingConvention) defines a global convention for all other parameter naming convention options (path, query and cookie), unless they are explicitly defined in the `options.json` file.
+
+In other words, the `pathParamNamingConvention`, `queryParamNamingConvention` and `cookieParamNamingConvention` are specific for the parameter type their names indicate. Thus, they take precedence over `parameterNamingConvention` when they are defined. If not defined, the undefined option is assigned the same value for `parameterNamingConvention` (either explicitly defined or default).
+
+Example 1:
+```json
+{
+  /*
+    'parameterNamingConvention' is not defined.
+        Then it assumes the 'CamelCase' convention.
+   */
+  "pathParamNamingConvention": "UnderscoreCase",
+  "queryParamNamingConvention": "HyphenCase"
+  /*
+    'cookieParamNamingConvention' is not defined.
+        Then it assumes the same value as 'parameterNamingConvention',
+        which is its default value ('CamelCase').
+   */
+}
+```
+
+Example 2:
+```json
+{
+  "parameterNamingConvention": "HyphenCase",
+  "pathParamNamingConvention": "UnderscoreCase",
+  "queryParamNamingConvention": "HyphenCase"
+  /*
+    'cookieParamNamingConvention' is not defined.
+        Then it assumes the same value as 'parameterNamingConvention',
+        which is explicitly defined as 'HyphenCase'.
+   */
+}
+```
 
 ## Supported Extensions
 
@@ -134,10 +180,7 @@ The path (GET, POST, etc..) will be completely ignored by the style validator.
 
 ## Roadmap
 
-In no specific order
-
-- Try to reach 100% unit test code coverage
-- Add some validations based on feedback
+To view the latest version of the roadmap, please see the [official roadmap](https://openapitools.github.io/openapi-style-validator/docs/roadmap/).
 
 ## Releases on maven central
 

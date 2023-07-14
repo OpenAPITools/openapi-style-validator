@@ -21,11 +21,15 @@ public class ValidatorParameters {
     public static final String PARAMETER_NAMING_CONVENTION = "parameterNamingConvention";
     public static final String HEADER_NAMING_CONVENTION = "headerNamingConvention";
     public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
+    public static final String QUERY_PARAM_NAMING_CONVENTION = "queryParamNamingConvention";
+    public static final String PATH_PARAM_NAMING_CONVENTION = "pathParamNamingConvention";
+    public static final String COOKIE_PARAM_NAMING_CONVENTION = "cookieParamNamingConvention";
 
     public static enum NamingConvention {
         UnderscoreCase("underscore_case"),
         UnderscoreUpperCase("UNDERSCORE_UPPER_CASE"),
         CamelCase("camelCase"),
+        PascalCase("PascalCase"),
         HyphenCase("hyphen-case"),
         AnyCase("AnyCase"),
         HyphenUpperCase("Hyphen-Upper-Case");
@@ -63,10 +67,17 @@ public class ValidatorParameters {
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
-    private NamingConvention propertyNamingConvention= NamingConvention.CamelCase;
+    private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
+
+    private boolean queryParamNamingConventionWasExplicitlySet = false;
+    private boolean pathParamNamingConventionWasExplicitlySet = false;
+    private boolean cookieParamNamingConventionWasExplicitlySet = false;
 
     public ValidatorParameters() {
-        //For Gson
+        // For Gson
     }
 
     public boolean isValidateInfoLicense() {
@@ -122,11 +133,23 @@ public class ValidatorParameters {
     }
 
     public NamingConvention getHeaderNamingConvention() {
-		return headerNamingConvention;
-	}
+        return headerNamingConvention;
+    }
 
     public NamingConvention getPropertyNamingConvention() {
         return propertyNamingConvention;
+    }
+
+    public NamingConvention getQueryParamNamingConvention() {
+        return queryParamNamingConvention;
+    }
+
+    public NamingConvention getPathParamNamingConvention() {
+        return pathParamNamingConvention;
+    }
+
+    public NamingConvention getCookieParamNamingConvention() {
+        return cookieParamNamingConvention;
     }
 
     public ValidatorParameters setValidateInfoLicense(boolean validateInfoLicense) {
@@ -191,6 +214,20 @@ public class ValidatorParameters {
 
     public ValidatorParameters setParameterNamingConvention(NamingConvention parameterNamingConvention) {
         this.parameterNamingConvention = parameterNamingConvention;
+
+        // Setting the higher level parameter naming convention overrides the sub-conventions
+        if (!this.cookieParamNamingConventionWasExplicitlySet) {
+            this.cookieParamNamingConvention = parameterNamingConvention;
+        }
+
+        if (!this.pathParamNamingConventionWasExplicitlySet) {
+            this.pathParamNamingConvention = parameterNamingConvention;
+        }
+
+        if (!this.queryParamNamingConventionWasExplicitlySet) {
+            this.queryParamNamingConvention = parameterNamingConvention;
+        }
+
         return this;
     }
 
@@ -201,6 +238,24 @@ public class ValidatorParameters {
 
     public ValidatorParameters setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
+        return this;
+    }
+
+    public ValidatorParameters setQueryParamNamingConvention(NamingConvention queryParamNamingConvention) {
+        this.queryParamNamingConvention = queryParamNamingConvention;
+        this.queryParamNamingConventionWasExplicitlySet = true;
+        return this;
+    }
+
+    public ValidatorParameters setPathParamNamingConvention(NamingConvention pathParamNamingConvention) {
+        this.pathParamNamingConvention = pathParamNamingConvention;
+        this.pathParamNamingConventionWasExplicitlySet = true;
+        return this;
+    }
+
+    public ValidatorParameters setCookieParamNamingConvention(NamingConvention cookieParamNamingConvention) {
+        this.cookieParamNamingConvention = cookieParamNamingConvention;
+        this.cookieParamNamingConventionWasExplicitlySet = true;
         return this;
     }
 
@@ -225,40 +280,45 @@ public class ValidatorParameters {
     @Override
     public String toString() {
         return String.format(
-                "ValidatorParameters [" +
-                        "validateInfoLicense=%s, " +
-                        "validateInfoDescription=%s, " +
-                        "validateInfoContact=%s, " +
-                        "validateOperationOperationId=%s, " +
-                        "validateOperationDescription=%s, " +
-                        "validateOperationTag=%s, validateOperationSummary=%s, " +
-                        "validateModelPropertiesExample=%s, " +
-                        "validateModelPropertiesDescription=%s, " +
-                        "validateModelRequiredProperties=%s, " +
-                        "validateModelNoLocalDef=%s, " +
-                        "validateNaming=%s, " +
-                        "ignoreHeaderXNaming=%s, " +
-                        "pathNamingConvention=%s, " +
-                        "headerNamingConvention=%s, " +
-                        "parameterNamingConvention=%s, " +
-                        "propertyNamingConvention=%s" +
-                        "]",
-                validateInfoLicense, 
-                validateInfoDescription, 
-                validateInfoContact, 
-                validateOperationOperationId, 
+                "ValidatorParameters [" + "validateInfoLicense=%s, "
+                        + "validateInfoDescription=%s, "
+                        + "validateInfoContact=%s, "
+                        + "validateOperationOperationId=%s, "
+                        + "validateOperationDescription=%s, "
+                        + "validateOperationTag=%s, validateOperationSummary=%s, "
+                        + "validateModelPropertiesExample=%s, "
+                        + "validateModelPropertiesDescription=%s, "
+                        + "validateModelRequiredProperties=%s, "
+                        + "validateModelNoLocalDef=%s, "
+                        + "validateNaming=%s, "
+                        + "ignoreHeaderXNaming=%s, "
+                        + "pathNamingConvention=%s, "
+                        + "headerNamingConvention=%s, "
+                        + "parameterNamingConvention=%s, "
+                        + "propertyNamingConvention=%s, "
+                        + "queryParamNamingConvention=%s, "
+                        + "pathParamNamingConvention=%s, "
+                        + "cookieParamNamingConvention=%s"
+                        + "]",
+                validateInfoLicense,
+                validateInfoDescription,
+                validateInfoContact,
+                validateOperationOperationId,
                 validateOperationDescription,
-                validateOperationTag, 
+                validateOperationTag,
                 validateOperationSummary,
                 validateModelPropertiesExample,
                 validateModelPropertiesDescription,
                 validateModelRequiredProperties,
                 validateModelNoLocalDef,
-                validateNaming, 
+                validateNaming,
                 ignoreHeaderXNaming,
                 pathNamingConvention,
                 headerNamingConvention,
                 parameterNamingConvention,
-                propertyNamingConvention);
+                propertyNamingConvention,
+                queryParamNamingConvention,
+                pathParamNamingConvention,
+                cookieParamNamingConvention);
     }
 }

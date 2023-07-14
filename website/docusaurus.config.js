@@ -14,11 +14,12 @@ const baseUrl = '/openapi-style-validator/';
 const docusaurusConfig = {
   title: 'OpenAPI Style Validator',
   tagline: 'A customizable style validator to make sure your OpenAPI spec follows your organization\'s standards.',
-  url: 'https://openapitools.github.io/openapi-style-validator/', // Your website URL
+  url: 'https://openapitools.github.io', // Your website URL
   baseUrl: baseUrl, // Base URL for your project */
   favicon: 'img/favicon.png',
   organizationName: 'OpenAPITools',
   projectName: 'openapi-style-validator',
+  trailingSlash: true,
 
   // // You may provide arbitrary config keys to be used as needed by your
   // // template. For example, if you need your repo's URL...
@@ -27,8 +28,6 @@ const docusaurusConfig = {
   themeConfig: {
     // Open Graph and Twitter card images.
     image: 'img/docusaurus.png',
-
-    sidebarCollapsible: true,
 
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),

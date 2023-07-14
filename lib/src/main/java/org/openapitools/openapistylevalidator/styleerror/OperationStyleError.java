@@ -1,22 +1,17 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
-import org.eclipse.microprofile.openapi.models.PathItem;
-
 import java.util.Objects;
+import org.eclipse.microprofile.openapi.models.PathItem;
 
 public final class OperationStyleError extends StyleError {
 
     private final String path;
     private final PathItem.HttpMethod method;
 
-    public OperationStyleError(String fieldNames,
-                               String description,
-                               String path,
-                               PathItem.HttpMethod method) {
+    public OperationStyleError(String fieldNames, String description, String path, PathItem.HttpMethod method) {
         super(StyleCheckSection.Operations, fieldNames, description);
         this.path = path;
         this.method = method;
-
     }
 
     @Override
@@ -24,11 +19,11 @@ public final class OperationStyleError extends StyleError {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OperationStyleError that = (OperationStyleError) o;
-        return styleCheckSection == that.styleCheckSection &&
-                Objects.equals(fieldNames, that.fieldNames) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(path, that.path) &&
-                method == that.method;
+        return styleCheckSection == that.styleCheckSection
+                && Objects.equals(fieldNames, that.fieldNames)
+                && Objects.equals(description, that.description)
+                && Objects.equals(path, that.path)
+                && method == that.method;
     }
 
     @Override
@@ -38,10 +33,6 @@ public final class OperationStyleError extends StyleError {
 
     @Override
     public String toString() {
-        return String.format("*ERROR* in Operation %s %s '%s' -> %s",
-                method.name(),
-                path,
-                fieldNames,
-                description);
+        return String.format("*ERROR* in Operation %s %s '%s' -> %s", method.name(), path, fieldNames, description);
     }
 }

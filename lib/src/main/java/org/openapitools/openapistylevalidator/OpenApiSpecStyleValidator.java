@@ -1,5 +1,6 @@
 package org.openapitools.openapistylevalidator;
 
+import java.util.*;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -8,9 +9,8 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
-
-import java.util.*;
 
 public class OpenApiSpecStyleValidator {
     public static final String INPUT_FILE = "inputFile";
@@ -54,7 +54,8 @@ public class OpenApiSpecStyleValidator {
                 List<Boolean> infoPresence = new ArrayList<>();
                 infoPresence.add(license.getName() != null && !license.getName().isEmpty());
                 infoPresence.add(license.getUrl() != null && !license.getUrl().isEmpty());
-                errorAggregator.validateMinimumInfo(infoPresence, StyleError.StyleCheckSection.APIInfo, "license", "name|url");
+                errorAggregator.validateMinimumInfo(
+                        infoPresence, StyleError.StyleCheckSection.APIInfo, "license", "name|url");
             } else {
                 errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "license");
             }
@@ -73,8 +74,10 @@ public class OpenApiSpecStyleValidator {
                 List<Boolean> infoPresence = new ArrayList<>();
                 infoPresence.add(contact.getName() != null && !contact.getName().isEmpty());
                 infoPresence.add(contact.getUrl() != null && !contact.getUrl().isEmpty());
-                infoPresence.add(contact.getEmail() != null && !contact.getEmail().isEmpty());
-                errorAggregator.validateMinimumInfo(infoPresence, StyleError.StyleCheckSection.APIInfo, "contact", "name|url|email");
+                infoPresence.add(
+                        contact.getEmail() != null && !contact.getEmail().isEmpty());
+                errorAggregator.validateMinimumInfo(
+                        infoPresence, StyleError.StyleCheckSection.APIInfo, "contact", "name|url|email");
             } else {
                 errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "contact");
             }
@@ -124,7 +127,8 @@ public class OpenApiSpecStyleValidator {
     }
 
     private boolean isPathIgnored(PathItem path) {
-        Object ignoreValidationObj = path.getExtensions() != null ? path.getExtensions().get(X_STYLE_VALIDATOR_IGNORED) : null;
+        Object ignoreValidationObj =
+                path.getExtensions() != null ? path.getExtensions().get(X_STYLE_VALIDATOR_IGNORED) : null;
         boolean ignoreValidation = false;
         if (ignoreValidationObj != null) {
             ignoreValidation = (boolean) ignoreValidationObj;
@@ -144,15 +148,19 @@ public class OpenApiSpecStyleValidator {
     private void validateModelProperties(String modelName, Schema model) {
         if (model.getProperties() != null) {
             model.getProperties().forEach((propertyName, property) -> {
-                boolean isNotRefProperty = property.getRef() == null &&
-                        (property.getItems() == null || property.getItems().getRef() == null);
-                if (parameters.isValidateModelPropertiesExample() && property.getExample() == null
+                boolean isNotRefProperty = property.getRef() == null
+                        && (property.getItems() == null || property.getItems().getRef() == null);
+                if (parameters.isValidateModelPropertiesExample()
+                        && property.getExample() == null
                         && ((property.getItems() == null && property.getRef() == null)
-                            || (property.getItems() != null && property.getItems().getRef() == null)) &&
-                            property.getAllOf() == null && isNotRefProperty) {
-                        errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
+                                || (property.getItems() != null
+                                        && property.getItems().getRef() == null))
+                        && property.getAllOf() == null
+                        && isNotRefProperty) {
+                    errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
                 }
-                if (parameters.isValidateModelPropertiesDescription() && property.getDescription() == null
+                if (parameters.isValidateModelPropertiesDescription()
+                        && property.getDescription() == null
                         && isNotRefProperty) {
                     errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "description");
                 }
@@ -166,16 +174,13 @@ public class OpenApiSpecStyleValidator {
 
     private void validateModelRequiredProperties(String modelName, Schema model) {
         if (parameters.isValidateModelRequiredProperties() && model.getRequired() != null) {
-            Set<String> namesOfProperties = Optional.ofNullable(model.getProperties())
-                    .map(Map::keySet)
-                    .orElse(Collections.emptySet());
-            model.getRequired().forEach(
-                    nameOfRequiredProperty -> {
-                        if (!namesOfProperties.contains(nameOfRequiredProperty)) {
-                            errorAggregator.logMissingModelProperty(modelName, nameOfRequiredProperty);
-                        }
-                    }
-            );
+            Set<String> namesOfProperties =
+                    Optional.ofNullable(model.getProperties()).map(Map::keySet).orElse(Collections.emptySet());
+            model.getRequired().forEach(nameOfRequiredProperty -> {
+                if (!namesOfProperties.contains(nameOfRequiredProperty)) {
+                    errorAggregator.logMissingModelProperty(modelName, nameOfRequiredProperty);
+                }
+            });
         }
     }
 
@@ -186,10 +191,13 @@ public class OpenApiSpecStyleValidator {
                     Schema model = openAPI.getComponents().getSchemas().get(definition);
 
                     if (model.getProperties() != null) {
-                        for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
-                            boolean isValid = namingValidator.isNamingValid(entry.getKey(), parameters.getPropertyNamingConvention());
+                        for (Map.Entry<String, Schema> entry :
+                                model.getProperties().entrySet()) {
+                            boolean isValid = namingValidator.isNamingValid(
+                                    entry.getKey(), parameters.getPropertyNamingConvention());
                             if (!isValid) {
-                                errorAggregator.logModelBadNaming(entry.getKey(),
+                                errorAggregator.logModelBadNaming(
+                                        entry.getKey(),
                                         "property",
                                         parameters.getPropertyNamingConvention().getDesignation(),
                                         definition);
@@ -210,29 +218,44 @@ public class OpenApiSpecStyleValidator {
                             if (op != null && op.getParameters() != null) {
                                 for (Parameter opParam : op.getParameters()) {
                                     boolean shouldValidate;
-                                    if (opParam.getIn() == Parameter.In.HEADER && opParam.getName().startsWith("X-")) {
+                                    if (opParam.getIn() == Parameter.In.HEADER
+                                            && opParam.getName().startsWith("X-")) {
                                         shouldValidate = !parameters.isIgnoreHeaderXNaming();
                                     } else {
                                         shouldValidate = true;
                                     }
 
                                     if (shouldValidate && opParam.getRef() == null) {
-                                        boolean isValid = false;
                                         if (opParam.getIn() == Parameter.In.HEADER) {
-                                            isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getHeaderNamingConvention());
-                                            if (!isValid) {
-                                                errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                        "header",
-                                                        parameters.getHeaderNamingConvention().getDesignation(),
+                                            validateParamNaming(
+                                                    opParam.getName(),
+                                                    "header",
+                                                    parameters.getHeaderNamingConvention(),
+                                                    key,
+                                                    method);
+
+                                        } else {
+                                            if (opParam.getIn() == Parameter.In.QUERY) {
+                                                validateParamNaming(
+                                                        opParam.getName(),
+                                                        "query parameter",
+                                                        parameters.getQueryParamNamingConvention(),
                                                         key,
                                                         method);
-                                            }
-                                        } else {
-                                            isValid = namingValidator.isNamingValid(opParam.getName(), parameters.getParameterNamingConvention());
-                                            if (!isValid) {
-                                                errorAggregator.logOperationBadNaming(opParam.getName(),
-                                                        "parameter",
-                                                        parameters.getParameterNamingConvention().getDesignation(),
+
+                                            } else if (opParam.getIn() == Parameter.In.PATH) {
+                                                validateParamNaming(
+                                                        opParam.getName(),
+                                                        "path parameter",
+                                                        parameters.getPathParamNamingConvention(),
+                                                        key,
+                                                        method);
+
+                                            } else if (opParam.getIn() == Parameter.In.COOKIE) {
+                                                validateParamNaming(
+                                                        opParam.getName(),
+                                                        "cookie parameter",
+                                                        parameters.getCookieParamNamingConvention(),
                                                         key,
                                                         method);
                                             }
@@ -245,9 +268,11 @@ public class OpenApiSpecStyleValidator {
                         String[] pathParts = key.split("/");
                         for (String part : pathParts) {
                             if (!part.isEmpty() && !(part.startsWith("{") && part.endsWith("}"))) {
-                                boolean isValid = namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
+                                boolean isValid =
+                                        namingValidator.isNamingValid(part, parameters.getPathNamingConvention());
                                 if (!isValid) {
-                                    errorAggregator.logOperationBadNaming(part,
+                                    errorAggregator.logOperationBadNaming(
+                                            part,
                                             "path",
                                             parameters.getPathNamingConvention().getDesignation(),
                                             key,
@@ -258,6 +283,19 @@ public class OpenApiSpecStyleValidator {
                     }
                 }
             }
+        }
+    }
+
+    private void validateParamNaming(
+            String paramName,
+            String variableType,
+            NamingConvention namingConvention,
+            String key,
+            PathItem.HttpMethod method) {
+        boolean isValid = namingValidator.isNamingValid(paramName, namingConvention);
+        if (!isValid) {
+            errorAggregator.logOperationBadNaming(
+                    paramName, variableType, namingConvention.getDesignation(), key, method);
         }
     }
 }

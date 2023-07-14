@@ -1,0 +1,5 @@
+{
+    "pathParamNamingConvention": "HyphenCase",
+    "queryParamNamingConvention": "HyphenCase",
+    "cookieParamNamingConvention": "HyphenCase"
+}

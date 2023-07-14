@@ -8,6 +8,7 @@ class NamingValidator {
     private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
     private static final String REGEX_UPPER_CASE_ALPHA_NUMERIC_ONLY = "[A-Z0-9]+";
     private static final String REGEX_CAMEL_CASE = "([a-z0-9]+[A-Z]+\\w+)+";
+    private static final String REGEX_PASCAL_CASE = "^[A-Z0-9][a-z]*(?:[A-Z0-9][a-z]*)*$";
 
     private boolean isUnderscoreCase(String variableName) {
         return isSeparatorCaseValid(variableName, "_", false);
@@ -19,6 +20,10 @@ class NamingValidator {
 
     private boolean isCamelCase(String variableName) {
         return variableName.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY) || variableName.matches(REGEX_CAMEL_CASE);
+    }
+
+    private boolean isPascalCase(String variableName) {
+        return variableName.matches(REGEX_PASCAL_CASE);
     }
 
     private boolean isAnyCase() {
@@ -41,7 +46,7 @@ class NamingValidator {
                 .findFirst();
         return !firstInvalidToken.isPresent();
     }
-    
+
     private boolean isSeparatorCaseValid(String variableName, String separator, boolean isUpperCase) {
         if (variableName.startsWith(separator) || variableName.endsWith(separator)) {
             return false;
@@ -58,25 +63,23 @@ class NamingValidator {
                 if (!token.equalsIgnoreCase(token)) {
                     return false;
                 }
-    
+
                 if (!token.matches(REGEX_UPPER_CASE_ALPHA_NUMERIC_ONLY)) {
                     return false;
-                }    
+                }
             } else {
                 if (!token.equalsIgnoreCase(token)) {
                     return false;
                 }
-    
+
                 if (!token.matches(REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY)) {
                     return false;
-                }    
+                }
             }
         }
 
         return variableName.length() == (totalLength + tokens.length - 1);
     }
-
-
 
     boolean isNamingValid(String name, ValidatorParameters.NamingConvention namingStrategy) {
         switch (namingStrategy) {
@@ -86,6 +89,8 @@ class NamingValidator {
                 return isUnderscoreUpperCase(name);
             case CamelCase:
                 return isCamelCase(name);
+            case PascalCase:
+                return isPascalCase(name);
             case HyphenCase:
                 return isHyphenCase(name);
             case AnyCase:

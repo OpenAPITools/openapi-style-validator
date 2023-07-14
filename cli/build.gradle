@@ -1,14 +1,21 @@
+plugins {
+    id "com.diffplug.spotless" version "6.19.0"
+}
+
 apply plugin: 'application'
 
 dependencies {
-    implementation project(':lib')
+    implementation project(':openapi-style-validator-lib')
     implementation 'commons-cli:commons-cli:1.5.0'
-    implementation 'org.slf4j:slf4j-jdk14:1.7.32'
-    implementation 'io.swagger.parser.v3:swagger-parser:2.0.28'
-    implementation 'org.openapitools.empoa:empoa-swagger-core:2.0.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    implementation 'org.slf4j:slf4j-jdk14:2.0.7'
+    implementation 'io.swagger.parser.v3:swagger-parser:2.0.33'
+    implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 
-    testImplementation "org.mockito:mockito-core:4.+"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.20.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0'
+
+    testImplementation "org.mockito:mockito-core:5.4.0"
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'
@@ -43,14 +50,17 @@ shadowJar {
 
 project.tasks.assemble.dependsOn project.tasks.shadowJar
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
+spotless {
+    java {
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        palantirJavaFormat()
+    }
 }
 
 publishing {
@@ -83,8 +93,6 @@ publishing {
                 }
             }
             from components.java
-            artifact sourcesJar
-            artifact javadocJar
         }
     }
 }

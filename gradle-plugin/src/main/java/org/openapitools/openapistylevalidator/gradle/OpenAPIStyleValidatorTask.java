@@ -39,6 +39,9 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
 
     public OpenAPIStyleValidatorTask() {
         this.setGroup("Verification");
@@ -162,6 +165,21 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         this.propertyNamingConvention = propertyNamingConvention;
     }
 
+    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for path parameters")
+    public void setPathParamNamingConvention(NamingConvention pathParamNamingConvention) {
+        this.pathParamNamingConvention = pathParamNamingConvention;
+    }
+
+    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for query parameters")
+    public void setQueryParamNamingConvention(NamingConvention queryParamNamingConvention) {
+        this.queryParamNamingConvention = queryParamNamingConvention;
+    }
+
+    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for cookie parameters")
+    public void setCookieParamNamingConvention(NamingConvention cookieParamNamingConvention) {
+        this.cookieParamNamingConvention = cookieParamNamingConvention;
+    }
+
     public ValidatorParameters createValidatorParameters() {
         ValidatorParameters parameters = new ValidatorParameters();
         parameters.setValidateInfoLicense(validateInfoLicense);
@@ -181,6 +199,9 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         parameters.setParameterNamingConvention(parameterNamingConvention);
         parameters.setHeaderNamingConvention(headerNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
+        parameters.setPathParamNamingConvention(pathParamNamingConvention);
+        parameters.setQueryParamNamingConvention(queryParamNamingConvention);
+        parameters.setCookieParamNamingConvention(cookieParamNamingConvention);
         return parameters;
     }
 
