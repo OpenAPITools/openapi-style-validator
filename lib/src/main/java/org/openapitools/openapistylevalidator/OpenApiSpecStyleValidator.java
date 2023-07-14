@@ -1,6 +1,7 @@
 package org.openapitools.openapistylevalidator;
 
 import java.util.*;
+
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -153,8 +154,8 @@ public class OpenApiSpecStyleValidator {
                 if (parameters.isValidateModelPropertiesExample()
                         && property.getExample() == null
                         && ((property.getItems() == null && property.getRef() == null)
-                                || (property.getItems() != null
-                                        && property.getItems().getRef() == null))
+                        || (property.getItems() != null
+                        && property.getItems().getRef() == null))
                         && property.getAllOf() == null
                         && isNotRefProperty) {
                     errorAggregator.logMissingOrEmptyModelAttribute(modelName, propertyName, "example");
@@ -193,8 +194,10 @@ public class OpenApiSpecStyleValidator {
                     if (model.getProperties() != null) {
                         for (Map.Entry<String, Schema> entry :
                                 model.getProperties().entrySet()) {
+                            String name = entry.getKey();
                             boolean isValid = namingValidator.isNamingValid(
-                                    entry.getKey(), parameters.getPropertyNamingConvention());
+                                    name, parameters.getPropertyNamingConvention()) ||
+                                    parameters.getAllowedModelProperties().contains(name);
                             if (!isValid) {
                                 errorAggregator.logModelBadNaming(
                                         entry.getKey(),
