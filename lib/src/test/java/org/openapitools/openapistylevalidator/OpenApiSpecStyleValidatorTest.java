@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -412,16 +411,18 @@ class OpenApiSpecStyleValidatorTest {
     void shouldAcceptSpecificModelProperties() {
         OpenAPI openAPI = createValidOpenAPI();
         openAPI.components(openAPI.getComponents()
-                .addSchema("Items", OASFactory.createSchema()
-                        .type(SchemaType.OBJECT)
-                        .properties(new HashMap<String, Schema>(){{
-                            put("_links", OASFactory.createSchema()
-                                    // _links should be an object. However, this is enough
-                                    // to represent the case
-                                    .type(SchemaType.STRING)
-                            );
-                        }}))
-        );
+                .addSchema(
+                        "Items",
+                        OASFactory.createSchema().type(SchemaType.OBJECT).properties(new HashMap<String, Schema>() {
+                            {
+                                put(
+                                        "_links",
+                                        OASFactory.createSchema()
+                                                // _links should be an object. However, this is enough
+                                                // to represent the case
+                                                .type(SchemaType.STRING));
+                            }
+                        })));
 
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
         ValidatorParameters parameters = new ValidatorParameters()
@@ -434,7 +435,9 @@ class OpenApiSpecStyleValidatorTest {
                 // Add the fix
                 .setAllowedModelProperties(Collections.singletonList("_links"));
         List<StyleError> errors = validator.validate(parameters);
-        Assertions.assertTrue(errors.isEmpty(), ()-> errors.stream().map(StyleError::toString).collect(Collectors.joining()));
+        Assertions.assertTrue(
+                errors.isEmpty(),
+                () -> errors.stream().map(StyleError::toString).collect(Collectors.joining()));
     }
 
     private static OpenAPI createValidOpenAPI() {
