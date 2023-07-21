@@ -193,8 +193,10 @@ public class OpenApiSpecStyleValidator {
                     if (model.getProperties() != null) {
                         for (Map.Entry<String, Schema> entry :
                                 model.getProperties().entrySet()) {
+                            String name = entry.getKey();
                             boolean isValid = namingValidator.isNamingValid(
-                                    entry.getKey(), parameters.getPropertyNamingConvention());
+                                            name, parameters.getPropertyNamingConvention())
+                                    || parameters.getAllowedModelProperties().contains(name);
                             if (!isValid) {
                                 errorAggregator.logModelBadNaming(
                                         entry.getKey(),

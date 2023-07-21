@@ -91,28 +91,29 @@ Example using the default output path for the jar (replace `<version>` with the 
 #### Options File
 The options file is described in json (example in `specs/options.json`), and has the following possible values:
 
-|Option|Type|Possible Values|Default Value|Description|
-|---|---|---|---|---|
-|validateInfoLicense|boolean|`true`, `false`|`true`|Ensures that there is a license section in the info section|
-|validateInfoDescription|boolean|`true`, `false`|`true`|Ensures that there is a description attribute in the info section|
-|validateInfoContact|boolean|`true`, `false`|`true`|Ensures that there is a contact section in the info section|
-|validateOperationOperationId|boolean|`true`, `false`|`true`|Ensures that there is an operation id for each operation|
-|validateOperationDescription|boolean|`true`, `false`|`true`|Ensures that there is a description for each operation|
-|validateOperationTag|boolean|`true`, `false`|`true`|Ensures that there is a tag for each operation|
-|validateOperationSummary|boolean|`true`, `false`|`true`|Ensures that there is a summary for each operation|
-|validateModelPropertiesExample|boolean|`true`, `false`|`true`|Ensures that the properties of the Schemas have an example value defined|
-|validateModelPropertiesDescription|boolean|`true`, `false`|`true`|Ensures that the properties of the Schemas have a description value defined|
-|validateModelRequiredProperties|boolean|`true`, `false`|`true`|Ensures that all required properties of the Schemas are listed among their properties|
-|validateModelNoLocalDef|boolean|`true`, `false`|`true`|Not implemented yet|
-|validateNaming|boolean|`true`, `false`|`true`|Ensures the names follow a given naming convention|
-|ignoreHeaderXNaming|boolean|`true`, `false`|`true`|Exclude from validation header parameters starting with `x-`|
-|pathNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`HyphenCase`|Naming convention for paths|
-|parameterNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Global naming convention for all parameter types (path, query and cookie) [(note)](#parameter-naming-convention-hierarchy)|
-|pathParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for path parameters [(note)](#parameter-naming-convention-hierarchy)|
-|queryParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for query parameters [(note)](#parameter-naming-convention-hierarchy)|
-|cookieParamNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|(same as `parameterNamingConvention`)|Specific naming convention for cookie parameters [(note)](#parameter-naming-convention-hierarchy)|
-|headerNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`UnderscoreUpperCase`|Naming convention for headers|
-|propertyNamingConvention|string|`CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase`|`CamelCase`|Naming convention for properties|
+|Option|Type| Possible Values                                                                                                |Default Value|Description|
+|---|---|----------------------------------------------------------------------------------------------------------------|---|---|
+|validateInfoLicense|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is a license section in the info section|
+|validateInfoDescription|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is a description attribute in the info section|
+|validateInfoContact|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is a contact section in the info section|
+|validateOperationOperationId|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is an operation id for each operation|
+|validateOperationDescription|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is a description for each operation|
+|validateOperationTag|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is a tag for each operation|
+|validateOperationSummary|boolean| `true`, `false`                                                                                                |`true`|Ensures that there is a summary for each operation|
+|validateModelPropertiesExample|boolean| `true`, `false`                                                                                                |`true`|Ensures that the properties of the Schemas have an example value defined|
+|validateModelPropertiesDescription|boolean| `true`, `false`                                                                                                |`true`|Ensures that the properties of the Schemas have a description value defined|
+|validateModelRequiredProperties|boolean| `true`, `false`                                                                                                |`true`|Ensures that all required properties of the Schemas are listed among their properties|
+|validateModelNoLocalDef|boolean| `true`, `false`                                                                                                |`true`|Not implemented yet|
+|validateNaming|boolean| `true`, `false`                                                                                                |`true`|Ensures the names follow a given naming convention|
+|ignoreHeaderXNaming|boolean| `true`, `false`                                                                                                |`true`|Exclude from validation header parameters starting with `x-`|
+|pathNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`HyphenCase`|Naming convention for paths|
+|parameterNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`CamelCase`|Global naming convention for all parameter types (path, query and cookie) [(note)](#parameter-naming-convention-hierarchy)|
+|pathParamNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |(same as `parameterNamingConvention`)|Specific naming convention for path parameters [(note)](#parameter-naming-convention-hierarchy)|
+|queryParamNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |(same as `parameterNamingConvention`)|Specific naming convention for query parameters [(note)](#parameter-naming-convention-hierarchy)|
+|cookieParamNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |(same as `parameterNamingConvention`)|Specific naming convention for cookie parameters [(note)](#parameter-naming-convention-hierarchy)|
+|headerNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`UnderscoreUpperCase`|Naming convention for headers|
+|propertyNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`CamelCase`|Naming convention for properties|
+|allowedModelProperties|array| `["_links", "_embedded"]`|`[]`|An array of property names that are authorised even if they do not match to the "propertyNamingConvention"|
 
 #### Parameter Naming Convention hierarchy
 

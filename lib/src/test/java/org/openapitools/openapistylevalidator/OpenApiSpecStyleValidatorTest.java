@@ -2,10 +2,8 @@ package org.openapitools.openapistylevalidator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -407,6 +405,40 @@ class OpenApiSpecStyleValidatorTest {
                         errors.get(0).toString()));
     }
     /* end - tests for issue #367 */
+
+    // https://github.com/OpenAPITools/openapi-style-validator/issues/152
+    @Test
+    void shouldAcceptSpecificModelProperties() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.components(openAPI.getComponents()
+                .addSchema(
+                        "Items",
+                        OASFactory.createSchema().type(SchemaType.OBJECT).properties(new HashMap<String, Schema>() {
+                            {
+                                put(
+                                        "_links",
+                                        OASFactory.createSchema()
+                                                // _links should be an object. However, this is enough
+                                                // to represent the case
+                                                .type(SchemaType.STRING));
+                            }
+                        })));
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+        ValidatorParameters parameters = new ValidatorParameters()
+                // Keep the details away
+                .setValidateModelPropertiesDescription(false)
+                .setValidateModelPropertiesExample(false)
+                // Reproduce the original error
+                .setPropertyNamingConvention(NamingConvention.CamelCase)
+                .setValidateNaming(true)
+                // Add the fix
+                .setAllowedModelProperties(Collections.singletonList("_links"));
+        List<StyleError> errors = validator.validate(parameters);
+        Assertions.assertTrue(
+                errors.isEmpty(),
+                () -> errors.stream().map(StyleError::toString).collect(Collectors.joining()));
+    }
 
     private static OpenAPI createValidOpenAPI() {
         return OASFactory.createOpenAPI()

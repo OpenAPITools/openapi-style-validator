@@ -1,5 +1,10 @@
 package org.openapitools.openapistylevalidator;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class ValidatorParameters {
     public static final String VALIDATE_INFO_LICENSE = "validateInfoLicense";
     public static final String VALIDATE_INFO_DESCRIPTION = "validateInfoDescription";
@@ -75,6 +80,8 @@ public class ValidatorParameters {
     private boolean queryParamNamingConventionWasExplicitlySet = false;
     private boolean pathParamNamingConventionWasExplicitlySet = false;
     private boolean cookieParamNamingConventionWasExplicitlySet = false;
+
+    private Set<String> allowedModelProperties = new HashSet<>();
 
     public ValidatorParameters() {
         // For Gson
@@ -275,6 +282,15 @@ public class ValidatorParameters {
     public ValidatorParameters setIgnoreHeaderXNaming(boolean ignoreHeaderXNaming) {
         this.ignoreHeaderXNaming = ignoreHeaderXNaming;
         return this;
+    }
+
+    public ValidatorParameters setAllowedModelProperties(List<String> allowedModelProperties) {
+        this.allowedModelProperties = new HashSet<>(allowedModelProperties);
+        return this;
+    }
+
+    public Set<String> getAllowedModelProperties() {
+        return Collections.unmodifiableSet(this.allowedModelProperties);
     }
 
     @Override
