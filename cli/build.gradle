@@ -15,7 +15,7 @@ dependencies {
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.20.0'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0'
 
-    testImplementation "org.mockito:mockito-core:5.4.0"
+    testImplementation "org.mockito:mockito-core:5.5.0"
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'
