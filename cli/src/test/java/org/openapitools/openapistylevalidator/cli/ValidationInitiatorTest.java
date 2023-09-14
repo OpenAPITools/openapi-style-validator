@@ -248,6 +248,21 @@ class ValidationInitiatorTest {
         }
 
         @Nested
+        class GivenInvalidSchemaNamingConvention {
+            @BeforeEach
+            void init() throws ParseException {
+                commandLine = parser.parse(options, new String[] {
+                    "-s", SRC_TEST_RESOURCES_SOME_YAML, "-o", "src/test/resources/invalidSchemaNamingConvention.json"
+                });
+            }
+
+            @Test
+            void throwsIllegalArgumentException() {
+                assertThrowsIllegalArgumentExceptionWithExceptedMessage("Invalid schemaNamingConvention", commandLine);
+            }
+        }
+
+        @Nested
         class GivenInvalidPropertyNamingConvention {
             @BeforeEach
             void init() throws ParseException {

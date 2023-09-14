@@ -38,6 +38,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
+    private NamingConvention schemaNamingConvention = NamingConvention.PascalCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
     private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
@@ -160,22 +161,27 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         this.headerNamingConvention = headerNamingConvention;
     }
 
+    @Option(option = ValidatorParameters.SCHEMA_NAMING_CONVENTION, description = "Naming convention for schemas")
+    public void setSchemaNamingConvention(NamingConvention schemaNamingConvention) {
+        this.schemaNamingConvention = schemaNamingConvention;
+    }
+
     @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for properties")
     public void setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
     }
 
-    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for path parameters")
+    @Option(option = ValidatorParameters.PATH_PARAM_NAMING_CONVENTION, description = "Naming convention for path parameters")
     public void setPathParamNamingConvention(NamingConvention pathParamNamingConvention) {
         this.pathParamNamingConvention = pathParamNamingConvention;
     }
 
-    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for query parameters")
+    @Option(option = ValidatorParameters.QUERY_PARAM_NAMING_CONVENTION, description = "Naming convention for query parameters")
     public void setQueryParamNamingConvention(NamingConvention queryParamNamingConvention) {
         this.queryParamNamingConvention = queryParamNamingConvention;
     }
 
-    @Option(option = ValidatorParameters.PROPERTY_NAMING_CONVENTION, description = "Naming convention for cookie parameters")
+    @Option(option = ValidatorParameters.COOKIE_PARAM_NAMING_CONVENTION, description = "Naming convention for cookie parameters")
     public void setCookieParamNamingConvention(NamingConvention cookieParamNamingConvention) {
         this.cookieParamNamingConvention = cookieParamNamingConvention;
     }
@@ -198,6 +204,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         parameters.setPathNamingConvention(pathNamingConvention);
         parameters.setParameterNamingConvention(parameterNamingConvention);
         parameters.setHeaderNamingConvention(headerNamingConvention);
+        parameters.setSchemaNamingConvention(schemaNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
         parameters.setPathParamNamingConvention(pathParamNamingConvention);
         parameters.setQueryParamNamingConvention(queryParamNamingConvention);

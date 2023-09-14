@@ -39,6 +39,8 @@ class ValidatorParametersTest {
                         ValidatorParameters.NamingConvention.UnderscoreUpperCase,
                         parameters.getHeaderNamingConvention()),
                 () -> assertEquals(
+                        ValidatorParameters.NamingConvention.PascalCase, parameters.getSchemaNamingConvention()),
+                () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
@@ -55,6 +57,7 @@ class ValidatorParametersTest {
                 .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setHeaderNamingConvention(ValidatorParameters.NamingConvention.UnderscoreUpperCase)
+                .setSchemaNamingConvention(ValidatorParameters.NamingConvention.PascalCase)
                 .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setQueryParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setPathParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
@@ -81,6 +84,8 @@ class ValidatorParametersTest {
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.UnderscoreUpperCase,
                         parameters.getHeaderNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.PascalCase, parameters.getSchemaNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
                 () -> assertEquals(

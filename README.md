@@ -112,6 +112,7 @@ The options file is described in json (example in `specs/options.json`), and has
 |queryParamNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |(same as `parameterNamingConvention`)|Specific naming convention for query parameters [(note)](#parameter-naming-convention-hierarchy)|
 |cookieParamNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |(same as `parameterNamingConvention`)|Specific naming convention for cookie parameters [(note)](#parameter-naming-convention-hierarchy)|
 |headerNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`UnderscoreUpperCase`|Naming convention for headers|
+|schemaNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`PascalCase`|Naming convention for schemas|
 |propertyNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`CamelCase`|Naming convention for properties|
 |allowedModelProperties|array| `["_links", "_embedded"]`|`[]`|An array of property names that are authorised even if they do not match to the "propertyNamingConvention"|
 

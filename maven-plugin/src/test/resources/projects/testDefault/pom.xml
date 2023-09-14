@@ -30,6 +30,7 @@
           <pathNamingConvention>HyphenCase</pathNamingConvention>
           <headerNamingConvention>UnderscoreUpperCase</headerNamingConvention>
           <parameterNamingConvention>CamelCase</parameterNamingConvention>
+          <schemaNamingConvention>PascalCase</schemaNamingConvention>
           <propertyNamingConvention>CamelCase</propertyNamingConvention>
         </configuration>
         <executions>

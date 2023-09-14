@@ -103,6 +103,11 @@ class ResourceTest {
                 + ValidatorParameters.NamingConvention.CamelCase
                 + NEXT_LINE_QUOTE
                 + PREFIX
+                + ValidatorParameters.SCHEMA_NAMING_CONVENTION
+                + SEPARATOR_QUOTE
+                + ValidatorParameters.NamingConvention.PascalCase
+                + NEXT_LINE_QUOTE
+                + PREFIX
                 + ValidatorParameters.PROPERTY_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
                 + ValidatorParameters.NamingConvention.CamelCase

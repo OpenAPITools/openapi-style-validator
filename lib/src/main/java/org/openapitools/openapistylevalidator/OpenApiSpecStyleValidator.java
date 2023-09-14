@@ -189,6 +189,15 @@ public class OpenApiSpecStyleValidator {
             if (openAPI.getComponents() != null && openAPI.getComponents().getSchemas() != null) {
                 for (String definition : openAPI.getComponents().getSchemas().keySet()) {
                     Schema model = openAPI.getComponents().getSchemas().get(definition);
+                    boolean isSchemaNameValid =
+                            namingValidator.isNamingValid(definition, parameters.getSchemaNamingConvention());
+                    if (!isSchemaNameValid) {
+                        errorAggregator.logModelBadNaming(
+                                definition,
+                                "schema",
+                                parameters.getSchemaNamingConvention().getDesignation(),
+                                definition);
+                    }
 
                     if (model.getProperties() != null) {
                         for (Map.Entry<String, Schema> entry :
