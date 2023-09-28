@@ -71,6 +71,9 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
     @Parameter(property = ValidatorParameters.HEADER_NAMING_CONVENTION, defaultValue = "UnderscoreUpperCase")
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
 
+    @Parameter(property = ValidatorParameters.SCHEMA_NAMING_CONVENTION, defaultValue = "PascalCase")
+    private NamingConvention schemaNamingConvention = NamingConvention.PascalCase;
+
     @Parameter(property = ValidatorParameters.PROPERTY_NAMING_CONVENTION, defaultValue = "CamelCase")
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
 
@@ -128,6 +131,7 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
         parameters.setPathNamingConvention(pathNamingConvention);
         parameters.setHeaderNamingConvention(headerNamingConvention);
         parameters.setParameterNamingConvention(parameterNamingConvention);
+        parameters.setSchemaNamingConvention(schemaNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
         parameters.setPathParamNamingConvention(pathParamNamingConvention);
         parameters.setQueryParamNamingConvention(queryParamNamingConvention);

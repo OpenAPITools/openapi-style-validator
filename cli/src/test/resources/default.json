@@ -15,5 +15,6 @@
     "pathNamingConvention": "HyphenCase",
     "headerNamingConvention": "UnderscoreUpperCase",
     "parameterNamingConvention": "CamelCase",
+    "schemaNamingConvention": "PascalCase",
     "propertyNamingConvention": "CamelCase"
 }

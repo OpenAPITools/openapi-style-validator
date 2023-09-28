@@ -332,6 +332,25 @@ class OpenApiSpecStyleValidatorTest {
     }
 
     @Test
+    void shouldReportSchemaNamingConventionError() {
+        OpenAPI openAPI = createValidOpenAPI();
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        ValidatorParameters validatorParams = new ValidatorParameters();
+        validatorParams.setSchemaNamingConvention(NamingConvention.HyphenUpperCase);
+        List<StyleError> errors = validator.validate(validatorParams);
+        Assertions.assertAll(
+                () -> assertEquals(2, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in model FooSchema 'FooSchema' -> schema should be in Hyphen-Upper-Case",
+                        errors.get(0).toString()),
+                () -> assertEquals(
+                        "*ERROR* in model BazSchema 'BazSchema' -> schema should be in Hyphen-Upper-Case",
+                        errors.get(1).toString()));
+    }
+
+    @Test
     void shouldReportPropertyNamingConventionError() {
         OpenAPI openAPI = createValidOpenAPI();
 

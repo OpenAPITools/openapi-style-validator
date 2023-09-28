@@ -99,6 +99,7 @@ class OptionManager {
         validateNamingConvention("header", parameters.getHeaderNamingConvention());
         validateNamingConvention("parameter", parameters.getParameterNamingConvention());
         validateNamingConvention("path", parameters.getPathNamingConvention());
+        validateNamingConvention("schema", parameters.getSchemaNamingConvention());
         validateNamingConvention("property", parameters.getPropertyNamingConvention());
     }
 

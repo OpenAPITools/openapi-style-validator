@@ -17,8 +17,9 @@
   "ignoreHeaderXNaming": true,
   "pathNamingConvention": "HyphenCase",
   "parameterNamingConvention": "CamelCase",
+  "schemaNamingConvention": "PascalCase",
   "propertyNamingConvention": "CamelCase",
   "queryParamNamingConvention": "CamelCase",
-	"pathParamNamingConvention": "HyphenCase",
-	"cookieParamNamingConvention": "CamelCase"
+  "pathParamNamingConvention": "HyphenCase",
+  "cookieParamNamingConvention": "CamelCase"
 }

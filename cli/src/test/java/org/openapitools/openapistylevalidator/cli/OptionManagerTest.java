@@ -130,6 +130,8 @@ class OptionManagerTest {
         Assertions.assertEquals(
                 ValidatorParameters.NamingConvention.CamelCase, parameters.getParameterNamingConvention());
         Assertions.assertEquals(
+                ValidatorParameters.NamingConvention.PascalCase, parameters.getSchemaNamingConvention());
+        Assertions.assertEquals(
                 ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
     }
 

@@ -25,6 +25,7 @@ public class ValidatorParameters {
     public static final String PATH_NAMING_CONVENTION = "pathNamingConvention";
     public static final String PARAMETER_NAMING_CONVENTION = "parameterNamingConvention";
     public static final String HEADER_NAMING_CONVENTION = "headerNamingConvention";
+    public static final String SCHEMA_NAMING_CONVENTION = "schemaNamingConvention";
     public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
     public static final String QUERY_PARAM_NAMING_CONVENTION = "queryParamNamingConvention";
     public static final String PATH_PARAM_NAMING_CONVENTION = "pathParamNamingConvention";
@@ -72,6 +73,7 @@ public class ValidatorParameters {
     private NamingConvention pathNamingConvention = NamingConvention.HyphenCase;
     private NamingConvention parameterNamingConvention = NamingConvention.CamelCase;
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
+    private NamingConvention schemaNamingConvention = NamingConvention.PascalCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
     private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
@@ -141,6 +143,10 @@ public class ValidatorParameters {
 
     public NamingConvention getHeaderNamingConvention() {
         return headerNamingConvention;
+    }
+
+    public NamingConvention getSchemaNamingConvention() {
+        return schemaNamingConvention;
     }
 
     public NamingConvention getPropertyNamingConvention() {
@@ -243,6 +249,11 @@ public class ValidatorParameters {
         return this;
     }
 
+    public ValidatorParameters setSchemaNamingConvention(NamingConvention schemaNamingConvention) {
+        this.schemaNamingConvention = schemaNamingConvention;
+        return this;
+    }
+
     public ValidatorParameters setPropertyNamingConvention(NamingConvention propertyNamingConvention) {
         this.propertyNamingConvention = propertyNamingConvention;
         return this;
@@ -311,6 +322,7 @@ public class ValidatorParameters {
                         + "pathNamingConvention=%s, "
                         + "headerNamingConvention=%s, "
                         + "parameterNamingConvention=%s, "
+                        + "schemaNamingConvention=%s, "
                         + "propertyNamingConvention=%s, "
                         + "queryParamNamingConvention=%s, "
                         + "pathParamNamingConvention=%s, "
@@ -332,6 +344,7 @@ public class ValidatorParameters {
                 pathNamingConvention,
                 headerNamingConvention,
                 parameterNamingConvention,
+                schemaNamingConvention,
                 propertyNamingConvention,
                 queryParamNamingConvention,
                 pathParamNamingConvention,
