@@ -13,7 +13,8 @@ dependencies {
     }
 
     implementation project(':openapi-style-validator-lib')
-    implementation 'io.swagger.parser.v3:swagger-parser:2.0.33'
+    implementation 'io.swagger.parser.v3:swagger-parser:2.1.16'
+    implementation 'io.swagger.core.v3:swagger-models:2.2.16'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
 
     implementation 'org.apache.maven:maven-plugin-api:3.9.4'
@@ -88,10 +89,10 @@ task generateTakariTestResources {
     doLast {
         // Generate 'workspacestate.properties' file
         java.util.Properties workspaceProp = new java.util.Properties();
-        getRootProject().getAllprojects().each { prj -> 
+        getRootProject().getAllprojects().each { prj ->
             def ext = prj.getExtensions().findByType(PublishingExtension.class);
             if(ext != null) {
-                ext.getPublications().each { pub -> 
+                ext.getPublications().each { pub ->
                     addProject(workspaceProp, prj)
                 }
             }
