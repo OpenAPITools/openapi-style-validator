@@ -27,7 +27,7 @@ Thanks to our sponsors for supporting this project!
 
 ### :1st_place_medal: Gold
 
-[![Fern](./docs/sponsors/fern_logo_tagline.svg)](https://framer.buildwithfern.com/)
+[![Fern](./docs/sponsors/fern_logo_tagline.svg)](https://www.devmark.ai/fern/?utm_source=openapitools-openapistylevalidator&utm_loc=readme&utm_type=logo)
 
 ### :2nd_place_medal: Silver
 
