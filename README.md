@@ -21,6 +21,22 @@ could automatize all of this? You can still do code reviews to find business/req
 but let openapi-style-validator validate the style and standards like mandatory examples, naming conventions,
 description, etc...
 
+## :trophy: Sponsors
+
+Thanks to our sponsors for supporting this project!
+
+### :1st_place_medal: Gold
+
+[![Fern](./docs/sponsors/fern_logo_tagline.svg)](https://www.devmark.ai/fern/?utm_source=openapitools-openapistylevalidator&utm_loc=readme&utm_type=logo)
+
+### :2nd_place_medal: Silver
+
+[Select your sponsor tier](https://github.com/sponsors/JFCote) and get your logo here with a link to your website.
+
+### :3rd_place_medal: Bronze
+
+[Select your sponsor tier](https://github.com/sponsors/JFCote) and get your company name here with a link to your website.
+
 ## What it can validate
 
 ### API Info
