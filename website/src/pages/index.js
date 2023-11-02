@@ -198,7 +198,7 @@ function Home() {
                 <div className={styles.announcementInner}>
                     <h2><b>Sponsors</b></h2>
                     <h3>Gold Sponsors</h3>
-                    <p><a href="https://www.devmark.ai/fern/?utm_source=openapitools-openapistylevalidator&utm_loc=website&utm_type=logo"><img src="img/sponsors/fern_logo_tagline.svp" /></a></p>
+                    <p><a href="https://www.devmark.ai/fern/?utm_source=openapitools-openapistylevalidator&utm_loc=website&utm_type=logo"><img src="img/sponsors/fern_logo_tagline.svg" /></a></p>
                     <p>If you find OpenAPI Style Generator useful, please consider <a
                         href="https://github.com/OpenAPITools/openapi-style-validator"> becoming a developer's sponsor
                     </a> by clicking on the "Sponsor" button on the top of the page.</p>
