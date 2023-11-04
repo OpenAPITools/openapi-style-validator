@@ -6,7 +6,6 @@ import org.eclipse.microprofile.openapi.models.PathItem;
 import org.openapitools.openapistylevalidator.styleerror.*;
 
 class ErrorAggregator {
-
     private final List<StyleError> errorList = new ArrayList<>();
 
     void logMissingOrEmptyAttribute(StyleError.StyleCheckSection styleCheckSection, String fieldNames) {

@@ -1,7 +1,6 @@
 package org.openapitools.openapistylevalidator.styleerror;
 
 public class StyleError {
-
     public enum StyleCheckSection {
         APIInfo,
         Operations,
