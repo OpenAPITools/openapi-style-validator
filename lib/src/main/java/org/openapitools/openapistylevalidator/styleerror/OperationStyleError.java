@@ -4,7 +4,6 @@ import java.util.Objects;
 import org.eclipse.microprofile.openapi.models.PathItem;
 
 public final class OperationStyleError extends StyleError {
-
     private final String path;
     private final PathItem.HttpMethod method;
 

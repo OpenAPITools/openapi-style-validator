@@ -17,7 +17,6 @@ import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConventi
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 class OpenApiSpecStyleValidatorTest {
-
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void testModelPropertiesExampleValidation(boolean isValidateModelPropertiesExample) {

@@ -3,7 +3,6 @@ package org.openapitools.openapistylevalidator.cli;
 import org.apache.commons.cli.*;
 
 public class Main {
-
     private static final String APP_NAME = "openapi-style-validator-cli";
     private static final DefaultParser parser = new DefaultParser();
     private static final OutputUtils outputUtils = new OutputUtils();

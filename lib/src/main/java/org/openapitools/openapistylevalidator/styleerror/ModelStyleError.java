@@ -3,7 +3,6 @@ package org.openapitools.openapistylevalidator.styleerror;
 import java.util.Objects;
 
 public final class ModelStyleError extends StyleError {
-
     private final String modelName;
     private final String propertyName;
 

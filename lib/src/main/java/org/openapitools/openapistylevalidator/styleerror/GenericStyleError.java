@@ -3,7 +3,6 @@ package org.openapitools.openapistylevalidator.styleerror;
 import java.util.Objects;
 
 public final class GenericStyleError extends StyleError {
-
     private final String parentObjectName;
 
     public GenericStyleError(

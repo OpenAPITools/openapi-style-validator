@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Optional;
 
 class NamingValidator {
-
     private static final String REGEX_LOWER_CASE_ALPHA_NUMERIC_ONLY = "[a-z0-9]+";
     private static final String REGEX_UPPER_CASE_ALPHA_NUMERIC_ONLY = "[A-Z0-9]+";
     private static final String REGEX_CAMEL_CASE = "([a-z0-9]+[A-Z]+\\w+)+";

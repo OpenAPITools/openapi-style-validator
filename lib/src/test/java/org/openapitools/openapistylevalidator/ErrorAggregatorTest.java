@@ -10,7 +10,6 @@ import org.openapitools.openapistylevalidator.styleerror.ModelStyleError;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 class ErrorAggregatorTest {
-
     private ErrorAggregator errorAggregator;
 
     @BeforeEach

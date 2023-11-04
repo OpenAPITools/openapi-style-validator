@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
 
 class OptionManagerTest {
-
     private OutputUtils outputUtils = Mockito.mock(OutputUtils.class);
     private OptionManager subject = new OptionManager(outputUtils);
 

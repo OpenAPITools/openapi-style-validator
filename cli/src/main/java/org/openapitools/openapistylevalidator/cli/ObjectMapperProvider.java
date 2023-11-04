@@ -10,7 +10,6 @@ import java.io.IOException;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
 
 class ObjectMapperProvider {
-
     private ObjectMapper optionsObjectMapper;
 
     /**
