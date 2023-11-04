@@ -12,14 +12,9 @@ A customizable style validator to make sure your OpenApi spec follows your organ
 
 ## Summary
 
-Unless you are working alone on a very small API, you are probably working with other people on your spec (YAML) file.
-Even if you have written directions and standards in a shared PDF or on a wiki somewhere and sent it to all the team
-members, there is no way to be sure they will follow it.
+In the collaborative world of API development, ensuring consistency and adherence to standards in your OpenAPI (YAML) specification file is a paramount challenge. Even if you've meticulously documented directives and guidelines in a shared PDF or a company wiki, there's no guarantee that every team member will strictly follow them.
 
-You could argue that you will do code review to prevent these errors. Yes you could but wouldn't it be better if you
-could automatize all of this? You can still do code reviews to find business/requirements/REST path errors
-but let openapi-style-validator validate the style and standards like mandatory examples, naming conventions,
-description, etc...
+One could argue that manual code reviews may catch these deviations, but what if there were a more efficient way to ensure conformity? Enter openapi-style-validator, a tool designed to automate this process. While you may still conduct code reviews to address business logic, requirements, and REST path issues, openapi-style-validator excels at validating the style and adherence to standards, including mandatory examples, naming conventions, descriptions, and more. By integrating this powerful tool into your workflow, you can effortlessly elevate the quality and consistency of your OpenAPI files, leaving you with more time to focus on the critical aspects of your API development.
 
 ## :trophy: Sponsors
 
