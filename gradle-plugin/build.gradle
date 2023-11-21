@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':openapi-style-validator-lib')
-    implementation 'io.swagger.parser.v3:swagger-parser:2.1.18'
+    implementation 'io.swagger.parser.v3:swagger-parser:2.1.19'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
     testImplementation 'junit:junit:4.13.2'
 }
