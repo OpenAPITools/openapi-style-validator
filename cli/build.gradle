@@ -1,5 +1,5 @@
 plugins {
-    id "com.diffplug.spotless" version "6.23.1"
+    id "com.diffplug.spotless" version "6.23.2"
 }
 
 apply plugin: 'application'
