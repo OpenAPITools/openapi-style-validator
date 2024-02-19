@@ -18,11 +18,11 @@ One could argue that manual code reviews may catch these deviations, but what if
 
 ## :trophy: Sponsors
 
-Thanks to our sponsors for supporting this project!
+There are currently no sponsors for this project. If you want to support the project, please consider becoming a sponsor. You can do so by clicking the "Sponsor" button at the top of the page.
 
 ### :1st_place_medal: Gold
 
-[![Fern](./docs/sponsors/fern_logo_tagline.svg)](https://www.devmark.ai/fern/?utm_source=openapitools-openapistylevalidator&utm_loc=readme&utm_type=logo)
+[Select your sponsor tier](https://github.com/sponsors/JFCote) and get your BIG logo here with a link to your website.
 
 ### :2nd_place_medal: Silver
 
