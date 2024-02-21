@@ -6098,9 +6098,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "ip@npm:^1.1.0, ip@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "ip@npm:1.1.5"
-  checksum: 3ad007368cf797ec9b73fbac0a644077198dd85a128d0fe39697a78a9cdd47915577eee5c4eca9933549b575ac4716107896c2d4aa43a1622b3f72104232cad4
+  version: 1.1.9
+  resolution: "ip@npm:1.1.9"
+  checksum: c4c374fdc1fa20f2b5a7c924af10a17cce8f7b9a693ab333dfa49e9d02cd76fabfed16df6f2498cca92dded2280988dace85f2c3c21e086292b3bb72195be71a
   languageName: node
   linkType: hard
 
