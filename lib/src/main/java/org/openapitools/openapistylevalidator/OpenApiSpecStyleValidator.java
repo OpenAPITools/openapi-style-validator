@@ -199,22 +199,7 @@ public class OpenApiSpecStyleValidator {
                                 definition);
                     }
 
-                    if (model.getProperties() != null) {
-                        for (Map.Entry<String, Schema> entry :
-                                model.getProperties().entrySet()) {
-                            String name = entry.getKey();
-                            boolean isValid = namingValidator.isNamingValid(
-                                            name, parameters.getPropertyNamingConvention())
-                                    || parameters.getAllowedModelProperties().contains(name);
-                            if (!isValid) {
-                                errorAggregator.logModelBadNaming(
-                                        entry.getKey(),
-                                        "property",
-                                        parameters.getPropertyNamingConvention().getDesignation(),
-                                        definition);
-                            }
-                        }
-                    }
+                    validatePropertyNaming(definition, model);
                 }
             }
 
@@ -293,6 +278,24 @@ public class OpenApiSpecStyleValidator {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void validatePropertyNaming(String definition, Schema model) {
+        if (model != null && model.getProperties() != null) {
+            for (Map.Entry<String, Schema> entry : model.getProperties().entrySet()) {
+                String propertyName = entry.getKey();
+                boolean isValid = namingValidator.isNamingValid(propertyName, parameters.getPropertyNamingConvention())
+                        || parameters.getAllowedModelProperties().contains(propertyName);
+                if (!isValid) {
+                    errorAggregator.logModelBadNaming(
+                            propertyName,
+                            "property",
+                            parameters.getPropertyNamingConvention().getDesignation(),
+                            definition);
+                }
+                validatePropertyNaming(definition, entry.getValue());
             }
         }
     }

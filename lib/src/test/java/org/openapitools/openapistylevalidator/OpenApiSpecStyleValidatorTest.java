@@ -359,7 +359,7 @@ class OpenApiSpecStyleValidatorTest {
         validatorParams.setPropertyNamingConvention(NamingConvention.HyphenCase);
         List<StyleError> errors = validator.validate(validatorParams);
         Assertions.assertAll(
-                () -> assertEquals(4, errors.size()),
+                () -> assertEquals(5, errors.size()),
                 () -> assertEquals(
                         "*ERROR* in model FooSchema 'fooPropertyOne' -> property should be in hyphen-case",
                         errors.get(0).toString()),
@@ -370,8 +370,11 @@ class OpenApiSpecStyleValidatorTest {
                         "*ERROR* in model BazSchema 'bazPropertyTwo' -> property should be in hyphen-case",
                         errors.get(2).toString()),
                 () -> assertEquals(
+                        "*ERROR* in model BazSchema 'bazRecursiveProperty' -> property should be in hyphen-case",
+                        errors.get(3).toString()),
+                () -> assertEquals(
                         "*ERROR* in model BazSchema 'bazPropertyOne' -> property should be in hyphen-case",
-                        errors.get(3).toString()));
+                        errors.get(4).toString()));
     }
 
     /* begin - tests for issue #367 */
@@ -609,7 +612,14 @@ class OpenApiSpecStyleValidatorTest {
                                                         OASFactory.createSchema()
                                                                 .type(SchemaType.INTEGER)
                                                                 .example("example2")
-                                                                .description("Simple property description 2"));
+                                                                .description("Simple property description 2")
+                                                                .addProperty(
+                                                                        "bazRecursiveProperty",
+                                                                        OASFactory.createSchema()
+                                                                                .type(SchemaType.STRING)
+                                                                                .example("recursive example")
+                                                                                .description(
+                                                                                        "Recursive property description")));
                                             }
                                         })
                                         .required(new ArrayList<String>() {
