@@ -16,5 +16,6 @@
     "headerNamingConvention": "UnderscoreUpperCase",
     "parameterNamingConvention": "CamelCase",
     "schemaNamingConvention": "PascalCase",
-    "propertyNamingConvention": "CamelCase"
+    "propertyNamingConvention": "CamelCase",
+    "enumNamingConvention": "UnderscoreUpperCase"
 }

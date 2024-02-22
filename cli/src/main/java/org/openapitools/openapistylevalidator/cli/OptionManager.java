@@ -101,6 +101,7 @@ class OptionManager {
         validateNamingConvention("path", parameters.getPathNamingConvention());
         validateNamingConvention("schema", parameters.getSchemaNamingConvention());
         validateNamingConvention("property", parameters.getPropertyNamingConvention());
+        validateNamingConvention("enum", parameters.getEnumNamingConvention());
     }
 
     private void validateNamingConvention(String kind, ValidatorParameters.NamingConvention convention) {

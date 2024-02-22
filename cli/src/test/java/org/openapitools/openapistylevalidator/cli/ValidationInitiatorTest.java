@@ -277,6 +277,21 @@ class ValidationInitiatorTest {
                         "Invalid propertyNamingConvention", commandLine);
             }
         }
+
+        @Nested
+        class GivenInvalidEnumNamingConvention {
+            @BeforeEach
+            void init() throws ParseException {
+                commandLine = parser.parse(options, new String[] {
+                    "-s", SRC_TEST_RESOURCES_SOME_YAML, "-o", "src/test/resources/invalidEnumNamingConvention.json"
+                });
+            }
+
+            @Test
+            void throwsIllegalArgumentException() {
+                assertThrowsIllegalArgumentExceptionWithExceptedMessage("Invalid enumNamingConvention", commandLine);
+            }
+        }
     }
 
     @Nested

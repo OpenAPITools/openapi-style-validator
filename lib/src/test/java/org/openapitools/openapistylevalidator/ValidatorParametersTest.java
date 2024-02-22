@@ -42,6 +42,8 @@ class ValidatorParametersTest {
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
                 () -> assertEquals(
+                        ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getEnumNamingConvention()),
+                () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getPathParamNamingConvention()),
@@ -58,6 +60,7 @@ class ValidatorParametersTest {
                 .setHeaderNamingConvention(ValidatorParameters.NamingConvention.UnderscoreUpperCase)
                 .setSchemaNamingConvention(ValidatorParameters.NamingConvention.PascalCase)
                 .setPropertyNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
+                .setEnumNamingConvention(ValidatorParameters.NamingConvention.UnderscoreUpperCase)
                 .setQueryParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setPathParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setCookieParamNamingConvention(ValidatorParameters.NamingConvention.CamelCase);
@@ -87,6 +90,8 @@ class ValidatorParametersTest {
                         ValidatorParameters.NamingConvention.PascalCase, parameters.getSchemaNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
+                () -> assertEquals(
+                        ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getEnumNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
                 () -> assertEquals(

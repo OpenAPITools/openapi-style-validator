@@ -200,6 +200,8 @@ public class OpenApiSpecStyleValidator {
                     }
 
                     validatePropertyNaming(definition, model);
+
+                    validateEnumNaming(definition, model);
                 }
             }
 
@@ -295,7 +297,27 @@ public class OpenApiSpecStyleValidator {
                             parameters.getPropertyNamingConvention().getDesignation(),
                             definition);
                 }
+                validateEnumNaming(definition, entry.getValue());
                 validatePropertyNaming(definition, entry.getValue());
+            }
+        }
+    }
+
+    private void validateEnumNaming(String definition, Schema model) {
+        if (model != null && model.getEnumeration() != null) {
+            for (Object enumValue : model.getEnumeration()) {
+                if (enumValue instanceof String) {
+                    String enumString = (String) enumValue;
+                    boolean isEnumNameValid =
+                            namingValidator.isNamingValid(enumString, parameters.getEnumNamingConvention());
+                    if (!isEnumNameValid) {
+                        errorAggregator.logModelBadNaming(
+                                enumString,
+                                "enum value",
+                                parameters.getEnumNamingConvention().getDesignation(),
+                                definition);
+                    }
+                }
             }
         }
     }
