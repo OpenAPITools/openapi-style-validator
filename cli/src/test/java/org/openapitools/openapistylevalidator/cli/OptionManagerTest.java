@@ -132,8 +132,7 @@ class OptionManagerTest {
                 ValidatorParameters.NamingConvention.PascalCase, parameters.getSchemaNamingConvention());
         Assertions.assertEquals(
                 ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention());
-        Assertions.assertEquals(
-                ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getEnumNamingConvention());
+        Assertions.assertEquals(ValidatorParameters.NamingConvention.AnyCase, parameters.getEnumNamingConvention());
     }
 
     /* begin - tests for issue #367 */

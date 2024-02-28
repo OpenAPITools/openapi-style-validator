@@ -41,8 +41,7 @@ class ValidatorParametersTest {
                         ValidatorParameters.NamingConvention.PascalCase, parameters.getSchemaNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getPropertyNamingConvention()),
-                () -> assertEquals(
-                        ValidatorParameters.NamingConvention.UnderscoreUpperCase, parameters.getEnumNamingConvention()),
+                () -> assertEquals(ValidatorParameters.NamingConvention.AnyCase, parameters.getEnumNamingConvention()),
                 () -> assertEquals(
                         ValidatorParameters.NamingConvention.CamelCase, parameters.getQueryParamNamingConvention()),
                 () -> assertEquals(

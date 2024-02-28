@@ -125,7 +125,7 @@ The options file is described in json (example in `specs/options.json`), and has
 |headerNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`UnderscoreUpperCase`|Naming convention for headers|
 |schemaNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`PascalCase`|Naming convention for schemas|
 |propertyNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`CamelCase`|Naming convention for properties|
-|enumNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`UnderscoreUpperCase`|Naming convention for enums|
+|enumNamingConvention|string| `CamelCase`, `PascalCase`, `HyphenUpperCase`, `HyphenCase`, `UnderscoreCase`, `UnderscoreUpperCase`, `AnyCase` |`AnyCase`|Naming convention for enums|
 |allowedModelProperties|array| `["_links", "_embedded"]`|`[]`|An array of property names that are authorised even if they do not match to the "propertyNamingConvention"|
 
 #### Parameter Naming Convention hierarchy

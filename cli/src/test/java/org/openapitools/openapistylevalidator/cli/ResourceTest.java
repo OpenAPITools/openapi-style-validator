@@ -115,7 +115,7 @@ class ResourceTest {
                 + PREFIX
                 + ValidatorParameters.ENUM_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
-                + ValidatorParameters.NamingConvention.UnderscoreUpperCase
+                + ValidatorParameters.NamingConvention.AnyCase
                 + "\""
                 + System.lineSeparator()
                 + "}";

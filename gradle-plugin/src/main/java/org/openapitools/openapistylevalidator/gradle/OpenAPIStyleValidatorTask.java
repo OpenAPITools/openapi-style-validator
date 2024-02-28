@@ -40,7 +40,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention schemaNamingConvention = NamingConvention.PascalCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
-    private NamingConvention enumNamingConvention = NamingConvention.UnderscoreUpperCase;
+    private NamingConvention enumNamingConvention = NamingConvention.AnyCase;
     private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
