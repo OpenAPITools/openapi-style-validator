@@ -32,6 +32,7 @@
           <parameterNamingConvention>CamelCase</parameterNamingConvention>
           <schemaNamingConvention>PascalCase</schemaNamingConvention>
           <propertyNamingConvention>CamelCase</propertyNamingConvention>
+          <enumNamingConvention>AnyCase</enumNamingConvention>
         </configuration>
         <executions>
           <execution>

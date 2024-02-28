@@ -111,6 +111,11 @@ class ResourceTest {
                 + ValidatorParameters.PROPERTY_NAMING_CONVENTION
                 + SEPARATOR_QUOTE
                 + ValidatorParameters.NamingConvention.CamelCase
+                + NEXT_LINE_QUOTE
+                + PREFIX
+                + ValidatorParameters.ENUM_NAMING_CONVENTION
+                + SEPARATOR_QUOTE
+                + ValidatorParameters.NamingConvention.AnyCase
                 + "\""
                 + System.lineSeparator()
                 + "}";

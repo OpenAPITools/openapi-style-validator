@@ -359,7 +359,7 @@ class OpenApiSpecStyleValidatorTest {
         validatorParams.setPropertyNamingConvention(NamingConvention.HyphenCase);
         List<StyleError> errors = validator.validate(validatorParams);
         Assertions.assertAll(
-                () -> assertEquals(4, errors.size()),
+                () -> assertEquals(5, errors.size()),
                 () -> assertEquals(
                         "*ERROR* in model FooSchema 'fooPropertyOne' -> property should be in hyphen-case",
                         errors.get(0).toString()),
@@ -370,7 +370,72 @@ class OpenApiSpecStyleValidatorTest {
                         "*ERROR* in model BazSchema 'bazPropertyTwo' -> property should be in hyphen-case",
                         errors.get(2).toString()),
                 () -> assertEquals(
+                        "*ERROR* in model BazSchema 'bazRecursiveProperty' -> property should be in hyphen-case",
+                        errors.get(3).toString()),
+                () -> assertEquals(
                         "*ERROR* in model BazSchema 'bazPropertyOne' -> property should be in hyphen-case",
+                        errors.get(4).toString()));
+    }
+
+    @Test
+    void shouldReportEnumNamingConventionError() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.components(OASFactory.createComponents()
+                .addSchema(
+                        "EnumSchema",
+                        OASFactory.createSchema()
+                                .title("Enum schema title")
+                                .type(SchemaType.STRING)
+                                .nullable(true)
+                                .enumeration(new ArrayList<Object>() {
+                                    {
+                                        add("red");
+                                        add("Green");
+                                        add("Light_Brown");
+                                        add("BLUE");
+                                        add("DARK_GREY");
+                                        add(null);
+                                    }
+                                }))
+                .addSchema(
+                        "EnumInPropertySchema",
+                        OASFactory.createSchema()
+                                .title("Enum in property schema title")
+                                .type(SchemaType.STRING)
+                                .addProperty(
+                                        "enumInProperty",
+                                        OASFactory.createSchema()
+                                                .example("example")
+                                                .description("Enum in property description")
+                                                .type(SchemaType.STRING)
+                                                .nullable(true)
+                                                .enumeration(new ArrayList<Object>() {
+                                                    {
+                                                        add("dark-green");
+                                                        add("YELLOW");
+                                                        add("TEAL_BLUE");
+                                                        add(null);
+                                                    }
+                                                }))));
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        ValidatorParameters validatorParams = new ValidatorParameters();
+        validatorParams.setEnumNamingConvention(NamingConvention.UnderscoreUpperCase);
+        List<StyleError> errors = validator.validate(validatorParams);
+        Assertions.assertAll(
+                () -> assertEquals(4, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in model EnumSchema 'red' -> enum value should be in UNDERSCORE_UPPER_CASE",
+                        errors.get(0).toString()),
+                () -> assertEquals(
+                        "*ERROR* in model EnumSchema 'Green' -> enum value should be in UNDERSCORE_UPPER_CASE",
+                        errors.get(1).toString()),
+                () -> assertEquals(
+                        "*ERROR* in model EnumSchema 'Light_Brown' -> enum value should be in UNDERSCORE_UPPER_CASE",
+                        errors.get(2).toString()),
+                () -> assertEquals(
+                        "*ERROR* in model EnumInPropertySchema 'dark-green' -> enum value should be in UNDERSCORE_UPPER_CASE",
                         errors.get(3).toString()));
     }
 
@@ -609,7 +674,14 @@ class OpenApiSpecStyleValidatorTest {
                                                         OASFactory.createSchema()
                                                                 .type(SchemaType.INTEGER)
                                                                 .example("example2")
-                                                                .description("Simple property description 2"));
+                                                                .description("Simple property description 2")
+                                                                .addProperty(
+                                                                        "bazRecursiveProperty",
+                                                                        OASFactory.createSchema()
+                                                                                .type(SchemaType.STRING)
+                                                                                .example("recursive example")
+                                                                                .description(
+                                                                                        "Recursive property description")));
                                             }
                                         })
                                         .required(new ArrayList<String>() {

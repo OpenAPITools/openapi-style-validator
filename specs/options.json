@@ -19,6 +19,7 @@
   "parameterNamingConvention": "CamelCase",
   "schemaNamingConvention": "PascalCase",
   "propertyNamingConvention": "CamelCase",
+  "enumNamingConvention": "AnyCase",
   "queryParamNamingConvention": "CamelCase",
   "pathParamNamingConvention": "HyphenCase",
   "cookieParamNamingConvention": "CamelCase"

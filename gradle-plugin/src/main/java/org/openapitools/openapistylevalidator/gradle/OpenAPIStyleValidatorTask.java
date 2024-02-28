@@ -40,6 +40,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention schemaNamingConvention = NamingConvention.PascalCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention enumNamingConvention = NamingConvention.AnyCase;
     private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
@@ -171,6 +172,11 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         this.propertyNamingConvention = propertyNamingConvention;
     }
 
+    @Option(option = ValidatorParameters.ENUM_NAMING_CONVENTION, description = "Naming convention for enums")
+    public void setEnumNamingConvention(NamingConvention enumNamingConvention) {
+        this.enumNamingConvention = enumNamingConvention;
+    }
+
     @Option(option = ValidatorParameters.PATH_PARAM_NAMING_CONVENTION, description = "Naming convention for path parameters")
     public void setPathParamNamingConvention(NamingConvention pathParamNamingConvention) {
         this.pathParamNamingConvention = pathParamNamingConvention;
@@ -206,6 +212,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         parameters.setHeaderNamingConvention(headerNamingConvention);
         parameters.setSchemaNamingConvention(schemaNamingConvention);
         parameters.setPropertyNamingConvention(propertyNamingConvention);
+        parameters.setEnumNamingConvention(enumNamingConvention);
         parameters.setPathParamNamingConvention(pathParamNamingConvention);
         parameters.setQueryParamNamingConvention(queryParamNamingConvention);
         parameters.setCookieParamNamingConvention(cookieParamNamingConvention);

@@ -27,6 +27,7 @@ public class ValidatorParameters {
     public static final String HEADER_NAMING_CONVENTION = "headerNamingConvention";
     public static final String SCHEMA_NAMING_CONVENTION = "schemaNamingConvention";
     public static final String PROPERTY_NAMING_CONVENTION = "propertyNamingConvention";
+    public static final String ENUM_NAMING_CONVENTION = "enumNamingConvention";
     public static final String QUERY_PARAM_NAMING_CONVENTION = "queryParamNamingConvention";
     public static final String PATH_PARAM_NAMING_CONVENTION = "pathParamNamingConvention";
     public static final String COOKIE_PARAM_NAMING_CONVENTION = "cookieParamNamingConvention";
@@ -75,6 +76,7 @@ public class ValidatorParameters {
     private NamingConvention headerNamingConvention = NamingConvention.UnderscoreUpperCase;
     private NamingConvention schemaNamingConvention = NamingConvention.PascalCase;
     private NamingConvention propertyNamingConvention = NamingConvention.CamelCase;
+    private NamingConvention enumNamingConvention = NamingConvention.AnyCase;
     private NamingConvention queryParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention pathParamNamingConvention = NamingConvention.CamelCase;
     private NamingConvention cookieParamNamingConvention = NamingConvention.CamelCase;
@@ -151,6 +153,10 @@ public class ValidatorParameters {
 
     public NamingConvention getPropertyNamingConvention() {
         return propertyNamingConvention;
+    }
+
+    public NamingConvention getEnumNamingConvention() {
+        return enumNamingConvention;
     }
 
     public NamingConvention getQueryParamNamingConvention() {
@@ -259,6 +265,11 @@ public class ValidatorParameters {
         return this;
     }
 
+    public ValidatorParameters setEnumNamingConvention(NamingConvention enumNamingConvention) {
+        this.enumNamingConvention = enumNamingConvention;
+        return this;
+    }
+
     public ValidatorParameters setQueryParamNamingConvention(NamingConvention queryParamNamingConvention) {
         this.queryParamNamingConvention = queryParamNamingConvention;
         this.queryParamNamingConventionWasExplicitlySet = true;
@@ -324,6 +335,7 @@ public class ValidatorParameters {
                         + "parameterNamingConvention=%s, "
                         + "schemaNamingConvention=%s, "
                         + "propertyNamingConvention=%s, "
+                        + "enumNamingConvention=%s, "
                         + "queryParamNamingConvention=%s, "
                         + "pathParamNamingConvention=%s, "
                         + "cookieParamNamingConvention=%s"
@@ -346,6 +358,7 @@ public class ValidatorParameters {
                 parameterNamingConvention,
                 schemaNamingConvention,
                 propertyNamingConvention,
+                enumNamingConvention,
                 queryParamNamingConvention,
                 pathParamNamingConvention,
                 cookieParamNamingConvention);
