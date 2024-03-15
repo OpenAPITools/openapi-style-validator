@@ -5184,12 +5184,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.0":
-  version: 1.14.5
-  resolution: "follow-redirects@npm:1.14.5"
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 69c5dc6658d9a5ac337b82e2b4ab4af5ed4b0482b582b9517dc10fa132f781187febe4d28e1808866c299b1ca0083c1493e781364746376e89a24e15b4887a0c
+  checksum: bf144aaa904f4317803d0e1282c972e7cca4664f812635be76f60df03d26c96eb0a127c18e2421c5344edc9aad59ae69206a6c042152f33a2a0122cf1a3d374c
   languageName: node
   linkType: hard
 
