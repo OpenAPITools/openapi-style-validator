@@ -5284,6 +5284,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-monkey@npm:^1.0.4":
+  version: 1.0.5
+  resolution: "fs-monkey@npm:1.0.5"
+  checksum: 5321f57328df5adfb4f97c275b90aebdb24c7d31d2e3feb64e8829bac5d002622019ceb0e14cb5e67c15c1930cac62da02e94cafee505e944d588c7ec3525e2d
+  languageName: node
+  linkType: hard
+
 "fs.realpath@npm:^1.0.0":
   version: 1.0.0
   resolution: "fs.realpath@npm:1.0.0"
@@ -7088,12 +7095,21 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"memfs@npm:^3.1.2, memfs@npm:^3.2.2":
+"memfs@npm:^3.1.2":
   version: 3.4.0
   resolution: "memfs@npm:3.4.0"
   dependencies:
     fs-monkey: 1.0.3
   checksum: f748b6875d906bc53d6970026f913331c24a927cf8b6cd56a40a24057a34c2b9f4c9d50d927490c400ba309f97485be586f071ee1cadd9e4c82e6131fcbfb042
+  languageName: node
+  linkType: hard
+
+"memfs@npm:^3.4.3":
+  version: 3.5.3
+  resolution: "memfs@npm:3.5.3"
+  dependencies:
+    fs-monkey: ^1.0.4
+  checksum: bcb5143e9746bf6f509569b4d79203d79ff7c3332bbfd59eb90ad49f56584935b5be6e46108d37173232a4423db63486cd9a5426c8c489e4743c87307316a75d
   languageName: node
   linkType: hard
 
@@ -10781,17 +10797,17 @@ fsevents@~2.3.2:
   linkType: hard
 
 "webpack-dev-middleware@npm:^5.2.1":
-  version: 5.2.2
-  resolution: "webpack-dev-middleware@npm:5.2.2"
+  version: 5.3.4
+  resolution: "webpack-dev-middleware@npm:5.3.4"
   dependencies:
     colorette: ^2.0.10
-    memfs: ^3.2.2
+    memfs: ^3.4.3
     mime-types: ^2.1.31
     range-parser: ^1.2.1
     schema-utils: ^4.0.0
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
-  checksum: 4972c48ec9d454c69d7bf6f97ab6c5794e46a20014104405772a1d7218fb12a56126b844c8d854c10fda0eac293e216fa03d2a7a806a18d1b45013b56d3b798a
+  checksum: 3d5defefa1885ad63b806e33094992ceda9e365873d89eb5f1ec2aa2fe5be5125a3da234e28edc6d599ce1c0329f3e2d6a7834ae14fcb5c3838da7c70c218e9d
   languageName: node
   linkType: hard
 
