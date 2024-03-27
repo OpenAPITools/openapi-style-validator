@@ -3250,12 +3250,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.1":
-  version: 1.20.1
-  resolution: "body-parser@npm:1.20.1"
+"body-parser@npm:1.20.2":
+  version: 1.20.2
+  resolution: "body-parser@npm:1.20.2"
   dependencies:
     bytes: 3.1.2
-    content-type: ~1.0.4
+    content-type: ~1.0.5
     debug: 2.6.9
     depd: 2.0.0
     destroy: 1.2.0
@@ -3263,10 +3263,10 @@ __metadata:
     iconv-lite: 0.4.24
     on-finished: 2.4.1
     qs: 6.11.0
-    raw-body: 2.5.1
+    raw-body: 2.5.2
     type-is: ~1.6.18
     unpipe: 1.0.0
-  checksum: 473245b1ff1828a1c0b0aee08f6503aefba9ea5e0de21bf65f014295c262f4177e4d6e60f97e11eab15fb1dafdfeaaa9f5f99cbbf55682c3521905c68f593684
+  checksum: 1a774a1636d1f40168d56ff89326eb1fed3728752ce40edc0d426194149b0585f170646d45627ec6a92b431a84cd8e2072d53c8ae1d03814ca934390fff975d8
   languageName: node
   linkType: hard
 
@@ -3882,6 +3882,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"content-type@npm:~1.0.5":
+  version: 1.0.5
+  resolution: "content-type@npm:1.0.5"
+  checksum: b9048d1de893fcbc79c94dd17c6080e5cf9a8b35b322674be91e76c0831504f857d2caf7ce29d330e4e5f20ba914164377c99b3285cfe7ffbe64afe976dacd7b
+  languageName: node
+  linkType: hard
+
 "convert-source-map@npm:^1.7.0":
   version: 1.8.0
   resolution: "convert-source-map@npm:1.8.0"
@@ -3898,10 +3905,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.5.0":
-  version: 0.5.0
-  resolution: "cookie@npm:0.5.0"
-  checksum: d8775419ba4dd8cc169aa7e070b0d33ca3d9d9a456b0c871b15f492a2032962f7c436c7f1fa81d9275c6b3af27611e68f70714da9ff3c15ebf6bb69ed9e0333a
+"cookie@npm:0.6.0":
+  version: 0.6.0
+  resolution: "cookie@npm:0.6.0"
+  checksum: 66870d204a3df607053f277b2e2c17fa39c9b2ea94e0b0c208528169b7b00e08b07729947f2e6a7644460dcfe985babf62f9a46fe796c5422e788201fd20490c
   languageName: node
   linkType: hard
 
@@ -4931,15 +4938,15 @@ __metadata:
   linkType: hard
 
 "express@npm:^4.17.1":
-  version: 4.18.2
-  resolution: "express@npm:4.18.2"
+  version: 4.19.2
+  resolution: "express@npm:4.19.2"
   dependencies:
     accepts: ~1.3.8
     array-flatten: 1.1.1
-    body-parser: 1.20.1
+    body-parser: 1.20.2
     content-disposition: 0.5.4
     content-type: ~1.0.4
-    cookie: 0.5.0
+    cookie: 0.6.0
     cookie-signature: 1.0.6
     debug: 2.6.9
     depd: 2.0.0
@@ -4965,7 +4972,7 @@ __metadata:
     type-is: ~1.6.18
     utils-merge: 1.0.1
     vary: ~1.1.2
-  checksum: b3675a74759b8b38c4341507d26d50f01eda9e86d71ec03ff695b016fd7573702c591de6a63b28477cced061a9093603b8251e81da4a5b2081b6042a83755f0c
+  checksum: 5b7634882a543d11669bca55e9e4730a4e52cdf0211090c063392811bea05f462fea7d2367da05a8532c7a17e1ca337334fad9a1e56e7fa8355a237048eb9cd0
   languageName: node
   linkType: hard
 
@@ -8665,15 +8672,15 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"raw-body@npm:2.5.1":
-  version: 2.5.1
-  resolution: "raw-body@npm:2.5.1"
+"raw-body@npm:2.5.2":
+  version: 2.5.2
+  resolution: "raw-body@npm:2.5.2"
   dependencies:
     bytes: 3.1.2
     http-errors: 2.0.0
     iconv-lite: 0.4.24
     unpipe: 1.0.0
-  checksum: aa356884ff024caa889329585b81f0f1f8ddf7ff39b8e10740efe6e4181a054cec2a8af0fc5496e8432e779da56ca85a628199d3edd3cc213b1277f065315321
+  checksum: d6fe5e5ad11458398a226be09ed68cbdf7a0719c67a9b172dbf595e2515416df55bc5a2e9681a64c304203b5bc1d3766cbc8fe5f89c6499bf12eb9da085dceaf
   languageName: node
   linkType: hard
 
