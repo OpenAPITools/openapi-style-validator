@@ -17,7 +17,7 @@ dependencies {
     implementation 'io.swagger.core.v3:swagger-models:2.2.22'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
 
-    implementation 'org.apache.maven:maven-plugin-api:3.9.6'
+    implementation 'org.apache.maven:maven-plugin-api:3.9.7'
     compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.13.0'
 
     testImplementation 'junit:junit:4.13.2'
