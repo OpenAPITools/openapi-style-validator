@@ -24,7 +24,7 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-core:2.2'
     testImplementation 'io.takari.maven.plugins:takari-plugin-testing:3.0.3'
     testImplementation 'io.takari.maven.plugins:takari-plugin-integration-testing:3.0.3'
-    testImplementation 'org.assertj:assertj-core:3.26.0'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
     testRuntimeOnly 'org.apache.maven:maven-compat:3.9.8'
     testRuntimeOnly 'org.apache.maven:maven-core:3.9.8'
 }
