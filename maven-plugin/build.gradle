@@ -21,7 +21,7 @@ dependencies {
     compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.13.1'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.hamcrest:hamcrest-core:2.2'
+    testImplementation 'org.hamcrest:hamcrest-core:3.0'
     testImplementation 'io.takari.maven.plugins:takari-plugin-testing:3.0.3'
     testImplementation 'io.takari.maven.plugins:takari-plugin-integration-testing:3.0.3'
     testImplementation 'org.assertj:assertj-core:3.26.3'
