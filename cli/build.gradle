@@ -7,7 +7,7 @@ apply plugin: 'application'
 dependencies {
     implementation project(':openapi-style-validator-lib')
     implementation 'commons-cli:commons-cli:1.8.0'
-    implementation 'org.slf4j:slf4j-jdk14:2.0.13'
+    implementation 'org.slf4j:slf4j-jdk14:2.0.14'
     implementation 'io.swagger.parser.v3:swagger-parser:2.1.19'
     implementation 'org.openapitools.empoa:empoa-swagger-core:2.1.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
