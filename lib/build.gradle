@@ -6,7 +6,7 @@ dependencies {
     implementation 'org.eclipse.microprofile.openapi:microprofile-openapi-api:3.1.1'
     testImplementation 'org.slf4j:slf4j-jdk14:2.0.16'
     testImplementation 'org.openapitools.empoa:empoa-simple-models-impl:2.1.0'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.16.1'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.16.2'
 }
 
 java {
