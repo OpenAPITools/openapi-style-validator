@@ -13,7 +13,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
 
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.23.1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.23.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.24.0'
 
     testImplementation "org.mockito:mockito-core:5.13.0"
 }
