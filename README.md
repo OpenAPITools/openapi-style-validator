@@ -1,3 +1,5 @@
+## This project is looking for maintainers. Please refer to the [announcement](https://github.com/OpenAPITools/openapi-style-validator/issues/783) for more information.
+
 # OpenApi Tools: OpenAPI Style Validator
 
 ![](website/static/img/logo.png)
