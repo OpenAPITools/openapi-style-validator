@@ -28,7 +28,7 @@ class OutputUtils {
                     options,
                     HelpFormatter.DEFAULT_LEFT_PAD,
                     HelpFormatter.DEFAULT_DESC_PAD,
-                    "Thanks for using OpenAPI Style Validator! If you this project useful, consider buying us a tree here: https://ecologi.com/darkjaff",
+                    "Thanks for using OpenAPI Style Validator! If you find this project useful, consider buying us a tree here: https://ecologi.com/darkjaff",
                     true);
 
             printWriter.flush();

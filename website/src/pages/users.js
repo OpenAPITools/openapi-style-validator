@@ -13,7 +13,7 @@ function Users() {
     const {users = {}} = siteConfig.customFields;
 
     let showcase = users.map((user, idx) => {
-            // avoid joining base/ with /img/path as double-slash breaks image load.
+            // Avoid joining base/ with /img/path as a double-slash breaks image load.
             let trimmedImg = user.image.startsWith("/") ? user.image.slice(1, user.image.length) : user.image;
             let imgUrl = useBaseUrl(trimmedImg);
             return (

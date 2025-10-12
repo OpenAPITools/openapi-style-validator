@@ -4,7 +4,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 
-// This is based mostly off of Babel's website configuration for Members/orgs/etc.
+// This is based mostly on Babel's website configuration for Members/orgs/etc.
 function MediaLink(props) {
     if (props.text) {
         return (
