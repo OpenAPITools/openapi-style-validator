@@ -47,7 +47,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
 
     public OpenAPIStyleValidatorTask() {
         this.setGroup("Verification");
-        this.setDescription("Validate that OpenAPI files against style rules");
+        this.setDescription("Validate OpenAPI files against style rules");
     }
 
     @TaskAction
