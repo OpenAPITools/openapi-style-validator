@@ -69,6 +69,44 @@ public class IntegrationTest {
         .assertLogText("BUILD SUCCESS");
   }
 
+  /**
+   * See <a href="https://github.com/OpenAPITools/openapi-style-validator/pull/810#discussion_r4502998987">the review discussion</a>:
+   * a root tag without a description is a warning, it must not fail the build.
+   */
+  @Test
+  public void withDefaultPomShouldNotFailOnRootTagWarning() throws Exception {
+    Path file = Paths.get("../cli/src/test/resources/rootTagWarning.yaml");
+    Assertions.assertTrue(Files.isRegularFile(file));
+
+    File basedir = resources.getBasedir("testDefault");
+    MavenExecutionResult result = maven.forProject(basedir)
+        .execute("verify", "-X", "-Dit.inputFile=" + file.normalize().toAbsolutePath());
+
+    result
+        .assertLogText("Validating spec:")
+        .assertLogText("*WARNING* Section: OpenAPI: 'description' in tag 'demo' -> This field should be present and not empty")
+        .assertLogText("BUILD SUCCESS");
+  }
+
+  /**
+   * See <a href="https://github.com/OpenAPITools/openapi-style-validator/pull/810#discussion_r4502998987">the review discussion</a>:
+   * an operation tag not declared in the root 'tags' section is still an error.
+   */
+  @Test
+  public void withDefaultPomShouldFailOnUndeclaredOperationTag() throws Exception {
+    Path file = Paths.get("../cli/src/test/resources/undeclaredOperationTag.yaml");
+    Assertions.assertTrue(Files.isRegularFile(file));
+
+    File basedir = resources.getBasedir("testDefault");
+    MavenExecutionResult result = maven.forProject(basedir)
+        .execute("verify", "-X", "-Dit.inputFile=" + file.normalize().toAbsolutePath());
+
+    result
+        .assertLogText("Validating spec:")
+        .assertLogText("*ERROR* in Operation GET /ping 'tags' -> The following tags are used but not declared in the root 'tags' section: undeclaredTag")
+        .assertLogText("BUILD FAILURE");
+  }
+
   @Test
   public void withEmptyPomShouldDisplayNamingErrors() throws Exception {
     Path file = Paths.get("../cli/src/test/resources/some.yaml");

@@ -10,6 +10,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openapitools.openapistylevalidator.styleerror.GenericStyleWarning;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 class OutputUtils {
@@ -41,10 +42,27 @@ class OutputUtils {
     }
 
     void printResults(List<StyleError> errorList) {
-        if (errorList.isEmpty()) {
+        /*
+         * Warnings (e.g. a root tag without a description) are reported, but
+         * they must not fail the run: only errors do.
+         * See https://github.com/OpenAPITools/openapi-style-validator/pull/810#discussion_r4502998987
+         */
+        boolean hasErrors = false;
+        for (StyleError error : errorList) {
+            if (error instanceof GenericStyleWarning) {
+                logger.warn(error.toString());
+            } else {
+                hasErrors = true;
+            }
+        }
+
+        if (!hasErrors) {
             logger.info("There are no style errors in this spec.");
         } else {
             for (StyleError error : errorList) {
+                if (error instanceof GenericStyleWarning) {
+                    continue;
+                }
                 String errorMessage = error.toString();
                 logger.error(errorMessage);
             }
