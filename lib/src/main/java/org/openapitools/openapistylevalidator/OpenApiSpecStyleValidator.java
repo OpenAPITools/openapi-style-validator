@@ -176,28 +176,83 @@ public class OpenApiSpecStyleValidator {
         if (!parameters.isValidateModelRequiredProperties() || model == null || model.getRef() != null) {
             return;
         }
+        /*
+         * A composition (allOf/anyOf/oneOf) may validly declare a required
+         * property in any of its members instead of the composing schema
+         * itself, so the required names are checked against every property
+         * name declared across the whole composition tree rooted at this
+         * schema.
+         * See https://github.com/OpenAPITools/openapi-style-validator/pull/809#discussion_r4502925779
+         */
+        Set<String> knownPropertyNames = collectCompositionPropertyNames(model, new HashSet<>());
+        validateModelRequiredProperties(modelName, model, knownPropertyNames, visited);
+    }
+
+    private void validateModelRequiredProperties(
+            String modelName, Schema model, Set<String> knownPropertyNames, Set<Schema> visited) {
+        if (!parameters.isValidateModelRequiredProperties() || model == null || model.getRef() != null) {
+            return;
+        }
         if (!visited.add(model)) {
             return;
         }
         if (model.getRequired() != null) {
-            Set<String> namesOfProperties =
-                    Optional.ofNullable(model.getProperties()).map(Map::keySet).orElse(Collections.emptySet());
             model.getRequired().forEach(nameOfRequiredProperty -> {
-                if (!namesOfProperties.contains(nameOfRequiredProperty)) {
+                if (!knownPropertyNames.contains(nameOfRequiredProperty)) {
                     errorAggregator.logMissingModelProperty(modelName, nameOfRequiredProperty);
                 }
             });
         }
+        // array items describe different instances: they get their own composition scope
         validateModelRequiredProperties(modelName, model.getItems(), visited);
-        validateModelRequiredProperties(modelName, model.getAllOf(), visited);
-        validateModelRequiredProperties(modelName, model.getAnyOf(), visited);
-        validateModelRequiredProperties(modelName, model.getOneOf(), visited);
+        validateModelRequiredProperties(modelName, model.getAllOf(), knownPropertyNames, visited);
+        validateModelRequiredProperties(modelName, model.getAnyOf(), knownPropertyNames, visited);
+        validateModelRequiredProperties(modelName, model.getOneOf(), knownPropertyNames, visited);
     }
 
-    private void validateModelRequiredProperties(String modelName, List<Schema> models, Set<Schema> visited) {
+    private void validateModelRequiredProperties(
+            String modelName, List<Schema> models, Set<String> knownPropertyNames, Set<Schema> visited) {
         if (models != null) {
-            models.forEach(model -> validateModelRequiredProperties(modelName, model, visited));
+            models.forEach(model -> validateModelRequiredProperties(modelName, model, knownPropertyNames, visited));
         }
+    }
+
+    /*
+     * Collects every property name declared in the composition tree rooted at
+     * the given schema: the schema itself and all its allOf/anyOf/oneOf
+     * members, transitively. Members that are pure $ref are followed through
+     * the component schemas they point to, because their properties count for
+     * the composition too. Array items are intentionally not traversed: they
+     * describe different instances, not a composition of the same one.
+     */
+    private Set<String> collectCompositionPropertyNames(Schema model, Set<Schema> visitedSchemas) {
+        Set<String> propertyNames = new HashSet<>();
+        if (model == null || !visitedSchemas.add(model)) {
+            return propertyNames;
+        }
+        if (model.getRef() != null) {
+            return collectCompositionPropertyNames(resolveComponentSchema(model.getRef()), visitedSchemas);
+        }
+        if (model.getProperties() != null) {
+            propertyNames.addAll(model.getProperties().keySet());
+        }
+        for (List<Schema> members : Arrays.asList(model.getAllOf(), model.getAnyOf(), model.getOneOf())) {
+            if (members != null) {
+                members.forEach(
+                        member -> propertyNames.addAll(collectCompositionPropertyNames(member, visitedSchemas)));
+            }
+        }
+        return propertyNames;
+    }
+
+    private Schema resolveComponentSchema(String ref) {
+        String schemasPrefix = "#/components/schemas/";
+        if (ref.startsWith(schemasPrefix)
+                && openAPI.getComponents() != null
+                && openAPI.getComponents().getSchemas() != null) {
+            return openAPI.getComponents().getSchemas().get(ref.substring(schemasPrefix.length()));
+        }
+        return null;
     }
 
     private void validateNaming() {
