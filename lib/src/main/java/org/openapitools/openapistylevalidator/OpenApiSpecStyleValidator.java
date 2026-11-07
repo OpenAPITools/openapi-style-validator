@@ -140,7 +140,7 @@ public class OpenApiSpecStyleValidator {
         if (openAPI.getComponents() != null && openAPI.getComponents().getSchemas() != null) {
             openAPI.getComponents().getSchemas().forEach((modelName, model) -> {
                 validateModelProperties(modelName, model);
-                validateModelRequiredProperties(modelName, model);
+                validateModelRequiredProperties(modelName, model, new HashSet<>());
             });
         }
     }
@@ -172,8 +172,14 @@ public class OpenApiSpecStyleValidator {
         }
     }
 
-    private void validateModelRequiredProperties(String modelName, Schema model) {
-        if (parameters.isValidateModelRequiredProperties() && model.getRequired() != null) {
+    private void validateModelRequiredProperties(String modelName, Schema model, Set<Schema> visited) {
+        if (!parameters.isValidateModelRequiredProperties() || model == null || model.getRef() != null) {
+            return;
+        }
+        if (!visited.add(model)) {
+            return;
+        }
+        if (model.getRequired() != null) {
             Set<String> namesOfProperties =
                     Optional.ofNullable(model.getProperties()).map(Map::keySet).orElse(Collections.emptySet());
             model.getRequired().forEach(nameOfRequiredProperty -> {
@@ -181,6 +187,16 @@ public class OpenApiSpecStyleValidator {
                     errorAggregator.logMissingModelProperty(modelName, nameOfRequiredProperty);
                 }
             });
+        }
+        validateModelRequiredProperties(modelName, model.getItems(), visited);
+        validateModelRequiredProperties(modelName, model.getAllOf(), visited);
+        validateModelRequiredProperties(modelName, model.getAnyOf(), visited);
+        validateModelRequiredProperties(modelName, model.getOneOf(), visited);
+    }
+
+    private void validateModelRequiredProperties(String modelName, List<Schema> models, Set<Schema> visited) {
+        if (models != null) {
+            models.forEach(model -> validateModelRequiredProperties(modelName, model, visited));
         }
     }
 

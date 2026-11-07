@@ -212,6 +212,90 @@ class OpenApiSpecStyleValidatorTest {
         }
     }
 
+    /**
+     * Test for the bug #407: required fields are not validated when a model is created inside an allOf
+     */
+    @Test
+    void testModelRequiredPropertiesValidationInsideAllOfComposition() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "Composition",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addAllOf(OASFactory.createSchema()
+                                                .type(SchemaType.OBJECT)
+                                                .addRequired("something")
+                                                .addProperty(
+                                                        "someOtherThing",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.STRING)))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelRequiredProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(1, errors.size());
+        assertEquals(
+                "*ERROR* in Model 'Composition', property 'something' -> This property should be present or removed from the list of required",
+                errors.get(0).toString());
+    }
+
+    /**
+     * Test for the bug #407: an inline model inside an allOf meeting all its constraints should not be reported
+     */
+    @Test
+    void testModelRequiredPropertiesValidationInsideAllOfCompositionWithoutErrors() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "Composition",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addAllOf(OASFactory.createSchema()
+                                                .type(SchemaType.OBJECT)
+                                                .addRequired("something")
+                                                .addProperty(
+                                                        "something",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.STRING)))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelRequiredProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /**
+     * Test for the bug #407: required fields of an inline model inside array items are validated as well
+     */
+    @Test
+    void testModelRequiredPropertiesValidationInsideArrayItems() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "ListOfItems",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.ARRAY)
+                                        .items(OASFactory.createSchema()
+                                                .type(SchemaType.OBJECT)
+                                                .addRequired("something")
+                                                .addProperty(
+                                                        "someOtherThing",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.STRING)))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelRequiredProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(1, errors.size());
+        assertEquals(
+                "*ERROR* in Model 'ListOfItems', property 'something' -> This property should be present or removed from the list of required",
+                errors.get(0).toString());
+    }
+
     @Test
     void testSuccessOfAllValidations() {
         OpenAPI openAPI = createValidOpenAPI();
