@@ -93,6 +93,8 @@ public class OpenApiSpecStyleValidator {
          */
         if (openAPI.getPaths() == null) return;
 
+        Set<String> declaredTagNames = getDeclaredTagNames();
+
         for (String key : openAPI.getPaths().getPathItems().keySet()) {
             PathItem path = openAPI.getPaths().getPathItems().get(key);
             boolean ignoreValidation = isPathIgnored(path);
@@ -122,7 +124,7 @@ public class OpenApiSpecStyleValidator {
                         if (op.getTags() == null || op.getTags().isEmpty()) {
                             errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
                         } else {
-                            List<String> undeclaredTags = getUndeclaredTags(op.getTags());
+                            List<String> undeclaredTags = getUndeclaredTags(op.getTags(), declaredTagNames);
                             if (!undeclaredTags.isEmpty()) {
                                 errorAggregator.logUndeclaredOperationTags(key, method, undeclaredTags);
                             }
@@ -152,9 +154,8 @@ public class OpenApiSpecStyleValidator {
         }
     }
 
-    private List<String> getUndeclaredTags(List<String> operationTags) {
+    private List<String> getUndeclaredTags(List<String> operationTags, Set<String> declaredTags) {
         List<String> undeclaredTags = new ArrayList<>();
-        Set<String> declaredTags = getDeclaredTagNames();
         for (String tag : operationTags) {
             if (!declaredTags.contains(tag)) {
                 undeclaredTags.add(tag);
