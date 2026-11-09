@@ -10,6 +10,9 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
   - url: 'http://localhost:9999/'
+tags:
+  - name: some
+    description: Some operations
 paths:
   /some_path/{some_id}:
     post:

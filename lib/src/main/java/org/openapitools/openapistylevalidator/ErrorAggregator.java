@@ -47,6 +47,24 @@ class ErrorAggregator {
                 field, "The collection should be present and there should be at least one item in it", path, method));
     }
 
+    void logUndeclaredOperationTags(String path, PathItem.HttpMethod method, List<String> undeclaredTags) {
+        errorList.add(new OperationStyleError(
+                "tags",
+                String.format(
+                        "The following tags are used but not declared in the root 'tags' section: %s",
+                        String.join(", ", undeclaredTags)),
+                path,
+                method));
+    }
+
+    void logMissingTagDescription(String tagName) {
+        errorList.add(new GenericStyleWarning(
+                StyleError.StyleCheckSection.OpenAPI,
+                String.format("tag '%s'", tagName),
+                "description",
+                "This field should be present and not empty"));
+    }
+
     void logMissingOrEmptyModelAttribute(String modelName, String propertyName, String field) {
         errorList.add(
                 new ModelStyleError(field, "This field should be present and not empty", modelName, propertyName));

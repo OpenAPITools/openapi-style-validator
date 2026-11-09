@@ -2,7 +2,9 @@ package org.openapitools.openapistylevalidator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.Collections;
+import org.eclipse.microprofile.openapi.models.PathItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,5 +46,31 @@ class ErrorAggregatorTest {
                 modelName,
                 nameOfMissingProperty);
         assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
+    }
+
+    @Test
+    void logUndeclaredOperationTagsShouldAddToErrorList() {
+        // Act
+        errorAggregator.logUndeclaredOperationTags("/ping", PathItem.HttpMethod.GET, Arrays.asList("tagOne", "tagTwo"));
+
+        // Assert
+        Assertions.assertAll(
+                () -> assertEquals(1, errorAggregator.getErrorList().size()),
+                () -> assertEquals(
+                        "*ERROR* in Operation GET /ping 'tags' -> The following tags are used but not declared in the root 'tags' section: tagOne, tagTwo",
+                        errorAggregator.getErrorList().get(0).toString()));
+    }
+
+    @Test
+    void logMissingTagDescriptionShouldAddToErrorList() {
+        // Act
+        errorAggregator.logMissingTagDescription("demo");
+
+        // Assert
+        Assertions.assertAll(
+                () -> assertEquals(1, errorAggregator.getErrorList().size()),
+                () -> assertEquals(
+                        "*WARNING* Section: OpenAPI: 'description' in tag 'demo' -> This field should be present and not empty",
+                        errorAggregator.getErrorList().get(0).toString()));
     }
 }

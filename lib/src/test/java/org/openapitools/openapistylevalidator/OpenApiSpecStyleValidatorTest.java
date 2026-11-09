@@ -184,6 +184,85 @@ class OpenApiSpecStyleValidatorTest {
         assertEquals(0, errors.size());
     }
 
+    /**
+     * Test for the issue #725
+     */
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void testOperationTagsDeclaredInRootTagsValidation(boolean isValidateOperationTag) {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getPaths().getPathItems().get("/ping").getGET().addTag("undeclaredTag");
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations();
+        parameters.setValidateOperationTag(isValidateOperationTag);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        if (isValidateOperationTag) {
+            assertEquals(1, errors.size());
+            assertEquals(
+                    "*ERROR* in Operation GET /ping 'tags' -> The following tags are used but not declared in the root 'tags' section: undeclaredTag",
+                    errors.get(0).toString());
+        } else {
+            assertEquals(0, errors.size());
+        }
+    }
+
+    /**
+     * Test for the issue #725
+     */
+    @Test
+    void shouldReportAllUndeclaredOperationTagsOfAnOperation() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getPaths()
+                .getPathItems()
+                .get("/ping")
+                .getGET()
+                .tags(Arrays.asList("undeclaredTagOne", "undeclaredTagTwo"));
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(new ValidatorParameters());
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in Operation GET /ping 'tags' -> The following tags are used but not declared in the root 'tags' section: undeclaredTagOne, undeclaredTagTwo",
+                        errors.get(0).toString()));
+    }
+
+    /**
+     * Test for the issue #725
+     */
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void testRootTagDescriptionValidation(boolean isValidateOperationTag) {
+        OpenAPI openAPI =
+                createValidOpenAPI().tags(Arrays.asList(OASFactory.createTag().name("demo")));
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations();
+        parameters.setValidateOperationTag(isValidateOperationTag);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        if (isValidateOperationTag) {
+            assertEquals(1, errors.size());
+            assertEquals(
+                    "*WARNING* Section: OpenAPI: 'description' in tag 'demo' -> This field should be present and not empty",
+                    errors.get(0).toString());
+        } else {
+            assertEquals(0, errors.size());
+        }
+    }
+
+    /**
+     * Test for the issue #725
+     */
+    @Test
+    void shouldNotReportErrorsWhenAllOperationTagsAreDeclared() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getPaths().getPathItems().get("/ping").getGET().addTag("extra");
+        openAPI.addTag(OASFactory.createTag().name("extra").description("Extra operations"));
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(new ValidatorParameters());
+        assertEquals(0, errors.size(), errors.toString());
+    }
+
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void validateModelRequiredProperties(boolean isValidateModelRequiredProperties) {
@@ -536,6 +615,7 @@ class OpenApiSpecStyleValidatorTest {
                         .contact(
                                 OASFactory.createContact().name("OpenAPI Tools").email("team@openapitools.org")))
                 .addServer(OASFactory.createServer().url("http://localhost:8000/"))
+                .addTag(OASFactory.createTag().name("demo").description("Demo operations"))
                 .paths(OASFactory.createPaths()
                         .addPathItem(
                                 "/ping",

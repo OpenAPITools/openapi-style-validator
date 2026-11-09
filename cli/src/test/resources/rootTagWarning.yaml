@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: root tag warning test
+  description: some description
+  version: '1.0'
+  contact:
+    email: "some@some.com"
+  license:
+    name: Apache-2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:9999/'
+tags:
+  - name: demo
+paths:
+  /ping:
+    get:
+      operationId: pingGet
+      summary: ping operation
+      description: ping description
+      tags:
+        - demo
+      responses:
+        '201':
+          description: OK

@@ -9,6 +9,7 @@ import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.eclipse.microprofile.openapi.models.tags.Tag;
 import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
@@ -32,6 +33,7 @@ public class OpenApiSpecStyleValidator {
         validateStructure();
         validateInfo();
         validateOperations();
+        validateTags();
         validateModels();
         validateNaming();
 
@@ -91,6 +93,8 @@ public class OpenApiSpecStyleValidator {
          */
         if (openAPI.getPaths() == null) return;
 
+        Set<String> declaredTagNames = getDeclaredTagNames();
+
         for (String key : openAPI.getPaths().getPathItems().keySet()) {
             PathItem path = openAPI.getPaths().getPathItems().get(key);
             boolean ignoreValidation = isPathIgnored(path);
@@ -119,11 +123,57 @@ public class OpenApiSpecStyleValidator {
                     if (parameters.isValidateOperationTag()) {
                         if (op.getTags() == null || op.getTags().isEmpty()) {
                             errorAggregator.logMissingOrEmptyOperationCollection(key, method, "tags");
+                        } else {
+                            List<String> undeclaredTags = getUndeclaredTags(op.getTags(), declaredTagNames);
+                            if (!undeclaredTags.isEmpty()) {
+                                errorAggregator.logUndeclaredOperationTags(key, method, undeclaredTags);
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    /*
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/725
+     *
+     * Encourages the declaration of the tags used by the operations in the
+     * root `tags` section, and the presence of a description on the declared
+     * tags (reported as a warning). Those checks are part of the
+     * `validateOperationTag` rule: they extend the same concern, so no
+     * dedicated parameter was introduced.
+     */
+    private void validateTags() {
+        if (!parameters.isValidateOperationTag() || openAPI.getTags() == null) return;
+
+        for (Tag tag : openAPI.getTags()) {
+            if (tag.getDescription() == null || tag.getDescription().isEmpty()) {
+                errorAggregator.logMissingTagDescription(tag.getName());
+            }
+        }
+    }
+
+    private List<String> getUndeclaredTags(List<String> operationTags, Set<String> declaredTags) {
+        List<String> undeclaredTags = new ArrayList<>();
+        for (String tag : operationTags) {
+            if (!declaredTags.contains(tag)) {
+                undeclaredTags.add(tag);
+            }
+        }
+        return undeclaredTags;
+    }
+
+    private Set<String> getDeclaredTagNames() {
+        Set<String> declaredTagNames = new HashSet<>();
+        if (openAPI.getTags() != null) {
+            for (Tag tag : openAPI.getTags()) {
+                if (tag.getName() != null) {
+                    declaredTagNames.add(tag.getName());
+                }
+            }
+        }
+        return declaredTagNames;
     }
 
     private boolean isPathIgnored(PathItem path) {

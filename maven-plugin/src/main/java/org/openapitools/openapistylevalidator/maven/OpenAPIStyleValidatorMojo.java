@@ -11,6 +11,7 @@ import org.openapitools.empoa.swagger.core.internal.SwAdapter;
 import org.openapitools.openapistylevalidator.OpenApiSpecStyleValidator;
 import org.openapitools.openapistylevalidator.ValidatorParameters;
 import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
+import org.openapitools.openapistylevalidator.styleerror.GenericStyleWarning;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
 import io.swagger.parser.OpenAPIParser;
@@ -109,9 +110,22 @@ public class OpenAPIStyleValidatorMojo extends AbstractMojo {
         ValidatorParameters parameters = createValidatorParameters();
         getLog().debug(String.format("Validating with options: %s", parameters));
         List<StyleError> result = openApiSpecStyleValidator.validate(parameters);
-        if (!result.isEmpty()) {
+        /*
+         * Warnings (e.g. a root tag without a description) are reported, but
+         * they must not fail the build: only errors do.
+         * See https://github.com/OpenAPITools/openapi-style-validator/pull/810#discussion_r4502998987
+         */
+        result.stream()
+                .filter(GenericStyleWarning.class::isInstance)
+                .map(StyleError::toString)
+                .forEach(m -> getLog().warn(String.format("\t%s", m)));
+        boolean hasErrors = result.stream().anyMatch(error -> !(error instanceof GenericStyleWarning));
+        if (hasErrors) {
             getLog().error("OpenAPI Specification does not meet the requirements. Issues:\n");
-            result.stream().map(StyleError::toString).forEach(m -> getLog().error(String.format("\t%s", m)));
+            result.stream()
+                    .filter(error -> !(error instanceof GenericStyleWarning))
+                    .map(StyleError::toString)
+                    .forEach(m -> getLog().error(String.format("\t%s", m)));
             throw new MojoExecutionException("OpenAPI Style validation failed");
         }
     }

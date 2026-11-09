@@ -1,0 +1,23 @@
+openapi: 3.0.1
+info:
+  title: undeclared operation tag test
+  description: some description
+  version: '1.0'
+  contact:
+    email: "some@some.com"
+  license:
+    name: Apache-2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:9999/'
+paths:
+  /ping:
+    get:
+      operationId: pingGet
+      summary: ping operation
+      description: ping description
+      tags:
+        - undeclaredTag
+      responses:
+        '201':
+          description: OK
