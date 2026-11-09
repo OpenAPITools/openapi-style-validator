@@ -418,6 +418,108 @@ class OpenApiSpecStyleValidatorTest {
                 errors.get(0).toString());
     }
 
+    /**
+     * See the review discussion on
+     * PR #809 (https://github.com/OpenAPITools/openapi-style-validator/pull/809#discussion_r4503877003):
+     * a required name declared only in properties sitting next to a $ref
+     * member (legal in OpenAPI 3.1) is known and not reported.
+     */
+    @Test
+    void testModelRequiredPropertiesInsideAllOfWithRefSiblingProperties() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "Base",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "id", OASFactory.createSchema().type(SchemaType.STRING)))
+                        .addSchema(
+                                "Extended",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addRequired("extra")
+                                        .addAllOf(OASFactory.createSchema()
+                                                .ref("#/components/schemas/Base")
+                                                .addProperty(
+                                                        "extra",
+                                                        OASFactory.createSchema()
+                                                                .type(SchemaType.STRING)))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelRequiredProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size(), errors.toString());
+    }
+
+    /**
+     * See the review discussion on
+     * PR #809 (https://github.com/OpenAPITools/openapi-style-validator/pull/809#discussion_r4503877003):
+     * a required list declared next to a $ref member (legal in OpenAPI 3.1)
+     * is satisfied by the properties of the referenced schema.
+     */
+    @Test
+    void testModelRequiredPropertiesInsideAllOfWithRefSiblingRequiredSatisfied() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "Base",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "id", OASFactory.createSchema().type(SchemaType.STRING)))
+                        .addSchema(
+                                "Extended",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addAllOf(OASFactory.createSchema()
+                                                .ref("#/components/schemas/Base")
+                                                .addRequired("id"))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelRequiredProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size(), errors.toString());
+    }
+
+    /**
+     * See the review discussion on
+     * PR #809 (https://github.com/OpenAPITools/openapi-style-validator/pull/809#discussion_r4503877003):
+     * a required list declared next to a $ref member (legal in OpenAPI 3.1)
+     * must not be silently skipped: a name declared nowhere in the
+     * composition is still reported.
+     */
+    @Test
+    void testModelRequiredPropertiesInsideAllOfWithRefSiblingRequiredUnknown() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "Base",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING)))
+                        .addSchema(
+                                "Extended",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addAllOf(OASFactory.createSchema()
+                                                .ref("#/components/schemas/Base")
+                                                .addRequired("id"))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelRequiredProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(1, errors.size(), errors.toString());
+        assertEquals(
+                "*ERROR* in Model 'Extended', property 'id' -> This property should be present or removed from the list of required",
+                errors.get(0).toString());
+    }
+
     @Test
     void testSuccessOfAllValidations() {
         OpenAPI openAPI = createValidOpenAPI();

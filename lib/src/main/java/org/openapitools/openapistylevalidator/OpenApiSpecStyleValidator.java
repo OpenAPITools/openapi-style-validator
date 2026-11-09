@@ -190,12 +190,20 @@ public class OpenApiSpecStyleValidator {
 
     private void validateModelRequiredProperties(
             String modelName, Schema model, Set<String> knownPropertyNames, Set<Schema> visited) {
-        if (!parameters.isValidateModelRequiredProperties() || model == null || model.getRef() != null) {
+        if (!parameters.isValidateModelRequiredProperties() || model == null) {
             return;
         }
         if (!visited.add(model)) {
             return;
         }
+        /*
+         * A schema declaring keywords next to its $ref (legal in OpenAPI 3.1)
+         * is validated in place: its own required list and composition
+         * members are checked against the known names, while the referenced
+         * component schema keeps being validated under its own name, so the
+         * ref itself is not followed here.
+         * See https://github.com/OpenAPITools/openapi-style-validator/pull/809#discussion_r4503877003
+         */
         if (model.getRequired() != null) {
             model.getRequired().forEach(nameOfRequiredProperty -> {
                 if (!knownPropertyNames.contains(nameOfRequiredProperty)) {
@@ -220,10 +228,14 @@ public class OpenApiSpecStyleValidator {
     /*
      * Collects every property name declared in the composition tree rooted at
      * the given schema: the schema itself and all its allOf/anyOf/oneOf
-     * members, transitively. Members that are pure $ref are followed through
-     * the component schemas they point to, because their properties count for
-     * the composition too. Array items are intentionally not traversed: they
-     * describe different instances, not a composition of the same one.
+     * members, transitively. Members that are $refs are followed through the
+     * component schemas they point to, because their properties count for the
+     * composition too. Sibling keywords declared next to a $ref are legal in
+     * OpenAPI 3.1, so the referencing schema's own properties and composition
+     * members are collected as well, not only the referenced schema's names.
+     * See https://github.com/OpenAPITools/openapi-style-validator/pull/809#discussion_r4503877003
+     * Array items are intentionally not traversed: they describe different
+     * instances, not a composition of the same one.
      */
     private Set<String> collectCompositionPropertyNames(Schema model, Set<Schema> visitedSchemas) {
         Set<String> propertyNames = new HashSet<>();
@@ -231,7 +243,8 @@ public class OpenApiSpecStyleValidator {
             return propertyNames;
         }
         if (model.getRef() != null) {
-            return collectCompositionPropertyNames(resolveComponentSchema(model.getRef()), visitedSchemas);
+            propertyNames.addAll(
+                    collectCompositionPropertyNames(resolveComponentSchema(model.getRef()), visitedSchemas));
         }
         if (model.getProperties() != null) {
             propertyNames.addAll(model.getProperties().keySet());
