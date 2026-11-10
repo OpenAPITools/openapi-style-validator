@@ -301,6 +301,74 @@ class OpenApiSpecStyleValidatorTest {
         assertEquals(0, errors.size());
     }
 
+    /*
+     * An empty composition list declares nothing, so there is nothing to
+     * discriminate: an empty oneOf must not trigger the missing-discriminator
+     * error.
+     */
+    @Test
+    void testModelDiscriminatorValidationIgnoresEmptyOneOfList() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyEmptyOneOfComposition",
+                                OASFactory.createSchema().oneOf(new ArrayList<>())));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelDiscriminator(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * Same as the empty oneOf case: an empty anyOf has nothing to
+     * discriminate and must not trigger the missing-discriminator error.
+     */
+    @Test
+    void testModelDiscriminatorValidationIgnoresEmptyAnyOfList() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyEmptyAnyOfComposition",
+                                OASFactory.createSchema().anyOf(new ArrayList<>())));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelDiscriminator(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * The rule is deliberately scoped to the named schemas of
+     * components/schemas, like the other model rules: a composition declared
+     * inline (here inside a property of a named schema) is not reported.
+     * Covering inline compositions could be a follow-up.
+     */
+    @Test
+    void testModelDiscriminatorValidationIgnoresInlineComposition() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "inlineComposition",
+                                                OASFactory.createSchema()
+                                                        .addOneOf(OASFactory.createSchema()
+                                                                .ref("#/components/schemas/One"))
+                                                        .addOneOf(OASFactory.createSchema()
+                                                                .ref("#/components/schemas/Two")))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelDiscriminator(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
     @Test
     void testSuccessOfAllValidations() {
         OpenAPI openAPI = createValidOpenAPI();

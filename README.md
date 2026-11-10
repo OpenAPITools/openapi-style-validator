@@ -51,6 +51,7 @@ Thanks to our sponsors for supporting this project!
 - All model properties must have examples
 - All model properties must have descriptions
 - All required properties must be listed among the properties
+- Named schemas in `components/schemas` with a non-empty oneOf or anyOf composition must define a discriminator (inline compositions, e.g. in responses, are not checked)
 
 ### Naming convention
 - Enforce naming convention for paths, parameters (path, query and cookie), headers and properties
@@ -116,7 +117,7 @@ The options file is described in json (example in `specs/options.json`), and has
 |validateModelPropertiesExample|boolean| `true`, `false`                                                                                                |`true`|Ensures that the properties of the Schemas have an example value defined|
 |validateModelPropertiesDescription|boolean| `true`, `false`                                                                                                |`true`|Ensures that the properties of the Schemas have a description value defined|
 |validateModelRequiredProperties|boolean| `true`, `false`                                                                                                |`true`|Ensures that all required properties of the Schemas are listed among their properties|
-|validateModelDiscriminator|boolean| `true`, `false`                                                                                                |`true`|Ensures that the Schemas using oneOf or anyOf define a discriminator|
+|validateModelDiscriminator|boolean| `true`, `false`                                                                                                |`true`|Ensures that named schemas in `components/schemas` with a non-empty oneOf or anyOf define a discriminator|
 |validateModelNoLocalDef|boolean| `true`, `false`                                                                                                |`true`|Not implemented yet|
 |validateNaming|boolean| `true`, `false`                                                                                                |`true`|Ensures the names follow a given naming convention|
 |ignoreHeaderXNaming|boolean| `true`, `false`                                                                                                |`true`|Exclude from validation header parameters starting with `x-`|
