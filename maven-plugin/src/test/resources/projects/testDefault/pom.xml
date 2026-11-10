@@ -24,6 +24,7 @@
           <validateModelPropertiesExample>true</validateModelPropertiesExample>
           <validateModelPropertiesDescription>true</validateModelPropertiesDescription>
           <validateModelRequiredProperties>true</validateModelRequiredProperties>
+          <validateModelDiscriminator>true</validateModelDiscriminator>
           <validateModelNoLocalDef>true</validateModelNoLocalDef>
           <validateNaming>true</validateNaming>
           <ignoreHeaderXNaming>true</ignoreHeaderXNaming>

@@ -73,6 +73,11 @@ class ResourceTest {
                 + "true"
                 + NEXT_LINE
                 + PREFIX
+                + ValidatorParameters.VALIDATE_MODEL_DISCRIMINATOR
+                + SEPARATOR
+                + "true"
+                + NEXT_LINE
+                + PREFIX
                 + ValidatorParameters.VALIDATE_MODEL_NO_LOCAL_DEF
                 + SEPARATOR
                 + "true"

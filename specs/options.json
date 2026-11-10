@@ -11,6 +11,7 @@
   "validateModelPropertiesExample": false,
   "validateModelPropertiesDescription": true,
   "validateModelRequiredProperties": true,
+  "validateModelDiscriminator": true,
   "validateModelNoLocalDef": true,
 
   "validateNaming": true,
