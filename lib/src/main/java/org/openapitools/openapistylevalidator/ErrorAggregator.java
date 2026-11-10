@@ -57,6 +57,14 @@ class ErrorAggregator {
                 null, "This property should be present or removed from the list of required", modelName, propertyName));
     }
 
+    void logMissingDiscriminator(String modelName) {
+        errorList.add(new ModelStyleError(
+                "discriminator",
+                "A schema with a oneOf or anyOf composition should define a discriminator",
+                modelName,
+                null));
+    }
+
     void logOperationBadNaming(
             String variableName,
             String variableType,

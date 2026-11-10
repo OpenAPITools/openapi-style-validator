@@ -212,6 +212,95 @@ class OpenApiSpecStyleValidatorTest {
         }
     }
 
+    /*
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/806
+     */
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void testModelDiscriminatorValidation(boolean isValidateModelDiscriminator) {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyComposition",
+                                OASFactory.createSchema()
+                                        .addOneOf(OASFactory.createSchema().ref("#/components/schemas/One"))
+                                        .addOneOf(OASFactory.createSchema().ref("#/components/schemas/Two"))));
+
+        ValidatorParameters parameters = TestDataProvider.createParametersDisablingAllValidations();
+        parameters.setValidateModelDiscriminator(isValidateModelDiscriminator);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        if (isValidateModelDiscriminator) {
+            assertEquals(1, errors.size());
+            assertEquals(
+                    "*ERROR* in Model 'MyComposition', field 'discriminator' -> A schema with a oneOf or anyOf composition should define a discriminator",
+                    errors.get(0).toString());
+        } else {
+            assertEquals(0, errors.size());
+        }
+    }
+
+    @Test
+    void testModelDiscriminatorValidationSuccessWhenDiscriminatorIsDefined() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyComposition",
+                                OASFactory.createSchema()
+                                        .addOneOf(OASFactory.createSchema().ref("#/components/schemas/One"))
+                                        .addOneOf(OASFactory.createSchema().ref("#/components/schemas/Two"))
+                                        .discriminator(
+                                                OASFactory.createDiscriminator().propertyName("objectType"))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelDiscriminator(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    void testModelDiscriminatorValidationReportsAnyOfComposition() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyComposition",
+                                OASFactory.createSchema()
+                                        .addAnyOf(OASFactory.createSchema().ref("#/components/schemas/One"))
+                                        .addAnyOf(OASFactory.createSchema().ref("#/components/schemas/Two"))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelDiscriminator(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in Model 'MyComposition', field 'discriminator' -> A schema with a oneOf or anyOf composition should define a discriminator",
+                        errors.get(0).toString()));
+    }
+
+    /*
+     * The issue only asks for oneOf and anyOf: allOf describes a merged model,
+     * not a set of alternatives, and does not require a discriminator.
+     */
+    @Test
+    void testModelDiscriminatorValidationIgnoresAllOfComposition() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyComposition",
+                                OASFactory.createSchema()
+                                        .addAllOf(OASFactory.createSchema().ref("#/components/schemas/One"))
+                                        .addAllOf(OASFactory.createSchema().ref("#/components/schemas/Two"))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelDiscriminator(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
     @Test
     void testSuccessOfAllValidations() {
         OpenAPI openAPI = createValidOpenAPI();

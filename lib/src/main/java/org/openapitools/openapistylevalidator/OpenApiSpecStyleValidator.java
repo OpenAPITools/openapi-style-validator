@@ -20,11 +20,13 @@ public class OpenApiSpecStyleValidator {
     private final ErrorAggregator errorAggregator;
     private ValidatorParameters parameters;
     private final NamingValidator namingValidator;
+    private final CompositionDiscriminatorValidator compositionDiscriminatorValidator;
 
     public OpenApiSpecStyleValidator(OpenAPI openApi) {
         this.openAPI = openApi;
         errorAggregator = new ErrorAggregator();
         namingValidator = new NamingValidator();
+        compositionDiscriminatorValidator = new CompositionDiscriminatorValidator(errorAggregator);
     }
 
     public List<StyleError> validate(ValidatorParameters parameters) {
@@ -142,6 +144,13 @@ public class OpenApiSpecStyleValidator {
                 validateModelProperties(modelName, model);
                 validateModelRequiredProperties(modelName, model);
             });
+        }
+
+        /*
+         * See https://github.com/OpenAPITools/openapi-style-validator/issues/806
+         */
+        if (parameters.isValidateModelDiscriminator()) {
+            compositionDiscriminatorValidator.validate(openAPI.getComponents());
         }
     }
 

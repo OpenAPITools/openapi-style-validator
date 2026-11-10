@@ -31,6 +31,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
     private boolean validateModelPropertiesExample = true;
     private boolean validateModelPropertiesDescription = true;
     private boolean validateModelRequiredProperties = true;
+    private boolean validateModelDiscriminator = true;
     private boolean validateModelNoLocalDef = true;
 
     private boolean validateNaming = true;
@@ -132,6 +133,11 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         this.validateModelRequiredProperties = validateModelRequiredProperties;
     }
 
+    @Option(option = ValidatorParameters.VALIDATE_MODEL_DISCRIMINATOR, description = "Ensures that the Schemas using oneOf or anyOf define a discriminator")
+    public void setValidateModelDiscriminator(boolean validateModelDiscriminator) {
+        this.validateModelDiscriminator = validateModelDiscriminator;
+    }
+
     @Option(option = ValidatorParameters.VALIDATE_MODEL_NO_LOCAL_DEF, description = "Not implemented yet")
     public void setValidateModelNoLocalDef(boolean validateModelNoLocalDef) {
         this.validateModelNoLocalDef = validateModelNoLocalDef;
@@ -204,6 +210,7 @@ public class OpenAPIStyleValidatorTask extends DefaultTask {
         parameters.setValidateModelPropertiesExample(validateModelPropertiesExample);
         parameters.setValidateModelPropertiesDescription(validateModelPropertiesDescription);
         parameters.setValidateModelRequiredProperties(validateModelRequiredProperties);
+        parameters.setValidateModelDiscriminator(validateModelDiscriminator);
         parameters.setValidateModelNoLocalDef(validateModelNoLocalDef);
         parameters.setValidateNaming(validateNaming);
         parameters.setIgnoreHeaderXNaming(ignoreHeaderXNaming);

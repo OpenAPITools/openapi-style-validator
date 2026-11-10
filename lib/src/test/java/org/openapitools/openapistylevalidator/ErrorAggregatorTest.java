@@ -45,4 +45,16 @@ class ErrorAggregatorTest {
                 nameOfMissingProperty);
         assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
     }
+
+    @Test
+    void logMissingDiscriminator() {
+        String modelName = "someModel";
+        errorAggregator.logMissingDiscriminator(modelName);
+        ModelStyleError expectedError = new ModelStyleError(
+                "discriminator",
+                "A schema with a oneOf or anyOf composition should define a discriminator",
+                modelName,
+                null);
+        assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
+    }
 }
