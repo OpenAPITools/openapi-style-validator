@@ -212,6 +212,214 @@ class OpenApiSpecStyleValidatorTest {
         }
     }
 
+    /*
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/741
+     *
+     * Plain @Test methods are used on purpose: junit-jupiter-params is
+     * declared testCompileOnly in the root build.gradle, so @ParameterizedTest
+     * methods compile but are silently skipped at runtime.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidation() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in Model 'MyObject', field 'additionalProperties' -> An object schema should declare additionalProperties",
+                        errors.get(0).toString()));
+    }
+
+    /*
+     * The rule is opt-in: by default an object without `additionalProperties`
+     * is not reported.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidationIsOptIn() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema()
+                                                        .type(SchemaType.STRING)
+                                                        .example("example")
+                                                        .description("description"))));
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(new ValidatorParameters());
+        assertEquals(0, errors.size());
+
+        List<StyleError> errorsWithRuleEnabled = new OpenApiSpecStyleValidator(openAPI)
+                .validate(new ValidatorParameters().setValidateModelAdditionalProperties(true));
+        Assertions.assertAll(
+                () -> assertEquals(1, errorsWithRuleEnabled.size()),
+                () -> assertEquals(
+                        "*ERROR* in Model 'MyObject', field 'additionalProperties' -> An object schema should declare additionalProperties",
+                        errorsWithRuleEnabled.get(0).toString()));
+    }
+
+    /*
+     * The `additionalProperties` keyword is either a boolean or a schema:
+     * declaring either of them satisfies the rule.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidationSuccessWhenDeclaredAsFalse() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING))
+                                        .additionalPropertiesBoolean(false)));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    void testModelAdditionalPropertiesValidationSuccessWhenDeclaredAsTrue() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING))
+                                        .additionalPropertiesBoolean(true)));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    void testModelAdditionalPropertiesValidationSuccessWhenDeclaredAsSchema() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING))
+                                        .additionalPropertiesSchema(
+                                                OASFactory.createSchema().type(SchemaType.STRING))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * The `type` keyword is optional: a schema declaring properties is
+     * understood as an object and must declare `additionalProperties` too.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidationReportsInferredObject() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyInferredObject",
+                                OASFactory.createSchema()
+                                        .addProperty(
+                                                "name",
+                                                OASFactory.createSchema().type(SchemaType.STRING))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in Model 'MyInferredObject', field 'additionalProperties' -> An object schema should declare additionalProperties",
+                        errors.get(0).toString()));
+    }
+
+    @Test
+    void testModelAdditionalPropertiesValidationIgnoresNonObjectSchema() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyString",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.STRING)
+                                        .addEnumeration("one")
+                                        .addEnumeration("two")));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * An empty properties map declares no property, so the schema is not
+     * understood as an object from its properties alone.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidationIgnoresEmptyProperties() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema("MyEmptyObject", OASFactory.createSchema().properties(new HashMap<>())));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * A composition of other schemas (e.g. an allOf used for inheritance)
+     * declares no property of its own: it is not flagged as an object.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidationIgnoresAllOfComposition() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyComposition",
+                                OASFactory.createSchema()
+                                        .addAllOf(OASFactory.createSchema().ref("#/components/schemas/One"))
+                                        .addAllOf(OASFactory.createSchema().ref("#/components/schemas/Two"))));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
     @Test
     void testSuccessOfAllValidations() {
         OpenAPI openAPI = createValidOpenAPI();

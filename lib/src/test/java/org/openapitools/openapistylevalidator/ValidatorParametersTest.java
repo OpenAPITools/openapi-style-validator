@@ -27,6 +27,9 @@ class ValidatorParametersTest {
                 () -> assertTrue(parameters.isValidateModelPropertiesExample()),
                 () -> assertTrue(parameters.isValidateModelPropertiesDescription()),
                 () -> assertTrue(parameters.isValidateModelRequiredProperties()),
+                /* Opt-in rule: disabled by default.
+                 * See https://github.com/OpenAPITools/openapi-style-validator/issues/741 */
+                () -> assertFalse(parameters.isValidateModelAdditionalProperties()),
                 () -> assertTrue(parameters.isValidateModelNoLocalDef()),
                 () -> assertTrue(parameters.isValidateNaming()),
                 () -> assertTrue(parameters.isIgnoreHeaderXNaming()),
@@ -53,6 +56,7 @@ class ValidatorParametersTest {
     @Test
     void testAllGetterSetters() {
         parameters = TestDataProvider.createParametersDisablingAllValidations()
+                .setValidateModelAdditionalProperties(false)
                 .setIgnoreHeaderXNaming(false)
                 .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
@@ -75,6 +79,7 @@ class ValidatorParametersTest {
                 () -> assertFalse(parameters.isValidateModelPropertiesExample()),
                 () -> assertFalse(parameters.isValidateModelPropertiesDescription()),
                 () -> assertFalse(parameters.isValidateModelRequiredProperties()),
+                () -> assertFalse(parameters.isValidateModelAdditionalProperties()),
                 () -> assertFalse(parameters.isValidateModelNoLocalDef()),
                 () -> assertFalse(parameters.isValidateNaming()),
                 () -> assertFalse(parameters.isIgnoreHeaderXNaming()),
