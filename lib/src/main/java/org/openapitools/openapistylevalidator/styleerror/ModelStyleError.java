@@ -31,11 +31,8 @@ public final class ModelStyleError extends StyleError {
 
     @Override
     public String toString() {
-        return String.format(
-                "*ERROR* in Model '%s', property '%s'%s -> %s",
-                modelName,
-                propertyName,
-                fieldNames == null ? "" : String.format(", field '%s'", fieldNames),
-                description);
+        String propertyPart = propertyName == null ? "" : String.format(", property '%s'", propertyName);
+        String fieldPart = fieldNames == null ? "" : String.format(", field '%s'", fieldNames);
+        return String.format("*ERROR* in Model '%s'%s%s -> %s", modelName, propertyPart, fieldPart, description);
     }
 }

@@ -57,6 +57,11 @@ class ErrorAggregator {
                 null, "This property should be present or removed from the list of required", modelName, propertyName));
     }
 
+    void logMissingAdditionalProperties(String modelName) {
+        errorList.add(new ModelStyleError(
+                "additionalProperties", "An object schema should declare additionalProperties", modelName, null));
+    }
+
     void logOperationBadNaming(
             String variableName,
             String variableType,

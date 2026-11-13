@@ -45,4 +45,13 @@ class ErrorAggregatorTest {
                 nameOfMissingProperty);
         assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
     }
+
+    @Test
+    void logMissingAdditionalProperties() {
+        String modelName = "someModel";
+        errorAggregator.logMissingAdditionalProperties(modelName);
+        ModelStyleError expectedError = new ModelStyleError(
+                "additionalProperties", "An object schema should declare additionalProperties", modelName, null);
+        assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
+    }
 }

@@ -24,4 +24,11 @@ class ModelStyleErrorTest {
         ModelStyleError error = new ModelStyleError(null, "d", "m", "p");
         assertEquals("*ERROR* in Model 'm', property 'p' -> d", error.toString());
     }
+
+    @Test
+    void toString_nullPropertyName() {
+        // Findings about the schema itself (e.g. a missing additionalProperties) have no property name
+        ModelStyleError error = new ModelStyleError("f", "d", "m", null);
+        assertEquals("*ERROR* in Model 'm', field 'f' -> d", error.toString());
+    }
 }
