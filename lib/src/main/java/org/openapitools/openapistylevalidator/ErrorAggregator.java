@@ -34,6 +34,14 @@ class ErrorAggregator {
         }
     }
 
+    void logLicenseUrlAndIdentifierBothSet() {
+        errorList.add(new GenericStyleError(
+                StyleError.StyleCheckSection.APIInfo,
+                "license",
+                "url|identifier",
+                "The license url and identifier are mutually exclusive, only one of them should be set"));
+    }
+
     List<StyleError> getErrorList() {
         return errorList;
     }

@@ -45,4 +45,15 @@ class ErrorAggregatorTest {
                 nameOfMissingProperty);
         assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
     }
+
+    @Test
+    void logLicenseUrlAndIdentifierBothSetShouldAddToErrorList() {
+        errorAggregator.logLicenseUrlAndIdentifierBothSet();
+
+        Assertions.assertAll(
+                () -> assertEquals(1, errorAggregator.getErrorList().size()),
+                () -> assertEquals(
+                        "*ERROR* Section: APIInfo: 'url|identifier' in license -> The license url and identifier are mutually exclusive, only one of them should be set",
+                        errorAggregator.getErrorList().get(0).toString()));
+    }
 }
