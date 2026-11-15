@@ -9,6 +9,7 @@
     "validateModelPropertiesExample": true,
     "validateModelPropertiesDescription": true,
     "validateModelRequiredProperties": true,
+    "validateModelAdditionalProperties": false,
     "validateModelNoLocalDef": true,
     "validateNaming": true,
     "ignoreHeaderXNaming": true,

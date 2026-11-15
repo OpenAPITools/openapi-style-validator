@@ -18,6 +18,7 @@ public class ValidatorParameters {
     public static final String VALIDATE_MODEL_PROPERTIES_EXAMPLE = "validateModelPropertiesExample";
     public static final String VALIDATE_MODEL_PROPERTIES_DESCRIPTION = "validateModelPropertiesDescription";
     public static final String VALIDATE_MODEL_REQUIRED_PROPERTIES = "validateModelRequiredProperties";
+    public static final String VALIDATE_MODEL_ADDITIONAL_PROPERTIES = "validateModelAdditionalProperties";
     public static final String VALIDATE_MODEL_NO_LOCAL_DEF = "validateModelNoLocalDef";
 
     public static final String VALIDATE_NAMING = "validateNaming";
@@ -67,6 +68,14 @@ public class ValidatorParameters {
     private boolean validateModelPropertiesExample = true;
     private boolean validateModelPropertiesDescription = true;
     private boolean validateModelRequiredProperties = true;
+
+    /*
+     * Opt-in: most existing specs do not declare `additionalProperties` on
+     * every object schema, so flagging them by default would be too noisy.
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/741
+     */
+    private boolean validateModelAdditionalProperties = false;
+
     private boolean validateModelNoLocalDef = true;
 
     private boolean validateNaming = true;
@@ -129,6 +138,10 @@ public class ValidatorParameters {
 
     public boolean isValidateModelRequiredProperties() {
         return validateModelRequiredProperties;
+    }
+
+    public boolean isValidateModelAdditionalProperties() {
+        return validateModelAdditionalProperties;
     }
 
     public boolean isValidateModelNoLocalDef() {
@@ -218,6 +231,11 @@ public class ValidatorParameters {
 
     public ValidatorParameters setValidateModelRequiredProperties(boolean validateModelRequiredProperties) {
         this.validateModelRequiredProperties = validateModelRequiredProperties;
+        return this;
+    }
+
+    public ValidatorParameters setValidateModelAdditionalProperties(boolean validateModelAdditionalProperties) {
+        this.validateModelAdditionalProperties = validateModelAdditionalProperties;
         return this;
     }
 
@@ -327,6 +345,7 @@ public class ValidatorParameters {
                         + "validateModelPropertiesExample=%s, "
                         + "validateModelPropertiesDescription=%s, "
                         + "validateModelRequiredProperties=%s, "
+                        + "validateModelAdditionalProperties=%s, "
                         + "validateModelNoLocalDef=%s, "
                         + "validateNaming=%s, "
                         + "ignoreHeaderXNaming=%s, "
@@ -350,6 +369,7 @@ public class ValidatorParameters {
                 validateModelPropertiesExample,
                 validateModelPropertiesDescription,
                 validateModelRequiredProperties,
+                validateModelAdditionalProperties,
                 validateModelNoLocalDef,
                 validateNaming,
                 ignoreHeaderXNaming,

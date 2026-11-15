@@ -16,6 +16,7 @@ class TestDataProvider {
                 .setValidateModelPropertiesExample(false)
                 .setValidateModelPropertiesDescription(false)
                 .setValidateModelRequiredProperties(false)
+                .setValidateModelAdditionalProperties(false)
                 .setValidateModelNoLocalDef(false)
                 .setValidateNaming(false);
     }
