@@ -38,7 +38,7 @@ Thanks to our sponsors for supporting this project!
 
 ### API Info
 - API license must be present and non-empty string
-- License url and identifier are mutually exclusive, only one of them should be set (OpenAPI 3.1)
+- License url and identifier are mutually exclusive, at most one of them may be set (OpenAPI 3.1)
 - API description must be present and non-empty string
 - API contact must be present and non-empty string
 
