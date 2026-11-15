@@ -285,7 +285,7 @@ class OpenApiSpecStyleValidatorTest {
 
     @Test
     void shouldNotReportMissingPathsOrComponentsWhenThereAreWebhooks() {
-        OpenAPI openAPI = openAPIWithWebhooksAccessor(Map.of("onEvent", OASFactory.createPathItem()))
+        OpenAPI openAPI = openAPIWithWebhooksAccessor(Collections.singletonMap("onEvent", OASFactory.createPathItem()))
                 .paths(null)
                 .components(null);
 
@@ -302,7 +302,8 @@ class OpenApiSpecStyleValidatorTest {
      */
     @Test
     void shouldNotReportMissingPathsOrComponentsWhenWebhooksMapIsEmpty() {
-        OpenAPI openAPI = openAPIWithWebhooksAccessor(Map.of()).paths(null).components(null);
+        OpenAPI openAPI =
+                openAPIWithWebhooksAccessor(Collections.emptyMap()).paths(null).components(null);
 
         OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
 
@@ -319,7 +320,7 @@ class OpenApiSpecStyleValidatorTest {
     @Test
     void shouldNotReportMissingPathsOrComponentsWhenWebhooksAreBehindSwaggerModel() {
         io.swagger.v3.oas.models.OpenAPI swaggerOpenAPI = new io.swagger.v3.oas.models.OpenAPI();
-        swaggerOpenAPI.webhooks(Map.of("onEvent", new io.swagger.v3.oas.models.PathItem()));
+        swaggerOpenAPI.webhooks(Collections.singletonMap("onEvent", new io.swagger.v3.oas.models.PathItem()));
         OpenAPI openAPI = new org.openapitools.empoa.simple.internal.models.OpenAPIImpl() {
             @SuppressWarnings("unused")
             public io.swagger.v3.oas.models.OpenAPI getSw() {

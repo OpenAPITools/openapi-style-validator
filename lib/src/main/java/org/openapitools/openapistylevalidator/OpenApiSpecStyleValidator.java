@@ -80,6 +80,9 @@ public class OpenApiSpecStyleValidator {
         try {
             Method getSw = openAPI.getClass().getMethod("getSw");
             Object swaggerOpenAPI = getSw.invoke(openAPI);
+            if (swaggerOpenAPI == null) {
+                return null;
+            }
             Method getWebhooks = swaggerOpenAPI.getClass().getMethod("getWebhooks");
             return asMap(getWebhooks.invoke(swaggerOpenAPI));
         } catch (ReflectiveOperationException e) {
