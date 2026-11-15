@@ -308,6 +308,29 @@ class ValidationInitiatorTest {
 
             assertDoesNotThrow(() -> validationInitiator.validate(optionManager, commandLine));
         }
+
+        /**
+         * See <a href="https://github.com/OpenAPITools/openapi-style-validator/issues/92">https://github.com/OpenAPITools/openapi-style-validator/issues/92</a>
+         *
+         * <p>End-to-end, the swagger-parser only carries `license.identifier`
+         * when the license declares no `url`: a license declaring both is
+         * reported by the parser itself as an unexpected attribute and the
+         * identifier never reaches the validator. The flagging of a license
+         * declaring both is therefore covered by the unit tests of the lib
+         * module, this only asserts that a 3.1 license using `identifier`
+         * alone passes the validation.
+         */
+        @Test
+        void shouldAcceptLicenseWithIdentifierOnly() throws ParseException {
+            CommandLine commandLine = parser.parse(options, new String[] {
+                "-s", "src/test/resources/licenseIdentifierOnly.yaml",
+                "-o", "src/test/resources/default.json"
+            });
+
+            List<StyleError> errorList = validationInitiator.validate(optionManager, commandLine);
+
+            assertEquals(0, errorList.size());
+        }
     }
 
     private void assertThrowsIllegalArgumentExceptionWithExceptedMessage(

@@ -1,0 +1,24 @@
+openapi: 3.1.0
+info:
+  title: Example specification
+  version: '1.0'
+  description: Example API
+  contact:
+    name: OpenAPI Tools
+    email: team@openapitools.org
+  license:
+    name: Eclipse Public License 2.0
+    identifier: EPL-2.0
+servers:
+  - url: 'http://localhost:8080/'
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: A simple get call
+      description: When this method is called, the server answers with 200 OKs
+      tags:
+        - demo
+      responses:
+        '200':
+          description: OK

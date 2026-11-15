@@ -1,5 +1,6 @@
 package org.openapitools.openapistylevalidator;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
@@ -46,6 +47,42 @@ public class OpenApiSpecStyleValidator {
         }
     }
 
+    /*
+     * The `identifier` field of the license object was introduced by OpenAPI
+     * 3.1.0. The MicroProfile OpenAPI API this library is built against (3.1)
+     * predates it and declares no `identifier` accessor: `getIdentifier()`
+     * exists only on models aligned with OAS 3.1, such as the MicroProfile
+     * OpenAPI 4.0 API.
+     *
+     * The CLI, Gradle and Maven plugins parse specifications with
+     * swagger-parser and convert the result through empoa-swagger-core, whose
+     * wrapper keeps the underlying swagger model - which does carry
+     * `identifier` - behind its `getSw()` accessor.
+     *
+     * Both situations are handled reflectively so the check works with any of
+     * them; when neither is available, no identifier is reported.
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/92
+     */
+    private static String getLicenseIdentifier(License license) {
+        try {
+            Method getIdentifier = license.getClass().getMethod("getIdentifier");
+            return (String) getIdentifier.invoke(license);
+        } catch (NoSuchMethodException e) {
+            // The model has no identifier accessor: try the swagger model behind an empoa wrapper, if any
+        } catch (ReflectiveOperationException e) {
+            return null;
+        }
+
+        try {
+            Method getSw = license.getClass().getMethod("getSw");
+            Object swaggerLicense = getSw.invoke(license);
+            Method getIdentifier = swaggerLicense.getClass().getMethod("getIdentifier");
+            return (String) getIdentifier.invoke(swaggerLicense);
+        } catch (ReflectiveOperationException e) {
+            return null;
+        }
+    }
+
     private void validateInfo() {
         Info info = openAPI.getInfo();
         License license = info.getLicense();
@@ -56,6 +93,20 @@ public class OpenApiSpecStyleValidator {
                 infoPresence.add(license.getUrl() != null && !license.getUrl().isEmpty());
                 errorAggregator.validateMinimumInfo(
                         infoPresence, StyleError.StyleCheckSection.APIInfo, "license", "name|url");
+
+                /*
+                 * See https://github.com/OpenAPITools/openapi-style-validator/issues/92
+                 *
+                 * In an OpenAPI 3.1.0 document the `identifier` field of the
+                 * license object is mutually exclusive of the `url` field.
+                 */
+                String identifier = getLicenseIdentifier(license);
+                if (license.getUrl() != null
+                        && !license.getUrl().isEmpty()
+                        && identifier != null
+                        && !identifier.isEmpty()) {
+                    errorAggregator.logLicenseUrlAndIdentifierBothSet();
+                }
             } else {
                 errorAggregator.logMissingOrEmptyAttribute(StyleError.StyleCheckSection.APIInfo, "license");
             }

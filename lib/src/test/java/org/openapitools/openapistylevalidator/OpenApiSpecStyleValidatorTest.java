@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.media.Schema.SchemaType;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter.In;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openapitools.empoa.simple.internal.models.info.LicenseImpl;
 import org.openapitools.openapistylevalidator.ValidatorParameters.NamingConvention;
 import org.openapitools.openapistylevalidator.styleerror.StyleError;
 
@@ -219,6 +221,125 @@ class OpenApiSpecStyleValidatorTest {
 
         List<StyleError> errors = validator.validate(new ValidatorParameters());
         assertEquals(0, errors.size(), errors.toString());
+    }
+
+    /*
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/92
+     *
+     * Plain @Test methods are used on purpose: junit-jupiter-params is
+     * declared testCompileOnly in the root build.gradle, so @ParameterizedTest
+     * methods compile but are silently skipped at runtime.
+     */
+    @Test
+    void testLicenseUrlOnlyIsValid() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getInfo()
+                .license(OASFactory.createLicense()
+                        .name("Eclipse Public License 2.0")
+                        .url("https://www.eclipse.org/legal/epl-2.0/"));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateInfoLicense(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * The simple model has no identifier accessor, so this fake provides one
+     * the way an OAS 3.1-aware model (e.g. MicroProfile OpenAPI 4.0) does.
+     */
+    private static License licenseWithIdentifier(String url, String identifier) {
+        return new LicenseImpl() {
+            @SuppressWarnings("unused")
+            public String getIdentifier() {
+                return identifier;
+            }
+        }.name("Eclipse Public License 2.0").url(url);
+    }
+
+    /*
+     * Mimics the license wrapper produced by empoa-swagger-core (SwLicense),
+     * which delegates name and url but keeps the underlying swagger model -
+     * carrying `identifier` - accessible only through its `getSw()` accessor.
+     */
+    private static License licenseThroughSwaggerModel(String url, String identifier) {
+        io.swagger.v3.oas.models.info.License swaggerLicense = new io.swagger.v3.oas.models.info.License()
+                .name("Eclipse Public License 2.0")
+                .url(url)
+                .identifier(identifier);
+        return new LicenseImpl() {
+            @SuppressWarnings("unused")
+            public io.swagger.v3.oas.models.info.License getSw() {
+                return swaggerLicense;
+            }
+        }.name("Eclipse Public License 2.0").url(url);
+    }
+
+    @Test
+    void testLicenseIdentifierOnlyIsValid() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getInfo().license(licenseWithIdentifier(null, "EPL-2.0"));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateInfoLicense(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    void testLicenseUrlAndIdentifierAreMutuallyExclusive() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getInfo().license(licenseWithIdentifier("https://www.eclipse.org/legal/epl-2.0/", "EPL-2.0"));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateInfoLicense(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* Section: APIInfo: 'url|identifier' in license -> The license url and identifier are mutually exclusive, only one of them should be set",
+                        errors.get(0).toString()));
+    }
+
+    /*
+     * The CLI, Gradle and Maven plugins convert the parsed specification to
+     * MicroProfile models through empoa-swagger-core: the license is a wrapper
+     * around the swagger model, which carries `identifier` even though the
+     * wrapper does not expose it.
+     */
+    @Test
+    void testLicenseUrlAndIdentifierAreMutuallyExclusiveThroughSwaggerModel() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getInfo().license(licenseThroughSwaggerModel("https://www.eclipse.org/legal/epl-2.0/", "EPL-2.0"));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateInfoLicense(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* Section: APIInfo: 'url|identifier' in license -> The license url and identifier are mutually exclusive, only one of them should be set",
+                        errors.get(0).toString()));
+    }
+
+    /*
+     * A license carrying only an identifier behind the swagger model is valid:
+     * the two fields must not be flagged when they are not both set.
+     */
+    @Test
+    void testLicenseIdentifierOnlyIsValidThroughSwaggerModel() {
+        OpenAPI openAPI = createValidOpenAPI();
+        openAPI.getInfo().license(licenseThroughSwaggerModel(null, "EPL-2.0"));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateInfoLicense(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        assertEquals(0, errors.size());
     }
 
     /**
