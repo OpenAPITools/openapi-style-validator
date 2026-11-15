@@ -56,7 +56,7 @@ class ValidatorParametersTest {
     @Test
     void testAllGetterSetters() {
         parameters = TestDataProvider.createParametersDisablingAllValidations()
-                .setValidateModelAdditionalProperties(false)
+                .setValidateModelAdditionalProperties(true)
                 .setIgnoreHeaderXNaming(false)
                 .setPathNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
                 .setParameterNamingConvention(ValidatorParameters.NamingConvention.CamelCase)
@@ -79,7 +79,7 @@ class ValidatorParametersTest {
                 () -> assertFalse(parameters.isValidateModelPropertiesExample()),
                 () -> assertFalse(parameters.isValidateModelPropertiesDescription()),
                 () -> assertFalse(parameters.isValidateModelRequiredProperties()),
-                () -> assertFalse(parameters.isValidateModelAdditionalProperties()),
+                () -> assertTrue(parameters.isValidateModelAdditionalProperties()),
                 () -> assertFalse(parameters.isValidateModelNoLocalDef()),
                 () -> assertFalse(parameters.isValidateNaming()),
                 () -> assertFalse(parameters.isIgnoreHeaderXNaming()),

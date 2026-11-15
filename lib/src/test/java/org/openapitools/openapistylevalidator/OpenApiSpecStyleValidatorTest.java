@@ -383,8 +383,8 @@ class OpenApiSpecStyleValidatorTest {
     }
 
     /*
-     * An empty properties map declares no property, so the schema is not
-     * understood as an object from its properties alone.
+     * An empty properties map declares no property, so a schema without
+     * `type` is not understood as an object from its properties alone.
      */
     @Test
     void testModelAdditionalPropertiesValidationIgnoresEmptyProperties() {
@@ -397,6 +397,32 @@ class OpenApiSpecStyleValidatorTest {
 
         List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
         assertEquals(0, errors.size());
+    }
+
+    /*
+     * An explicit `type: object` is an object whether or not it declares
+     * properties: the rule applies to it, so an empty properties map does
+     * not save it from reporting.
+     */
+    @Test
+    void testModelAdditionalPropertiesValidationReportsExplicitObjectWithEmptyProperties() {
+        OpenAPI openAPI = createValidOpenAPI()
+                .components(OASFactory.createComponents()
+                        .addSchema(
+                                "MyEmptyObject",
+                                OASFactory.createSchema()
+                                        .type(SchemaType.OBJECT)
+                                        .properties(new HashMap<>())));
+
+        ValidatorParameters parameters =
+                TestDataProvider.createParametersDisablingAllValidations().setValidateModelAdditionalProperties(true);
+
+        List<StyleError> errors = new OpenApiSpecStyleValidator(openAPI).validate(parameters);
+        Assertions.assertAll(
+                () -> assertEquals(1, errors.size()),
+                () -> assertEquals(
+                        "*ERROR* in Model 'MyEmptyObject', field 'additionalProperties' -> An object schema should declare additionalProperties",
+                        errors.get(0).toString()));
     }
 
     /*
