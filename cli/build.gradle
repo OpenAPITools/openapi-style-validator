@@ -1,5 +1,6 @@
 plugins {
     id "com.diffplug.spotless" version "6.25.0"
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 apply plugin: 'application'
@@ -19,8 +20,6 @@ dependencies {
 }
 
 mainClassName = 'org.openapitools.openapistylevalidator.cli.Main'
-
-apply plugin: 'com.github.johnrengelman.shadow'
 
 def generatedVersionDir = "${buildDir}/generated-version"
 

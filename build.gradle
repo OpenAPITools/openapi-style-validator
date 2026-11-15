@@ -1,12 +1,11 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         maven {
         url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
         classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     }
 }
@@ -83,8 +82,8 @@ subprojects {
 
     jacocoTestReport {
         reports {
-            xml.enabled true
-            html.enabled false
+            xml.required = true
+            html.required = false
         }
     }
 
