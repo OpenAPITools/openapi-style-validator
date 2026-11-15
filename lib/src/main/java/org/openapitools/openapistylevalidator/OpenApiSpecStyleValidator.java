@@ -1,5 +1,6 @@
 package org.openapitools.openapistylevalidator;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
@@ -41,9 +42,53 @@ public class OpenApiSpecStyleValidator {
     private void validateStructure() {
         boolean hasNoPaths = openAPI.getPaths() == null;
         boolean hasNoComponents = openAPI.getComponents() == null;
-        if (hasNoPaths && hasNoComponents) {
-            errorAggregator.logMissingPathsAndComponents();
+        boolean hasNoWebhooks = getWebhooks(openAPI) == null;
+        if (hasNoPaths && hasNoComponents && hasNoWebhooks) {
+            errorAggregator.logMissingPathsComponentsOrWebhooks();
         }
+    }
+
+    /*
+     * The `webhooks` field was introduced at the root of the document by
+     * OpenAPI 3.1.0, which requires at least one of `paths`, `components` or
+     * `webhooks` to exist: a document describing only webhooks, or only
+     * reusable components, is valid.
+     *
+     * The MicroProfile OpenAPI API this library is built against (3.1)
+     * predates it and declares no `webhooks` accessor: `getWebhooks()`
+     * exists only on models aligned with OAS 3.1, such as the MicroProfile
+     * OpenAPI 4.0 API. The CLI, Gradle and Maven plugins parse
+     * specifications with swagger-parser and convert the result through
+     * empoa-swagger-core, whose wrapper keeps the underlying swagger model -
+     * which does carry `webhooks` - behind its `getSw()` accessor.
+     *
+     * Both situations are handled reflectively so the check works with any
+     * of them; when neither is available, the document is considered to
+     * have no webhooks.
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/93
+     */
+    private static Map<?, ?> getWebhooks(OpenAPI openAPI) {
+        try {
+            Method getWebhooks = openAPI.getClass().getMethod("getWebhooks");
+            return asMap(getWebhooks.invoke(openAPI));
+        } catch (NoSuchMethodException e) {
+            // The model has no webhooks accessor: try the swagger model behind an empoa wrapper, if any
+        } catch (ReflectiveOperationException e) {
+            return null;
+        }
+
+        try {
+            Method getSw = openAPI.getClass().getMethod("getSw");
+            Object swaggerOpenAPI = getSw.invoke(openAPI);
+            Method getWebhooks = swaggerOpenAPI.getClass().getMethod("getWebhooks");
+            return asMap(getWebhooks.invoke(swaggerOpenAPI));
+        } catch (ReflectiveOperationException e) {
+            return null;
+        }
+    }
+
+    private static Map<?, ?> asMap(Object webhooks) {
+        return webhooks instanceof Map ? (Map<?, ?>) webhooks : null;
     }
 
     private void validateInfo() {
