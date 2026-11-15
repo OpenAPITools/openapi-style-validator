@@ -45,4 +45,15 @@ class ErrorAggregatorTest {
                 nameOfMissingProperty);
         assertEquals(Collections.singletonList(expectedError), errorAggregator.getErrorList());
     }
+
+    @Test
+    void logMissingPathsComponentsOrWebhooksShouldAddToErrorList() {
+        errorAggregator.logMissingPathsComponentsOrWebhooks();
+
+        Assertions.assertAll(
+                () -> assertEquals(1, errorAggregator.getErrorList().size()),
+                () -> assertEquals(
+                        "*ERROR* Section: OpenAPI: 'paths,components,webhooks' -> Should have at least one of paths, components or webhooks",
+                        errorAggregator.getErrorList().get(0).toString()));
+    }
 }

@@ -36,6 +36,9 @@ Thanks to our sponsors for supporting this project!
 
 ## What it can validate
 
+### Structure
+- At least one of `paths`, `components` or `webhooks` must be present (as of OpenAPI 3.1, a document describing only webhooks or only reusable components is valid)
+
 ### API Info
 - API license must be present and non-empty string
 - API description must be present and non-empty string

@@ -259,8 +259,79 @@ class OpenApiSpecStyleValidatorTest {
         Assertions.assertAll(
                 () -> assertEquals(1, errors.size()),
                 () -> assertEquals(
-                        "*ERROR* Section: OpenAPI: 'paths,components' -> Should have at least one of paths or components",
+                        "*ERROR* Section: OpenAPI: 'paths,components,webhooks' -> Should have at least one of paths, components or webhooks",
                         errors.get(0).toString()));
+    }
+
+    /*
+     * See https://github.com/OpenAPITools/openapi-style-validator/issues/93
+     *
+     * OpenAPI 3.1.0 requires at least one of `paths`, `components` or
+     * `webhooks` to exist: a document describing only webhooks is valid.
+     *
+     * The MicroProfile OpenAPI API the library is built against (3.1) has no
+     * `webhooks` accessor, so this fake provides one the way an OAS 3.1-aware
+     * model (e.g. MicroProfile OpenAPI 4.0) does.
+     */
+    private static OpenAPI openAPIWithWebhooksAccessor(
+            Map<String, org.eclipse.microprofile.openapi.models.PathItem> webhooks) {
+        return new org.openapitools.empoa.simple.internal.models.OpenAPIImpl() {
+            @SuppressWarnings("unused")
+            public Map<String, org.eclipse.microprofile.openapi.models.PathItem> getWebhooks() {
+                return webhooks;
+            }
+        }.info(createValidOpenAPI().getInfo());
+    }
+
+    @Test
+    void shouldNotReportMissingPathsOrComponentsWhenThereAreWebhooks() {
+        OpenAPI openAPI = openAPIWithWebhooksAccessor(Collections.singletonMap("onEvent", OASFactory.createPathItem()))
+                .paths(null)
+                .components(null);
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        List<StyleError> errors = validator.validate(new ValidatorParameters());
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * Like `paths` and `components`, declaring the field with an empty
+     * object counts as present: the structural check reports documents that
+     * declare none of the three at all.
+     */
+    @Test
+    void shouldNotReportMissingPathsOrComponentsWhenWebhooksMapIsEmpty() {
+        OpenAPI openAPI =
+                openAPIWithWebhooksAccessor(Collections.emptyMap()).paths(null).components(null);
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        List<StyleError> errors = validator.validate(new ValidatorParameters());
+        assertEquals(0, errors.size());
+    }
+
+    /*
+     * The CLI, Gradle and Maven plugins convert the parsed specification to
+     * MicroProfile models through empoa-swagger-core: the document is a
+     * wrapper around the swagger model, which carries `webhooks` even though
+     * the wrapper does not expose it.
+     */
+    @Test
+    void shouldNotReportMissingPathsOrComponentsWhenWebhooksAreBehindSwaggerModel() {
+        io.swagger.v3.oas.models.OpenAPI swaggerOpenAPI = new io.swagger.v3.oas.models.OpenAPI();
+        swaggerOpenAPI.webhooks(Collections.singletonMap("onEvent", new io.swagger.v3.oas.models.PathItem()));
+        OpenAPI openAPI = new org.openapitools.empoa.simple.internal.models.OpenAPIImpl() {
+            @SuppressWarnings("unused")
+            public io.swagger.v3.oas.models.OpenAPI getSw() {
+                return swaggerOpenAPI;
+            }
+        }.info(createValidOpenAPI().getInfo()).paths(null).components(null);
+
+        OpenApiSpecStyleValidator validator = new OpenApiSpecStyleValidator(openAPI);
+
+        List<StyleError> errors = validator.validate(new ValidatorParameters());
+        assertEquals(0, errors.size());
     }
 
     /* tests for naming convention parameters */

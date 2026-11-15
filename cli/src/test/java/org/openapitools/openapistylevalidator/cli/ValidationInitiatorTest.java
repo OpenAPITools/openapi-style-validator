@@ -308,6 +308,26 @@ class ValidationInitiatorTest {
 
             assertDoesNotThrow(() -> validationInitiator.validate(optionManager, commandLine));
         }
+
+        /**
+         * See <a href="https://github.com/OpenAPITools/openapi-style-validator/issues/93">https://github.com/OpenAPITools/openapi-style-validator/issues/93</a>
+         *
+         * <p>End-to-end: a webhooks-only 3.1 document passes the structural
+         * validation. The webhooks do not survive the parse to empoa
+         * conversion as MicroProfile fields - the wrapper keeps them behind
+         * its swagger model, where the lib finds them reflectively.
+         */
+        @Test
+        void shouldNotReportErrorWhenThereAreOnlyWebhooks() throws ParseException {
+            CommandLine commandLine = parser.parse(options, new String[] {
+                "-s", "src/test/resources/webhooksOnly.yaml",
+                "-o", "src/test/resources/default.json"
+            });
+
+            List<StyleError> errorList = validationInitiator.validate(optionManager, commandLine);
+
+            assertEquals(0, errorList.size());
+        }
     }
 
     private void assertThrowsIllegalArgumentExceptionWithExceptedMessage(

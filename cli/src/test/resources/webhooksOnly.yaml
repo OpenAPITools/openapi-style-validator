@@ -1,0 +1,24 @@
+openapi: 3.1.0
+info:
+  title: Webhooks only specification
+  version: '1.0'
+  description: Example API with only webhooks
+  contact:
+    name: OpenAPI Tools
+    email: team@openapitools.org
+  license:
+    name: Eclipse Public License 2.0
+    url: https://www.eclipse.org/legal/epl-2.0/
+servers:
+  - url: 'http://localhost:8080/'
+webhooks:
+  onEvent:
+    post:
+      operationId: onEvent
+      summary: A simple post call
+      description: When this method is called, the server answers with 200 OKs
+      tags:
+        - demo
+      responses:
+        '200':
+          description: OK

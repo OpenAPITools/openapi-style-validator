@@ -79,10 +79,10 @@ class ErrorAggregator {
                 model));
     }
 
-    public void logMissingPathsAndComponents() {
+    public void logMissingPathsComponentsOrWebhooks() {
         errorList.add(new StyleError(
                 StyleError.StyleCheckSection.OpenAPI,
-                "paths,components",
-                "Should have at least one of paths or components"));
+                "paths,components,webhooks",
+                "Should have at least one of paths, components or webhooks"));
     }
 }
