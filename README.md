@@ -199,7 +199,7 @@ It can also be invoked directly from the command line (replace `<version>` with 
 
 `mvn org.openapitools.openapistylevalidator:openapi-style-validator-maven-plugin:<version>:validate -DinputFile=path/to/spec.yaml`
 
-The validation options and naming conventions listed in the Options File table above can be set in the same `<configuration>` element, using the same names (for example `<validateInfoLicense>false</validateInfoLicense>`).
+The validation options and naming conventions listed in the Options File table above can be set in the same `<configuration>` element, using the same names (for example `<validateInfoLicense>false</validateInfoLicense>`). The `allowedModelProperties` option is not currently exposed by this plugin.
 
 ### Using the Gradle plugin
 
@@ -211,7 +211,8 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'org.openapitools.openapistylevalidator:openapi-style-validator-gradle-plugin:${validatorVersion}'
+    // replace validatorVersion with the current version, or define it as a property first
+    classpath "org.openapitools.openapistylevalidator:openapi-style-validator-gradle-plugin:${validatorVersion}"
   }
 }
 
@@ -231,7 +232,7 @@ The task can then be run with:
 
 `gradlew openAPIStyleValidator`
 
-The validation options and naming conventions listed in the Options File table above can be set on the task the same way, using the same names.
+The validation options and naming conventions listed in the Options File table above can be set on the task the same way, using the same names. The `allowedModelProperties` option is not currently exposed by this task.
 
 ### Using sbt
 
