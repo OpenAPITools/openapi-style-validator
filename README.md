@@ -68,7 +68,7 @@ times. I did not validate lately if they still have this feature.
 
 ## How to use the style validator
 
-For now, the project is a simple command line interface (CLI) and a library. The easiest way to use it right now
+The project is available as a command line interface (CLI), a library, and Maven and Gradle plugins. The easiest way to use it right now
 is to use the CLI and check the output. It will list all errors found based on the options you provided.
 
 ### To build
@@ -172,6 +172,71 @@ Example 2:
    */
 }
 ```
+
+### Using the Maven plugin
+
+A Maven plugin is released on Maven Central as `openapi-style-validator-maven-plugin`. Its `validate` goal (bound to the `validate` phase of the build lifecycle by default) fails the build if the specification does not meet the requirements:
+
+```xml
+<plugin>
+  <groupId>org.openapitools.openapistylevalidator</groupId>
+  <artifactId>openapi-style-validator-maven-plugin</artifactId>
+  <version>${validatorVersion}</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>validate</goal>
+      </goals>
+      <configuration>
+        <inputFile>path/to/spec.yaml</inputFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+It can also be invoked directly from the command line (replace `<version>` with the current version):
+
+`mvn org.openapitools.openapistylevalidator:openapi-style-validator-maven-plugin:<version>:validate -DinputFile=path/to/spec.yaml`
+
+The validation options and naming conventions listed in the Options File table above can be set in the same `<configuration>` element, using the same names (for example `<validateInfoLicense>false</validateInfoLicense>`). The `allowedModelProperties` option is not currently exposed by this plugin.
+
+### Using the Gradle plugin
+
+A Gradle plugin is released on Maven Central as `openapi-style-validator-gradle-plugin` (the plugin is not published to the Gradle Plugin Portal). It adds an `openAPIStyleValidator` task, in the `Verification` group, that fails the build if the specification does not meet the requirements:
+
+```groovy
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    // replace validatorVersion with the current version, or define it as a property first
+    classpath "org.openapitools.openapistylevalidator:openapi-style-validator-gradle-plugin:${validatorVersion}"
+  }
+}
+
+apply plugin: 'org.openapitools.openapistylevalidator'
+
+openAPIStyleValidator {
+  // set the input file option:
+  inputFile = file('path/to/spec.yaml')
+
+  // customize the validation options:
+  validateInfoLicense = false
+  validateInfoDescription = false
+}
+```
+
+The task can then be run with:
+
+`gradlew openAPIStyleValidator`
+
+The validation options and naming conventions listed in the Options File table above can be set on the task the same way, using the same names. The `allowedModelProperties` option is not currently exposed by this task.
+
+### Using sbt
+
+There is also an sbt plugin, maintained outside this project: [sbt-openapi-style-validator](https://github.com/jrouly/sbt-openapi-style-validator).
 
 ## Supported Extensions
 
